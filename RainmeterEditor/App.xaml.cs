@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using RainmeterEditor.Business;
+using RainmeterEditor.Documents.Text;
 
 namespace RainmeterEditor
 {
@@ -12,5 +14,9 @@ namespace RainmeterEditor
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            DocumentManager.Instance.RegisterEditorFactory(new TextEditorFactory());
+        }
     }
 }

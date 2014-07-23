@@ -72,7 +72,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginWin7Audio", "Plugins\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginWindowMessage", "Plugins\PluginWindowMessage\PluginWindowMessage.vcxproj", "{B9184DBA-C6B7-44FE-8BBD-0852DB22D2E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainmeterEditor", "RainmeterEditor\RainmeterEditor.csproj", "{438D0136-4A27-4E4D-A617-FFACE4554236}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainmeterStudio", "RainmeterEditor\RainmeterStudio.csproj", "{438D0136-4A27-4E4D-A617-FFACE4554236}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

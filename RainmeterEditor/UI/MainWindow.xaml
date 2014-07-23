@@ -4,7 +4,7 @@
         xmlns:ui="clr-namespace:RainmeterEditor.UI"
         xmlns:ad="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:adlayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Rainmeter Studio" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -20,7 +20,7 @@
         <!-- Menu bar -->
         <Menu Grid.Row="0" Grid.ColumnSpan="10">
             <MenuItem Header="_File">
-                <MenuItem Header="_New Item..." />
+                <MenuItem Header="_New Item..." Click="File_New_Click"/>
                 <MenuItem Header="_Open..." />
                 <Separator />
                 <MenuItem Header="_Close" />

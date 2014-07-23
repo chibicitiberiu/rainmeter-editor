@@ -11,21 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RainmeterEditor.Interop;
-using RainmeterEditor.Storage;
 
-namespace RainmeterEditor.UI
+namespace RainmeterEditor.Documents.Ini
 {
     /// <summary>
-    /// Interaction logic for SkinsPanel.xaml
+    /// Interaction logic for IniSkinDesignerControl.xaml
     /// </summary>
-    public partial class SkinsPanel : UserControl
+    public partial class IniSkinDesignerControl : UserControl
     {
-        public SkinsPanel()
+        public IniSkinDesignerControl()
         {
             InitializeComponent();
-
-            //var x = Rainmeter.Instance.Handle;
         }
     }
 }

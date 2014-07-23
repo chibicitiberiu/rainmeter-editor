@@ -11,21 +11,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RainmeterEditor.Interop;
-using RainmeterEditor.Storage;
 
-namespace RainmeterEditor.UI
+namespace RainmeterEditor.Documents.Text
 {
     /// <summary>
-    /// Interaction logic for SkinsPanel.xaml
+    /// Interaction logic for TextEditorControl.xaml
     /// </summary>
-    public partial class SkinsPanel : UserControl
+    public partial class TextEditorControl : UserControl
     {
-        public SkinsPanel()
+        private TextDocument _document;
+
+        public TextEditorControl(TextDocument document)
         {
             InitializeComponent();
 
-            //var x = Rainmeter.Instance.Handle;
+            _document = document;
+            text.Text = document.Text;
         }
     }
 }
