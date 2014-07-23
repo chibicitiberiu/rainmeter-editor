@@ -668,7 +668,7 @@ void MeterString::EnumerateInstalledFontFamilies()
 
 void MeterString::InitializeStatic()
 {
-	if (GetRainmeter().GetDebug())
+	if (Rainmeter::GetInstance().GetDebug())
 	{
 		LogDebug(L"------------------------------");
 		LogDebug(L"* Font families:");

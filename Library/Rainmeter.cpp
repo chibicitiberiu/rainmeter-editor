@@ -47,50 +47,8 @@ enum INTERVAL
 */
 int RainmeterMain(LPWSTR cmdLine)
 {
-	// Avoid loading a dll from current directory
-	SetDllDirectory(L"");
-
-	const WCHAR* layout = nullptr;
-
-	if (cmdLine[0] == L'!' || cmdLine[0] == L'[')
-	{
-		HWND wnd = FindWindow(RAINMETER_CLASS_NAME, RAINMETER_WINDOW_NAME);
-		if (wnd)
-		{
-			// Deliver bang to existing Rainmeter instance
-			COPYDATASTRUCT cds;
-			cds.dwData = 1;
-			cds.cbData = (DWORD)((wcslen(cmdLine) + 1) * sizeof(WCHAR));
-			cds.lpData = (PVOID)cmdLine;
-			SendMessage(wnd, WM_COPYDATA, 0, (LPARAM)&cds);
-			return 0;
-		}
-
-		// Disallow everything except !LoadLayout.
-		if (_wcsnicmp(cmdLine, L"!LoadLayout ", 12) == 0)
-		{
-			layout = cmdLine + 12;  // Skip "!LoadLayout ".
-		}
-		else
-		{
-			return 1;
-		}
-	}
-	else if (cmdLine[0] == L'"')
-	{
-		// Strip quotes
-		++cmdLine;
-		WCHAR* pos = wcsrchr(cmdLine, L'"');
-		if (pos)
-		{
-			*pos = L'\0';
-		}
-	}
-
-	const WCHAR* iniFile = (*cmdLine && !layout) ? cmdLine : nullptr;
-
-	auto& rainmeter = GetRainmeter();
-	int ret = rainmeter.Initialize(iniFile, layout);
+	auto& rainmeter = Rainmeter::GetInstance();
+	int ret = rainmeter.Initialize(nullptr, nullptr);
 	if (ret == 0)
 	{
 		ret = rainmeter.MessagePump();
@@ -98,6 +56,31 @@ int RainmeterMain(LPWSTR cmdLine)
 	rainmeter.Finalize();
 
 	return ret;
+}
+
+/*
+** Initializes Rainmeter.
+**
+*/
+void* Rainmeter_Initialize()
+{
+	int res = Rainmeter::GetInstance().Initialize(nullptr, nullptr);
+	
+	// Success?
+	if (res == 0) 
+		return &Rainmeter::GetInstance();
+
+	return nullptr;
+}
+
+/*
+** Finalizes Rainmeter.
+**
+*/
+void Rainmeter_Finalize(void* ptr)
+{
+	Rainmeter* rainmeter = (Rainmeter*)ptr;
+	rainmeter->Finalize();
 }
 
 /*
@@ -203,12 +186,6 @@ int Rainmeter::Initialize(LPCWSTR iniPath, LPCWSTR layout)
 			PathUtil::ExpandEnvironmentVariables(m_IniFile);
 			bDefaultIniLocation = true;
 		}
-	}
-
-	if (IsAlreadyRunning())
-	{
-		// Instance already running with same .ini file
-		return 1;
 	}
 
 	WNDCLASS wc = {0};
@@ -441,65 +418,6 @@ void Rainmeter::Finalize()
 	if (m_Mutex) ReleaseMutex(m_Mutex);
 }
 
-bool Rainmeter::IsAlreadyRunning()
-{
-	typedef struct
-	{
-		ULONG i[2];
-		ULONG buf[4];
-		unsigned char in[64];
-		unsigned char digest[16];
-	} MD5_CTX;
-
-	typedef void (WINAPI * FPMD5INIT)(MD5_CTX* context);
-	typedef void (WINAPI * FPMD5UPDATE)(MD5_CTX* context, const unsigned char* input, unsigned int inlen);
-	typedef void (WINAPI * FPMD5FINAL)(MD5_CTX* context);
-
-	bool alreadyRunning = false;
-
-	// Create MD5 digest from command line
-	HMODULE cryptDll = System::RmLoadLibrary(L"cryptdll.dll");
-	if (cryptDll)
-	{
-		FPMD5INIT MD5Init = (FPMD5INIT)GetProcAddress(cryptDll, "MD5Init");
-		FPMD5UPDATE MD5Update = (FPMD5UPDATE)GetProcAddress(cryptDll, "MD5Update");
-		FPMD5FINAL MD5Final = (FPMD5FINAL)GetProcAddress(cryptDll, "MD5Final");
-		if (MD5Init && MD5Update && MD5Final)
-		{
-			std::wstring data = m_IniFile;
-			_wcsupr(&data[0]);
-
-			MD5_CTX ctx = {0};
-			MD5Init(&ctx);
-			MD5Update(&ctx, (LPBYTE)&data[0], (UINT)data.length() * sizeof(WCHAR));
-			MD5Final(&ctx);
-			FreeLibrary(cryptDll);
-
-			// Convert MD5 digest to mutex string (e.g. "Rainmeter0123456789abcdef0123456789abcdef")
-			const WCHAR hexChars[] = L"0123456789abcdef";
-			WCHAR mutexName[64] = L"Rainmeter";
-			WCHAR* pos = mutexName + (_countof(L"Rainmeter") - 1);
-			for (size_t i = 0; i < 16; ++i)
-			{
-				*(pos++) = hexChars[ctx.digest[i] >> 4];
-				*(pos++) = hexChars[ctx.digest[i] & 0xF];
-			}
-			*pos = L'\0';
-
-			m_Mutex = CreateMutex(nullptr, FALSE, mutexName);
-			if (GetLastError() == ERROR_ALREADY_EXISTS)
-			{
-				alreadyRunning = true;
-				m_Mutex = nullptr;
-			}
-		}
-
-		FreeLibrary(cryptDll);
-	}
-
-	return alreadyRunning;
-}
-
 int Rainmeter::MessagePump()
 {
 	MSG msg;
@@ -539,7 +457,7 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 				const WCHAR* data = (const WCHAR*)cds->lpData;
 				if (cds->dwData == 1 && (cds->cbData > 0))
 				{
-					GetRainmeter().DelayedExecuteCommand(data);
+					Rainmeter::GetInstance().DelayedExecuteCommand(data);
 				}
 			}
 		}
@@ -550,12 +468,12 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 		{
 			MeasureNet::UpdateIFTable();
 			MeasureNet::UpdateStats();
-			GetRainmeter().WriteStats(false);
+			Rainmeter::GetInstance().WriteStats(false);
 		}
 		break;
 
 	case WM_RAINMETER_DELAYED_REFRESH_ALL:
-		GetRainmeter().RefreshAll();
+		Rainmeter::GetInstance().RefreshAll();
 		break;
 
 	case WM_RAINMETER_DELAYED_EXECUTE:
@@ -563,15 +481,15 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 		{
 			// Execute bang
 			WCHAR* bang = (WCHAR*)lParam;
-			GetRainmeter().ExecuteCommand(bang, nullptr);
+			Rainmeter::GetInstance().ExecuteCommand(bang, nullptr);
 			free(bang);  // _wcsdup()
 		}
 		break;
 
 	case WM_RAINMETER_EXECUTE:
-		if (GetRainmeter().HasMeterWindow((MeterWindow*)wParam))
+		if (Rainmeter::GetInstance().HasMeterWindow((MeterWindow*)wParam))
 		{
-			GetRainmeter().ExecuteCommand((const WCHAR*)lParam, (MeterWindow*)wParam);
+			Rainmeter::GetInstance().ExecuteCommand((const WCHAR*)lParam, (MeterWindow*)wParam);
 		}
 		break;
 

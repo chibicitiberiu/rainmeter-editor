@@ -86,7 +86,7 @@ void* __stdcall RmGet(void* rm, int type)
 
 	case RMG_SETTINGSFILE:
 		{
-			return (void*)GetRainmeter().GetDataFile().c_str();
+			return (void*)Rainmeter::GetInstance().GetDataFile().c_str();
 		}
 
 	case RMG_SKINNAME:
@@ -113,7 +113,7 @@ void __stdcall RmExecute(void* skin, LPCWSTR command)
 	if (command)
 	{
 		// WM_RAINMETER_EXECUTE used instead of ExecuteCommand for thread-safety
-		SendMessage(GetRainmeter().GetWindow(), WM_RAINMETER_EXECUTE, (WPARAM)mw, (LPARAM)command);
+		SendMessage(Rainmeter::GetInstance().GetWindow(), WM_RAINMETER_EXECUTE, (WPARAM)mw, (LPARAM)command);
 	}
 }
 
@@ -122,7 +122,7 @@ BOOL LSLog(int level, LPCWSTR unused, LPCWSTR message)
 	NULLCHECK(message);
 
 	// Ignore Debug messages from plugins unless in debug mode.
-	if (level != (int)Logger::Level::Debug || GetRainmeter().GetDebug())
+	if (level != (int)Logger::Level::Debug || Rainmeter::GetInstance().GetDebug())
 	{
 		GetLogger().Log((Logger::Level)level, L"", message);
 	}
@@ -137,7 +137,7 @@ void __stdcall RmLog(void* rm, int level, LPCWSTR message)
 	MeasurePlugin* measure = (MeasurePlugin*)rm;
 
 	// Ignore Debug messages from plugins unless in debug mode.
-	if (level != (int)Logger::Level::Debug || GetRainmeter().GetDebug())
+	if (level != (int)Logger::Level::Debug || Rainmeter::GetInstance().GetDebug())
 	{
 		GetLogger().LogSection((Logger::Level)level, measure, message);
 	}
@@ -150,7 +150,7 @@ void RmLogF(void* rm, int level, LPCWSTR format, ...)
 	MeasurePlugin* measure = (MeasurePlugin*)rm;
 
 	// Ignore Debug messages from plugins unless in debug mode.
-	if (level != (int)Logger::Level::Debug || GetRainmeter().GetDebug())
+	if (level != (int)Logger::Level::Debug || Rainmeter::GetInstance().GetDebug())
 	{
 		va_list args;
 		va_start(args, format);
@@ -166,7 +166,7 @@ LPCWSTR ReadConfigString(LPCWSTR section, LPCWSTR option, LPCWSTR defValue)
 	NULLCHECK(option);
 	NULLCHECK(defValue);
 
-	ConfigParser* parser = GetRainmeter().GetCurrentParser();
+	ConfigParser* parser = Rainmeter::GetInstance().GetCurrentParser();
 	if (parser)
 	{
 		return parser->ReadString(section, option, defValue, false).c_str();
@@ -187,7 +187,7 @@ LPCWSTR PluginBridge(LPCWSTR command, LPCWSTR data)
 
 	if (_wcsicmp(command, L"GetConfig") == 0)
 	{
-		MeterWindow* meterWindow = GetRainmeter().GetMeterWindowByINI(data);
+		MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindowByINI(data);
 		if (meterWindow)
 		{
 			g_Buffer = L"\"";
@@ -206,7 +206,7 @@ LPCWSTR PluginBridge(LPCWSTR command, LPCWSTR data)
 		{
 			const std::wstring& config = subStrings[0];
 
-			MeterWindow* meterWindow = GetRainmeter().GetMeterWindow(config);
+			MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindow(config);
 			if (meterWindow)
 			{
 				WCHAR buf1[64];
@@ -226,7 +226,7 @@ LPCWSTR PluginBridge(LPCWSTR command, LPCWSTR data)
 		{
 			const std::wstring& config = subStrings[0];
 
-			MeterWindow* meterWindow = GetRainmeter().GetMeterWindow(config);
+			MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindow(config);
 			if (meterWindow)
 			{
 				const std::wstring& variable = subStrings[1];
@@ -247,7 +247,7 @@ LPCWSTR PluginBridge(LPCWSTR command, LPCWSTR data)
 
 		if (subStrings.size() == 3)
 		{
-			MeterWindow* meterWindow = GetRainmeter().GetMeterWindow(subStrings[0]);
+			MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindow(subStrings[0]);
 			if (meterWindow)
 			{
 				meterWindow->SetVariable(subStrings[1], subStrings[2]);

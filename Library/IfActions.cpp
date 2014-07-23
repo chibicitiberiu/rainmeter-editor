@@ -161,7 +161,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 			if (!m_EqualCommitted)
 			{
 				m_EqualCommitted = true;		// To avoid infinite loop from !Update
-				GetRainmeter().ExecuteCommand(m_EqualAction.c_str(), measure.GetMeterWindow());
+				Rainmeter::GetInstance().ExecuteCommand(m_EqualAction.c_str(), measure.GetMeterWindow());
 			}
 		}
 		else
@@ -178,7 +178,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 			if (!m_AboveCommitted)
 			{
 				m_AboveCommitted = true;		// To avoid infinite loop from !Update
-				GetRainmeter().ExecuteCommand(m_AboveAction.c_str(), measure.GetMeterWindow());
+				Rainmeter::GetInstance().ExecuteCommand(m_AboveAction.c_str(), measure.GetMeterWindow());
 			}
 		}
 		else
@@ -195,7 +195,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 			if (!m_BelowCommitted)
 			{
 				m_BelowCommitted = true;		// To avoid infinite loop from !Update
-				GetRainmeter().ExecuteCommand(m_BelowAction.c_str(), measure.GetMeterWindow());
+				Rainmeter::GetInstance().ExecuteCommand(m_BelowAction.c_str(), measure.GetMeterWindow());
 			}
 		}
 		else
@@ -240,7 +240,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 					if (m_ConditionMode || !item.tCommitted)
 					{
 						item.tCommitted = true;
-						GetRainmeter().ExecuteCommand(item.tAction.c_str(), measure.GetMeterWindow());
+						Rainmeter::GetInstance().ExecuteCommand(item.tAction.c_str(), measure.GetMeterWindow());
 					}
 				}
 				else if (result == 0.0f)	// "False"
@@ -250,7 +250,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 					if (m_ConditionMode || !item.fCommitted)
 					{
 						item.fCommitted = true;
-						GetRainmeter().ExecuteCommand(item.fAction.c_str(), measure.GetMeterWindow());
+						Rainmeter::GetInstance().ExecuteCommand(item.fAction.c_str(), measure.GetMeterWindow());
 					}
 				}
 			}
@@ -314,7 +314,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 					if (m_MatchMode || !item.tCommitted)
 					{
 						item.tCommitted = true;
-						GetRainmeter().ExecuteCommand(item.tAction.c_str(), measure.GetMeterWindow());
+						Rainmeter::GetInstance().ExecuteCommand(item.tAction.c_str(), measure.GetMeterWindow());
 					}
 				}
 				else			// Not Match
@@ -324,7 +324,7 @@ void IfActions::DoIfActions(Measure& measure, double value)
 					if (m_MatchMode || !item.fCommitted)
 					{
 						item.fCommitted = true;
-						GetRainmeter().ExecuteCommand(item.fAction.c_str(), measure.GetMeterWindow());
+						Rainmeter::GetInstance().ExecuteCommand(item.fAction.c_str(), measure.GetMeterWindow());
 					}
 				}
 			}

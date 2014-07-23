@@ -73,7 +73,7 @@ void ContextMenu::ShowMenu(POINT pos, MeterWindow* meterWindow)
 	if (!menu) return;
 
 	m_MenuActive = true;
-	Rainmeter& rainmeter = GetRainmeter();
+	Rainmeter& rainmeter = Rainmeter::GetInstance();
 
 	SetMenuDefaultItem(menu, IDM_MANAGE, MF_BYCOMMAND);
 
@@ -343,7 +343,7 @@ HMENU ContextMenu::CreateSkinMenu(MeterWindow* meterWindow, int index, HMENU men
 			CheckMenuItem(settingsMenu, IDM_SKIN_REMEMBERPOSITION, MF_BYCOMMAND | MF_CHECKED);
 		}
 
-		if (GetRainmeter().m_DisableDragging)
+		if (Rainmeter::GetInstance().m_DisableDragging)
 		{
 			EnableMenuItem(settingsMenu, IDM_SKIN_DRAGGABLE, MF_BYCOMMAND | MF_GRAYED);
 		}
@@ -398,7 +398,7 @@ HMENU ContextMenu::CreateSkinMenu(MeterWindow* meterWindow, int index, HMENU men
 	// Add the variants menu
 	if (variantsMenu)
 	{
-		const SkinRegistry::Folder& skinFolder = *GetRainmeter().m_SkinRegistry.FindFolder(skinName);
+		const SkinRegistry::Folder& skinFolder = *Rainmeter::GetInstance().m_SkinRegistry.FindFolder(skinName);
 		for (int i = 0, isize = (int)skinFolder.files.size(); i < isize; ++i)
 		{
 			InsertMenu(variantsMenu, i, MF_BYPOSITION, skinFolder.baseID + i, skinFolder.files[i].c_str());
@@ -549,7 +549,7 @@ void ContextMenu::AppendSkinCustomMenu(
 
 int ContextMenu::CreateAllSkinsMenuRecursive(HMENU skinMenu, int index)
 {
-	SkinRegistry& skinRegistry = GetRainmeter().m_SkinRegistry;
+	SkinRegistry& skinRegistry = Rainmeter::GetInstance().m_SkinRegistry;
 	const int initialLevel = skinRegistry.GetFolder(index).level;
 	int menuIndex = 0;
 
@@ -604,7 +604,7 @@ int ContextMenu::CreateAllSkinsMenuRecursive(HMENU skinMenu, int index)
 
 void ContextMenu::CreateLayoutMenu(HMENU layoutMenu)
 {
-	const auto& layouts = GetRainmeter().m_Layouts;
+	const auto& layouts = Rainmeter::GetInstance().m_Layouts;
 	for (size_t i = 0, isize = layouts.size(); i < isize; ++i)
 	{
 		InsertMenu(layoutMenu, (UINT)i, MF_BYPOSITION, ID_THEME_FIRST + i, layouts[i].c_str());

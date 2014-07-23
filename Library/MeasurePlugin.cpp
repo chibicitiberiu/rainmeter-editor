@@ -127,15 +127,15 @@ void MeasurePlugin::ReadOptions(ConfigParser& parser, const WCHAR* section)
 	}
 
 	// First try from program path
-	std::wstring pluginFile = GetRainmeter().GetPluginPath();
+	std::wstring pluginFile = Rainmeter::GetInstance().GetPluginPath();
 	pluginFile += pluginName;
 	m_Plugin = System::RmLoadLibrary(pluginFile.c_str());
 	if (!m_Plugin)
 	{
-		if (GetRainmeter().HasUserPluginPath())
+		if (Rainmeter::GetInstance().HasUserPluginPath())
 		{
 			// Try from settings path
-			pluginFile = GetRainmeter().GetUserPluginPath();
+			pluginFile = Rainmeter::GetInstance().GetUserPluginPath();
 			pluginFile += pluginName;
 			m_Plugin = System::RmLoadLibrary(pluginFile.c_str());
 		}

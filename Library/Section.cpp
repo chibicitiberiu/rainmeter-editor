@@ -82,6 +82,6 @@ void Section::DoUpdateAction()
 {
 	if (!m_OnUpdateAction.empty())
 	{
-		GetRainmeter().ExecuteCommand(m_OnUpdateAction.c_str(), m_MeterWindow);
+		Rainmeter::GetInstance().ExecuteCommand(m_OnUpdateAction.c_str(), m_MeterWindow);
 	}
 }

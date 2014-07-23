@@ -556,7 +556,7 @@ bool Meter::ReplaceMeasures(std::wstring& str, AUTOSCALE autoScale, double scale
 void Meter::CreateToolTip(MeterWindow* meterWindow)
 {
 	HWND hMeterWindow = m_MeterWindow->GetWindow();
-	HINSTANCE hInstance = GetRainmeter().GetModuleInstance();
+	HINSTANCE hInstance = Rainmeter::GetInstance().GetModuleInstance();
 	DWORD style = WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP;
 
 	if (m_ToolTipType)

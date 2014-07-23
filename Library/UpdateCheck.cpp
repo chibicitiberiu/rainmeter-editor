@@ -70,17 +70,17 @@ void CheckVersion(void* dummy)
 			if (availableVersion > RAINMETER_VERSION ||
 				(revision_beta && availableVersion == RAINMETER_VERSION))
 			{
-				GetRainmeter().SetNewVersion();
+				Rainmeter::GetInstance().SetNewVersion();
 
 				WCHAR buffer[32];
-				const WCHAR* dataFile = GetRainmeter().GetDataFile().c_str();
+				const WCHAR* dataFile = Rainmeter::GetInstance().GetDataFile().c_str();
 				GetPrivateProfileString(L"Rainmeter", L"LastCheck", L"0", buffer, _countof(buffer), dataFile);
 
 				// Show tray notification only once per new version
 				int lastVersion = parseVersion(buffer);
 				if (availableVersion > lastVersion)
 				{
-					GetRainmeter().GetTrayWindow()->ShowUpdateNotification(version);
+					Rainmeter::GetInstance().GetTrayWindow()->ShowUpdateNotification(version);
 					WritePrivateProfileString(L"Rainmeter", L"LastCheck", version, dataFile);
 				}
 			}

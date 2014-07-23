@@ -258,7 +258,7 @@ bool MeterButton::MouseUp(POINT pos, bool execute)
 	{
 		if (execute && m_Clicked && m_Focus && HitTest2(pos.x, pos.y))
 		{
-			GetRainmeter().ExecuteCommand(m_Command.c_str(), m_MeterWindow);
+			Rainmeter::GetInstance().ExecuteCommand(m_Command.c_str(), m_MeterWindow);
 		}
 		m_State = BUTTON_STATE_NORMAL;
 		m_Clicked = false;

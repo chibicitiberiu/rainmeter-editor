@@ -31,7 +31,7 @@ UINT GetUniqueID()
 WCHAR* GetString(UINT id)
 {
 	LPWSTR pData;
-	int len = LoadString(GetRainmeter().GetResourceInstance(), id, (LPWSTR)&pData, 0);
+	int len = LoadString(Rainmeter::GetInstance().GetResourceInstance(), id, (LPWSTR)&pData, 0);
 	return len ? pData : L"";
 }
 

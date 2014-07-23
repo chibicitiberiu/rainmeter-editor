@@ -76,7 +76,7 @@ void MeasureNet::UpdateIFTable()
 				logging = true;
 			}
 
-			if (GetRainmeter().GetDebug() && logging)
+			if (Rainmeter::GetInstance().GetDebug() && logging)
 			{
 				LogDebug(L"------------------------------");
 				LogDebugF(L"* NETWORK-INTERFACE: Count=%i", c_NumOfTables);
@@ -169,7 +169,7 @@ void MeasureNet::UpdateIFTable()
 					logging = true;
 				}
 
-				if (GetRainmeter().GetDebug() && logging)
+				if (Rainmeter::GetInstance().GetDebug() && logging)
 				{
 					LogDebug(L"------------------------------");
 					LogDebugF(L"* NETWORK-INTERFACE: Count=%i", c_NumOfTables);
@@ -463,17 +463,17 @@ void MeasureNet::ReadOptions(ConfigParser& parser, const WCHAR* section)
 	if (m_Net == NET_IN)
 	{
 		netName = L"NetInSpeed";
-		value = GetRainmeter().GetGlobalOptions().netInSpeed;
+		value = Rainmeter::GetInstance().GetGlobalOptions().netInSpeed;
 	}
 	else if (m_Net == NET_OUT)
 	{
 		netName = L"NetOutSpeed";
-		value = GetRainmeter().GetGlobalOptions().netOutSpeed;
+		value = Rainmeter::GetInstance().GetGlobalOptions().netOutSpeed;
 	}
 	else // if (m_Net == NET_TOTAL)
 	{
 		netName = L"NetTotalSpeed";
-		value = GetRainmeter().GetGlobalOptions().netInSpeed + GetRainmeter().GetGlobalOptions().netOutSpeed;
+		value = Rainmeter::GetInstance().GetGlobalOptions().netInSpeed + Rainmeter::GetInstance().GetGlobalOptions().netOutSpeed;
 	}
 
 	double maxValue = parser.ReadFloat(section, L"MaxValue", -1);
@@ -491,7 +491,7 @@ void MeasureNet::ReadOptions(ConfigParser& parser, const WCHAR* section)
 	m_Cumulative = parser.ReadBool(section, L"Cumulative", false);
 	if (m_Cumulative)
 	{
-		GetRainmeter().SetNetworkStatisticsTimer();
+		Rainmeter::GetInstance().SetNetworkStatisticsTimer();
 	}
 
 	if (maxValue == 0.0)
@@ -705,7 +705,7 @@ void MeasureNet::InitializeStatic()
 		}
 	}
 
-	if (GetRainmeter().GetDebug())
+	if (Rainmeter::GetInstance().GetDebug())
 	{
 		UpdateIFTable();
 	}
