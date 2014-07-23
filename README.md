@@ -1,1 +1,1 @@
-*Rainmeter Studio* is an editor for the RainMeter desktop customization tool for Windows.
+*Rainmeter Studio* is an editor for Rainmeter skins.
