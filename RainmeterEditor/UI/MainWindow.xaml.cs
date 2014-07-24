@@ -61,7 +61,7 @@ namespace RainmeterEditor
 
         private void File_New_Click(object sender, RoutedEventArgs e)
         {
-            documentController.Create();
+            documentController.Create(this);
         }
     }
 }

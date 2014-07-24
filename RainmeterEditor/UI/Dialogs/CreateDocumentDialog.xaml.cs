@@ -59,6 +59,7 @@ namespace RainmeterEditor.UI.Dialogs
             InitializeComponent();
 
             PopulateFormats();
+            Validate();
         }
 
         private void PopulateFormats()
@@ -78,6 +79,15 @@ namespace RainmeterEditor.UI.Dialogs
         {
             DialogResult = false;
             Close();
+        }
+
+        private void Validate()
+        {
+            bool res = true;
+            res &= !String.IsNullOrWhiteSpace(textPath.Text);
+            res &= (listFormats.SelectedItem != null);
+
+            buttonCreate.IsEnabled = res;
         }
     }
 }
