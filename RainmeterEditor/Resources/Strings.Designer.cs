@@ -70,6 +70,24 @@ namespace RainmeterEditor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New file....
+        /// </summary>
+        internal static string DocumentCreateCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("DocumentCreateCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates a new file.
+        /// </summary>
+        internal static string DocumentCreateCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("DocumentCreateCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text Editor.
         /// </summary>
         internal static string DocumentEditor_Text_Name {

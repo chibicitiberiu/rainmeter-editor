@@ -120,6 +120,12 @@
   <data name="Category_Utility" xml:space="preserve">
     <value>Utility</value>
   </data>
+  <data name="DocumentCreateCommand_DisplayText" xml:space="preserve">
+    <value>New file...</value>
+  </data>
+  <data name="DocumentCreateCommand_ToolTip" xml:space="preserve">
+    <value>Creates a new file</value>
+  </data>
   <data name="DocumentEditor_Text_Name" xml:space="preserve">
     <value>Text Editor</value>
   </data>

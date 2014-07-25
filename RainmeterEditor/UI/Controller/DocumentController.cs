@@ -7,11 +7,19 @@ using RainmeterEditor.UI.Dialogs;
 using RainmeterEditor.Model.Events;
 using RainmeterEditor.Model;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace RainmeterEditor.UI.Controller
 {
     public class DocumentController
     {
+        #region Commands
+
+        public Command DocumentCreateCommand { get; private set; }
+
+        #endregion
+
         public event EventHandler<DocumentOpenedEventArgs> DocumentOpened
         {
             add
@@ -23,19 +31,27 @@ namespace RainmeterEditor.UI.Controller
                 DocumentManager.Instance.DocumentOpened -= value;
             }
         }
-
         public event EventHandler DocumentClosed;
-        
+
+        public Window OwnerWindow { get; set; }
+
         public DocumentController()
         {
+            DocumentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow())
+            {
+                DisplayText = Resources.Strings.DocumentCreateCommand_DisplayText,
+                Tooltip = Resources.Strings.DocumentCreateCommand_ToolTip,
+                Icon = new BitmapImage(new Uri("/Resources/Icons/page_white_star_16.png", UriKind.RelativeOrAbsolute)),
+                Shortcut = new KeyGesture(Key.N, ModifierKeys.Control)
+            };
         }
 
-        public void Create(Window parent = null, DocumentFormat defaultFormat = null, string defaultPath = "")
+        public void CreateWindow(DocumentFormat defaultFormat = null, string defaultPath = "")
         {
             // Show dialog
             var dialog = new CreateDocumentDialog()
             {
-                Owner = parent,
+                Owner = OwnerWindow,
                 SelectedFormat = defaultFormat,
                 SelectedPath = defaultPath
             };
@@ -56,5 +72,6 @@ namespace RainmeterEditor.UI.Controller
             // Call manager
             DocumentManager.Instance.Create(format, path);
         }
+
     }
 }

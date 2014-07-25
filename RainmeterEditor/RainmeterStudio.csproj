@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Model\IDocumentStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
+    <Compile Include="UI\Command.cs" />
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
     </Compile>
@@ -175,13 +176,27 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\page_white_text.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\text-x-generic-32.png" />
+    <Resource Include="Resources\Icons\text_file_32.png" />
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Resources\splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\arrow_left_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\arrow_right_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\arrow_backward_16.png" />
+    <Resource Include="Resources\Icons\arrow_forward_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\page_white_star_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\project_16.png" />
+    <Resource Include="Resources\Icons\project_star_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,20 +15,38 @@ using RainmeterEditor.Model.Events;
 using RainmeterEditor.UI.Controller;
 using Xceed.Wpf.AvalonDock.Layout;
 
-namespace RainmeterEditor
+namespace RainmeterEditor.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        DocumentController documentController = new DocumentController();
+        private DocumentController documentController;
+
+        private IEnumerable<Command> Commands
+        {
+            get
+            {
+                yield return documentController.DocumentCreateCommand;
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
 
+            documentController = new DocumentController();
+            documentController.OwnerWindow = this;
             documentController.DocumentOpened += documentController_DocumentOpened;
+
+            foreach (var c in Commands)
+            {
+                Resources.Add(c.Name, c);
+
+                if (c.Shortcut != null)
+                    InputBindings.Add(new KeyBinding(c, c.Shortcut));
+            }
         }
 
         void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)
@@ -57,11 +75,6 @@ namespace RainmeterEditor
                     e.Cancel = true;
                     return;
             }
-        }
-
-        private void File_New_Click(object sender, RoutedEventArgs e)
-        {
-            documentController.Create(this);
         }
     }
 }
