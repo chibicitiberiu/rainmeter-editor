@@ -27,17 +27,14 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="10">
             <MenuItem Header="_File">
                 <MenuItem Header="_New">
-                    <MenuItem Header="_File..." 
-                              DataContext="{DynamicResource DocumentCreateCommand}"
-                              Command="{Binding}"
-                              ToolTip="{Binding Tooltip}"
+                    <MenuItem DataContext="{Binding DocumentCreateCommand}"
+                              Command="{Binding}" Header="{Binding DisplayText}" ToolTip="{Binding Tooltip}"
                               InputGestureText="{Binding ShortcutText}">
                         <MenuItem.Icon>
-                            <Image DataContext="{DynamicResource DocumentCreateCommand}"
-                                   Source="{Binding Icon}" />
+                            <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Project..." Command="{DynamicResource CreateFileCommand}">
+                    <MenuItem Header="_Project..." Command="{Binding DocumentCreateCommand}">
                         <MenuItem.Icon>
                             <Image Source="/Resources/Icons/project_star_16.png" />
                         </MenuItem.Icon>
@@ -62,6 +59,10 @@
                     <Image Width="16" Height="16" Source="/Resources/Icons/arrow_forward_16.png" />
                 </Button>
                 <Separator />
+                <Button DataContext="{Binding DocumentCreateCommand}"
+                        Command="{Binding}" ToolTip="{Binding Tooltip}">
+                    <Image Source="{Binding Icon}" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
 

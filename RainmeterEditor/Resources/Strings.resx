@@ -121,7 +121,7 @@
     <value>Utility</value>
   </data>
   <data name="DocumentCreateCommand_DisplayText" xml:space="preserve">
-    <value>New file...</value>
+    <value>_File...</value>
   </data>
   <data name="DocumentCreateCommand_ToolTip" xml:space="preserve">
     <value>Creates a new file</value>

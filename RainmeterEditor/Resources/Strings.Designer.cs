@@ -70,7 +70,7 @@ namespace RainmeterEditor.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New file....
+        ///   Looks up a localized string similar to _File....
         /// </summary>
         internal static string DocumentCreateCommand_DisplayText {
             get {

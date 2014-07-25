@@ -24,29 +24,24 @@ namespace RainmeterEditor.UI
     {
         private DocumentController documentController;
 
-        private IEnumerable<Command> Commands
-        {
-            get
-            {
-                yield return documentController.DocumentCreateCommand;
-            }
-        }
+        public Command DocumentCreateCommand { get { return documentController.DocumentCreateCommand; } }
 
         public MainWindow()
         {
             InitializeComponent();
 
+            this.DataContext = this;
+
             documentController = new DocumentController();
             documentController.OwnerWindow = this;
             documentController.DocumentOpened += documentController_DocumentOpened;
+            AddKeyBinding(documentController.DocumentCreateCommand);
+        }
 
-            foreach (var c in Commands)
-            {
-                Resources.Add(c.Name, c);
-
-                if (c.Shortcut != null)
-                    InputBindings.Add(new KeyBinding(c, c.Shortcut));
-            }
+        private void AddKeyBinding(Command c)
+        {
+            if (c.Shortcut != null)
+                InputBindings.Add(new KeyBinding(c, c.Shortcut));
         }
 
         void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)
