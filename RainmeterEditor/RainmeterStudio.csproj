@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\DocumentManager.cs" />
+    <Compile Include="Business\ProjectManager.cs" />
     <Compile Include="Documents\Text\TextDocument.cs" />
     <Compile Include="Documents\Text\TextEditorControl.xaml.cs">
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
@@ -88,8 +89,11 @@
     <Compile Include="Documents\Text\TextEditor.cs" />
     <Compile Include="Documents\Text\TextEditorFactory.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Property.cs" />
     <Compile Include="Model\RainmeterConfig.cs" />
+    <Compile Include="Model\Reference.cs" />
+    <Compile Include="Model\Tree.cs" />
     <Compile Include="Rainmeter.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +101,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\IDocumentStorage.cs" />
+    <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
     <Compile Include="UI\Command.cs" />
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
