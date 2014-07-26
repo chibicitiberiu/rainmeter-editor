@@ -3,8 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RainmeterEditor.Storage;
-using RainmeterEditor.Model;
+using RainmeterStudio.Storage;
+using RainmeterStudio.Model;
 using System.IO;
 
 namespace RainmeterStudio.Tests.Storage
