@@ -19,11 +19,11 @@ namespace RainmeterStudio.Documents.Text
         }
 
         /// <inheritdoc />
-        public IEnumerable<DocumentFormat> CreateDocumentFormats
+        public IEnumerable<DocumentTemplate> CreateDocumentFormats
         {
             get 
             {
-                yield return new DocumentFormat()
+                yield return new DocumentTemplate()
                 {
                     Name = Resources.Strings.DocumentFormat_TextFile_Name,
                     Category = Resources.Strings.Category_Utility,
@@ -48,7 +48,7 @@ namespace RainmeterStudio.Documents.Text
 
         public IDocumentStorage Storage { get { return _storage; } }
 
-        public IDocument CreateDocument(DocumentFormat format, string path)
+        public IDocument CreateDocument(DocumentTemplate format, string path)
         {
             var document = new TextDocument();
             document.FilePath = path;

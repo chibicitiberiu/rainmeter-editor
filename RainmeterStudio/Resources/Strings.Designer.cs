@@ -22,7 +22,7 @@ namespace RainmeterStudio.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RainmeterStudio.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RainmeterStudio.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace RainmeterStudio.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,52 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Utility.
         /// </summary>
-        internal static string Category_Utility {
+        public static string Category_Utility {
             get {
                 return ResourceManager.GetString("Category_Utility", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse.
+        /// </summary>
+        public static string Dialog_Browse {
+            get {
+                return ResourceManager.GetString("Dialog_Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Dialog_Cancel {
+            get {
+                return ResourceManager.GetString("Dialog_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string Dialog_Create {
+            get {
+                return ResourceManager.GetString("Dialog_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Dialog_OK {
+            get {
+                return ResourceManager.GetString("Dialog_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _File....
         /// </summary>
-        internal static string DocumentCreateCommand_DisplayText {
+        public static string DocumentCreateCommand_DisplayText {
             get {
                 return ResourceManager.GetString("DocumentCreateCommand_DisplayText", resourceCulture);
             }
@@ -81,7 +117,7 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Creates a new file.
         /// </summary>
-        internal static string DocumentCreateCommand_ToolTip {
+        public static string DocumentCreateCommand_ToolTip {
             get {
                 return ResourceManager.GetString("DocumentCreateCommand_ToolTip", resourceCulture);
             }
@@ -90,7 +126,7 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Text Editor.
         /// </summary>
-        internal static string DocumentEditor_Text_Name {
+        public static string DocumentEditor_Text_Name {
             get {
                 return ResourceManager.GetString("DocumentEditor_Text_Name", resourceCulture);
             }
@@ -99,7 +135,7 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Blank text file.
         /// </summary>
-        internal static string DocumentFormat_TextFile_Description {
+        public static string DocumentFormat_TextFile_Description {
             get {
                 return ResourceManager.GetString("DocumentFormat_TextFile_Description", resourceCulture);
             }
@@ -108,9 +144,81 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Text file.
         /// </summary>
-        internal static string DocumentFormat_TextFile_Name {
+        public static string DocumentFormat_TextFile_Name {
             get {
                 return ResourceManager.GetString("DocumentFormat_TextFile_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Project....
+        /// </summary>
+        public static string ProjectCreateCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectCreateCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates a new project.
+        /// </summary>
+        public static string ProjectCreateCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectCreateCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location:.
+        /// </summary>
+        public static string ProjectCreateDialog_Location {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set location as default.
+        /// </summary>
+        public static string ProjectCreateDialog_LocationDefault {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_LocationDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string ProjectCreateDialog_Name {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path:.
+        /// </summary>
+        public static string ProjectCreateDialog_Path {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create directory for project.
+        /// </summary>
+        public static string ProjectCreateDialog_PathCreateFolder {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_PathCreateFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create project.
+        /// </summary>
+        public static string ProjectCreateDialog_Title {
+            get {
+                return ResourceManager.GetString("ProjectCreateDialog_Title", resourceCulture);
             }
         }
     }

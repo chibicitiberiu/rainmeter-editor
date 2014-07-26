@@ -51,7 +51,7 @@ namespace RainmeterStudio.Business
         /// </summary>
         /// <param name="format"></param>
         /// <param name="path"></param>
-        public void Create(DocumentFormat format, string path)
+        public void Create(DocumentTemplate format, string path)
         {
             // Create document
             var document = format.Factory.CreateDocument(format, path);
@@ -65,7 +65,7 @@ namespace RainmeterStudio.Business
                 DocumentOpened(this, new DocumentOpenedEventArgs(editor));
         }
 
-        public IEnumerable<DocumentFormat> DocumentFormats
+        public IEnumerable<DocumentTemplate> DocumentFormats
         {
             get
             {

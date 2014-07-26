@@ -117,58 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Category_Utility" xml:space="preserve">
-    <value>Utility</value>
+  <data name="DocumentCreateCommand_Icon" xml:space="preserve">
+    <value>/Resources/Icons/page_white_star_16.png</value>
   </data>
-  <data name="Dialog_Browse" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="Dialog_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Dialog_Create" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="Dialog_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="DocumentCreateCommand_DisplayText" xml:space="preserve">
-    <value>_File...</value>
-  </data>
-  <data name="DocumentCreateCommand_ToolTip" xml:space="preserve">
-    <value>Creates a new file</value>
-  </data>
-  <data name="DocumentEditor_Text_Name" xml:space="preserve">
-    <value>Text Editor</value>
-  </data>
-  <data name="DocumentFormat_TextFile_Description" xml:space="preserve">
-    <value>Blank text file</value>
-  </data>
-  <data name="DocumentFormat_TextFile_Name" xml:space="preserve">
-    <value>Text file</value>
-  </data>
-  <data name="ProjectCreateCommand_DisplayText" xml:space="preserve">
-    <value>_Project...</value>
-  </data>
-  <data name="ProjectCreateCommand_ToolTip" xml:space="preserve">
-    <value>Creates a new project</value>
-  </data>
-  <data name="ProjectCreateDialog_Location" xml:space="preserve">
-    <value>Location:</value>
-  </data>
-  <data name="ProjectCreateDialog_LocationDefault" xml:space="preserve">
-    <value>Set location as default</value>
-  </data>
-  <data name="ProjectCreateDialog_Name" xml:space="preserve">
-    <value>Name:</value>
-  </data>
-  <data name="ProjectCreateDialog_Path" xml:space="preserve">
-    <value>Path:</value>
-  </data>
-  <data name="ProjectCreateDialog_PathCreateFolder" xml:space="preserve">
-    <value>Create directory for project</value>
-  </data>
-  <data name="ProjectCreateDialog_Title" xml:space="preserve">
-    <value>Create project</value>
+  <data name="ProjectCreateCommand_Icon" xml:space="preserve">
+    <value>/Resources/Icons/project_star_16.png</value>
   </data>
 </root>

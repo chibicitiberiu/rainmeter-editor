@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -95,6 +96,11 @@
     <Compile Include="Model\Reference.cs" />
     <Compile Include="Model\Tree.cs" />
     <Compile Include="Rainmeter.cs" />
+    <Compile Include="Resources\Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,11 +110,15 @@
     <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
     <Compile Include="UI\Command.cs" />
+    <Compile Include="UI\Controller\ProjectController.cs" />
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controller\DocumentController.cs" />
     <Compile Include="Model\Events\DocumentOpenedEventArgs.cs" />
+    <Compile Include="UI\Dialogs\CreateProjectDialog.xaml.cs">
+      <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SkinsPanel.xaml.cs">
       <DependentUpon>SkinsPanel.xaml</DependentUpon>
     </Compile>
@@ -121,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\CreateDocumentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\CreateProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,8 +181,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.resx">
+    <EmbeddedResource Include="Resources\Icons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />

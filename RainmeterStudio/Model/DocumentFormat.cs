@@ -2,7 +2,7 @@
 
 namespace RainmeterStudio.Model
 {
-    public class DocumentFormat
+    public class DocumentTemplate
     {
         public string Name { get; set; }
         public ImageSource Icon { get; set; }

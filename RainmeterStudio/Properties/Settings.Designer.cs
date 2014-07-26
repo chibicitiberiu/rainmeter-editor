@@ -22,5 +22,16 @@ namespace RainmeterStudio.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Windows.Input.KeyGestureConverter asdf {
+            get {
+                return ((global::System.Windows.Input.KeyGestureConverter)(this["asdf"]));
+            }
+            set {
+                this["asdf"] = value;
+            }
+        }
     }
 }

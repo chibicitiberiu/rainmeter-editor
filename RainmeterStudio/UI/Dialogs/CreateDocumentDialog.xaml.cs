@@ -24,11 +24,11 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
-        public DocumentFormat SelectedFormat
+        public DocumentTemplate SelectedFormat
         {
             get
             {
-                return listFormats.SelectedItem as DocumentFormat;
+                return listFormats.SelectedItem as DocumentTemplate;
             }
             set
             {

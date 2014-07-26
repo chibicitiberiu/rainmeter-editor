@@ -11,7 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RainmeterStudio.Business;
 using RainmeterStudio.Model.Events;
+using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
 using Xceed.Wpf.AvalonDock.Layout;
 
@@ -22,9 +24,8 @@ namespace RainmeterStudio.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DocumentController documentController;
-
-        public Command DocumentCreateCommand { get { return documentController.DocumentCreateCommand; } }
+        public DocumentController DocumentController { get; set; }
+        public ProjectController ProjectController { get; set; }
 
         public MainWindow()
         {
@@ -32,10 +33,19 @@ namespace RainmeterStudio.UI
 
             this.DataContext = this;
 
-            documentController = new DocumentController();
-            documentController.OwnerWindow = this;
-            documentController.DocumentOpened += documentController_DocumentOpened;
-            AddKeyBinding(documentController.DocumentCreateCommand);
+            // Initialize project controller
+            // TODO: put this in main
+            ProjectStorage projectStorage = new ProjectStorage();
+            ProjectManager projectManager = new ProjectManager(projectStorage);
+            ProjectController = new Controller.ProjectController(projectManager);
+            ProjectController.OwnerWindow = this;
+            AddKeyBinding(ProjectController.ProjectCreateCommand);
+
+            // Initialize document controller
+            DocumentController = new DocumentController();
+            DocumentController.OwnerWindow = this;
+            DocumentController.DocumentOpened += documentController_DocumentOpened;
+            AddKeyBinding(DocumentController.DocumentCreateCommand);
         }
 
         private void AddKeyBinding(Command c)

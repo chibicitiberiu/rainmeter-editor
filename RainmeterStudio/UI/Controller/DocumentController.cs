@@ -16,7 +16,25 @@ namespace RainmeterStudio.UI.Controller
     {
         #region Commands
 
-        public Command DocumentCreateCommand { get; private set; }
+        public Command _documentCreateCommand;
+        public Command DocumentCreateCommand
+        {
+            get
+            {
+                if (_documentCreateCommand == null)
+                {
+                    _documentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow())
+                    {
+                        DisplayText = Resources.Strings.DocumentCreateCommand_DisplayText,
+                        Tooltip = Resources.Strings.DocumentCreateCommand_ToolTip,
+                        Icon = new BitmapImage(new Uri(Resources.Icons.DocumentCreateCommand_Icon, UriKind.RelativeOrAbsolute)),
+                        Shortcut = new KeyGesture(Key.N, ModifierKeys.Control)
+                    };
+                }
+
+                return _documentCreateCommand;
+            }
+        }
 
         #endregion
 
@@ -37,16 +55,9 @@ namespace RainmeterStudio.UI.Controller
 
         public DocumentController()
         {
-            DocumentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow())
-            {
-                DisplayText = Resources.Strings.DocumentCreateCommand_DisplayText,
-                Tooltip = Resources.Strings.DocumentCreateCommand_ToolTip,
-                Icon = new BitmapImage(new Uri("/Resources/Icons/page_white_star_16.png", UriKind.RelativeOrAbsolute)),
-                Shortcut = new KeyGesture(Key.N, ModifierKeys.Control)
-            };
         }
 
-        public void CreateWindow(DocumentFormat defaultFormat = null, string defaultPath = "")
+        public void CreateWindow(DocumentTemplate defaultFormat = null, string defaultPath = "")
         {
             // Show dialog
             var dialog = new CreateDocumentDialog()
@@ -67,7 +78,7 @@ namespace RainmeterStudio.UI.Controller
             DocumentManager.Instance.Create(format, path);
         }
 
-        public void Create(DocumentFormat format, string path)
+        public void Create(DocumentTemplate format, string path)
         {
             // Call manager
             DocumentManager.Instance.Create(format, path);

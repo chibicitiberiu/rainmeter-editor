@@ -6,11 +6,27 @@
         xmlns:adlayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
         Title="Rainmeter Studio" Height="350" Width="525"
         ResizeMode="CanResizeWithGrip" >
-    
+
     <Window.Resources>
-        
+        <Style x:Key="CommandMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Command" Value="{Binding}" />
+            <Setter Property="Header" Value="{Binding DisplayText}" />
+            <Setter Property="ToolTip" Value="{Binding Tooltip}" />
+            <Setter Property="InputGestureText" Value="{Binding ShortcutText}" />
+        </Style>
+        <Style x:Key="CommandButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding}" />
+            <Setter Property="ToolTip" Value="{Binding Tooltip}" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Width="16" Height="16" Source="{Binding Icon}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,19 +43,20 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="10">
             <MenuItem Header="_File">
                 <MenuItem Header="_New">
-                    <MenuItem DataContext="{Binding DocumentCreateCommand}"
-                              Command="{Binding}" Header="{Binding DisplayText}" ToolTip="{Binding Tooltip}"
-                              InputGestureText="{Binding ShortcutText}">
+                    <MenuItem DataContext="{Binding DocumentController.DocumentCreateCommand}"
+                              Style="{StaticResource CommandMenuItemStyle}" >
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Project..." Command="{Binding DocumentCreateCommand}">
+                    <MenuItem DataContext="{Binding ProjectController.ProjectCreateCommand}"
+                              Style="{StaticResource CommandMenuItemStyle}">
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Icons/project_star_16.png" />
+                            <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <Separator />
                 <MenuItem Header="_Open..." />
                 <Separator />
                 <MenuItem Header="_Close" />
@@ -59,10 +76,8 @@
                     <Image Width="16" Height="16" Source="/Resources/Icons/arrow_forward_16.png" />
                 </Button>
                 <Separator />
-                <Button DataContext="{Binding DocumentCreateCommand}"
-                        Command="{Binding}" ToolTip="{Binding Tooltip}">
-                    <Image Source="{Binding Icon}" />
-                </Button>
+                <Button DataContext="{Binding DocumentController.DocumentCreateCommand}"
+                        Style="{StaticResource CommandButtonStyle}" />
             </ToolBar>
         </ToolBarTray>
 
@@ -109,7 +124,7 @@
                          Width="64" Height="8" 
                          IsIndeterminate="True" 
                          Visibility="Collapsed" />
-            
+
             <TextBlock Name="statusMessage">Ready</TextBlock>
         </StatusBar>
     </Grid>

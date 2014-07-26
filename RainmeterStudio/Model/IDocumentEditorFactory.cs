@@ -16,7 +16,7 @@ namespace RainmeterStudio.Model
         /// <summary>
         /// Formats that will be used to populate the 'create document' dialog
         /// </summary>
-        IEnumerable<DocumentFormat> CreateDocumentFormats { get; }
+        IEnumerable<DocumentTemplate> CreateDocumentFormats { get; }
 
         /// <summary>
         /// Creates a new editor object
@@ -29,7 +29,7 @@ namespace RainmeterStudio.Model
         /// Creates a new document
         /// </summary>
         /// <returns>A new document</returns>
-        IDocument CreateDocument(DocumentFormat format, string path);
+        IDocument CreateDocument(DocumentTemplate format, string path);
 
         /// <summary>
         /// Gets the storage of this factory
