@@ -221,5 +221,95 @@ namespace RainmeterStudio.Resources {
                 return ResourceManager.GetString("ProjectCreateDialog_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse all.
+        /// </summary>
+        public static string ProjectPanel_CollapseAllCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse all.
+        /// </summary>
+        public static string ProjectPanel_CollapseAllCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all.
+        /// </summary>
+        public static string ProjectPanel_ExpandAllCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all.
+        /// </summary>
+        public static string ProjectPanel_ExpandAllCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string ProjectPanel_RefreshCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectPanel_RefreshCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string ProjectPanel_RefreshCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectPanel_RefreshCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all files.
+        /// </summary>
+        public static string ProjectPanel_ShowAllFilesCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all files.
+        /// </summary>
+        public static string ProjectPanel_ShowAllFilesCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync with active view.
+        /// </summary>
+        public static string ProjectPanel_SyncWithActiveViewCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync with active view.
+        /// </summary>
+        public static string ProjectPanel_SyncWithActiveViewCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand_ToolTip", resourceCulture);
+            }
+        }
     }
 }

@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="RainmeterStudio.UI.ProjectPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:RainmeterStudio.UI.Controller"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ctrl:IconProviderConverter x:Key="IconConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!-- Toolbar -->
+        <ToolBar Grid.Row="0" ToolBarTray.IsLocked="True">
+            <Button DataContext="{Binding SyncWithActiveViewCommand}"
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Width="16" Height="16" Source="{Binding Icon}" />
+            </Button>
+            <Button DataContext="{Binding RefreshCommand}"
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Width="16" Height="16" Source="{Binding Icon}" />
+            </Button>
+            <Button DataContext="{Binding CollapseAllCommand}"
+                    Style="{StaticResource CommandAutoHideButtonStyle}">
+                <Image Width="16" Height="16" Source="{Binding Icon}" />
+            </Button>
+            <Button DataContext="{Binding ExpandAllCommand}"
+                    Style="{StaticResource CommandAutoHideButtonStyle}">
+                <Image Width="16" Height="16" Source="{Binding Icon}" />
+            </Button>
+            <ToggleButton Name="toggleShowAllFiles"
+                    DataContext="{Binding ShowAllFilesCommand}"
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Width="16" Height="16" Source="{Binding Icon}" />
+            </ToggleButton>
+        </ToolBar>
+        
+        <!-- Project item tree  -->
+        <TreeView Grid.Row="2" Name="treeProjectItems">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <DockPanel LastChildFill="True">
+                        <Image DockPanel.Dock="Left" Width="16" Height="16" Source="{Binding Converter={StaticResource IconConverter}}" />
+                        <TextBlock Text="{Binding Data.Name}" />
+                    </DockPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</UserControl>

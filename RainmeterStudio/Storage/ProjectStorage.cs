@@ -18,7 +18,9 @@ namespace RainmeterStudio.Storage
             // Deserialize file
             var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
             Project project = serializer.Deserialize(file) as Project;
-            
+            if (project != null)
+                project.Path = path;
+
             // Clean up
             file.Close();
             return project;
@@ -29,12 +31,13 @@ namespace RainmeterStudio.Storage
             // Open file
             var file = File.OpenWrite(path);
 
-            // Deserialize file
+            // Serialize file
             var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
             serializer.Serialize(file, project);
 
             // Clean up
             file.Close();
+            project.Path = path;
         }
     }
 }

@@ -39,19 +39,16 @@ namespace RainmeterStudio.UI
             ProjectManager projectManager = new ProjectManager(projectStorage);
             ProjectController = new Controller.ProjectController(projectManager);
             ProjectController.OwnerWindow = this;
-            AddKeyBinding(ProjectController.ProjectCreateCommand);
-
+            this.AddKeyBinding(ProjectController.ProjectCreateCommand);
+            
             // Initialize document controller
             DocumentController = new DocumentController();
             DocumentController.OwnerWindow = this;
             DocumentController.DocumentOpened += documentController_DocumentOpened;
-            AddKeyBinding(DocumentController.DocumentCreateCommand);
-        }
+            this.AddKeyBinding(DocumentController.DocumentCreateCommand);
 
-        private void AddKeyBinding(Command c)
-        {
-            if (c.Shortcut != null)
-                InputBindings.Add(new KeyBinding(c, c.Shortcut));
+            // Initialize panels
+            projectPanel.Controller = ProjectController;
         }
 
         void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)

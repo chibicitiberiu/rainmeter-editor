@@ -110,6 +110,7 @@
     <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
     <Compile Include="UI\Command.cs" />
+    <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
@@ -119,9 +120,10 @@
     <Compile Include="UI\Dialogs\CreateProjectDialog.xaml.cs">
       <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SkinsPanel.xaml.cs">
-      <DependentUpon>SkinsPanel.xaml</DependentUpon>
+    <Compile Include="UI\ProjectPanel.xaml.cs">
+      <DependentUpon>ProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DirectoryHelper.cs" />
     <Page Include="Documents\Ini\IniSkinDesignerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,7 +152,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\SkinsPanel.xaml">
+    <Page Include="UI\ProjectPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,27 +201,52 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\text_file_32.png" />
+    <Resource Include="Resources\Icons\32\text_generic.png" />
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\arrow_left_16.png" />
+    <Resource Include="Resources\Icons\16\arrow_left.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\arrow_right_16.png" />
+    <Resource Include="Resources\Icons\16\arrow_right.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\arrow_backward_16.png" />
-    <Resource Include="Resources\Icons\arrow_forward_16.png" />
+    <Resource Include="Resources\Icons\16\arrow_backward.png" />
+    <Resource Include="Resources\Icons\16\arrow_forward.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\page_white_star_16.png" />
+    <Resource Include="Resources\Icons\16\page_white_star.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\project_16.png" />
-    <Resource Include="Resources\Icons\project_star_16.png" />
+    <Resource Include="Resources\Icons\16\project.png" />
+    <Resource Include="Resources\Icons\16\project_star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\page_white_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\text_generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\file_generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\arrow_refresh_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\plus.png" />
+    <Resource Include="Resources\Icons\16\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\folder_explore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\view-refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

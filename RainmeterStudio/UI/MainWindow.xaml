@@ -4,28 +4,8 @@
         xmlns:ui="clr-namespace:RainmeterStudio.UI"
         xmlns:ad="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:adlayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
-        Title="Rainmeter Studio" Height="350" Width="525"
+        Title="Rainmeter Studio" Height="600" Width="800"
         ResizeMode="CanResizeWithGrip" >
-
-    <Window.Resources>
-        <Style x:Key="CommandMenuItemStyle" TargetType="MenuItem">
-            <Setter Property="Command" Value="{Binding}" />
-            <Setter Property="Header" Value="{Binding DisplayText}" />
-            <Setter Property="ToolTip" Value="{Binding Tooltip}" />
-            <Setter Property="InputGestureText" Value="{Binding ShortcutText}" />
-        </Style>
-        <Style x:Key="CommandButtonStyle" TargetType="Button">
-            <Setter Property="Command" Value="{Binding}" />
-            <Setter Property="ToolTip" Value="{Binding Tooltip}" />
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <Image Width="16" Height="16" Source="{Binding Icon}" />
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -70,14 +50,16 @@
         <ToolBarTray Grid.Row="1">
             <ToolBar>
                 <Button Name="buttonBackward" ToolTip="Navigate backward">
-                    <Image Width="16" Height="16" Source="/Resources/Icons/arrow_backward_16.png" />
+                    <Image Width="16" Height="16" Source="/Resources/Icons/16/arrow_backward.png" />
                 </Button>
                 <Button Name="buttonForward" ToolTip="Navigate forward">
-                    <Image Width="16" Height="16" Source="/Resources/Icons/arrow_forward_16.png" />
+                    <Image Width="16" Height="16" Source="/Resources/Icons/16/arrow_forward.png" />
                 </Button>
                 <Separator />
                 <Button DataContext="{Binding DocumentController.DocumentCreateCommand}"
-                        Style="{StaticResource CommandButtonStyle}" />
+                        Style="{StaticResource CommandButtonStyle}">
+                    <Image Width="16" Height="16" Source="{Binding Icon}" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
 
@@ -102,10 +84,10 @@
                 <adlayout:LayoutPanel Orientation="Horizontal">
                     <adlayout:LayoutDocumentPane x:Name="documentPane" />
 
-                    <adlayout:LayoutAnchorablePaneGroup DockWidth="150" Orientation="Vertical">
+                    <adlayout:LayoutAnchorablePaneGroup DockWidth="250" Orientation="Vertical">
                         <adlayout:LayoutAnchorablePane>
-                            <adlayout:LayoutAnchorable Title="Skins">
-                                <ui:SkinsPanel />
+                            <adlayout:LayoutAnchorable Title="Project">
+                                <ui:ProjectPanel x:Name="projectPanel" />
                             </adlayout:LayoutAnchorable>
                             <adlayout:LayoutAnchorable Title="Outline" />
                         </adlayout:LayoutAnchorablePane>

@@ -44,7 +44,7 @@ namespace RainmeterStudio.UI.Controller
         {
             get
             {
-                return Manager.ActiveProjectPath;
+                return Manager.ActiveProject.Path;
             }
         }
 
@@ -78,11 +78,8 @@ namespace RainmeterStudio.UI.Controller
             {
                 if (_projectCreateCommand == null)
                 {
-                    _projectCreateCommand = new Command("ProjectCreateComand", () => CreateProject())
+                    _projectCreateCommand = new Command("ProjectCreateCommand", () => CreateProject())
                     {
-                        DisplayText = Resources.Strings.ProjectCreateCommand_DisplayText,
-                        Tooltip = Resources.Strings.ProjectCreateCommand_ToolTip,
-                        Icon = new BitmapImage(new Uri(Resources.Icons.ProjectCreateCommand_Icon, UriKind.RelativeOrAbsolute)),
                         Shortcut = new KeyGesture(Key.N, ModifierKeys.Control | ModifierKeys.Shift)
                     };
                 }
@@ -123,10 +120,11 @@ namespace RainmeterStudio.UI.Controller
             if (!res.HasValue || !res.Value)
                 return;
 
+            string selectedName = dialog.SelectedName;
             string selectedPath = dialog.SelectedPath;
 
             // Call manager
-            Manager.CreateProject(name, selectedPath); // TODO
+            Manager.CreateProject(selectedName, selectedPath);
         }
 
         /// <summary>

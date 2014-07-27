@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using RainmeterStudio.Model;
@@ -15,11 +16,6 @@ namespace RainmeterStudio.Business
         /// Gets the currently opened project
         /// </summary>
         public Project ActiveProject { get; protected set; }
-
-        /// <summary>
-        /// Gets the currently opened project's path
-        /// </summary>
-        public string ActiveProjectPath { get; protected set; }
 
         /// <summary>
         /// Gets or sets the project storage
@@ -61,9 +57,10 @@ namespace RainmeterStudio.Business
             // Create project object
             ActiveProject = new Project();
             ActiveProject.Name = name;
+            ActiveProject.Path = path;
 
             // Save to file
-            ActiveProjectPath = path;
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
             SaveActiveProject();
 
             // Raise event
@@ -83,7 +80,7 @@ namespace RainmeterStudio.Business
 
             // Open using storage
             ActiveProject = Storage.Load(path);
-            ActiveProjectPath = path;
+            ActiveProject.Path = path;
 
             // Raise event
             if (ActiveProjectChanged != null)
@@ -100,7 +97,7 @@ namespace RainmeterStudio.Business
                 throw new InvalidOperationException("Cannot save a project that is not opened.");
 
             // Save
-            Storage.Save(ActiveProjectPath, ActiveProject);
+            Storage.Save(ActiveProject.Path, ActiveProject);
         }
 
         /// <summary>
@@ -109,7 +106,6 @@ namespace RainmeterStudio.Business
         public void Close() 
         {
             ActiveProject = null;
-            ActiveProjectPath = null;
 
             // Raise event
             if (ActiveProjectChanged != null)

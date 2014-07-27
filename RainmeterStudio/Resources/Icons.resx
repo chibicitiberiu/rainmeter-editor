@@ -117,10 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentCreateCommand_Icon" xml:space="preserve">
-    <value>/Resources/Icons/page_white_star_16.png</value>
+  <data name="DocumentCreateCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/page_white_star.png</value>
   </data>
-  <data name="ProjectCreateCommand_Icon" xml:space="preserve">
-    <value>/Resources/Icons/project_star_16.png</value>
+  <data name="DocumentTemplate_Text" xml:space="preserve">
+    <value>/Resources/Icons/32/text_generic.png</value>
+  </data>
+  <data name="ProjectCreateCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/project_star.png</value>
+  </data>
+  <data name="ProjectItemFolder" xml:space="preserve">
+    <value>/Resources/Icons/16/folder.png</value>
+  </data>
+  <data name="ProjectItemNone" xml:space="preserve">
+    <value>/Resources/Icons/16/page_white_delete.png</value>
+  </data>
+  <data name="ProjectItemUnknown" xml:space="preserve">
+    <value>/Resources/Icons/16/file_generic.png</value>
+  </data>
+  <data name="ProjectItem_rsproj" xml:space="preserve">
+    <value>/Resources/Icons/16/project.png</value>
+  </data>
+  <data name="ProjectItem_txt" xml:space="preserve">
+    <value>/Resources/Icons/16/text_generic.png</value>
+  </data>
+  <data name="ProjectPanel_CollapseAllCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/minus.png</value>
+  </data>
+  <data name="ProjectPanel_ExpandAllCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/plus.png</value>
+  </data>
+  <data name="ProjectPanel_RefreshCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/view-refresh.png</value>
+  </data>
+  <data name="ProjectPanel_ShowAllFilesCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/folder_explore.png</value>
+  </data>
+  <data name="ProjectPanel_SyncWithActiveViewCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/arrow_refresh_small.png</value>
   </data>
 </root>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using System.Windows.Media;
+using RainmeterStudio.UI.Controller;
 
 namespace RainmeterStudio.UI
 {
@@ -15,22 +16,101 @@ namespace RainmeterStudio.UI
         private Func<object, bool> _canExecute;
         private Action _executeNoParam;
         private Func<bool> _canExecuteNoParam;
-        
+
         #endregion
 
         #region Public properties
 
+        /// <summary>
+        /// Gets or sets the name of the command
+        /// </summary>
         public string Name { get; set; }
-        public string DisplayText { get; set; }
-        public string Tooltip { get; set; }
-        public ImageSource Icon { get; set; }
+
+        #region Display text property
+        private string _displayText = null;
+
+        /// <summary>
+        /// Gets or sets the display text of the command
+        /// </summary>
+        public string DisplayText
+        {
+            get
+            {
+                if (_displayText == null)
+                    return Resources.Strings.ResourceManager.GetString(Name + "_DisplayText");
+
+                return _displayText;
+            }
+            set
+            {
+                _displayText = value;
+            }
+        }
+
+        #endregion
+
+        #region ToolTip property
+        private string _toolTip = null;
+
+        /// <summary>
+        /// Gets or sets the tooltip
+        /// </summary>
+        public string ToolTip
+        {
+            get
+            {
+                if (_toolTip == null)
+                    return Resources.Strings.ResourceManager.GetString(Name + "_ToolTip");
+
+                return _toolTip;
+            }
+            set
+            {
+                _toolTip = value;
+            }
+        }
+        #endregion
+
+        #region Icon property
+        private ImageSource _icon = null;
+
+        /// <summary>
+        /// Gets or sets the command's icon
+        /// </summary>
+        public ImageSource Icon
+        {
+            get
+            {
+                if (_icon == null)
+                    return IconProvider.GetIcon(Name);
+
+                return _icon;
+            }
+            set
+            {
+                _icon = value;
+            }
+        }
+        #endregion
+
+        #region Keyboard shortcut property
+        
+        /// <summary>
+        /// Gets or sets the keyboard shortcut of this command
+        /// </summary>
         public KeyGesture Shortcut { get; set; }
 
+        /// <summary>
+        /// Gets the text representation of the keyboard shortcut
+        /// </summary>
         public string ShortcutText
         {
             get
             {
                 string text = String.Empty;
+
+                if (Shortcut == null)
+                    return text;
 
                 if ((Shortcut.Modifiers & ModifierKeys.Windows) != 0)
                     text += "Win+";
@@ -51,22 +131,45 @@ namespace RainmeterStudio.UI
 
         #endregion
 
-        public event EventHandler CanExecuteChanged;
+        #endregion
 
-        public Command(string name = null, Action<object> execute = null, Func<object, bool> canExecute = null)
+        #pragma warning disable 67
+        
+        public event EventHandler CanExecuteChanged;
+        
+        #pragma warning restore 67
+
+        /// <summary>
+        /// Initializes this command
+        /// </summary>
+        /// <param name="name">The name of the command</param>
+        /// <param name="execute">Callback function to execute when the command is triggered</param>
+        /// <param name="canExecute">Function that can be queried if the command can execute</param>
+        public Command(string name, Action<object> execute, Func<object, bool> canExecute = null)
         {
             Name = name;
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public Command(string name = null, Action execute = null, Func<bool> canExecute = null)
+        /// <summary>
+        /// Initializes this command
+        /// </summary>
+        /// <param name="name">The name of the command</param>
+        /// <param name="execute">Callback function to execute when the command is triggered</param>
+        /// <param name="canExecute">Function that can be queried if the command can execute</param>
+        public Command(string name, Action execute, Func<bool> canExecute = null)
         {
             Name = name;
             _executeNoParam = execute;
             _canExecuteNoParam = canExecute;
         }
 
+        /// <summary>
+        /// Function that can be queried if the command can be executed
+        /// </summary>
+        /// <param name="parameter">Command parameter</param>
+        /// <returns>True if the function can be executed</returns>
         public virtual bool CanExecute(object parameter)
         {
             if (_canExecute != null)
@@ -77,12 +180,30 @@ namespace RainmeterStudio.UI
             return true;
         }
 
+        /// <summary>
+        /// Executes the command
+        /// </summary>
+        /// <param name="parameter">Command parameter</param>
         public virtual void Execute(object parameter)
         {
             if (_execute != null)
                 _execute(parameter);
             else if (_executeNoParam != null)
                 _executeNoParam();
+        }
+    }
+
+    public static class UIElementExtensions
+    {
+        /// <summary>
+        /// Adds a keyboard shortcut to an UI element
+        /// </summary>
+        /// <param name="uiElement">UI element</param>
+        /// <param name="command">Command</param>
+        public static void AddKeyBinding(this System.Windows.UIElement uiElement, Command command)
+        {
+            if (command.Shortcut != null)
+                uiElement.InputBindings.Add(new KeyBinding(command, command.Shortcut));
         }
     }
 }

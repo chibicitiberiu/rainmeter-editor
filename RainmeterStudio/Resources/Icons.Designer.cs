@@ -61,20 +61,119 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/page_white_star_16.png.
+        ///   Looks up a localized string similar to /Resources/Icons/16/page_white_star.png.
         /// </summary>
-        internal static string DocumentCreateCommand_Icon {
+        internal static string DocumentCreateCommand {
             get {
-                return ResourceManager.GetString("DocumentCreateCommand_Icon", resourceCulture);
+                return ResourceManager.GetString("DocumentCreateCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/project_star_16.png.
+        ///   Looks up a localized string similar to /Resources/Icons/32/text_generic.png.
         /// </summary>
-        internal static string ProjectCreateCommand_Icon {
+        internal static string DocumentTemplate_Text {
             get {
-                return ResourceManager.GetString("ProjectCreateCommand_Icon", resourceCulture);
+                return ResourceManager.GetString("DocumentTemplate_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/project_star.png.
+        /// </summary>
+        internal static string ProjectCreateCommand {
+            get {
+                return ResourceManager.GetString("ProjectCreateCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/project.png.
+        /// </summary>
+        internal static string ProjectItem_rsproj {
+            get {
+                return ResourceManager.GetString("ProjectItem_rsproj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/text_generic.png.
+        /// </summary>
+        internal static string ProjectItem_txt {
+            get {
+                return ResourceManager.GetString("ProjectItem_txt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/folder.png.
+        /// </summary>
+        internal static string ProjectItemFolder {
+            get {
+                return ResourceManager.GetString("ProjectItemFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/page_white_delete.png.
+        /// </summary>
+        internal static string ProjectItemNone {
+            get {
+                return ResourceManager.GetString("ProjectItemNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/file_generic.png.
+        /// </summary>
+        internal static string ProjectItemUnknown {
+            get {
+                return ResourceManager.GetString("ProjectItemUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/minus.png.
+        /// </summary>
+        internal static string ProjectPanel_CollapseAllCommand {
+            get {
+                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/plus.png.
+        /// </summary>
+        internal static string ProjectPanel_ExpandAllCommand {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/view-refresh.png.
+        /// </summary>
+        internal static string ProjectPanel_RefreshCommand {
+            get {
+                return ResourceManager.GetString("ProjectPanel_RefreshCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/folder_explore.png.
+        /// </summary>
+        internal static string ProjectPanel_ShowAllFilesCommand {
+            get {
+                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/arrow_refresh_small.png.
+        /// </summary>
+        internal static string ProjectPanel_SyncWithActiveViewCommand {
+            get {
+                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand", resourceCulture);
             }
         }
     }

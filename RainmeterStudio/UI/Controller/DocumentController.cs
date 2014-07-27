@@ -25,9 +25,6 @@ namespace RainmeterStudio.UI.Controller
                 {
                     _documentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow())
                     {
-                        DisplayText = Resources.Strings.DocumentCreateCommand_DisplayText,
-                        Tooltip = Resources.Strings.DocumentCreateCommand_ToolTip,
-                        Icon = new BitmapImage(new Uri(Resources.Icons.DocumentCreateCommand_Icon, UriKind.RelativeOrAbsolute)),
                         Shortcut = new KeyGesture(Key.N, ModifierKeys.Control)
                     };
                 }

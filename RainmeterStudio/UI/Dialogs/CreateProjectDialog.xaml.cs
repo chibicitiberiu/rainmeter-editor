@@ -125,10 +125,15 @@ namespace RainmeterStudio.UI.Dialogs
         {
             InitializeComponent();
 
+            // Add event handlers
             textLocation.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(textLocation_TextChanged));
             textPath.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(textPath_TextChanged));
 
+            // Set data context
             DataContext = this;
+
+            // Focus on name textbox
+            textName.Focus();
         }
 
         private void Create()

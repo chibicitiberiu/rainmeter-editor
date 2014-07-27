@@ -8,6 +8,39 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ToolBar">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style TargetType="ToolBarTray">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            
+            <Style x:Key="CommandMenuItemStyle" TargetType="MenuItem">
+                <Setter Property="Command" Value="{Binding}" />
+                <Setter Property="Header" Value="{Binding DisplayText}" />
+                <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+                <Setter Property="InputGestureText" Value="{Binding ShortcutText}" />
+            </Style>
+            
+            <Style x:Key="CommandButtonStyle" TargetType="ButtonBase">
+                <Setter Property="Command" Value="{Binding}" />
+                <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value=".5" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="CommandAutoHideButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource CommandButtonStyle}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

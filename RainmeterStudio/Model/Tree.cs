@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -12,17 +13,17 @@ namespace RainmeterStudio.Model
         public T Data { get; set; }
 
         [XmlArray("children"), XmlArrayItem("child")]
-        public List<Tree<T>> Children { get; set; }
+        public ObservableCollection<Tree<T>> Children { get; set; }
 
         public Tree()
         {
-            Children = new List<Tree<T>>();
+            Children = new ObservableCollection<Tree<T>>();
             Data = default(T);
         }
 
         public Tree(T data)
         {
-            Children = new List<Tree<T>>();
+            Children = new ObservableCollection<Tree<T>>();
             Data = data;
         }
 

@@ -29,7 +29,7 @@ namespace RainmeterStudio.Documents.Text
                     Category = Resources.Strings.Category_Utility,
                     DefaultExtension = ".txt",
                     Description = Resources.Strings.DocumentFormat_TextFile_Description,
-                    Icon = new System.Windows.Media.Imaging.BitmapImage(new Uri("/Resources/Icons/text_file_32.png", UriKind.RelativeOrAbsolute)),
+                    Icon = new System.Windows.Media.Imaging.BitmapImage(new Uri(Resources.Icons.DocumentTemplate_Text, UriKind.RelativeOrAbsolute)),
                     Factory = this
                 };
             }
