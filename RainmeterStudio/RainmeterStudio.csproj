@@ -109,9 +109,11 @@
     <Compile Include="Model\IDocumentStorage.cs" />
     <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
+    <Compile Include="Storage\SerializableTree.cs" />
     <Compile Include="UI\Command.cs" />
     <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
+    <Compile Include="UI\Controller\SettingsProvider.cs" />
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
     </Compile>
@@ -123,7 +125,9 @@
     <Compile Include="UI\ProjectPanel.xaml.cs">
       <DependentUpon>ProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
+    <Compile Include="Utils\TreeExtensions.cs" />
     <Page Include="Documents\Ini\IniSkinDesignerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +251,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\16\view-refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\folder_project.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

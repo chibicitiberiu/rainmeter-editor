@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using RainmeterStudio.Business;
 using RainmeterStudio.Model;
 using RainmeterStudio.UI.Dialogs;
@@ -71,22 +72,9 @@ namespace RainmeterStudio.UI.Controller
 
         #region Commands
 
-        private Command _projectCreateCommand;
-        public Command ProjectCreateCommand
-        {
-            get
-            {
-                if (_projectCreateCommand == null)
-                {
-                    _projectCreateCommand = new Command("ProjectCreateCommand", () => CreateProject())
-                    {
-                        Shortcut = new KeyGesture(Key.N, ModifierKeys.Control | ModifierKeys.Shift)
-                    };
-                }
+        public Command ProjectCreateCommand { get; private set; }
 
-                return _projectCreateCommand;
-            }
-        }
+        public Command ProjectOpenCommand { get; private set; }
 
         #endregion
 
@@ -97,6 +85,9 @@ namespace RainmeterStudio.UI.Controller
         public ProjectController(ProjectManager manager)
         {
             Manager = manager;
+
+            ProjectCreateCommand = new Command("ProjectCreateCommand", () => CreateProject());
+            ProjectOpenCommand = new Command("ProjectOpenCommand", () => OpenProject());
         }
 
         /// <summary>
@@ -133,7 +124,21 @@ namespace RainmeterStudio.UI.Controller
         /// <param name="path"></param>
         public void OpenProject(string path = null)
         {
+            // Open dialog
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = Resources.Strings.Dialog_FileType_Project + "|*.rsproj|"
+                + Resources.Strings.Dialog_FileType_AllFiles + "|*.*";
+            dialog.Title = Resources.Strings.Dialog_OpenProject_Title;
+            dialog.Multiselect = false;
 
+            // Show dialog
+            bool? res = dialog.ShowDialog(OwnerWindow);
+            if (!res.HasValue || !res.Value)
+                return;
+
+            // Call manager
+            string filename = dialog.FileName;
+            Manager.OpenProject(filename);
         }
 
         /// <summary>

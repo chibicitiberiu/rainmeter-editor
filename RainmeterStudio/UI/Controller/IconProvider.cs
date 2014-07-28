@@ -55,10 +55,10 @@ namespace RainmeterStudio.UI.Controller
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var tree = value as Tree<Reference>;
-            if (tree != null)
+            var reference = value as Reference;
+            if (reference != null)
             {
-                return IconProvider.GetProjectItemIcon(tree.Data);
+                return IconProvider.GetProjectItemIcon(reference);
             }
 
             return null;

@@ -126,7 +126,7 @@
   <data name="ProjectCreateCommand" xml:space="preserve">
     <value>/Resources/Icons/16/project_star.png</value>
   </data>
-  <data name="ProjectItemFolder" xml:space="preserve">
+  <data name="ProjectItemDirectory" xml:space="preserve">
     <value>/Resources/Icons/16/folder.png</value>
   </data>
   <data name="ProjectItemNone" xml:space="preserve">
@@ -140,6 +140,9 @@
   </data>
   <data name="ProjectItem_txt" xml:space="preserve">
     <value>/Resources/Icons/16/text_generic.png</value>
+  </data>
+  <data name="ProjectOpenCommand" xml:space="preserve">
+    <value>/Resources/Icons/16/folder_project.png</value>
   </data>
   <data name="ProjectPanel_CollapseAllCommand" xml:space="preserve">
     <value>/Resources/Icons/16/minus.png</value>

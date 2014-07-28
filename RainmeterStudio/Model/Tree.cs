@@ -7,13 +7,11 @@ using System.Xml.Serialization;
 
 namespace RainmeterStudio.Model
 {
-    public class Tree<T>
+    public class Tree<T> : IList<Tree<T>>
     {
-        [XmlElement("data")]
         public T Data { get; set; }
 
-        [XmlArray("children"), XmlArrayItem("child")]
-        public ObservableCollection<Tree<T>> Children { get; set; }
+        public ObservableCollection<Tree<T>> Children { get; private set; }
 
         public Tree()
         {
@@ -149,6 +147,11 @@ namespace RainmeterStudio.Model
                 hash = hash * 7 + c.GetHashCode();
 
             return hash;
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Children.GetEnumerator();
         }
     }
 }

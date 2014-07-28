@@ -129,14 +129,29 @@
   <data name="Dialog_Create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="Dialog_FileType_AllFiles" xml:space="preserve">
+    <value>All files</value>
+  </data>
+  <data name="Dialog_FileType_Project" xml:space="preserve">
+    <value>RainmeterStudio project</value>
+  </data>
   <data name="Dialog_OK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="Dialog_OpenProject_Title" xml:space="preserve">
+    <value>Open project...</value>
+  </data>
+  <data name="DocumentCloseCommand_DisplayText" xml:space="preserve">
+    <value>_Close</value>
+  </data>
+  <data name="DocumentCloseCommand_ToolTip" xml:space="preserve">
+    <value>Close active document</value>
   </data>
   <data name="DocumentCreateCommand_DisplayText" xml:space="preserve">
     <value>_File...</value>
   </data>
   <data name="DocumentCreateCommand_ToolTip" xml:space="preserve">
-    <value>Creates a new file</value>
+    <value>Create a new file</value>
   </data>
   <data name="DocumentEditor_Text_Name" xml:space="preserve">
     <value>Text Editor</value>
@@ -147,11 +162,20 @@
   <data name="DocumentFormat_TextFile_Name" xml:space="preserve">
     <value>Text file</value>
   </data>
+  <data name="MainWindow_File" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="MainWindow_File_New" xml:space="preserve">
+    <value>_New</value>
+  </data>
+  <data name="MainWindow_File_Open" xml:space="preserve">
+    <value>_Open</value>
+  </data>
   <data name="ProjectCreateCommand_DisplayText" xml:space="preserve">
     <value>_Project...</value>
   </data>
   <data name="ProjectCreateCommand_ToolTip" xml:space="preserve">
-    <value>Creates a new project</value>
+    <value>Create a new project</value>
   </data>
   <data name="ProjectCreateDialog_Location" xml:space="preserve">
     <value>Location:</value>
@@ -170,6 +194,12 @@
   </data>
   <data name="ProjectCreateDialog_Title" xml:space="preserve">
     <value>Create project</value>
+  </data>
+  <data name="ProjectOpenCommand_DisplayText" xml:space="preserve">
+    <value>_Project...</value>
+  </data>
+  <data name="ProjectOpenCommand_ToolTip" xml:space="preserve">
+    <value>Open existing project</value>
   </data>
   <data name="ProjectPanel_CollapseAllCommand_DisplayText" xml:space="preserve">
     <value>Collapse all</value>

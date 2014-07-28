@@ -4,6 +4,7 @@
         xmlns:ui="clr-namespace:RainmeterStudio.UI"
         xmlns:ad="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:adlayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:r="clr-namespace:RainmeterStudio.Resources"
         Title="Rainmeter Studio" Height="600" Width="800"
         ResizeMode="CanResizeWithGrip" >
 
@@ -21,8 +22,8 @@
 
         <!-- Menu bar -->
         <Menu Grid.Row="0" Grid.ColumnSpan="10">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New">
+            <MenuItem Header="{x:Static r:Strings.MainWindow_File}">
+                <MenuItem Header="{x:Static r:Strings.MainWindow_File_New}">
                     <MenuItem DataContext="{Binding DocumentController.DocumentCreateCommand}"
                               Style="{StaticResource CommandMenuItemStyle}" >
                         <MenuItem.Icon>
@@ -37,7 +38,15 @@
                     </MenuItem>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Open..." />
+                <MenuItem Header="{x:Static r:Strings.MainWindow_File_Open}">
+                    <MenuItem DataContext="{Binding ProjectController.ProjectOpenCommand}"
+                              Style="{StaticResource CommandMenuItemStyle}">
+                        <MenuItem.Icon>
+                            <Image Source="{Binding Icon}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="_Close" />
                 <MenuItem Header="E_xit" />

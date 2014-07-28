@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -17,6 +18,7 @@ using RainmeterStudio.Interop;
 using RainmeterStudio.Model;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
+using RainmeterStudio.UI.ViewModel;
 using RainmeterStudio.Utils;
 
 namespace RainmeterStudio.UI
@@ -48,77 +50,49 @@ namespace RainmeterStudio.UI
             }
         }
 
-        private Command _syncWithActiveViewCommand;
-        public Command SyncWithActiveViewCommand
+        #region Commands
+
+        public Command SyncWithActiveViewCommand { get; private set; }
+
+        public Command RefreshCommand { get; private set; }
+
+        public Command ExpandAllCommand { get; private set; }
+
+        public Command CollapseAllCommand { get; private set; }
+
+        public Command ShowAllFilesCommand { get; private set; }
+
+        #endregion
+
+        private bool _canExpand = false;
+        private bool CanExpand
         {
             get
             {
-                if (_syncWithActiveViewCommand == null)
-                {
-                    _syncWithActiveViewCommand = new Command("ProjectPanel_SyncWithActiveViewCommand", SyncWithActiveView);
-                }
-                return _syncWithActiveViewCommand;
+                return _canExpand;
+            }
+            set
+            {
+                _canExpand = value;
+
+                if (ExpandAllCommand != null)
+                    ExpandAllCommand.NotifyCanExecuteChanged();
+
+                if (CollapseAllCommand != null)
+                    CollapseAllCommand.NotifyCanExecuteChanged();
             }
         }
 
-        private Command _refreshCommand;
-        public Command RefreshCommand
-        {
-            get
-            {
-                if (_refreshCommand == null)
-                {
-                    _refreshCommand = new Command("ProjectPanel_RefreshCommand", SyncWithActiveView)
-                    {
-                        Shortcut = new KeyGesture(Key.F5)
-                    };
-                }
-                return _refreshCommand;
-            }
-        }
-
-        private Command _expandAllCommand;
-        public Command ExpandAllCommand
-        {
-            get
-            {
-                if (_expandAllCommand == null)
-                {
-                    _expandAllCommand = new Command("ProjectPanel_ExpandAllCommand", SyncWithActiveView);
-                }
-                return _expandAllCommand;
-            }
-        }
-
-        private Command _collapseAllCommand;
-        public Command CollapseAllCommand
-        {
-            get
-            {
-                if (_collapseAllCommand == null)
-                {
-                    _collapseAllCommand = new Command("ProjectPanel_CollapseAllCommand", SyncWithActiveView);
-                }
-                return _collapseAllCommand;
-            }
-        }
-
-        private Command _showAllFilesCommand;
-        public Command ShowAllFilesCommand
-        {
-            get
-            {
-                if (_showAllFilesCommand == null)
-                {
-                    _showAllFilesCommand = new Command("ProjectPanel_ShowAllFilesCommand", SyncWithActiveView);
-                }
-                return _showAllFilesCommand;
-            }
-        }
 
         public ProjectPanel()
         {
             InitializeComponent();
+
+            SyncWithActiveViewCommand = new Command("ProjectPanel_SyncWithActiveViewCommand", SyncWithActiveView);
+            RefreshCommand = new Command("ProjectPanel_RefreshCommand", Refresh);
+            ExpandAllCommand = new Command("ProjectPanel_ExpandAllCommand", ExpandAll, () => _canExpand);
+            CollapseAllCommand = new Command("ProjectPanel_CollapseAllCommand", CollapseAll, () => !_canExpand);
+            ShowAllFilesCommand = new Command("ProjectPanel_ShowAllFilesCommand", Refresh);
 
             this.DataContext = this;
             Refresh();
@@ -144,34 +118,86 @@ namespace RainmeterStudio.UI
             {
                 this.IsEnabled = true;
 
-                // Display all files in the project directory
+                // Get tree
+                Tree<ReferenceViewModel> tree;
                 if (toggleShowAllFiles.IsChecked.HasValue && toggleShowAllFiles.IsChecked.Value)
                 {
-                    string projectFolder = System.IO.Path.GetDirectoryName(Controller.ActiveProjectPath);
-                    var tree = DirectoryHelper.GetFolderTree(projectFolder);
-                    tree.Data = Controller.ActiveProject.Root.Data;
-            
-                    treeProjectItems.Items.Clear();
-                    treeProjectItems.Items.Add(tree);
+                    tree = GetAllFiles();
                 }
-
-                // Display only the project items
                 else
                 {
-                    treeProjectItems.Items.Clear();
-                    treeProjectItems.Items.Add(Controller.ActiveProject.Root);
+                    tree = GetProjectItems();
                 }
+
+                // Add tree to tree view
+                treeProjectItems.Items.Clear();
+                treeProjectItems.Items.Add(tree);
             }
         }
 
-        private void toggleShowAllFiles_Checked(object sender, RoutedEventArgs e)
+        private Tree<ReferenceViewModel> GetAllFiles()
         {
-            Refresh();
+            // Get directory name
+            string projectFolder = System.IO.Path.GetDirectoryName(Controller.ActiveProjectPath);
+
+            // Get folder tree
+            Tree<Reference> refTree = DirectoryHelper.GetFolderTree(projectFolder);
+            refTree.Data = Controller.ActiveProject.Root.Data;
+
+            // Remove the project file from the list
+            Tree<Reference> project = refTree.First(x => DirectoryHelper.PathsEqual(x.Data.Path, Controller.ActiveProjectPath));
+            refTree.Remove(project);
+
+            // Transform to reference view model and return
+            return refTree.TransformData<Reference, ReferenceViewModel>((data) => new ReferenceViewModel(data));
         }
 
-        private void toggleShowAllFiles_Unchecked(object sender, RoutedEventArgs e)
+        private Tree<ReferenceViewModel> GetProjectItems()
         {
-            Refresh();
+            // Get project items
+            Tree<Reference> refTree = Controller.ActiveProject.Root;
+
+            // Transform to reference view model and return
+            return refTree.TransformData<Reference, ReferenceViewModel>((data) => new ReferenceViewModel(data));
+        }
+
+        private void ExpandAll()
+        {
+            // Get tree
+            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            if (tree == null)
+                return;
+
+            // Expand all
+            tree.Apply((node) => node.Data.IsExpanded = true);
+
+            // Set can expand property
+            CanExpand = false;
+        }
+
+        private void CollapseAll()
+        {
+            // Get tree
+            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            if (tree == null)
+                return;
+
+            // Expand all
+            tree.Apply((node) => node.Data.IsExpanded = false);
+
+            // Set can expand property
+            CanExpand = true;
+        }
+
+        void TreeViewItem_ExpandedOrCollapsed(object sender, RoutedEventArgs e)
+        {
+            // Get tree
+            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            if (tree == null)
+                return;
+            
+            // We can expand if the root is not expanded
+            CanExpand = (!tree.Data.IsExpanded);
         }
     }
 }

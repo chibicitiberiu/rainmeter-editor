@@ -23,10 +23,7 @@ namespace RainmeterStudio.UI.Controller
             {
                 if (_documentCreateCommand == null)
                 {
-                    _documentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow())
-                    {
-                        Shortcut = new KeyGesture(Key.N, ModifierKeys.Control)
-                    };
+                    _documentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow());
                 }
 
                 return _documentCreateCommand;

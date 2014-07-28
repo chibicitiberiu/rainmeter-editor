@@ -97,11 +97,56 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All files.
+        /// </summary>
+        public static string Dialog_FileType_AllFiles {
+            get {
+                return ResourceManager.GetString("Dialog_FileType_AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RainmeterStudio project.
+        /// </summary>
+        public static string Dialog_FileType_Project {
+            get {
+                return ResourceManager.GetString("Dialog_FileType_Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string Dialog_OK {
             get {
                 return ResourceManager.GetString("Dialog_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open project....
+        /// </summary>
+        public static string Dialog_OpenProject_Title {
+            get {
+                return ResourceManager.GetString("Dialog_OpenProject_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Close.
+        /// </summary>
+        public static string DocumentCloseCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("DocumentCloseCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close active document.
+        /// </summary>
+        public static string DocumentCloseCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("DocumentCloseCommand_ToolTip", resourceCulture);
             }
         }
         
@@ -115,7 +160,7 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creates a new file.
+        ///   Looks up a localized string similar to Create a new file.
         /// </summary>
         public static string DocumentCreateCommand_ToolTip {
             get {
@@ -151,6 +196,33 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _File.
+        /// </summary>
+        public static string MainWindow_File {
+            get {
+                return ResourceManager.GetString("MainWindow_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _New.
+        /// </summary>
+        public static string MainWindow_File_New {
+            get {
+                return ResourceManager.GetString("MainWindow_File_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Open.
+        /// </summary>
+        public static string MainWindow_File_Open {
+            get {
+                return ResourceManager.GetString("MainWindow_File_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Project....
         /// </summary>
         public static string ProjectCreateCommand_DisplayText {
@@ -160,7 +232,7 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creates a new project.
+        ///   Looks up a localized string similar to Create a new project.
         /// </summary>
         public static string ProjectCreateCommand_ToolTip {
             get {
@@ -219,6 +291,24 @@ namespace RainmeterStudio.Resources {
         public static string ProjectCreateDialog_Title {
             get {
                 return ResourceManager.GetString("ProjectCreateDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Project....
+        /// </summary>
+        public static string ProjectOpenCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectOpenCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open existing project.
+        /// </summary>
+        public static string ProjectOpenCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("ProjectOpenCommand_ToolTip", resourceCulture);
             }
         }
         

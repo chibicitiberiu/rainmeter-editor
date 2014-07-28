@@ -94,11 +94,29 @@ namespace RainmeterStudio.UI
         #endregion
 
         #region Keyboard shortcut property
-        
+
+        private KeyGesture _shortcut;
+
         /// <summary>
         /// Gets or sets the keyboard shortcut of this command
         /// </summary>
-        public KeyGesture Shortcut { get; set; }
+        public KeyGesture Shortcut
+        {
+            get
+            {
+                if (_shortcut == null)
+                {
+                    string str = SettingsProvider.GetSetting<string>(Name + "_Shortcut");
+                    return GetKeyGestureFromString(str);
+                }
+
+                return _shortcut;
+            }
+            set
+            {
+                _shortcut = value;
+            }
+        }
 
         /// <summary>
         /// Gets the text representation of the keyboard shortcut
@@ -107,10 +125,12 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                string text = String.Empty;
-
+                // Safety check
                 if (Shortcut == null)
-                    return text;
+                    return null;
+
+                // Build string
+                string text = String.Empty;
 
                 if ((Shortcut.Modifiers & ModifierKeys.Windows) != 0)
                     text += "Win+";
@@ -127,17 +147,56 @@ namespace RainmeterStudio.UI
                 text += Enum.GetName(typeof(Key), Shortcut.Key);
                 return text;
             }
+            set
+            {
+                Shortcut = GetKeyGestureFromString(value);
+            }
+        }
+
+        private KeyGesture GetKeyGestureFromString(string k)
+        {
+            // Safety check
+            if (k == null)
+                return null;
+
+            // Variables
+            ModifierKeys mods = ModifierKeys.None;
+            Key key = Key.None;
+
+            // Parse each field
+            foreach (var field in k.Split('+'))
+            {
+                // Trim surrounding white space
+                string trimmed = field.Trim();
+
+                // Parse
+                if (trimmed.Equals("Win", StringComparison.InvariantCultureIgnoreCase))
+                    mods |= ModifierKeys.Windows;
+                if (trimmed.Equals("Ctrl", StringComparison.InvariantCultureIgnoreCase))
+                    mods |= ModifierKeys.Control;
+                if (trimmed.Equals("Alt", StringComparison.InvariantCultureIgnoreCase))
+                    mods |= ModifierKeys.Alt;
+                if (trimmed.Equals("Shift", StringComparison.InvariantCultureIgnoreCase))
+                    mods |= ModifierKeys.Shift;
+                else Enum.TryParse<Key>(field, out key);
+            }
+
+            return new KeyGesture(key, mods);
         }
 
         #endregion
 
         #endregion
 
-        #pragma warning disable 67
-        
+
+
         public event EventHandler CanExecuteChanged;
-        
-        #pragma warning restore 67
+
+        public void NotifyCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, new EventArgs());
+        }
 
         /// <summary>
         /// Initializes this command

@@ -25,12 +25,66 @@ namespace RainmeterStudio.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Input.KeyGestureConverter asdf {
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+N")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string ProjectCreateCommand_Shortcut {
             get {
-                return ((global::System.Windows.Input.KeyGestureConverter)(this["asdf"]));
+                return ((string)(this["ProjectCreateCommand_Shortcut"]));
             }
             set {
-                this["asdf"] = value;
+                this["ProjectCreateCommand_Shortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F5")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string ProjectPanel_RefreshCommand_Shortcut {
+            get {
+                return ((string)(this["ProjectPanel_RefreshCommand_Shortcut"]));
+            }
+            set {
+                this["ProjectPanel_RefreshCommand_Shortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+N")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string DocumentCreateCommand_Shortcut {
+            get {
+                return ((string)(this["DocumentCreateCommand_Shortcut"]));
+            }
+            set {
+                this["DocumentCreateCommand_Shortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+O")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string ProjectOpenCommand_Shortcut {
+            get {
+                return ((string)(this["ProjectOpenCommand_Shortcut"]));
+            }
+            set {
+                this["ProjectOpenCommand_Shortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+W")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string DocumentCloseCommand_Shortcut {
+            get {
+                return ((string)(this["DocumentCloseCommand_Shortcut"]));
+            }
+            set {
+                this["DocumentCloseCommand_Shortcut"] = value;
             }
         }
     }

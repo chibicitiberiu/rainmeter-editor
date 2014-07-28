@@ -108,9 +108,9 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to /Resources/Icons/16/folder.png.
         /// </summary>
-        internal static string ProjectItemFolder {
+        internal static string ProjectItemDirectory {
             get {
-                return ResourceManager.GetString("ProjectItemFolder", resourceCulture);
+                return ResourceManager.GetString("ProjectItemDirectory", resourceCulture);
             }
         }
         
@@ -129,6 +129,15 @@ namespace RainmeterStudio.Resources {
         internal static string ProjectItemUnknown {
             get {
                 return ResourceManager.GetString("ProjectItemUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Resources/Icons/16/folder_project.png.
+        /// </summary>
+        internal static string ProjectOpenCommand {
+            get {
+                return ResourceManager.GetString("ProjectOpenCommand", resourceCulture);
             }
         }
         

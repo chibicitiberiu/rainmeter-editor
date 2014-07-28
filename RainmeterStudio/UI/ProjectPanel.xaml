@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ctrl="clr-namespace:RainmeterStudio.UI.Controller"
+             xmlns:ui="clr-namespace:RainmeterStudio.UI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -45,13 +46,16 @@
         <TreeView Grid.Row="2" Name="treeProjectItems">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="IsExpanded" Value="True" />
+                    <Setter Property="IsExpanded" Value="{Binding Data.IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding Data.IsSelected, Mode=TwoWay}" />
+                    <EventSetter Event="Expanded" Handler="TreeViewItem_ExpandedOrCollapsed" />
+                    <EventSetter Event="Collapsed" Handler="TreeViewItem_ExpandedOrCollapsed" />
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <DockPanel LastChildFill="True">
-                        <Image DockPanel.Dock="Left" Width="16" Height="16" Source="{Binding Converter={StaticResource IconConverter}}" />
+                        <Image DockPanel.Dock="Left" Width="16" Height="16" Source="{Binding Data.Reference, Converter={StaticResource IconConverter}}" />
                         <TextBlock Text="{Binding Data.Name}" />
                     </DockPanel>
                 </HierarchicalDataTemplate>

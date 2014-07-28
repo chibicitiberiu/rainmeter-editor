@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using RainmeterStudio.Storage;
 
 namespace RainmeterStudio.Model
 {
@@ -170,8 +171,25 @@ namespace RainmeterStudio.Model
         /// <summary>
         /// Gets or sets the root node
         /// </summary>
-        [XmlElement("root")]
+        [XmlIgnore]
         public Tree<Reference> Root { get; set; }
+
+        /// <summary>
+        /// Gets or sets the serializable root node
+        /// </summary>
+        /// <remarks>Warning: not efficient</remarks>
+        [XmlElement("root")]
+        public SerializableTree<Reference> SerializableRoot
+        {
+            get
+            {
+                return Root.AsSerializableTree();
+            }
+            set
+            {
+                Root = value.AsTree();
+            }
+        }
 
         #endregion
 
