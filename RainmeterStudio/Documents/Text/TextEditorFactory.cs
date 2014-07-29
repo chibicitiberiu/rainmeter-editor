@@ -8,51 +8,17 @@ using RainmeterStudio.Model;
 
 namespace RainmeterStudio.Documents.Text
 {
-    /*public class TextEditorFactory : IDocumentEditorFactory
+    [AutoRegister]
+    public class TextEditorFactory : IDocumentEditorFactory
     {
-        private TextStorage _storage = new TextStorage();
-
-        /// <inheritdoc />
-        public string EditorName
-        {
-            get { return Resources.Strings.DocumentEditor_Text_Name; }
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<DocumentTemplate> CreateDocumentFormats
-        {
-            get 
-            {
-                yield return new DocumentTemplate()
-                {
-                    Name = Resources.Strings.DocumentFormat_TextFile_Name,
-                    Category = Resources.Strings.Category_Utility,
-                    DefaultExtension = ".txt",
-                    Description = Resources.Strings.DocumentFormat_TextFile_Description,
-                    Icon = new System.Windows.Media.Imaging.BitmapImage(new Uri(Resources.Icons.DocumentTemplate_Text, UriKind.RelativeOrAbsolute)),
-                    Factory = this
-                };
-            }
-        }
-
         public IDocumentEditor CreateEditor(IDocument document)
         {
-            TextDocument textDocument = document as TextDocument;
-
-            if (textDocument == null)
-                throw new ArgumentException("Cannot edit provided document.");
-
-            return new TextEditor(textDocument);
+            return new TextEditor((TextDocument)document);
         }
 
-        public IDocumentStorage Storage { get { return _storage; } }
-
-        public IDocument CreateDocument(DocumentTemplate format, string path)
+        public bool CanEdit(Type type)
         {
-            var document = new TextDocument();
-            document.FilePath = path;
-
-            return document;
+            return type.Equals(typeof(TextDocument));
         }
-    }*/
+    }
 }

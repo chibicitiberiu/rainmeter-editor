@@ -7,16 +7,16 @@ using System.Windows;
 using RainmeterStudio.Business;
 using RainmeterStudio.Documents.Text;
 
-namespace RainmeterStudio
+namespace RainmeterStudio.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
+        public App()
         {
-            //DocumentManager.Instance.RegisterEditorFactory(new TextEditorFactory());
+            InitializeComponent();   
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace RainmeterStudio.Model
+﻿using RainmeterStudio.Model;
+namespace RainmeterStudio.Documents
 {
     /// <summary>
     /// Represents a document template

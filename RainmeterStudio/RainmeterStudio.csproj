@@ -66,26 +66,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Business\DocumentManager.cs" />
     <Compile Include="Business\ProjectManager.cs" />
+    <Compile Include="Documents\AutoRegisterAttribute.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\ICustomDocumentTitleProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\ISelectionPropertiesProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\IToolboxProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\IUndoSupport.cs" />
-    <Compile Include="Documents\DocumentTemplate.cs" />
     <Compile Include="Documents\IDocumentEditor.cs" />
     <Compile Include="Documents\IDocumentEditorFactory.cs" />
     <Compile Include="Documents\IDocumentStorage.cs" />
     <Compile Include="Documents\Text\TextDocument.cs" />
+    <Compile Include="Documents\Text\TextDocumentTemplate.cs" />
     <Compile Include="Documents\Text\TextEditorControl.xaml.cs">
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Documents\Text\TextStorage.cs" />
-    <Compile Include="Model\DocumentTemplate.cs" />
+    <Compile Include="MainClass.cs" />
+    <Compile Include="Documents\DocumentTemplate_.cs" />
     <Compile Include="Model\IDocument.cs" />
     <Compile Include="Documents\Ini\IniDocument.cs" />
     <Compile Include="Documents\Ini\IniSkinDesigner.cs" />
@@ -130,9 +132,11 @@
     <Compile Include="UI\ProjectPanel.xaml.cs">
       <DependentUpon>ProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIManager.cs" />
     <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
+    <Compile Include="Utils\LinqExtension.cs" />
     <Compile Include="Utils\TreeExtensions.cs" />
     <Page Include="Documents\Ini\IniSkinDesignerControl.xaml">
       <SubType>Designer</SubType>
@@ -154,7 +158,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="UI\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -214,7 +218,7 @@
     <Resource Include="Resources\Icons\32\text_generic.png" />
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="Resources\splash.png" />
+    <Resource Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\16\arrow_left.png" />

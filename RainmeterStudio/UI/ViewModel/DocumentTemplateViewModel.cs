@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
+using RainmeterStudio.Documents;
 using RainmeterStudio.Model;
 using RainmeterStudio.UI.Controller;
 

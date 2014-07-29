@@ -26,7 +26,7 @@ namespace RainmeterStudio.Documents.Text
             InitializeComponent();
 
             _document = document;
-            text.Text = document.Text;
+            text.Text = document.Lines.Aggregate((a, b) => a + "\n" + b);
         }
     }
 }

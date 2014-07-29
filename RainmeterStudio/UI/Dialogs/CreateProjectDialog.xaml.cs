@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
+using RainmeterStudio.Documents;
 using RainmeterStudio.Model;
 
 namespace RainmeterStudio.UI.Dialogs

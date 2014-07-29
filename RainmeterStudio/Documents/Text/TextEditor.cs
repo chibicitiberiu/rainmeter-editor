@@ -7,7 +7,7 @@ using RainmeterStudio.Model;
 
 namespace RainmeterStudio.Documents.Text
 {
-    /*public class TextEditor : IDocumentEditor
+    public class TextEditor : IDocumentEditor
     {
         private TextDocument _document;
         private TextEditorControl _control;
@@ -18,10 +18,14 @@ namespace RainmeterStudio.Documents.Text
             _control = new TextEditorControl(document);
         }
 
-        public override IDocument Document { get { return _document; } }
+        public IDocument AttachedDocument
+        {
+            get { return _document; }
+        }
 
-        public override string Title { get { return _document.Name; } }
-
-        public override System.Windows.UIElement EditorUI { get { return _control; } }
-    }*/
+        public System.Windows.UIElement EditorUI
+        {
+            get { return _control; }
+        }
+    }
 }

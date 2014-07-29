@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
+using RainmeterStudio.Documents;
 using RainmeterStudio.Model;
 
 namespace RainmeterStudio.UI.Dialogs
@@ -24,7 +25,7 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
-        public DocumentTemplate SelectedFormat
+        public DocumentTemplate SelectedTemplate
         {
             get
             {

@@ -16,9 +16,9 @@ namespace RainmeterStudio.Documents.Text
         /// <summary>
         /// Gets or sets the text associated with this document
         /// </summary>
-        public string Text
+        public List<string> Lines
         {
-            get; set;
+            get; private set;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace RainmeterStudio.Documents.Text
         /// </summary>
         public TextDocument()
         {
-            Text = String.Empty;
+            Lines = new List<string>();
         }
     }
 }

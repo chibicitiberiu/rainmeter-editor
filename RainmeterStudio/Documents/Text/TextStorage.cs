@@ -6,7 +6,8 @@ namespace RainmeterStudio.Documents.Text
 {
     /// <summary>
     /// Storage for text files
-    /// </summary>
+    /// </summary>    
+    [AutoRegister]
     public class TextStorage : IDocumentStorage
     {
         /// <inheritdoc />
@@ -15,7 +16,7 @@ namespace RainmeterStudio.Documents.Text
             TextDocument document = new TextDocument();
             document.Reference.Path = path;
             document.Reference.Name = Path.GetFileName(path);
-            document.Text = File.ReadAllText(path);
+            document.Lines.AddRange(File.ReadAllLines(path));
 
             return document;
         }
@@ -28,7 +29,7 @@ namespace RainmeterStudio.Documents.Text
             if (textDocument == null)
                 throw new ArgumentException("Provided document is not supported by this storage.");
 
-            File.WriteAllText(path, textDocument.Text);
+            File.WriteAllLines(path, textDocument.Lines);
         }
 
         /// <inheritdoc />

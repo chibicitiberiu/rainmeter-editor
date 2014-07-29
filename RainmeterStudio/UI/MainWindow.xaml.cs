@@ -27,26 +27,21 @@ namespace RainmeterStudio.UI
         public DocumentController DocumentController { get; set; }
         public ProjectController ProjectController { get; set; }
 
-        public MainWindow()
+        public MainWindow(ProjectController projCtrl, DocumentController docCtrl)
         {
             InitializeComponent();
 
-            this.DataContext = this;
+            // Set fields
+            DataContext = this;
+            DocumentController = docCtrl;
+            ProjectController = projCtrl;
 
-            // Initialize project controller
-            // TODO: put this in main
-            ProjectStorage projectStorage = new ProjectStorage();
-            ProjectManager projectManager = new ProjectManager(projectStorage);
-            ProjectController = new Controller.ProjectController(projectManager);
-            ProjectController.OwnerWindow = this;
+            // Add key bindings
             this.AddKeyBinding(ProjectController.ProjectCreateCommand);
-            
-            // Initialize document controller
-            DocumentManager documentManager = new DocumentManager();
-            DocumentController = new DocumentController(documentManager, projectManager);
-            DocumentController.OwnerWindow = this;
-            DocumentController.DocumentOpened += documentController_DocumentOpened;
             this.AddKeyBinding(DocumentController.DocumentCreateCommand);
+            
+            // Subscribe to events
+            DocumentController.DocumentOpened += documentController_DocumentOpened;
 
             // Initialize panels
             projectPanel.Controller = ProjectController;

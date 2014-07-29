@@ -9,6 +9,7 @@ using RainmeterStudio.Model;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using RainmeterStudio.Documents;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -34,18 +35,23 @@ namespace RainmeterStudio.UI.Controller
 
         #endregion
 
+        /// <summary>
+        /// Triggered when a document is opened
+        /// </summary>
         public event EventHandler<DocumentOpenedEventArgs> DocumentOpened
         {
-            add
-            {
-                DocumentManager.DocumentOpened += value;
-            }
-            remove
-            {
-                DocumentManager.DocumentOpened -= value;
-            }
+            add { DocumentManager.DocumentOpened += value; }
+            remove { DocumentManager.DocumentOpened -= value; }
         }
-        public event EventHandler DocumentClosed;
+
+        /// <summary>
+        /// Triggered when a document is closed
+        /// </summary>
+        public event EventHandler<DocumentClosedEventArgs> DocumentClosed
+        {
+            add { DocumentManager.DocumentClosed += value; }
+            remove { DocumentManager.DocumentClosed -= value; }
+        }
 
         public Window OwnerWindow { get; set; }
 
@@ -63,7 +69,7 @@ namespace RainmeterStudio.UI.Controller
             var dialog = new CreateDocumentDialog()
             {
                 Owner = OwnerWindow,
-                SelectedFormat = defaultFormat,
+                SelectedTemplate = defaultFormat,
                 SelectedPath = defaultPath
             };
             bool? res = dialog.ShowDialog();
@@ -71,7 +77,7 @@ namespace RainmeterStudio.UI.Controller
             if (!res.HasValue || !res.Value)
                 return;
 
-            var format = dialog.SelectedFormat;
+            var format = dialog.SelectedTemplate;
             var path = dialog.SelectedPath;
 
             // Call manager
