@@ -14,21 +14,23 @@ namespace RainmeterStudio.UI.Controller
 {
     public class DocumentController
     {
+        #region Managers
+
+        /// <summary>
+        /// Gets or sets the document manager
+        /// </summary>
+        protected DocumentManager DocumentManager { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the project manager
+        /// </summary>
+        protected ProjectManager ProjectManager { get; private set; }
+
+        #endregion
+
         #region Commands
 
-        public Command _documentCreateCommand;
-        public Command DocumentCreateCommand
-        {
-            get
-            {
-                if (_documentCreateCommand == null)
-                {
-                    _documentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow());
-                }
-
-                return _documentCreateCommand;
-            }
-        }
+        public Command DocumentCreateCommand { get; private set; }
 
         #endregion
 
@@ -36,19 +38,23 @@ namespace RainmeterStudio.UI.Controller
         {
             add
             {
-                DocumentManager.Instance.DocumentOpened += value;
+                DocumentManager.DocumentOpened += value;
             }
             remove
             {
-                DocumentManager.Instance.DocumentOpened -= value;
+                DocumentManager.DocumentOpened -= value;
             }
         }
         public event EventHandler DocumentClosed;
 
         public Window OwnerWindow { get; set; }
 
-        public DocumentController()
+        public DocumentController(DocumentManager documentManager, ProjectManager projectManager)
         {
+            DocumentManager = documentManager;
+            ProjectManager = projectManager;
+
+            DocumentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow());
         }
 
         public void CreateWindow(DocumentTemplate defaultFormat = null, string defaultPath = "")
@@ -69,13 +75,13 @@ namespace RainmeterStudio.UI.Controller
             var path = dialog.SelectedPath;
 
             // Call manager
-            DocumentManager.Instance.Create(format, path);
+            DocumentManager.Create(format);
         }
 
-        public void Create(DocumentTemplate format, string path)
+        public void Create(DocumentTemplate format)
         {
             // Call manager
-            DocumentManager.Instance.Create(format, path);
+            DocumentManager.Create(format);
         }
 
     }

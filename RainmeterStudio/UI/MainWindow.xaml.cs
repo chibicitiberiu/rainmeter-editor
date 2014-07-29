@@ -42,7 +42,8 @@ namespace RainmeterStudio.UI
             this.AddKeyBinding(ProjectController.ProjectCreateCommand);
             
             // Initialize document controller
-            DocumentController = new DocumentController();
+            DocumentManager documentManager = new DocumentManager();
+            DocumentController = new DocumentController(documentManager, projectManager);
             DocumentController.OwnerWindow = this;
             DocumentController.DocumentOpened += documentController_DocumentOpened;
             this.AddKeyBinding(DocumentController.DocumentCreateCommand);
@@ -56,7 +57,7 @@ namespace RainmeterStudio.UI
             // Spawn a new window
             LayoutDocument document = new LayoutDocument();
             document.Content = e.Editor.EditorUI;
-            document.Title = e.Editor.Title;
+            document.Title = e.Editor.AttachedDocument.Reference.Name;
             document.Closing += document_Closing;
 
             documentPane.Children.Add(document);

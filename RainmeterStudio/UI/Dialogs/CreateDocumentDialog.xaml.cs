@@ -64,7 +64,8 @@ namespace RainmeterStudio.UI.Dialogs
 
         private void PopulateFormats()
         {
-            listFormats.ItemsSource = DocumentManager.Instance.DocumentFormats;
+            //listFormats.ItemsSource = DocumentManager.Instance.DocumentFormats;
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listFormats.ItemsSource);
             view.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
         }

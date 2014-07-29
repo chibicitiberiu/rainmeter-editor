@@ -13,7 +13,8 @@ namespace RainmeterStudio.Documents.Text
         IDocument IDocumentStorage.Read(string path)
         {
             TextDocument document = new TextDocument();
-            document.FilePath = path;
+            document.Reference.Path = path;
+            document.Reference.Name = Path.GetFileName(path);
             document.Text = File.ReadAllText(path);
 
             return document;
@@ -59,6 +60,11 @@ namespace RainmeterStudio.Documents.Text
 
             // Not found, probably text file
             return true;
+        }
+
+        public bool CanWrite(Type documentType)
+        {
+            return documentType.Equals(typeof(TextDocument));
         }
     }
 }

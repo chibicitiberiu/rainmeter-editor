@@ -8,7 +8,7 @@ using RainmeterStudio.Model;
 
 namespace RainmeterStudio.Documents.Text
 {
-    public class TextEditorFactory : IDocumentEditorFactory
+    /*public class TextEditorFactory : IDocumentEditorFactory
     {
         private TextStorage _storage = new TextStorage();
 
@@ -35,7 +35,6 @@ namespace RainmeterStudio.Documents.Text
             }
         }
 
-
         public IDocumentEditor CreateEditor(IDocument document)
         {
             TextDocument textDocument = document as TextDocument;
@@ -55,5 +54,5 @@ namespace RainmeterStudio.Documents.Text
 
             return document;
         }
-    }
+    }*/
 }

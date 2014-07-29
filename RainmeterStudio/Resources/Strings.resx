@@ -231,4 +231,7 @@
   <data name="ProjectPanel_SyncWithActiveViewCommand_ToolTip" xml:space="preserve">
     <value>Sync with active view</value>
   </data>
+  <data name="TemplateCategory_Utility" xml:space="preserve">
+    <value>Utility</value>
+  </data>
 </root>

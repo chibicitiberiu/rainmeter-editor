@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:r="clr-namespace:RainmeterStudio.Resources"
-        xmlns:toremove="clr-namespace:RainmeterStudio.Model"
         Title="{x:Static r:Strings.ProjectCreateDialog_Title}" Height="320" Width="480"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow" ShowInTaskbar="False">
@@ -16,10 +15,6 @@
 
         <ListView Name="listTemplates" Grid.Row="0" SelectedIndex="0"
                   IsEnabled="False">
-            <!-- TODO: remove -->
-            <toremove:DocumentTemplate Name="Empty project" 
-                                       Description="Create a new empty project" >
-            </toremove:DocumentTemplate>
             
             <ListView.ItemTemplate>
                 <DataTemplate>

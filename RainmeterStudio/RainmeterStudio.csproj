@@ -72,15 +72,21 @@
     </ApplicationDefinition>
     <Compile Include="Business\DocumentManager.cs" />
     <Compile Include="Business\ProjectManager.cs" />
+    <Compile Include="Documents\DocumentEditorFeatures\ICustomDocumentTitleProvider.cs" />
+    <Compile Include="Documents\DocumentEditorFeatures\ISelectionPropertiesProvider.cs" />
+    <Compile Include="Documents\DocumentEditorFeatures\IToolboxProvider.cs" />
+    <Compile Include="Documents\DocumentEditorFeatures\IUndoSupport.cs" />
+    <Compile Include="Documents\DocumentTemplate.cs" />
+    <Compile Include="Documents\IDocumentEditor.cs" />
+    <Compile Include="Documents\IDocumentEditorFactory.cs" />
+    <Compile Include="Documents\IDocumentStorage.cs" />
     <Compile Include="Documents\Text\TextDocument.cs" />
     <Compile Include="Documents\Text\TextEditorControl.xaml.cs">
       <DependentUpon>TextEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Documents\Text\TextStorage.cs" />
-    <Compile Include="Model\DocumentFormat.cs" />
+    <Compile Include="Model\DocumentTemplate.cs" />
     <Compile Include="Model\IDocument.cs" />
-    <Compile Include="Model\IDocumentEditor.cs" />
-    <Compile Include="Model\IDocumentEditorFactory.cs" />
     <Compile Include="Documents\Ini\IniDocument.cs" />
     <Compile Include="Documents\Ini\IniSkinDesigner.cs" />
     <Compile Include="Documents\Ini\IniSkinDesignerControl.xaml.cs">
@@ -106,7 +112,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\IDocumentStorage.cs" />
     <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="Storage\SkinDirectory.cs" />
     <Compile Include="Storage\SerializableTree.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="UI\ProjectPanel.xaml.cs">
       <DependentUpon>ProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\TreeExtensions.cs" />

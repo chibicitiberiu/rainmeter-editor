@@ -16,7 +16,7 @@ namespace RainmeterStudio
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            DocumentManager.Instance.RegisterEditorFactory(new TextEditorFactory());
+            //DocumentManager.Instance.RegisterEditorFactory(new TextEditorFactory());
         }
     }
 }

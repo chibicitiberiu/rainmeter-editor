@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using RainmeterStudio.Documents;
 using RainmeterStudio.Model;
 using RainmeterStudio.Model.Events;
 
@@ -9,33 +11,56 @@ namespace RainmeterStudio.Business
 {
     public class DocumentManager
     {
-        #region Singleton instance
-        private static DocumentManager _instance = null;
+        #region Events
 
         /// <summary>
-        /// Gets the instance of DocumentManager
+        /// Triggered when a document is opened
         /// </summary>
-        public static DocumentManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new DocumentManager();
+        public event EventHandler<DocumentOpenedEventArgs> DocumentOpened;
 
-                return _instance;
-            }
-        }
+        /// <summary>
+        /// Triggered when a document is closed
+        /// </summary>
+        public event EventHandler<DocumentClosedEventArgs> DocumentClosed;
 
         #endregion
 
-        private DocumentManager()
+        #region Properties
+
+        /// <summary>
+        /// Gets a list of factories
+        /// </summary>
+        public IEnumerable<IDocumentEditorFactory> Factories { get { return _factories; } }
+
+        /// <summary>
+        /// Gets a list of editors
+        /// </summary>
+        public IEnumerable<IDocumentEditor> Editors { get { return _editors; } }
+
+        /// <summary>
+        /// Gets a list of storages
+        /// </summary>
+        public IEnumerable<IDocumentStorage> Storages { get { return _storages; } }
+
+        #endregion
+
+        #region Private fields
+
+        private List<IDocumentEditorFactory> _factories = new List<IDocumentEditorFactory>();
+        private List<IDocumentEditor> _editors = new List<IDocumentEditor>();
+        private List<IDocumentStorage> _storages = new List<IDocumentStorage>();
+        private List<DocumentTemplate> _templates = new List<DocumentTemplate>();
+
+        #endregion
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes this document manager
+        /// </summary>
+        public DocumentManager()
         {
         }
-
-        List<IDocumentEditorFactory> _factories = new List<IDocumentEditorFactory>();
-        List<IDocumentEditor> _editors = new List<IDocumentEditor>();
-
-        public event EventHandler<DocumentOpenedEventArgs> DocumentOpened;
 
         /// <summary>
         /// Registers a document editor factory
@@ -47,32 +72,180 @@ namespace RainmeterStudio.Business
         }
 
         /// <summary>
+        /// Registers a document storage
+        /// </summary>
+        /// <param name="storage">The storage</param>
+        public void RegisterStorage(IDocumentStorage storage)
+        {
+            _storages.Add(storage);
+        }
+
+        /// <summary>
+        /// Registers a document template
+        /// </summary>
+        /// <param name="template">The document template</param>
+        public void RegisterTemplate(DocumentTemplate template)
+        {
+            _templates.Add(template);
+        }
+
+        #endregion
+
+        #region Document operations
+
+        /// <summary>
         /// Creates a new document in the specified path, with the specified format, and opens it
         /// </summary>
         /// <param name="format"></param>
         /// <param name="path"></param>
-        public void Create(DocumentTemplate format, string path)
+        public IDocumentEditor Create(DocumentTemplate format)
         {
             // Create document
-            var document = format.Factory.CreateDocument(format, path);
+            var document = format.CreateDocument();
+            document.IsDirty = true;
 
-            // Create editor
-            var editor = format.Factory.CreateEditor(document);
-            _editors.Add(editor);
+            // Find and create editor
+            IDocumentEditor editor = CreateEditor(document);
 
             // Trigger event
             if (DocumentOpened != null)
                 DocumentOpened(this, new DocumentOpenedEventArgs(editor));
+
+            return editor;
         }
 
-        public IEnumerable<DocumentTemplate> DocumentFormats
+        /// <summary>
+        /// Opens the specified document
+        /// </summary>
+        public IDocumentEditor Open(string path)
         {
-            get
-            {
-                foreach (var f in _factories)
-                    foreach (var df in f.CreateDocumentFormats)
-                        yield return df;
-            }
+            // Try to open
+            IDocument document = Read(path);
+
+            // Create factory
+            var editor = CreateEditor(document);
+
+            // Trigger event
+            if (DocumentOpened != null)
+                DocumentOpened(this, new DocumentOpenedEventArgs(editor));
+
+            return editor;
         }
+
+        public void Save(IDocument document)
+        {
+            // Find a storage
+            var storage = FindStorage(document);
+
+            if (document.Reference == null)
+                throw new ArgumentException("Reference cannot be empty");
+
+            // Save
+            storage.Write(document.Reference.Path, document);
+
+            // Clear dirty flag
+            document.IsDirty = false;
+        }
+
+        public void SaveAs(string path, IDocument document)
+        {
+            // Find a storage
+            var storage = FindStorage(document);
+
+            // Save
+            storage.Write(path, document);
+
+            // Update reference
+            document.Reference.Name = Path.GetFileName(path);
+            document.Reference.Path = path;
+
+            // Clear dirty flag
+            document.IsDirty = false;
+        }
+
+        public void SaveACopy(string path, IDocument document)
+        {
+            // Find a storage
+            var storage = FindStorage(document);
+
+            // Save
+            storage.Write(path, document);
+        }
+
+        #endregion
+
+        #region Private functions
+
+        /// <summary>
+        /// Attempts to create an editor for the document
+        /// </summary>
+        /// <param name="document">The document</param>
+        /// <exception cref="ArgumentException">Thrown if failed to create editor</exception>
+        /// <returns>The editor</returns>
+        private IDocumentEditor CreateEditor(IDocument document)
+        {
+            IDocumentEditor editor = null;
+
+            foreach (var factory in Factories)
+                if (factory.CanEdit(document.GetType()))
+                {
+                    editor = factory.CreateEditor(document);
+                    break;
+                }
+
+            if (editor == null)
+                throw new ArgumentException("Failed to create editor.");
+
+            _editors.Add(editor);
+            return editor;
+        }
+
+        /// <summary>
+        /// Attempts to read a document
+        /// </summary>
+        /// <param name="path">Path of file</param>
+        /// <exception cref="ArgumentException">Thrown when failed to open the document</exception>
+        /// <returns></returns>
+        private IDocument Read(string path)
+        {
+            IDocument document = null;
+
+            foreach (var storage in Storages)
+                if (storage.CanRead(path))
+                {
+                    document = storage.Read(path);
+                    break;
+                }
+
+            // Failed to open
+            if (document == null)
+                throw new ArgumentException("Failed to open document.");
+
+            return document;
+        }
+
+        /// <summary>
+        /// Attempts to find a storage for the specified document
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        private IDocumentStorage FindStorage(IDocument document)
+        {
+            IDocumentStorage storage = null;
+
+            foreach (var s in Storages)
+                if (s.CanWrite(document.GetType()))
+                {
+                    storage = s;
+                    break;
+                }
+
+            if (storage == null)
+                throw new ArgumentException("Failed to find storage object.");
+
+            return storage;
+        }
+
+        #endregion
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace RainmeterStudio.Model
 {
-    public interface IDocument
+    public interface IDocument : INotifyPropertyChanged
     {
-        string Name { get; }
-        string FilePath { get; }
+        Reference Reference { get; }
+        bool IsDirty { get; set; }
     }
 }

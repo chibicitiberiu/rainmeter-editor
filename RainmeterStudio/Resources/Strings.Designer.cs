@@ -401,5 +401,14 @@ namespace RainmeterStudio.Resources {
                 return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand_ToolTip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utility.
+        /// </summary>
+        public static string TemplateCategory_Utility {
+            get {
+                return ResourceManager.GetString("TemplateCategory_Utility", resourceCulture);
+            }
+        }
     }
 }

@@ -4,29 +4,67 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using RainmeterStudio.Model;
+using System.ComponentModel;
 
 namespace RainmeterStudio.Documents.Text
 {
     public class TextDocument : IDocument
     {
-        public string Name
-        {
-            get
-            {
-                return Path.GetFileName(FilePath);
-            }
-        }
+        private Reference _reference;
+        private bool _isDirty;
 
-        public string FilePath
-        {
-            get; set;
-        }
-
+        /// <summary>
+        /// Gets or sets the text associated with this document
+        /// </summary>
         public string Text
         {
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets the reference of this document
+        /// </summary>
+        public Reference Reference
+        {
+            get
+            {
+                return _reference;
+            }
+            set
+            {
+                _reference = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Reference"));
+            }
+        }
+
+        /// <summary>
+        /// Gets a property indicating if this file was modified and not saved
+        /// </summary>
+        public bool IsDirty
+        {
+            get
+            {
+                return _isDirty;
+            }
+            set
+            {
+                _isDirty = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsDirty"));
+            }
+        }
+
+        /// <summary>
+        /// Triggered when the value of a property changes
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Initializes the text document
+        /// </summary>
         public TextDocument()
         {
             Text = String.Empty;
