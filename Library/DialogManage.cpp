@@ -88,7 +88,7 @@ void DialogManage::Open(int tab)
 		0, 0, 500, 322,
 		DS_CENTER | WS_POPUP | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU,
 		WS_EX_APPWINDOW | WS_EX_CONTROLPARENT | ((*GetString(ID_STR_ISRTL) == L'1') ? WS_EX_LAYOUTRTL : 0),
-		Rainmeter::GetInstance().GetWindow());
+		GetRainmeter().GetWindow());
 
 	// Fake WM_NOTIFY to change tab
 	NMHDR nm;
@@ -290,11 +290,11 @@ INT_PTR DialogManage::OnCommand(WPARAM wParam, LPARAM lParam)
 	switch (LOWORD(wParam))
 	{
 	case Id_RefreshAllButton:
-		Rainmeter::GetInstance().RefreshAll();
+		GetRainmeter().RefreshAll();
 		break;
 
 	case Id_EditSettingsButton:
-		Rainmeter::GetInstance().EditSettings();
+		GetRainmeter().EditSettings();
 		break;
 
 	case Id_OpenLogButton:
@@ -606,7 +606,7 @@ void DialogManage::TabSkins::Update(MeterWindow* meterWindow, bool deleted)
 		tvi.item.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_SELECTEDIMAGE;
 		tvi.item.iImage = tvi.item.iSelectedImage = 0;
 
-		if (!Rainmeter::GetInstance().m_SkinRegistry.IsEmpty())
+		if (!GetRainmeter().m_SkinRegistry.IsEmpty())
 		{
 			PopulateTree(item, tvi);
 		}
@@ -644,7 +644,7 @@ void DialogManage::TabSkins::SetControls()
 		EnableWindow(item, TRUE);
 
 		item = GetControl(Id_DraggableCheckBox);
-		if (Rainmeter::GetInstance().GetDisableDragging())
+		if (GetRainmeter().GetDisableDragging())
 		{
 			EnableWindow(item, FALSE);
 			Button_SetCheck(item, BST_UNCHECKED);
@@ -684,7 +684,7 @@ void DialogManage::TabSkins::SetControls()
 
 		item = GetControl(Id_LoadOrderEdit);
 		EnableWindow(item, TRUE);
-		_itow_s(Rainmeter::GetInstance().GetLoadOrder(m_SkinFolderPath), buffer, 10);
+		_itow_s(GetRainmeter().GetLoadOrder(m_SkinFolderPath), buffer, 10);
 		SetWindowText(item, buffer);
 
 		item = GetControl(Id_OnHoverDropDownList);
@@ -797,10 +797,10 @@ void DialogManage::TabSkins::ReadSkin()
 	item = GetControl(Id_EditButton);
 	EnableWindow(item, TRUE);
 
-	std::wstring file = Rainmeter::GetInstance().GetSkinPath() + m_SkinFolderPath;
+	std::wstring file = GetRainmeter().GetSkinPath() + m_SkinFolderPath;
 	file += L'\\';
 	file += m_SkinFileName;
-	m_SkinWindow = Rainmeter::GetInstance().GetMeterWindowByINI(file);
+	m_SkinWindow = GetRainmeter().GetMeterWindowByINI(file);
 	if (!m_SkinWindow)
 	{
 		DisableControls();
@@ -917,12 +917,12 @@ std::wstring DialogManage::TabSkins::GetTreeSelectionPath(HWND tree)
 */
 int DialogManage::TabSkins::PopulateTree(HWND tree, TVINSERTSTRUCT& tvi, int index)
 {
-	int initialLevel = Rainmeter::GetInstance().m_SkinRegistry.GetFolder(index).level;
+	int initialLevel = GetRainmeter().m_SkinRegistry.GetFolder(index).level;
 
-	const size_t max = Rainmeter::GetInstance().m_SkinRegistry.GetFolderCount();
+	const size_t max = GetRainmeter().m_SkinRegistry.GetFolderCount();
 	while (index < max)
 	{
-		const auto& skinFolder = Rainmeter::GetInstance().m_SkinRegistry.GetFolder(index);
+		const auto& skinFolder = GetRainmeter().m_SkinRegistry.GetFolder(index);
 		if (skinFolder.level != initialLevel)
 		{
 			return index - 1;
@@ -937,7 +937,7 @@ int DialogManage::TabSkins::PopulateTree(HWND tree, TVINSERTSTRUCT& tvi, int ind
 
 		// Add subfolders
 		if ((index + 1) < max &&
-			Rainmeter::GetInstance().m_SkinRegistry.GetFolder(index + 1).level == initialLevel + 1)
+			GetRainmeter().m_SkinRegistry.GetFolder(index + 1).level == initialLevel + 1)
 		{
 			index = PopulateTree(tree, tvi, index + 1);
 		}
@@ -1042,9 +1042,9 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 			HMENU menu = CreatePopupMenu();
 
 			// Add active skins to menu
-			std::map<std::wstring, MeterWindow*>::const_iterator iter = Rainmeter::GetInstance().GetAllMeterWindows().begin();
+			std::map<std::wstring, MeterWindow*>::const_iterator iter = GetRainmeter().GetAllMeterWindows().begin();
 			int index = 0;
-			for ( ; iter != Rainmeter::GetInstance().GetAllMeterWindows().end(); ++iter)
+			for ( ; iter != GetRainmeter().GetAllMeterWindows().end(); ++iter)
 			{
 				std::wstring name = ((*iter).second)->GetFolderPath() + L'\\';
 				name += ((*iter).second)->GetFileName();
@@ -1075,7 +1075,7 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 
 	case Id_CreateSkinPackageButton:
 		{
-			std::wstring file = Rainmeter::GetInstance().GetPath() + L"SkinInstaller.exe";
+			std::wstring file = GetRainmeter().GetPath() + L"SkinInstaller.exe";
 			CommandHandler::RunFile(file.c_str(), L"/Packager");
 		}
 		break;
@@ -1086,11 +1086,11 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 			{
 				// Skin not active, load
 				const SkinRegistry::Indexes indexes =
-					Rainmeter::GetInstance().m_SkinRegistry.FindIndexes(m_SkinFolderPath, m_SkinFileName);
+					GetRainmeter().m_SkinRegistry.FindIndexes(m_SkinFolderPath, m_SkinFileName);
 				if (indexes.IsValid())
 				{
 					m_HandleCommands = false;
-					Rainmeter::GetInstance().ActivateSkin(indexes.folder, indexes.file);
+					GetRainmeter().ActivateSkin(indexes.folder, indexes.file);
 					m_HandleCommands = true;
 
 					// Fake selection change to update controls
@@ -1104,7 +1104,7 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 			else
 			{
 				m_HandleCommands = false;
-				Rainmeter::GetInstance().DeactivateSkin(m_SkinWindow, -1);
+				GetRainmeter().DeactivateSkin(m_SkinWindow, -1);
 			}
 		}
 		break;
@@ -1117,7 +1117,7 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 		break;
 
 	case Id_EditButton:
-		Rainmeter::GetInstance().EditSkinFile(m_SkinFolderPath, m_SkinFileName);
+		GetRainmeter().EditSkinFile(m_SkinFolderPath, m_SkinFileName);
 		break;
 
 	case Id_XPositionEdit:
@@ -1184,15 +1184,15 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 				// Reset selection
 				Edit_SetSel((HWND)lParam, LOWORD(sel), HIWORD(sel));
 
-				WritePrivateProfileString(m_SkinFolderPath.c_str(), L"LoadOrder", buffer, Rainmeter::GetInstance().GetIniFile().c_str());
-				const SkinRegistry::Indexes indexes = Rainmeter::GetInstance().m_SkinRegistry.FindIndexes(
+				WritePrivateProfileString(m_SkinFolderPath.c_str(), L"LoadOrder", buffer, GetRainmeter().GetIniFile().c_str());
+				const SkinRegistry::Indexes indexes = GetRainmeter().m_SkinRegistry.FindIndexes(
 					m_SkinWindow->GetFolderPath(), m_SkinWindow->GetFileName());
 				if (indexes.IsValid())
 				{
-					Rainmeter::GetInstance().SetLoadOrder(indexes.folder, value);
+					GetRainmeter().SetLoadOrder(indexes.folder, value);
 
 					std::multimap<int, MeterWindow*> windows;
-					Rainmeter::GetInstance().GetMeterWindowsByLoadOrder(windows);
+					GetRainmeter().GetMeterWindowsByLoadOrder(windows);
 
 					System::PrepareHelperWindow();
 
@@ -1306,17 +1306,17 @@ INT_PTR DialogManage::TabSkins::OnCommand(WPARAM wParam, LPARAM lParam)
 	case IDM_MANAGESKINSMENU_OPENFOLDER:
 		{
 			HWND tree = GetControl(Id_SkinsTreeView);
-			Rainmeter::GetInstance().OpenSkinFolder(GetTreeSelectionPath(tree));
+			GetRainmeter().OpenSkinFolder(GetTreeSelectionPath(tree));
 		}
 		break;
 
 	default:
 		if (wParam >= ID_CONFIG_FIRST && wParam <= ID_CONFIG_LAST)
 		{
-			std::map<std::wstring, MeterWindow*>::const_iterator iter = Rainmeter::GetInstance().GetAllMeterWindows().begin();
+			std::map<std::wstring, MeterWindow*>::const_iterator iter = GetRainmeter().GetAllMeterWindows().begin();
 			int index = (int)wParam - ID_CONFIG_FIRST;
 			int i = 0;
-			for ( ; iter != Rainmeter::GetInstance().GetAllMeterWindows().end(); ++iter)
+			for ( ; iter != GetRainmeter().GetAllMeterWindows().end(); ++iter)
 			{
 				if (i == index)
 				{
@@ -1356,7 +1356,7 @@ INT_PTR DialogManage::TabSkins::OnNotify(WPARAM wParam, LPARAM lParam)
 	case NM_CLICK:
 		if (nm->idFrom == Id_AddMetadataLink)
 		{
-			std::wstring file = Rainmeter::GetInstance().GetSkinPath() + m_SkinFolderPath;
+			std::wstring file = GetRainmeter().GetSkinPath() + m_SkinFolderPath;
 			file += L'\\';
 			file += m_SkinFileName;
 			const WCHAR* str = L"\r\n"  // Hack to add below [Rainmeter].
@@ -1586,7 +1586,7 @@ void DialogManage::TabLayouts::Initialize()
 {
 	HWND item = GetControl(Id_List);
 	ListBox_ResetContent(item);
-	const std::vector<std::wstring>& layouts = Rainmeter::GetInstance().GetAllLayouts();
+	const std::vector<std::wstring>& layouts = GetRainmeter().GetAllLayouts();
 	for (size_t i = 0, isize = layouts.size(); i < isize; ++i)
 	{
 		ListBox_AddString(item, layouts[i].c_str());
@@ -1654,7 +1654,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 				item = GetControl(Id_EditButton);
 				EnableWindow(item, TRUE);
 				
-				const std::vector<std::wstring>& layouts = Rainmeter::GetInstance().GetAllLayouts();
+				const std::vector<std::wstring>& layouts = GetRainmeter().GetAllLayouts();
 				item  = GetControl(Id_List);
 				int sel = ListBox_GetCurSel(item);
 				
@@ -1671,7 +1671,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 			Edit_GetText(item, buffer, MAX_PATH);
 
 			std::wstring layout = buffer;
-			std::wstring path = Rainmeter::GetInstance().GetLayoutPath();
+			std::wstring path = GetRainmeter().GetLayoutPath();
 			CreateDirectory(path.c_str(), 0);
 
 			path += layout;
@@ -1679,7 +1679,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 			if (alreadyExists)
 			{
 				std::wstring text = GetFormattedString(ID_STR_THEMEALREADYEXISTS, layout.c_str());
-				if (Rainmeter::GetInstance().ShowMessage(m_Window, text.c_str(), MB_ICONWARNING | MB_YESNO) != IDYES)
+				if (GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_ICONWARNING | MB_YESNO) != IDYES)
 				{
 					// Cancel
 					break;
@@ -1696,10 +1696,10 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 			item = GetControl(Id_SaveEmptyThemeCheckBox);
 			if (Button_GetCheck(item) != BST_CHECKED)
 			{
-				if (!System::CopyFiles(Rainmeter::GetInstance().GetIniFile(), path))
+				if (!System::CopyFiles(GetRainmeter().GetIniFile(), path))
 				{
 					std::wstring text = GetFormattedString(ID_STR_THEMESAVEFAIL, path.c_str());
-					Rainmeter::GetInstance().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONERROR);
+					GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONERROR);
 					break;
 				}
 
@@ -1741,7 +1741,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 				if (file == INVALID_HANDLE_VALUE)
 				{
 					std::wstring text = GetFormattedString(ID_STR_THEMESAVEFAIL, path.c_str());
-					Rainmeter::GetInstance().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONERROR);
+					GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONERROR);
 					break;
 				}
 
@@ -1753,7 +1753,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 				item = GetControl(Id_List);
 				ListBox_AddString(item, layout.c_str());
 
-				Rainmeter::GetInstance().ScanForLayouts();
+				GetRainmeter().ScanForLayouts();
 			}
 		}
 		break;
@@ -1762,7 +1762,7 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			HWND item  = GetControl(Id_List);
 			int sel = ListBox_GetCurSel(item);
-			Rainmeter::GetInstance().LoadLayout(Rainmeter::GetInstance().m_Layouts[sel]);
+			GetRainmeter().LoadLayout(GetRainmeter().m_Layouts[sel]);
 		}
 		break;
 
@@ -1770,13 +1770,13 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			HWND item  = GetControl(Id_List);
 			int sel = ListBox_GetCurSel(item);
-			const std::vector<std::wstring>& layouts = Rainmeter::GetInstance().GetAllLayouts();
+			const std::vector<std::wstring>& layouts = GetRainmeter().GetAllLayouts();
 
-			std::wstring args = L"\"" + Rainmeter::GetInstance().GetLayoutPath();
+			std::wstring args = L"\"" + GetRainmeter().GetLayoutPath();
 			args += layouts[sel];
 			args += L"\\Rainmeter.ini";
 			args += L'"';
-			CommandHandler::RunFile(Rainmeter::GetInstance().GetSkinEditor().c_str(), args.c_str());
+			CommandHandler::RunFile(GetRainmeter().GetSkinEditor().c_str(), args.c_str());
 		}
 		break;
 
@@ -1784,16 +1784,16 @@ INT_PTR DialogManage::TabLayouts::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			HWND item  = GetControl(Id_List);
 			int sel = ListBox_GetCurSel(item);
-			std::vector<std::wstring>& layouts = const_cast<std::vector<std::wstring>&>(Rainmeter::GetInstance().GetAllLayouts());
+			std::vector<std::wstring>& layouts = const_cast<std::vector<std::wstring>&>(GetRainmeter().GetAllLayouts());
 
 			std::wstring text = GetFormattedString(ID_STR_THEMEDELETE, layouts[sel].c_str());
-			if (Rainmeter::GetInstance().ShowMessage(m_Window, text.c_str(), MB_ICONQUESTION | MB_YESNO) != IDYES)
+			if (GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_ICONQUESTION | MB_YESNO) != IDYES)
 			{
 				// Cancel
 				break;
 			}
 
-			std::wstring folder = Rainmeter::GetInstance().GetLayoutPath();
+			std::wstring folder = GetRainmeter().GetLayoutPath();
 			folder += layouts[sel];
 
 			if (System::RemoveFolder(folder))
@@ -1907,7 +1907,7 @@ void DialogManage::TabSettings::Initialize()
 	// Scan for languages
 	HWND item = GetControl(Id_LanguageDropDownList);
 
-	std::wstring files = Rainmeter::GetInstance().GetPath() + L"Languages\\*.dll";
+	std::wstring files = GetRainmeter().GetPath() + L"Languages\\*.dll";
 	WIN32_FIND_DATA fd;
 	HANDLE hSearch = FindFirstFile(files.c_str(), &fd);
 	if (hSearch != INVALID_HANDLE_VALUE)
@@ -1932,7 +1932,7 @@ void DialogManage::TabSettings::Initialize()
 					int index = ComboBox_AddString(item, text.c_str());
 					ComboBox_SetItemData(item, index, (LPARAM)lcid);
 
-					if (lcid == Rainmeter::GetInstance().GetResourceLCID())
+					if (lcid == GetRainmeter().GetResourceLCID())
 					{
 						ComboBox_SetCurSel(item, index);
 					}
@@ -1944,23 +1944,23 @@ void DialogManage::TabSettings::Initialize()
 		FindClose(hSearch);
 	}
 
-	Button_SetCheck(GetControl(Id_CheckForUpdatesCheckBox), !Rainmeter::GetInstance().GetDisableVersionCheck());
-	Button_SetCheck(GetControl(Id_LockSkinsCheckBox), Rainmeter::GetInstance().GetDisableDragging());
+	Button_SetCheck(GetControl(Id_CheckForUpdatesCheckBox), !GetRainmeter().GetDisableVersionCheck());
+	Button_SetCheck(GetControl(Id_LockSkinsCheckBox), GetRainmeter().GetDisableDragging());
 	Button_SetCheck(GetControl(Id_LogToFileCheckBox), GetLogger().IsLogToFile());
-	Button_SetCheck(GetControl(Id_VerboseLoggingCheckbox), Rainmeter::GetInstance().GetDebug());
+	Button_SetCheck(GetControl(Id_VerboseLoggingCheckbox), GetRainmeter().GetDebug());
 
 	BOOL isLogFile = (_waccess(GetLogger().GetLogFilePath().c_str(), 0) != -1);
 	EnableWindow(GetControl(Id_ShowLogFileButton), isLogFile);
 	EnableWindow(GetControl(Id_DeleteLogFileButton), isLogFile);
 
-	Edit_SetText(GetControl(Id_EditorEdit), Rainmeter::GetInstance().GetSkinEditor().c_str());
+	Edit_SetText(GetControl(Id_EditorEdit), GetRainmeter().GetSkinEditor().c_str());
 
-	bool iconEnabled = Rainmeter::GetInstance().GetTrayWindow()->IsTrayIconEnabled();
+	bool iconEnabled = GetRainmeter().GetTrayWindow()->IsTrayIconEnabled();
 	Button_SetCheck(GetControl(Id_ShowTrayIconCheckBox), iconEnabled);
 
 	if (IsWindowsVistaOrGreater())
 	{
-		Button_SetCheck(GetControl(Id_UseD2DCheckBox), Rainmeter::GetInstance().GetUseD2D());
+		Button_SetCheck(GetControl(Id_UseD2DCheckBox), GetRainmeter().GetUseD2D());
 	}
 	else
 	{
@@ -1995,18 +1995,18 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 		{
 			int sel = ComboBox_GetCurSel((HWND)lParam);
 			LCID lcid = (LCID)ComboBox_GetItemData((HWND)lParam, sel);
-			if (lcid != Rainmeter::GetInstance().m_ResourceLCID)
+			if (lcid != GetRainmeter().m_ResourceLCID)
 			{
 				WCHAR buffer[16];
 				_ultow(lcid, buffer, 10);
-				WritePrivateProfileString(L"Rainmeter", L"Language", buffer, Rainmeter::GetInstance().GetIniFile().c_str());
+				WritePrivateProfileString(L"Rainmeter", L"Language", buffer, GetRainmeter().GetIniFile().c_str());
 
-				std::wstring resource = Rainmeter::GetInstance().GetPath() + L"Languages\\";
+				std::wstring resource = GetRainmeter().GetPath() + L"Languages\\";
 				resource += buffer;
 				resource += L".dll";
-				FreeLibrary(Rainmeter::GetInstance().m_ResourceInstance);
-				Rainmeter::GetInstance().m_ResourceInstance = LoadLibraryEx(resource.c_str(), nullptr, DONT_RESOLVE_DLL_REFERENCES | LOAD_LIBRARY_AS_DATAFILE);
-				Rainmeter::GetInstance().m_ResourceLCID = lcid;
+				FreeLibrary(GetRainmeter().m_ResourceInstance);
+				GetRainmeter().m_ResourceInstance = LoadLibraryEx(resource.c_str(), nullptr, DONT_RESOLVE_DLL_REFERENCES | LOAD_LIBRARY_AS_DATAFILE);
+				GetRainmeter().m_ResourceLCID = lcid;
 
 				if (DialogAbout::GetDialog())
 				{
@@ -2014,42 +2014,42 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 					SendMessage(DialogAbout::GetDialog()->GetWindow(), WM_CLOSE, 0, 0);
 					if (sel == 0)
 					{
-						Rainmeter::GetInstance().DelayedExecuteCommand(L"!About");
+						GetRainmeter().DelayedExecuteCommand(L"!About");
 					}
 					else if (sel == 1)
 					{
-						Rainmeter::GetInstance().DelayedExecuteCommand(L"!About Skins");
+						GetRainmeter().DelayedExecuteCommand(L"!About Skins");
 					}
 					else if (sel == 2)
 					{
-						Rainmeter::GetInstance().DelayedExecuteCommand(L"!About Plugins");
+						GetRainmeter().DelayedExecuteCommand(L"!About Plugins");
 					}
 					else //if (sel == 3)
 					{
-						Rainmeter::GetInstance().DelayedExecuteCommand(L"!About Version");
+						GetRainmeter().DelayedExecuteCommand(L"!About Version");
 					}
 				}
 
 				SendMessage(c_Dialog->GetWindow(), WM_CLOSE, 0, 0);
-				Rainmeter::GetInstance().DelayedExecuteCommand(L"!Manage Settings");
+				GetRainmeter().DelayedExecuteCommand(L"!Manage Settings");
 			}
 		}
 		break;
 
 	case Id_CheckForUpdatesCheckBox:
-		Rainmeter::GetInstance().SetDisableVersionCheck(!Rainmeter::GetInstance().GetDisableVersionCheck());
+		GetRainmeter().SetDisableVersionCheck(!GetRainmeter().GetDisableVersionCheck());
 		break;
 
 	case Id_LockSkinsCheckBox:
-		Rainmeter::GetInstance().SetDisableDragging(!Rainmeter::GetInstance().GetDisableDragging());
+		GetRainmeter().SetDisableDragging(!GetRainmeter().GetDisableDragging());
 		break;
 
 	case Id_ResetStatisticsButton:
-		Rainmeter::GetInstance().ResetStats();
+		GetRainmeter().ResetStats();
 		break;
 
 	case Id_ShowLogFileButton:
-		Rainmeter::GetInstance().ShowLogFile();
+		GetRainmeter().ShowLogFile();
 		break;
 
 	case Id_DeleteLogFileButton:
@@ -2079,7 +2079,7 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 		break;
 
 	case Id_VerboseLoggingCheckbox:
-		Rainmeter::GetInstance().SetDebug(!Rainmeter::GetInstance().GetDebug());
+		GetRainmeter().SetDebug(!GetRainmeter().GetDebug());
 		break;
 
 	case Id_EditorEdit:
@@ -2088,7 +2088,7 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 			WCHAR buffer[MAX_PATH];
 			if (GetWindowText((HWND)lParam, buffer, _countof(buffer)) > 0)
 			{
-				Rainmeter::GetInstance().SetSkinEditor(buffer);
+				GetRainmeter().SetSkinEditor(buffer);
 			}
 		}
 		break;
@@ -2098,7 +2098,7 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 			WCHAR buffer[MAX_PATH];
 			buffer[0] = L'\0';
 			
-			std::wstring editor = Rainmeter::GetInstance().GetSkinEditor();
+			std::wstring editor = GetRainmeter().GetSkinEditor();
 			editor = editor.substr(0, editor.find_last_of(L"/\\")).c_str(); 
 
 			OPENFILENAME ofn = { sizeof(OPENFILENAME) };
@@ -2122,11 +2122,11 @@ INT_PTR DialogManage::TabSettings::OnCommand(WPARAM wParam, LPARAM lParam)
 		break;	
 
 	case Id_ShowTrayIconCheckBox:
-		Rainmeter::GetInstance().GetTrayWindow()->SetTrayIcon(!Rainmeter::GetInstance().GetTrayWindow()->IsTrayIconEnabled());
+		GetRainmeter().GetTrayWindow()->SetTrayIcon(!GetRainmeter().GetTrayWindow()->IsTrayIconEnabled());
 		break;
 
 	case Id_UseD2DCheckBox:
-		Rainmeter::GetInstance().SetUseD2D(!Rainmeter::GetInstance().GetUseD2D());
+		GetRainmeter().SetUseD2D(!GetRainmeter().GetUseD2D());
 		break;
 
 	default:

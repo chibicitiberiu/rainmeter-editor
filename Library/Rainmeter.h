@@ -272,14 +272,15 @@ private:
 	GlobalOptions m_GlobalOptions;
 };
 
+// Convenience function.
+inline Rainmeter& GetRainmeter() { return Rainmeter::GetInstance(); }
+
 #ifdef LIBRARY_EXPORTS
-#define EXPORT_PLUGIN EXTERN_C __declspec(dllexport)
+#define EXPORT_PLUGIN EXTERN_C
 #else
 #define EXPORT_PLUGIN EXTERN_C __declspec(dllimport)
 #endif
 
 EXPORT_PLUGIN int RainmeterMain(LPWSTR cmdLine);
-EXPORT_PLUGIN void* Rainmeter_Initialize();
-EXPORT_PLUGIN void Rainmeter_Finalize(void* ptr);
 
 #endif

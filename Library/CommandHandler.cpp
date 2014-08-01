@@ -165,7 +165,7 @@ void DoBang(const BangInfo& bangInfo, std::vector<std::wstring>& args, MeterWind
 				const std::wstring& folderPath = args[bangInfo.argCount];
 				if (!folderPath.empty() && (folderPath.length() != 1 || folderPath[0] != L'*'))
 				{
-					MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindow(folderPath);
+					MeterWindow* meterWindow = GetRainmeter().GetMeterWindow(folderPath);
 					if (meterWindow)
 					{
 						meterWindow->DoBang(bangInfo.bang, args);
@@ -179,7 +179,7 @@ void DoBang(const BangInfo& bangInfo, std::vector<std::wstring>& args, MeterWind
 			}
 
 			// No skin defined -> apply to all.
-			for (const auto& ip : Rainmeter::GetInstance().GetAllMeterWindows())
+			for (const auto& ip : GetRainmeter().GetAllMeterWindows())
 			{
 				ip.second->DoBang(bangInfo.bang, args);
 			}
@@ -213,7 +213,7 @@ void DoGroupBang(const BangInfo& bangInfo, std::vector<std::wstring>& args, Mete
 	if (args.size() > bangInfo.argCount)
 	{
 		std::multimap<int, MeterWindow*> windows;
-		Rainmeter::GetInstance().GetMeterWindowsByLoadOrder(windows, args[bangInfo.argCount]);
+		GetRainmeter().GetMeterWindowsByLoadOrder(windows, args[bangInfo.argCount]);
 
 		// Remove extra parameters (including group).
 		args.resize(bangInfo.argCount);
@@ -584,11 +584,11 @@ void CommandHandler::DoActivateSkinBang(std::vector<std::wstring>& args, MeterWi
 {
 	if (args.size() == 1)
 	{
-		if (Rainmeter::GetInstance().ActivateSkin(args[0])) return;
+		if (GetRainmeter().ActivateSkin(args[0])) return;
 	}
 	else if (args.size() > 1)
 	{
-		if (Rainmeter::GetInstance().ActivateSkin(args[0], args[1])) return;
+		if (GetRainmeter().ActivateSkin(args[0], args[1])) return;
 	}
 
 	LogErrorF(skin, L"!ActivateConfig: Invalid parameters");
@@ -598,7 +598,7 @@ void CommandHandler::DoDeactivateSkinBang(std::vector<std::wstring>& args, Meter
 {
 	if (!args.empty())
 	{
-		skin = Rainmeter::GetInstance().GetMeterWindow(args[0]);
+		skin = GetRainmeter().GetMeterWindow(args[0]);
 		if (!skin)
 		{
 			LogWarningF(L"!DeactivateConfig: \"%s\" not active", args[0].c_str());
@@ -608,7 +608,7 @@ void CommandHandler::DoDeactivateSkinBang(std::vector<std::wstring>& args, Meter
 
 	if (skin)
 	{
-		Rainmeter::GetInstance().DeactivateSkin(skin, -1);
+		GetRainmeter().DeactivateSkin(skin, -1);
 	}
 	else
 	{
@@ -620,10 +620,10 @@ void CommandHandler::DoToggleSkinBang(std::vector<std::wstring>& args, MeterWind
 {
 	if (args.size() >= 2)
 	{
-		MeterWindow* meterWindow = Rainmeter::GetInstance().GetMeterWindow(args[0]);
+		MeterWindow* meterWindow = GetRainmeter().GetMeterWindow(args[0]);
 		if (meterWindow)
 		{
-			Rainmeter::GetInstance().DeactivateSkin(meterWindow, -1);
+			GetRainmeter().DeactivateSkin(meterWindow, -1);
 			return;
 		}
 
@@ -641,10 +641,10 @@ void CommandHandler::DoDeactivateSkinGroupBang(std::vector<std::wstring>& args, 
 	if (!args.empty())
 	{
 		std::multimap<int, MeterWindow*> windows;
-		Rainmeter::GetInstance().GetMeterWindowsByLoadOrder(windows, args[0]);
+		GetRainmeter().GetMeterWindowsByLoadOrder(windows, args[0]);
 		for (const auto& ip : windows)
 		{
-			Rainmeter::GetInstance().DeactivateSkin(ip.second, -1);
+			GetRainmeter().DeactivateSkin(ip.second, -1);
 		}
 	}
 	else
@@ -663,12 +663,12 @@ void CommandHandler::DoLoadLayoutBang(std::vector<std::wstring>& args, MeterWind
 			std::wstring command = L"!LoadLayout \"";
 			command += args[0];
 			command += L'"';
-			Rainmeter::GetInstance().DelayedExecuteCommand(command.c_str());
+			GetRainmeter().DelayedExecuteCommand(command.c_str());
 		}
 		else
 		{
 			// Not called from a skin (or called with delay).
-			Rainmeter::GetInstance().LoadLayout(args[0]);
+			GetRainmeter().LoadLayout(args[0]);
 		}
 	}
 }
@@ -734,7 +734,7 @@ void CommandHandler::DoSkinMenuBang(std::vector<std::wstring>& args, MeterWindow
 {
 	if (!args.empty())
 	{
-		skin = Rainmeter::GetInstance().GetMeterWindow(args[0]);
+		skin = GetRainmeter().GetMeterWindow(args[0]);
 		if (!skin)
 		{
 			LogWarningF(L"!SkinMenu: \"%s\" not active", args[0].c_str());
@@ -745,7 +745,7 @@ void CommandHandler::DoSkinMenuBang(std::vector<std::wstring>& args, MeterWindow
 	if (skin)
 	{
 		POINT pos = System::GetCursorPosition();
-		Rainmeter::GetInstance().ShowContextMenu(pos, skin);
+		GetRainmeter().ShowContextMenu(pos, skin);
 	}
 	else
 	{
@@ -756,12 +756,12 @@ void CommandHandler::DoSkinMenuBang(std::vector<std::wstring>& args, MeterWindow
 void CommandHandler::DoTrayMenuBang(std::vector<std::wstring>& args, MeterWindow* skin)
 {
 	POINT pos = System::GetCursorPosition();
-	Rainmeter::GetInstance().ShowContextMenu(pos, nullptr);
+	GetRainmeter().ShowContextMenu(pos, nullptr);
 }
 
 void CommandHandler::DoResetStatsBang(std::vector<std::wstring>& args, MeterWindow* meterWindow)
 {
-	Rainmeter::GetInstance().ResetStats();
+	GetRainmeter().ResetStats();
 }
 
 void CommandHandler::DoWriteKeyValueBang(std::vector<std::wstring>& args, MeterWindow* skin)
@@ -791,8 +791,8 @@ void CommandHandler::DoWriteKeyValueBang(std::vector<std::wstring>& args, MeterW
 		return;
 	}
 
-	if (_wcsnicmp(iniFile, Rainmeter::GetInstance().m_SkinPath.c_str(), Rainmeter::GetInstance().m_SkinPath.size()) != 0 &&
-		_wcsnicmp(iniFile, Rainmeter::GetInstance().m_SettingsPath.c_str(), Rainmeter::GetInstance().m_SettingsPath.size()) != 0)
+	if (_wcsnicmp(iniFile, GetRainmeter().m_SkinPath.c_str(), GetRainmeter().m_SkinPath.size()) != 0 &&
+		_wcsnicmp(iniFile, GetRainmeter().m_SettingsPath.c_str(), GetRainmeter().m_SettingsPath.size()) != 0)
 	{
 		LogErrorF(skin, L"!WriteKeyValue: Illegal path: %s", iniFile);
 		return;
@@ -825,14 +825,14 @@ void CommandHandler::DoWriteKeyValueBang(std::vector<std::wstring>& args, MeterW
 
 	if (temporary)
 	{
-		if (Rainmeter::GetInstance().GetDebug())
+		if (GetRainmeter().GetDebug())
 		{
 			LogDebugF(skin, L"!WriteKeyValue: Writing to: %s (Temp: %s)", iniFile, strIniWrite.c_str());
 		}
 	}
 	else
 	{
-		if (Rainmeter::GetInstance().GetDebug())
+		if (GetRainmeter().GetDebug())
 		{
 			LogDebugF(skin, L"!WriteKeyValue: Writing to: %s", iniFile);
 		}
@@ -935,13 +935,13 @@ void CommandHandler::DoLogBang(std::vector<std::wstring>& args, MeterWindow* ski
 void CommandHandler::DoRefreshApp(std::vector<std::wstring>& args, MeterWindow* meterWindow)
 {
 	// Refresh needs to be delayed since it crashes if done during Update().
-	PostMessage(Rainmeter::GetInstance().m_Window, WM_RAINMETER_DELAYED_REFRESH_ALL, 0, 0);
+	PostMessage(GetRainmeter().m_Window, WM_RAINMETER_DELAYED_REFRESH_ALL, 0, 0);
 }
 
 void CommandHandler::DoQuitBang(std::vector<std::wstring>& args, MeterWindow* meterWindow)
 {
 	// Quit needs to be delayed since it crashes if done during Update().
-	PostMessage(Rainmeter::GetInstance().GetTrayWindow()->GetWindow(), WM_COMMAND, MAKEWPARAM(IDM_QUIT, 0), 0);
+	PostMessage(GetRainmeter().GetTrayWindow()->GetWindow(), WM_COMMAND, MAKEWPARAM(IDM_QUIT, 0), 0);
 }
 
 void CommandHandler::DoLsBoxHookBang(std::vector<std::wstring>& args, MeterWindow* meterWindow)

@@ -62,7 +62,7 @@ void DialogAbout::Open(int tab)
 		0, 0, 400, 210,
 		DS_CENTER | WS_POPUP | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME,
 		WS_EX_APPWINDOW | WS_EX_CONTROLPARENT | ((*GetString(ID_STR_ISRTL) == L'1') ? WS_EX_LAYOUTRTL : 0),
-		Rainmeter::GetInstance().GetWindow());
+		GetRainmeter().GetWindow());
 
 	// Fake WM_NOTIFY to change tab
 	NMHDR nm;
@@ -752,7 +752,7 @@ void DialogAbout::TabSkins::UpdateSkinList()
 
 	// Add entries for each skin
 	std::wstring::size_type maxLength = 0;
-	const std::map<std::wstring, MeterWindow*>& windows = Rainmeter::GetInstance().GetAllMeterWindows();
+	const std::map<std::wstring, MeterWindow*>& windows = GetRainmeter().GetAllMeterWindows();
 	std::map<std::wstring, MeterWindow*>::const_iterator iter = windows.begin();
 	bool found = false;
 	for ( ; iter != windows.end(); ++iter)
@@ -806,7 +806,7 @@ void DialogAbout::TabSkins::UpdateMeasureList(MeterWindow* meterWindow)
 		HWND item = GetControl(Id_SkinsListBox);
 		int selected = (int)SendMessage(item, LB_GETCURSEL, 0, 0);
 
-		const std::map<std::wstring, MeterWindow*>& windows = Rainmeter::GetInstance().GetAllMeterWindows();
+		const std::map<std::wstring, MeterWindow*>& windows = GetRainmeter().GetAllMeterWindows();
 		std::map<std::wstring, MeterWindow*>::const_iterator iter = windows.begin();
 		while (selected && iter != windows.end())
 		{
@@ -1143,10 +1143,10 @@ void DialogAbout::TabPlugins::Initialize()
 		FindClose(hSearch);
 	};
 
-	findPlugins(Rainmeter::GetInstance().GetPluginPath());
-	if (Rainmeter::GetInstance().HasUserPluginPath())
+	findPlugins(GetRainmeter().GetPluginPath());
+	if (GetRainmeter().HasUserPluginPath())
 	{
-		findPlugins(Rainmeter::GetInstance().GetUserPluginPath());
+		findPlugins(GetRainmeter().GetUserPluginPath());
 	}
 
 	m_Initialized = true;
@@ -1242,15 +1242,15 @@ void DialogAbout::TabVersion::Initialize()
 	SetWindowText(item, Platform::GetPlatformFriendlyName().c_str());
 
 	item = GetControl(Id_PathLabel);
-	std::wstring text = L"Path: " + Rainmeter::GetInstance().GetPath();
+	std::wstring text = L"Path: " + GetRainmeter().GetPath();
 	SetWindowText(item, text.c_str());
 
 	item = GetControl(Id_IniFileLabel);
-	text = L"IniFile: " + Rainmeter::GetInstance().GetIniFile();
+	text = L"IniFile: " + GetRainmeter().GetIniFile();
 	SetWindowText(item, text.c_str());
 
 	item = GetControl(Id_SkinPathLabel);
-	text = L"SkinPath: " + Rainmeter::GetInstance().GetSkinPath();
+	text = L"SkinPath: " + GetRainmeter().GetSkinPath();
 	SetWindowText(item, text.c_str());
 
 	m_Initialized = true;
@@ -1291,11 +1291,11 @@ INT_PTR DialogAbout::TabVersion::OnCommand(WPARAM wParam, LPARAM lParam)
 			text += L'\n';
 			text += Platform::GetPlatformFriendlyName();
 			text += L"\nPath: ";
-			text += Rainmeter::GetInstance().GetPath();
+			text += GetRainmeter().GetPath();
 			text += L"\nIniFile: ";
-			text += Rainmeter::GetInstance().GetIniFile();
+			text += GetRainmeter().GetIniFile();
 			text += L"\nSkinPath: ";
-			text += Rainmeter::GetInstance().GetSkinPath();
+			text += GetRainmeter().GetSkinPath();
 			System::SetClipboardText(text);
 		}
 		break;

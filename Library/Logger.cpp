@@ -65,7 +65,7 @@ void Logger::StartLogFile()
 		else
 		{
 			const std::wstring text = GetFormattedString(ID_STR_LOGFILECREATEFAIL, filePath);
-			Rainmeter::GetInstance().ShowMessage(nullptr, text.c_str(), MB_OK | MB_ICONERROR);
+			GetRainmeter().ShowMessage(nullptr, text.c_str(), MB_OK | MB_ICONERROR);
 			SetLogToFile(false);
 			return;
 		}
@@ -85,7 +85,7 @@ void Logger::DeleteLogFile()
 	if (_waccess(filePath, 0) != -1)
 	{
 		const std::wstring text = GetFormattedString(ID_STR_LOGFILEDELETE, filePath);
-		const int res = Rainmeter::GetInstance().ShowMessage(nullptr, text.c_str(), MB_YESNO | MB_ICONQUESTION);
+		const int res = GetRainmeter().ShowMessage(nullptr, text.c_str(), MB_YESNO | MB_ICONQUESTION);
 		if (res == IDYES)
 		{
 			SetLogToFile(false);
@@ -98,7 +98,7 @@ void Logger::SetLogToFile(bool logToFile)
 {
 	m_LogToFile = logToFile;
 	WritePrivateProfileString(
-		L"Rainmeter", L"Logging", logToFile ? L"1" : L"0", Rainmeter::GetInstance().GetIniFile().c_str());
+		L"Rainmeter", L"Logging", logToFile ? L"1" : L"0", GetRainmeter().GetIniFile().c_str());
 }
 
 void Logger::LogInternal(Level level, ULONGLONG timestamp, const WCHAR* source, const WCHAR* msg)

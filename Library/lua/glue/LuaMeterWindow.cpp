@@ -38,7 +38,7 @@ static int Bang(lua_State* L)
 	if (top == 2)	// 1 argument
 	{
 		parser.ReplaceVariables(bang);
-		Rainmeter::GetInstance().ExecuteCommand(bang.c_str(), self);
+		GetRainmeter().ExecuteCommand(bang.c_str(), self);
 	}
 	else
 	{
@@ -54,7 +54,7 @@ static int Bang(lua_State* L)
 				args.push_back(tmpSz);
 			}
 
-			Rainmeter::GetInstance().ExecuteBang(bangSz, args, self);
+			GetRainmeter().ExecuteBang(bangSz, args, self);
 		}
 	}
 

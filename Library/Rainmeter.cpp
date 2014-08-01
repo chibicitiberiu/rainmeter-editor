@@ -47,7 +47,7 @@ enum INTERVAL
 */
 int RainmeterMain(LPWSTR cmdLine)
 {
-	auto& rainmeter = Rainmeter::GetInstance();
+	auto& rainmeter = GetRainmeter();
 	int ret = rainmeter.Initialize(nullptr, nullptr);
 	if (ret == 0)
 	{
@@ -58,30 +58,6 @@ int RainmeterMain(LPWSTR cmdLine)
 	return ret;
 }
 
-/*
-** Initializes Rainmeter.
-**
-*/
-void* Rainmeter_Initialize()
-{
-	int res = Rainmeter::GetInstance().Initialize(nullptr, nullptr);
-	
-	// Success?
-	if (res == 0) 
-		return &Rainmeter::GetInstance();
-
-	return nullptr;
-}
-
-/*
-** Finalizes Rainmeter.
-**
-*/
-void Rainmeter_Finalize(void* ptr)
-{
-	Rainmeter* rainmeter = (Rainmeter*)ptr;
-	rainmeter->Finalize();
-}
 
 /*
 ** Constructor
@@ -127,7 +103,7 @@ Rainmeter::~Rainmeter()
 	GdiplusShutdown(m_GDIplusToken);
 }
 
-Rainmeter& Rainmeter::GetInstance()
+Rainmeter& GetRainmeter()
 {
 	static Rainmeter s_Rainmeter;
 	return s_Rainmeter;
@@ -457,7 +433,7 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 				const WCHAR* data = (const WCHAR*)cds->lpData;
 				if (cds->dwData == 1 && (cds->cbData > 0))
 				{
-					Rainmeter::GetInstance().DelayedExecuteCommand(data);
+					GetRainmeter().DelayedExecuteCommand(data);
 				}
 			}
 		}
@@ -468,12 +444,12 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 		{
 			MeasureNet::UpdateIFTable();
 			MeasureNet::UpdateStats();
-			Rainmeter::GetInstance().WriteStats(false);
+			GetRainmeter().WriteStats(false);
 		}
 		break;
 
 	case WM_RAINMETER_DELAYED_REFRESH_ALL:
-		Rainmeter::GetInstance().RefreshAll();
+		GetRainmeter().RefreshAll();
 		break;
 
 	case WM_RAINMETER_DELAYED_EXECUTE:
@@ -481,15 +457,15 @@ LRESULT CALLBACK Rainmeter::MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 		{
 			// Execute bang
 			WCHAR* bang = (WCHAR*)lParam;
-			Rainmeter::GetInstance().ExecuteCommand(bang, nullptr);
+			GetRainmeter().ExecuteCommand(bang, nullptr);
 			free(bang);  // _wcsdup()
 		}
 		break;
 
 	case WM_RAINMETER_EXECUTE:
-		if (Rainmeter::GetInstance().HasMeterWindow((MeterWindow*)wParam))
+		if (GetRainmeter().HasMeterWindow((MeterWindow*)wParam))
 		{
-			Rainmeter::GetInstance().ExecuteCommand((const WCHAR*)lParam, (MeterWindow*)wParam);
+			GetRainmeter().ExecuteCommand((const WCHAR*)lParam, (MeterWindow*)wParam);
 		}
 		break;
 

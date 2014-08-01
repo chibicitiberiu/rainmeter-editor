@@ -92,13 +92,13 @@ void ConfigParser::SetBuiltInVariables(const std::wstring& filename, const std::
 		return m_BuiltInVariables.insert(std::make_pair(name, value));
 	};
 
-	insertVariable(L"PROGRAMPATH", Rainmeter::GetInstance().GetPath());
-	insertVariable(L"PROGRAMDRIVE", Rainmeter::GetInstance().GetDrive());
-	insertVariable(L"SETTINGSPATH", Rainmeter::GetInstance().GetSettingsPath());
-	insertVariable(L"SKINSPATH", Rainmeter::GetInstance().GetSkinPath());
-	insertVariable(L"PLUGINSPATH", Rainmeter::GetInstance().GetPluginPath());
+	insertVariable(L"PROGRAMPATH", GetRainmeter().GetPath());
+	insertVariable(L"PROGRAMDRIVE", GetRainmeter().GetDrive());
+	insertVariable(L"SETTINGSPATH", GetRainmeter().GetSettingsPath());
+	insertVariable(L"SKINSPATH", GetRainmeter().GetSkinPath());
+	insertVariable(L"PLUGINSPATH", GetRainmeter().GetPluginPath());
 	insertVariable(L"CURRENTPATH", PathUtil::GetFolderFromFilePath(filename));
-	insertVariable(L"ADDONSPATH", Rainmeter::GetInstance().GetAddonPath());
+	insertVariable(L"ADDONSPATH", GetRainmeter().GetAddonPath());
 
 	if (meterWindow)
 	{
@@ -1314,7 +1314,7 @@ void ConfigParser::ReadIniFile(const std::wstring& iniFile, LPCTSTR skinSection,
 {
 	if (depth > 100)	// Is 100 enough to assume the include loop never ends?
 	{
-		Rainmeter::GetInstance().ShowMessage(nullptr, GetString(ID_STR_INCLUDEINFINITELOOP), MB_OK | MB_ICONERROR);
+		GetRainmeter().ShowMessage(nullptr, GetString(ID_STR_INCLUDEINFINITELOOP), MB_OK | MB_ICONERROR);
 		return;
 	}
 
@@ -1331,11 +1331,11 @@ void ConfigParser::ReadIniFile(const std::wstring& iniFile, LPCTSTR skinSection,
 
 	if (temporary)
 	{
-		if (Rainmeter::GetInstance().GetDebug()) LogDebugF(m_MeterWindow, L"Reading file: %s (Temp: %s)", iniFile.c_str(), iniRead.c_str());
+		if (GetRainmeter().GetDebug()) LogDebugF(m_MeterWindow, L"Reading file: %s (Temp: %s)", iniFile.c_str(), iniRead.c_str());
 	}
 	else
 	{
-		if (Rainmeter::GetInstance().GetDebug()) LogDebugF(m_MeterWindow, L"Reading file: %s", iniFile.c_str());
+		if (GetRainmeter().GetDebug()) LogDebugF(m_MeterWindow, L"Reading file: %s", iniFile.c_str());
 		iniRead = iniFile;
 	}
 
