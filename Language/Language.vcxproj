@@ -32,7 +32,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ResourceCompile Include="Language.rc" />
     <ResourceCompile Include="Resource.rc">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ResourceCompile>

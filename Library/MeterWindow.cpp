@@ -19,13 +19,10 @@
 #include "StdAfx.h"
 #include "MeterWindow.h"
 #include "Rainmeter.h"
-#include "TrayWindow.h"
 #include "System.h"
 #include "Error.h"
 #include "Meter.h"
 #include "Measure.h"
-#include "DialogAbout.h"
-#include "DialogManage.h"
 #include "resource.h"
 #include "Litestep.h"
 #include "MeasureCalc.h"
@@ -414,7 +411,7 @@ void MeterWindow::Refresh(bool init, bool all)
 
 	if (!ReadSkin())
 	{
-		GetRainmeter().DeactivateSkin(this, -1);
+		GetRainmeter().DeactivateSkin(this);
 		return;
 	}
 
@@ -798,7 +795,7 @@ void MeterWindow::DoBang(Bang bang, const std::vector<std::wstring>& args)
 
 	case Bang::UpdateMeasure:
 		UpdateMeasure(args[0]);
-		DialogAbout::UpdateMeasures(this);
+		// TODO: update measure callback
 		break;
 
 	case Bang::DisableMeasureGroup:
@@ -827,7 +824,7 @@ void MeterWindow::DoBang(Bang bang, const std::vector<std::wstring>& args)
 
 	case Bang::UpdateMeasureGroup:
 		UpdateMeasure(args[0], true);
-		DialogAbout::UpdateMeasures(this);
+		// DialogAbout::UpdateMeasures(this);
 		break;
 
 	case Bang::Show:
@@ -1880,7 +1877,7 @@ void MeterWindow::ScreenToWindow()
 */
 void MeterWindow::ReadOptions()
 {
-	WCHAR buffer[32];
+	/*WCHAR buffer[32];
 
 	const WCHAR* section = m_FolderPath.c_str();
 	ConfigParser parser;
@@ -1953,7 +1950,7 @@ void MeterWindow::ReadOptions()
 	}
 
 	// Set WindowXScreen/WindowYScreen temporarily
-	WindowToScreen();
+	WindowToScreen();*/
 }
 
 /*
@@ -1962,7 +1959,7 @@ void MeterWindow::ReadOptions()
 */
 void MeterWindow::WriteOptions(INT setting)
 {
-	const WCHAR* iniFile = GetRainmeter().GetIniFile().c_str();
+	/*const WCHAR* iniFile = GetRainmeter().GetIniFile().c_str();
 
 	if (*iniFile)
 	{
@@ -1971,7 +1968,7 @@ void MeterWindow::WriteOptions(INT setting)
 
 		if (setting != OPTION_ALL)
 		{
-			DialogManage::UpdateSkins(this);
+			//DialogManage::UpdateSkins(this);
 		}
 
 		if (setting & OPTION_POSITION)
@@ -2046,7 +2043,7 @@ void MeterWindow::WriteOptions(INT setting)
 		{
 			WritePrivateProfileString(section, L"UseD2D", m_UseD2D ? L"1" : L"0", iniFile);
 		}
-	}
+	}*/
 }
 
 /*
@@ -2063,7 +2060,7 @@ bool MeterWindow::ReadSkin()
 	if (_waccess(iniFile.c_str(), 0) == -1)
 	{
 		std::wstring message = GetFormattedString(ID_STR_UNABLETOREFRESHSKIN, m_FolderPath.c_str(), m_FileName.c_str());
-		GetRainmeter().ShowMessage(m_Window, message.c_str(), MB_OK | MB_ICONEXCLAMATION);
+		// unsupported: GetRainmeter().ShowMessage(m_Window, message.c_str(), MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 
@@ -2095,8 +2092,7 @@ bool MeterWindow::ReadSkin()
 			_snwprintf_s(buffer, _TRUNCATE, L"%u.%u", appVersion / 1000000, (appVersion / 1000) % 1000);
 		}
 
-		std::wstring text = GetFormattedString(ID_STR_NEWVERSIONREQUIRED, m_FolderPath.c_str(), m_FileName.c_str(), buffer);
-		GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONEXCLAMATION);
+		// TODO: throw error or something
 		return false;
 	}
 
@@ -2234,7 +2230,7 @@ bool MeterWindow::ReadSkin()
 		do
 		{
 			// Try program folder first
-			std::wstring szFontFile = GetRainmeter().GetPath() + L"Fonts\\";
+			std::wstring szFontFile = GetRainmeter().GetWorkDirectory() + L"Fonts\\";
 			szFontFile += localFont;
 			if (!m_FontCollection->AddFile(szFontFile.c_str()))
 			{
@@ -2310,7 +2306,7 @@ bool MeterWindow::ReadSkin()
 	if (m_Meters.empty())
 	{
 		std::wstring text = GetFormattedString(ID_STR_NOMETERSINSKIN, m_FolderPath.c_str(), m_FileName.c_str());
-		GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONEXCLAMATION);
+		// Unsupported: GetRainmeter().ShowMessage(m_Window, text.c_str(), MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 
@@ -2767,7 +2763,7 @@ void MeterWindow::Update(bool refresh)
 		}
 	}
 
-	DialogAbout::UpdateMeasures(this);
+	// TODO: call update measures callback
 
 	// Update all meters
 	bool bActiveTransition = false;
@@ -2792,12 +2788,7 @@ void MeterWindow::Update(bool refresh)
 			SetResizeWindowMode(RESIZEMODE_CHECK);
 		}
 
-		// If our option is to disable when in an RDP session, then check if in an RDP session.
-		// Only redraw if we are not in a remote session
-		if (GetRainmeter().IsRedrawable())
-		{
-			Redraw();
-		}
+		Redraw();
 	}
 
 	// Post-updates
@@ -3391,20 +3382,8 @@ LRESULT MeterWindow::OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (wParam)
 	{
-	case IDM_SKIN_EDITSKIN:
-		GetRainmeter().EditSkinFile(m_FolderPath, m_FileName);
-		break;
-
 	case IDM_SKIN_REFRESH:
 		Refresh(false);
-		break;
-
-	case IDM_SKIN_OPENSKINSFOLDER:
-		GetRainmeter().OpenSkinFolder(m_FolderPath);
-		break;
-
-	case IDM_SKIN_MANAGESKIN:
-		DialogManage::OpenSkin(this);
 		break;
 
 	case IDM_SKIN_VERYTOPMOST:
@@ -3466,7 +3445,7 @@ LRESULT MeterWindow::OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case IDM_CLOSESKIN:
 		if (m_State != STATE_CLOSING)
 		{
-			GetRainmeter().DeactivateSkin(this, -1);
+			GetRainmeter().DeactivateSkin(this);
 		}
 		break;
 
@@ -3557,20 +3536,6 @@ LRESULT MeterWindow::OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (!action.empty())
 			{
 				GetRainmeter().ExecuteCommand(action.c_str(), this);
-			}
-		}
-		else
-		{
-			// Forward to tray window, which handles all the other commands
-			HWND tray = GetRainmeter().GetTrayWindow()->GetWindow();
-
-			if (wParam == IDM_QUIT)
-			{
-				PostMessage(tray, WM_COMMAND, wParam, lParam);
-			}
-			else
-			{
-				SendMessage(tray, WM_COMMAND, wParam, lParam);
 			}
 		}
 		break;
@@ -3667,7 +3632,7 @@ void MeterWindow::SavePositionIfAppropriate()
 	else
 	{
 		ScreenToWindow();
-		DialogManage::UpdateSkins(this);
+		// TODO: call update skins callback
 	}
 }
 

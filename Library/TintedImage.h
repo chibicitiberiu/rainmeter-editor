@@ -128,7 +128,7 @@ protected:
 	Gdiplus::REAL m_Rotate;
 	bool m_UseExifOrientation;
 
-	std::wstring m_Path;
+	std::wstring m_WorkDirectory;
 	bool m_HasPathChanged;
 
 	std::wstring m_CacheKey;

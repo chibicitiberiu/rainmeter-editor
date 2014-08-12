@@ -34,10 +34,12 @@
     <ClCompile Include="ConfigParser_Test.cpp">
       <ExcludedFromBuild>$(ExcludeTests)</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ContextMenu.cpp" />
-    <ClCompile Include="DialogAbout.cpp" />
-    <ClCompile Include="DialogManage.cpp" />
+    <ClCompile Include="Exports_Meter.cpp" />
+    <ClCompile Include="Exports_MeterString.cpp" />
+    <ClCompile Include="Exports_Rainmeter.cpp" />
     <ClCompile Include="Group.cpp" />
+    <ClCompile Include="Exports_Group.cpp" />
+    <ClCompile Include="HandleManager.cpp" />
     <ClCompile Include="IfActions.cpp" />
     <ClCompile Include="Litestep.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -73,17 +75,11 @@
     <ClCompile Include="Rainmeter.cpp" />
     <ClCompile Include="Export.cpp" />
     <ClCompile Include="Section.cpp" />
-    <ClCompile Include="SkinRegistry.cpp" />
-    <ClCompile Include="SkinRegistry_Test.cpp">
-      <ExcludedFromBuild>$(ExcludeTests)</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TintedImage.cpp" />
-    <ClCompile Include="TrayWindow.cpp" />
-    <ClCompile Include="UpdateCheck.cpp" />
     <ClCompile Include="lua\LuaManager.cpp" />
     <ClCompile Include="lua\LuaScript.cpp" />
     <ClCompile Include="lua\glue\LuaMeasure.cpp" />
@@ -92,18 +88,21 @@
     <ClCompile Include="lua\glue\LuaGlobal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="..\Language\Language.rc" />
     <ResourceCompile Include="Library.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandHandler.h" />
     <ClInclude Include="ConfigParser.h" />
-    <ClInclude Include="ContextMenu.h" />
-    <ClInclude Include="DialogAbout.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="Exports_Common.h" />
+    <ClCompile Include="Exports_Section.cpp">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
     <ClInclude Include="Group.h" />
+    <ClInclude Include="HandleManager.h" />
     <ClInclude Include="IfActions.h" />
     <ClInclude Include="Litestep.h" />
-    <ClInclude Include="DialogManage.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Measure.h" />
     <ClInclude Include="MeasureCalc.h" />
@@ -139,12 +138,9 @@
     <ClInclude Include="RainmeterQuery.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Section.h" />
-    <ClInclude Include="SkinRegistry.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="TintedImage.h" />
-    <ClInclude Include="TrayWindow.h" />
-    <ClInclude Include="UpdateCheck.h" />
     <ClInclude Include="lua\LuaManager.h" />
     <ClInclude Include="lua\LuaScript.h" />
   </ItemGroup>

@@ -942,9 +942,8 @@ LRESULT CALLBACK System::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			break;
 
 		case TIMER_RESUME:
-			KillTimer(hWnd, TIMER_RESUME);
-			if (GetRainmeter().IsRedrawable())
 			{
+				KillTimer(hWnd, TIMER_RESUME);
 				std::map<std::wstring, MeterWindow*>::const_iterator iter = GetRainmeter().GetAllMeterWindows().begin();
 				for ( ; iter != GetRainmeter().GetAllMeterWindows().end(); ++iter)
 				{
@@ -1147,7 +1146,7 @@ void System::SetWallpaper(const std::wstring& wallpaper, const std::wstring& sty
 		Bitmap bitmap(wallpaper.c_str());
 		if (bitmap.GetLastStatus() == Ok)
 		{
-			std::wstring file = GetRainmeter().GetSettingsPath() + L"Wallpaper.bmp";
+			std::wstring file = /*TODO - fix: GetRainmeter().GetSettingsPath() + */ L"Wallpaper.bmp";
 
 			const CLSID bmpClsid = { 0x557cf400, 0x1a04, 0x11d3, { 0x9a, 0x73, 0x0, 0x0, 0xf8, 0x1e, 0xf3, 0x2e } };
 			if (bitmap.Save(file.c_str(), &bmpClsid) == Ok)

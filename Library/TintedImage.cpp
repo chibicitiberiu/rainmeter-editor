@@ -318,7 +318,7 @@ void TintedImage::LoadImage(const std::wstring& imageName, bool bLoadAlways)
 	// Load the bitmap if defined
 	if (!imageName.empty())
 	{
-		std::wstring filename = m_Path + imageName;
+		std::wstring filename = m_WorkDirectory + imageName;
 		if (m_MeterWindow) m_MeterWindow->MakePathAbsolute(filename);
 		m_HasPathChanged = false;
 
@@ -629,12 +629,12 @@ void TintedImage::ReadOptions(ConfigParser& parser, const WCHAR* section, const 
 	ColorMatrix oldColorMatrix = *m_ColorMatrix;
 	RotateFlipType oldFlip = m_Flip;
 	REAL oldRotate = m_Rotate;
-	std::wstring oldPath = m_Path;
+	std::wstring oldPath = m_WorkDirectory;
 
-	m_Path = parser.ReadString(section, m_OptionArray[OptionIndexImagePath], imagePath);
-	PathUtil::AppendBacklashIfMissing(m_Path);
+	m_WorkDirectory = parser.ReadString(section, m_OptionArray[OptionIndexImagePath], imagePath);
+	PathUtil::AppendBacklashIfMissing(m_WorkDirectory);
 
-	m_HasPathChanged = (oldPath != m_Path);
+	m_HasPathChanged = (oldPath != m_WorkDirectory);
 
 	if (!m_DisableTransform)
 	{

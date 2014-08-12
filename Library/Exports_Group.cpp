@@ -4,29 +4,29 @@
 #include "HandleManager.h"
 #include "Exports_Common.h"
 
-EXPORT bool Group_BelongsToGroup (bool* result, int32_t handle, LPWSTR str)
+EXPORT int Group_BelongsToGroup(bool* result, int32_t handle, LPWSTR str)
 {
-	Group* group = (Group*)handle_get_resource (handle);
+	Group* group = (Group*) handle_get_resource(handle);
 
 	if (group != nullptr)
 	{
-		*result = group->BelongsToGroup (str);
-		return true;
+		*result = group->BelongsToGroup(str);
+		return Results::Ok;
 	}
 
-	return false;
+	return Results::InvalidHandle;
 }
 
-EXPORT bool Group_Destroy (int32_t handle)
+EXPORT int Group_Destroy(int32_t handle)
 {
-	Group* group = (Group*)handle_get_resource (handle);
+	Group* group = (Group*) handle_get_resource(handle);
 
 	if (group != nullptr)
 	{
-		handle_free (handle);
+		handle_free(handle);
 		delete group;
-		return true;
+		return Results::Ok;
 	}
 
-	return false;
+	return Results::InvalidHandle;
 }

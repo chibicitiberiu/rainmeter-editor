@@ -19,6 +19,12 @@
     <Filter Include="Lua\glue">
       <UniqueIdentifier>{941dce28-a314-4492-befb-5770432c98bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Exports">
+      <UniqueIdentifier>{86873eb6-7daf-4cde-b957-2c1bfc5aa066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exports">
+      <UniqueIdentifier>{2bd33bb1-d45c-4072-9ef2-cfa77bbf82df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConfigParser.cpp">
@@ -126,12 +132,6 @@
     <ClCompile Include="TintedImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TrayWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UpdateCheck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lua\LuaManager.cpp">
       <Filter>Lua</Filter>
     </ClCompile>
@@ -150,12 +150,6 @@
     <ClCompile Include="lua\glue\LuaGlobal.cpp">
       <Filter>Lua\glue</Filter>
     </ClCompile>
-    <ClCompile Include="DialogAbout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogManage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Export.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -171,20 +165,29 @@
     <ClCompile Include="CommandHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SkinRegistry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinRegistry_Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ContextMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="IfActions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeasureString.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandleManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_Group.cpp">
+      <Filter>Source Files\Exports</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_Section.cpp">
+      <Filter>Source Files\Exports</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_Meter.cpp">
+      <Filter>Source Files\Exports</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_MeterString.cpp">
+      <Filter>Source Files\Exports</Filter>
+    </ClCompile>
+    <ClCompile Include="Exports_Rainmeter.cpp">
+      <Filter>Source Files\Exports</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,23 +302,11 @@
     <ClInclude Include="TintedImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TrayWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateCheck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lua\LuaManager.h">
       <Filter>Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\LuaScript.h">
       <Filter>Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogAbout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogManage.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Export.h">
       <Filter>Header Files</Filter>
@@ -332,21 +323,24 @@
     <ClInclude Include="CommandHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SkinRegistry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ContextMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IfActions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeasureString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandleManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exports_Common.h">
+      <Filter>Header Files\Exports</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Library.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\Language\Language.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

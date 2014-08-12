@@ -49,14 +49,9 @@ public:
 
 	static Logger& GetInstance();
 
-	void SetLogFilePath(std::wstring path) { m_LogFilePath = path; }
+	typedef void (*LoggerCallback) (Level level, LPCWSTR timestamp, LPCWSTR source, LPCWSTR message);
 
-	void StartLogFile();
-	void StopLogFile();
-	void DeleteLogFile();
-
-	bool IsLogToFile() { return m_LogToFile; }
-	void SetLogToFile(bool logToFile);
+	void SetLogCallback(LoggerCallback callback) { m_LoggerCallback = callback; }
 
 	void Log(Level level, const WCHAR* source, const WCHAR* msg);
 	void LogVF(Level level, const WCHAR* source, const WCHAR* format, va_list args);
@@ -64,15 +59,10 @@ public:
 	void LogSection(Logger::Level level, Section* section, const WCHAR* message);
 	void LogSectionVF(Logger::Level level, Section* section, const WCHAR* format, va_list args);
 
-	const std::wstring& GetLogFilePath() { return m_LogFilePath; }
-
 	const std::list<Entry>& GetEntries() { return m_Entries; }
 
 private:
 	void LogInternal(Level level, ULONGLONG timestamp, const WCHAR* source, const WCHAR* msg);
-
-	// Appends |entry| to the log file.
-	void WriteToLogFile(Entry& entry);
 
 	Logger();
 	~Logger();
@@ -81,7 +71,7 @@ private:
 	Logger& operator=(Logger other) = delete;
 
 	bool m_LogToFile;
-	std::wstring m_LogFilePath;
+	LoggerCallback m_LoggerCallback;
 
 	std::list<Entry> m_Entries;
 

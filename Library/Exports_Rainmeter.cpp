@@ -7,10 +7,10 @@
 */
 bool Rainmeter_Initialize()
 {
-	int res = GetRainmeter().Initialize(nullptr, nullptr);
-	
+	int res = GetRainmeter().Initialize();
+
 	// Success?
-	if (res == 0) 
+	if (res == 0)
 		return &GetRainmeter();
 
 	return nullptr;
@@ -22,6 +22,6 @@ bool Rainmeter_Initialize()
 */
 void Rainmeter_Finalize(void* ptr)
 {
-	Rainmeter* rainmeter = (Rainmeter*)ptr;
+	Rainmeter* rainmeter = (Rainmeter*) ptr;
 	rainmeter->Finalize();
 }

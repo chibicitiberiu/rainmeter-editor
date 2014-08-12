@@ -33,7 +33,7 @@ const size_t MAX_LOG_ENTIRES = 20;
 }  // namespace
 
 Logger::Logger() :
-	m_LogToFile(false)
+	m_LoggerCallback (nullptr)
 {
 	System::InitializeCriticalSection(&m_CsLog);
 	System::InitializeCriticalSection(&m_CsLogDelay);
@@ -49,56 +49,6 @@ Logger& Logger::GetInstance()
 {
 	static Logger s_Logger;
 	return s_Logger;
-}
-
-void Logger::StartLogFile()
-{
-	const WCHAR* filePath = m_LogFilePath.c_str();
-	if (_waccess(filePath, 0) == -1)
-	{
-		// Create empty log file.
-		HANDLE file = CreateFile(filePath, GENERIC_WRITE, 0, nullptr, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
-		if (file != INVALID_HANDLE_VALUE)
-		{
-			CloseHandle(file);
-		}
-		else
-		{
-			const std::wstring text = GetFormattedString(ID_STR_LOGFILECREATEFAIL, filePath);
-			GetRainmeter().ShowMessage(nullptr, text.c_str(), MB_OK | MB_ICONERROR);
-			SetLogToFile(false);
-			return;
-		}
-	}
-
-	SetLogToFile(true);
-}
-
-void Logger::StopLogFile()
-{
-	SetLogToFile(false);
-}
-
-void Logger::DeleteLogFile()
-{
-	const WCHAR* filePath = m_LogFilePath.c_str();
-	if (_waccess(filePath, 0) != -1)
-	{
-		const std::wstring text = GetFormattedString(ID_STR_LOGFILEDELETE, filePath);
-		const int res = GetRainmeter().ShowMessage(nullptr, text.c_str(), MB_YESNO | MB_ICONQUESTION);
-		if (res == IDYES)
-		{
-			SetLogToFile(false);
-			System::RemoveFile(m_LogFilePath);
-		}
-	}
-}
-
-void Logger::SetLogToFile(bool logToFile)
-{
-	m_LogToFile = logToFile;
-	WritePrivateProfileString(
-		L"Rainmeter", L"Logging", logToFile ? L"1" : L"0", GetRainmeter().GetIniFile().c_str());
 }
 
 void Logger::LogInternal(Level level, ULONGLONG timestamp, const WCHAR* source, const WCHAR* msg)
@@ -121,15 +71,11 @@ void Logger::LogInternal(Level level, ULONGLONG timestamp, const WCHAR* source, 
 		m_Entries.pop_front();
 	}
 
-	DialogAbout::AddLogItem(level, timestampSz, source, msg);
-	WriteToLogFile(entry);
-}
+	// Call callback function
+	if (m_LoggerCallback != nullptr)
+		(*m_LoggerCallback)(entry.level, entry.timestamp.c_str(), source, msg);
 
-void Logger::WriteToLogFile(Entry& entry)
-{
-#ifndef _DEBUG
-	if (!m_LogToFile) return;
-#endif
+#ifdef _DEBUG
 
 	const WCHAR* levelSz =
 		(entry.level == Level::Error) ? L"ERRO" :
@@ -146,26 +92,9 @@ void Logger::WriteToLogFile(Entry& entry)
 	message += entry.message;
 	message += L'\n';
 
-#ifdef _DEBUG
-	_RPTW0(_CRT_WARN, message.c_str());
-	if (!m_LogToFile) return;
-#endif
+	OutputDebugStringW (message.c_str ());
 
-	const WCHAR* filePath = m_LogFilePath.c_str();
-	if (_waccess(filePath, 0) == -1)
-	{
-		// The file has been deleted manually.
-		StopLogFile();
-	}
-	else
-	{
-		FILE* file = _wfopen(filePath, L"a+, ccs=UTF-8");
-		if (file)
-		{
-			fputws(message.c_str(), file);
-			fclose(file);
-		}
-	}
+#endif
 }
 
 void Logger::Log(Level level, const WCHAR* source, const WCHAR* msg)

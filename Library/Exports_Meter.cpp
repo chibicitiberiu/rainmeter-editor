@@ -4,18 +4,16 @@
 #include "HandleManager.h"
 #include "Exports_Common.h"
 
-
-
-EXPORT bool Meter_Destroy (int handle)
+EXPORT int Meter_Destroy(int handle)
 {
-	Meter* meter = (Meter*)handle_get_resource (handle);
+	Meter* meter = (Meter*) handle_get_resource(handle);
 
 	if (meter != nullptr)
 	{
-		handle_free (handle);
+		handle_free(handle);
 		delete meter;
-		return true;
+		return Results::Ok;
 	}
 
-	return false;
+	return Results::InvalidHandle;
 }

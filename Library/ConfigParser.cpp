@@ -92,7 +92,7 @@ void ConfigParser::SetBuiltInVariables(const std::wstring& filename, const std::
 		return m_BuiltInVariables.insert(std::make_pair(name, value));
 	};
 
-	insertVariable(L"PROGRAMPATH", GetRainmeter().GetPath());
+	insertVariable(L"PROGRAMPATH", GetRainmeter().GetWorkDirectory());
 	insertVariable(L"PROGRAMDRIVE", GetRainmeter().GetDrive());
 	insertVariable(L"SETTINGSPATH", GetRainmeter().GetSettingsPath());
 	insertVariable(L"SKINSPATH", GetRainmeter().GetSkinPath());
