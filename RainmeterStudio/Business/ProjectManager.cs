@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using RainmeterStudio.Model;
+using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Storage;
 using RainmeterStudio.Storage;
 
 namespace RainmeterStudio.Business

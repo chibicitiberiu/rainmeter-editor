@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using RainmeterStudio.Business;
-using RainmeterStudio.Model;
+using RainmeterStudio.Core.Model;
 using RainmeterStudio.UI.Dialogs;
 
 namespace RainmeterStudio.UI.Controller

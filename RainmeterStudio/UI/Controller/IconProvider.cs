@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using RainmeterStudio.Model;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.UI.Controller
 {

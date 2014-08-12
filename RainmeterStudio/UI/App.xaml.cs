@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
-using RainmeterStudio.Business;
-using RainmeterStudio.Documents.Text;
+﻿using System.Windows;
 
 namespace RainmeterStudio.UI
 {

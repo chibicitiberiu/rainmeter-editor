@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="INIFileParser">
-      <HintPath>..\packages\ini-parser.2.1.1\lib\INIFileParser.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -71,39 +68,17 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Business\DocumentManager.cs" />
+    <Compile Include="Business\PluginManager.cs" />
     <Compile Include="Business\ProjectManager.cs" />
-    <Compile Include="Documents\AutoRegisterAttribute.cs" />
-    <Compile Include="Documents\DocumentEditorFeatures\ICustomDocumentTitleProvider.cs" />
-    <Compile Include="Documents\DocumentEditorFeatures\ISelectionPropertiesProvider.cs" />
-    <Compile Include="Documents\DocumentEditorFeatures\IToolboxProvider.cs" />
-    <Compile Include="Documents\DocumentEditorFeatures\IUndoSupport.cs" />
-    <Compile Include="Documents\IDocumentEditor.cs" />
-    <Compile Include="Documents\IDocumentEditorFactory.cs" />
-    <Compile Include="Documents\IDocumentStorage.cs" />
-    <Compile Include="Documents\Text\TextDocument.cs" />
-    <Compile Include="Documents\Text\TextDocumentTemplate.cs" />
-    <Compile Include="Documents\Text\TextEditorControl.xaml.cs">
-      <DependentUpon>TextEditorControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Documents\Text\TextStorage.cs" />
     <Compile Include="MainClass.cs" />
-    <Compile Include="Documents\DocumentTemplate_.cs" />
-    <Compile Include="Model\IDocument.cs" />
-    <Compile Include="Documents\Ini\IniDocument.cs" />
-    <Compile Include="Documents\Ini\IniSkinDesigner.cs" />
-    <Compile Include="Documents\Ini\IniSkinDesignerControl.xaml.cs">
-      <DependentUpon>IniSkinDesignerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Documents\Ini\IniSkinDesignerFactory.cs" />
-    <Compile Include="Documents\Text\TextEditor.cs" />
-    <Compile Include="Documents\Text\TextEditorFactory.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
-    <Compile Include="Model\Project.cs" />
-    <Compile Include="Model\Property.cs" />
-    <Compile Include="Model\RainmeterConfig.cs" />
-    <Compile Include="Model\Reference.cs" />
-    <Compile Include="Model\Tree.cs" />
     <Compile Include="Rainmeter.cs" />
+    <Compile Include="Rainmeter\DataTypes\Action.cs" />
+    <Compile Include="Rainmeter\DataTypes\Bang.cs" />
+    <Compile Include="Rainmeter\Group.cs" />
+    <Compile Include="Rainmeter\Measure.cs" />
+    <Compile Include="Rainmeter\Meter.cs" />
+    <Compile Include="Rainmeter\Section.cs" />
     <Compile Include="Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,8 +90,6 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Storage\ProjectStorage.cs" />
-    <Compile Include="Storage\SkinDirectory.cs" />
-    <Compile Include="Storage\SerializableTree.cs" />
     <Compile Include="UI\Command.cs" />
     <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
@@ -125,7 +98,6 @@
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controller\DocumentController.cs" />
-    <Compile Include="Model\Events\DocumentOpenedEventArgs.cs" />
     <Compile Include="UI\Dialogs\CreateProjectDialog.xaml.cs">
       <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -135,17 +107,6 @@
     <Compile Include="UI\UIManager.cs" />
     <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
-    <Compile Include="Utils\DirectoryHelper.cs" />
-    <Compile Include="Utils\LinqExtension.cs" />
-    <Compile Include="Utils\TreeExtensions.cs" />
-    <Page Include="Documents\Ini\IniSkinDesignerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Documents\Text\TextEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Dialogs\CreateDocumentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,7 +167,6 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="LICENSE" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -264,6 +224,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\16\folder_project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RainmeterStudio.Core\RainmeterStudio.Core.csproj">
+      <Project>{1d2a4896-af31-4e82-a84f-4e218067701f}</Project>
+      <Name>RainmeterStudio.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

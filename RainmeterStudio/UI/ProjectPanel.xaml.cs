@@ -14,12 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Utils;
 using RainmeterStudio.Interop;
-using RainmeterStudio.Model;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
 using RainmeterStudio.UI.ViewModel;
-using RainmeterStudio.Utils;
 
 namespace RainmeterStudio.UI
 {

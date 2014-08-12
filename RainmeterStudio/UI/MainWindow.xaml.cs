@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
-using RainmeterStudio.Model.Events;
+using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
 using Xceed.Wpf.AvalonDock.Layout;

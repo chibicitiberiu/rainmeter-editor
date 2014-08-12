@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using RainmeterStudio.Documents;
-using RainmeterStudio.Model;
-using RainmeterStudio.Model.Events;
-using RainmeterStudio.Utils;
+using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Model.Events;
+using RainmeterStudio.Core.Storage;
 
 namespace RainmeterStudio.Business
 {
@@ -65,61 +65,6 @@ namespace RainmeterStudio.Business
         /// </summary>
         public DocumentManager()
         {
-        }
-
-        /// <summary>
-        /// Registers all classes with the auto register flag
-        /// </summary>
-        /// <remarks>We love linq</remarks>
-        public void PerformAutoRegister()
-        {
-            // Get all assemblies
-            AppDomain.CurrentDomain.GetAssemblies()
-
-            // Get all types
-            .SelectMany(assembly => assembly.GetTypes())
-
-            // Select only the classes
-            .Where(type => type.IsClass)
-
-            // That have the AutoRegister attribute
-            .Where(type => type.GetCustomAttributes(typeof(AutoRegisterAttribute), false).Length > 0)
-
-            // That implement any of the types that can be registered
-            .Where((type) =>
-            {
-                bool res = false;
-                res |= typeof(IDocumentEditorFactory).IsAssignableFrom(type);
-                res |= typeof(IDocumentStorage).IsAssignableFrom(type);
-                res |= typeof(DocumentTemplate).IsAssignableFrom(type);
-
-                return res;
-            })
-
-            // Obtain their default constructor
-            .Select(type => type.GetConstructor(new Type[0]))
-
-            // Invoke the default constructor
-            .Select(constructor => constructor.Invoke(new object[0]))
-
-            // Register
-            .ForEach(obj =>
-            {
-                // Try to register factory
-                var factory = obj as IDocumentEditorFactory;
-                if (factory != null)
-                    RegisterEditorFactory(factory);
-
-                // Try to register as storage
-                var storage = obj as IDocumentStorage;
-                if (storage != null)
-                    RegisterStorage(storage);
-
-                // Try to register as document template
-                var doctemplate = obj as DocumentTemplate;
-                if (doctemplate != null)
-                    RegisterTemplate(doctemplate);
-            });
         }
 
         /// <summary>

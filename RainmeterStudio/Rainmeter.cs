@@ -7,7 +7,7 @@ using RainmeterStudio.Interop;
 
 namespace RainmeterStudio
 {
-    class Rainmeter
+    class RainmeterContext   
     {
         #region Imports
 
@@ -19,17 +19,17 @@ namespace RainmeterStudio
 
         #endregion
 
-        private static Rainmeter _instance = null;
+        private static RainmeterContext _instance = null;
 
         /// <summary>
         /// Gets the single instance of this class
         /// </summary>
-        public static Rainmeter Instance
+        public static RainmeterContext Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new Rainmeter();
+                    _instance = new RainmeterContext();
 
                 return _instance;
             }
@@ -39,7 +39,7 @@ namespace RainmeterStudio
 
         #region Constructor, finalizer
 
-        private Rainmeter()
+        private RainmeterContext()
         {
             _handle = Rainmeter_Initialize();
 
@@ -47,7 +47,7 @@ namespace RainmeterStudio
                 throw new Exception("Failed to initialize native library.");
         }
 
-        ~Rainmeter()
+        ~RainmeterContext()
         {
             Rainmeter_Finalize(_handle);
         }

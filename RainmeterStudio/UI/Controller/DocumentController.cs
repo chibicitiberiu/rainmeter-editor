@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RainmeterStudio.Business;
-using RainmeterStudio.UI.Dialogs;
-using RainmeterStudio.Model.Events;
-using RainmeterStudio.Model;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using RainmeterStudio.Documents;
+using RainmeterStudio.Business;
+using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model.Events;
+using RainmeterStudio.UI.Dialogs;
 
 namespace RainmeterStudio.UI.Controller
 {

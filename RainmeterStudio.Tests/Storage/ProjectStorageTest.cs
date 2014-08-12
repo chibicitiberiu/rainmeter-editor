@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RainmeterStudio.Storage;
-using RainmeterStudio.Model;
 using System.IO;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.Tests.Storage
 {

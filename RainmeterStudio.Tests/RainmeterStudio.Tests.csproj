@@ -61,6 +61,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RainmeterStudio.Core\RainmeterStudio.Core.csproj">
+      <Project>{1d2a4896-af31-4e82-a84f-4e218067701f}</Project>
+      <Name>RainmeterStudio.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RainmeterStudio\RainmeterStudio.csproj">
       <Project>{438d0136-4a27-4e4d-a617-fface4554236}</Project>
       <Name>RainmeterStudio</Name>

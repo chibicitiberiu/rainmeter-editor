@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using RainmeterStudio.Model;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.UI.ViewModel
 {
