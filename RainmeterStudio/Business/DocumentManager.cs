@@ -47,6 +47,11 @@ namespace RainmeterStudio.Business
         /// </summary>
         public IEnumerable<IDocumentStorage> Storages { get { return _storages; } }
 
+        /// <summary>
+        /// Gets a list of document templates
+        /// </summary>
+        public IEnumerable<DocumentTemplate> DocumentTemplates { get { return _templates; } }
+
         #endregion
 
         #region Private fields

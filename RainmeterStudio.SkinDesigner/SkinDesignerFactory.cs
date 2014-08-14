@@ -21,7 +21,7 @@ namespace RainmeterStudio.SkinDesignerPlugin
         /// <returns>A new document editor</returns>
         public IDocumentEditor CreateEditor(IDocument document)
         {
-            return new SkinDesigner(document as SkinDocument);
+            return new SkinDesigner((SkinDocument)document);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace RainmeterStudio.SkinDesignerPlugin
         /// <returns>True if the editor can edit the document type</returns>
         public bool CanEdit(Type type)
         {
-            return (type == typeof(SkinDocument));
+            return type.Equals(typeof(SkinDocument));
         }
     }
 }

@@ -31,10 +31,10 @@ namespace RainmeterStudio
 
             // Initialize plugin manager
             PluginManager pluginManager = new PluginManager();
-            pluginManager.AddRegisterType(typeof(IDocumentStorage), obj => documentManager.RegisterStorage((IDocumentStorage)obj));
-            pluginManager.AddRegisterType(typeof(DocumentTemplate), obj => documentManager.RegisterTemplate((DocumentTemplate)obj));
-            pluginManager.AddRegisterType(typeof(IDocumentEditorFactory), obj => documentManager.RegisterEditorFactory((IDocumentEditorFactory)obj));
-            pluginManager.LoadPlugins();
+            pluginManager.AddRegisterExportTypeHandler(typeof(IDocumentStorage), obj => documentManager.RegisterStorage((IDocumentStorage)obj));
+            pluginManager.AddRegisterExportTypeHandler(typeof(DocumentTemplate), obj => documentManager.RegisterTemplate((DocumentTemplate)obj));
+            pluginManager.AddRegisterExportTypeHandler(typeof(IDocumentEditorFactory), obj => documentManager.RegisterEditorFactory((IDocumentEditorFactory)obj));
+            pluginManager.Initialize();
 
             // Create & run app
             var uiManager = new UIManager(projectManager, documentManager);

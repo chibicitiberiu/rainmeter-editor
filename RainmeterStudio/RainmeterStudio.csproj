@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RainmeterStudio</RootNamespace>
-    <AssemblyName>RainmeterEditor</AssemblyName>
+    <AssemblyName>RainmeterStudio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -73,17 +73,12 @@
     <Compile Include="MainClass.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
     <Compile Include="Rainmeter.cs" />
-    <Compile Include="Rainmeter\DataTypes\Action.cs" />
-    <Compile Include="Rainmeter\DataTypes\Bang.cs" />
-    <Compile Include="Rainmeter\Group.cs" />
-    <Compile Include="Rainmeter\Measure.cs" />
-    <Compile Include="Rainmeter\Meter.cs" />
-    <Compile Include="Rainmeter\Section.cs" />
     <Compile Include="Resources\Icons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ResourceProvider.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

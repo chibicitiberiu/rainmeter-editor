@@ -7,29 +7,30 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Resources;
 
 namespace RainmeterStudio.UI.Controller
 {
+    /// <summary>
+    /// Provides icons
+    /// </summary>
     public static class IconProvider
     {
-        private static Dictionary<string, ImageSource> _loadedImages = new Dictionary<string, ImageSource>();
-
+        /// <summary>
+        /// Gets an icon by resource name
+        /// </summary>
+        /// <param name="key">Resource name</param>
+        /// <returns>The icon</returns>
         public static ImageSource GetIcon(string key)
         {
-            if (!_loadedImages.ContainsKey(key))
-            {
-                // Try to get the icon file name
-                string iconPath = Resources.Icons.ResourceManager.GetString(key);
-                if (iconPath == null)
-                    return null;
-
-                // Load the image
-                var uri = new Uri(iconPath, UriKind.RelativeOrAbsolute);
-                _loadedImages.Add(key, new BitmapImage(uri));
-            }
-            return _loadedImages[key];
+            return ResourceProvider.GetImage(key);
         }
 
+        /// <summary>
+        /// Gets an icon by reference
+        /// </summary>
+        /// <param name="item">The reference</param>
+        /// <returns>The icon</returns>
         public static ImageSource GetProjectItemIcon(Reference item)
         {
             // Resource name
@@ -51,6 +52,9 @@ namespace RainmeterStudio.UI.Controller
         }
     }
 
+    /// <summary>
+    /// Icon provider converter, for use in xaml
+    /// </summary>
     public class IconProviderConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

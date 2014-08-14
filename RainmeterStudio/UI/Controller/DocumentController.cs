@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.UI.Dialogs;
+using RainmeterStudio.UI.ViewModel;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -60,7 +63,7 @@ namespace RainmeterStudio.UI.Controller
         public void CreateWindow(DocumentTemplate defaultFormat = null, string defaultPath = "")
         {
             // Show dialog
-            var dialog = new CreateDocumentDialog()
+            var dialog = new CreateDocumentDialog(this)
             {
                 Owner = OwnerWindow,
                 SelectedTemplate = defaultFormat,
@@ -84,5 +87,15 @@ namespace RainmeterStudio.UI.Controller
             DocumentManager.Create(format);
         }
 
+        /// <summary>
+        /// Gets a list of document templates view models
+        /// </summary>
+        public IEnumerable<DocumentTemplateViewModel> DocumentTemplates
+        {
+            get
+            {
+                return DocumentManager.DocumentTemplates.Select(t => new DocumentTemplateViewModel(t));
+            }
+        }
     }
 }

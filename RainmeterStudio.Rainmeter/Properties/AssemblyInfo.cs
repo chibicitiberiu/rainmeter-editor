@@ -1,20 +1,18 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using RainmeterStudio.Core;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RainmeterStudio.SkinDesigner")]
+[assembly: AssemblyTitle("RainmeterStudio.Rainmeter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RainmeterStudio.SkinDesigner")]
+[assembly: AssemblyProduct("RainmeterStudio.Rainmeter")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: RainmeterStudioPlugin]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -22,7 +20,7 @@ using RainmeterStudio.Core;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d4aa7c80-76e6-484d-8766-7cd75f6d9e18")]
+[assembly: Guid("8a34d129-3bf6-4218-b29f-d353ad8640c9")]
 
 // Version information for an assembly consists of the following four values:
 //

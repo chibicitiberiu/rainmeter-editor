@@ -5,13 +5,14 @@ using System.Text;
 using System.Windows;
 using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Documents.DocumentEditorFeatures;
 
 namespace RainmeterStudio.SkinDesignerPlugin
 {
     /// <summary>
     /// Skin designer document editor
     /// </summary>
-    public class SkinDesigner : IDocumentEditor
+    public class SkinDesigner : IDocumentEditor //TODO: , ISelectionPropertiesProvider, IToolboxProvider, IUndoSupport
     {
         /// <summary>
         /// Gets the document attached to this editor instance
@@ -46,6 +47,7 @@ namespace RainmeterStudio.SkinDesignerPlugin
         public SkinDesigner(SkinDocument document)
         {
             AttachedDocument = document;
+            EditorUI = new SkinDesignerControl(document);
         }
     }
 }

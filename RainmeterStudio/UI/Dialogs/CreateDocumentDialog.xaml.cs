@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
+using RainmeterStudio.UI.Controller;
 
 namespace RainmeterStudio.UI.Dialogs
 {
@@ -21,6 +22,8 @@ namespace RainmeterStudio.UI.Dialogs
     /// </summary>
     public partial class CreateDocumentDialog : Window
     {
+        private DocumentController _documentController;
+
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
@@ -54,20 +57,34 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Creates a new instance of CreateDocumentDialog
         /// </summary>
-        public CreateDocumentDialog()
+        public CreateDocumentDialog(DocumentController docCtrl)
         {
             InitializeComponent();
+            _documentController = docCtrl;
 
-            PopulateFormats();
+            PopulateCategories();
+            RepopulateFormats();
             Validate();
         }
 
-        private void PopulateFormats()
+        private void PopulateCategories()
         {
-            //listFormats.ItemsSource = DocumentManager.Instance.DocumentFormats;
+            listCategories.ItemsSource = _documentController.DocumentTemplates
+                .Select(template => template.Category)
+                .Where(cat => cat != null)
+                .Distinct()
+                .Concat(new[] { "All" });
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listFormats.ItemsSource);
-            view.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+            listCategories.SelectedIndex = listCategories.Items.Count - 1;
+        }
+
+        private void RepopulateFormats()
+        {
+            if (Object.Equals(listCategories.SelectedItem, "All"))
+                listFormats.ItemsSource = _documentController.DocumentTemplates;
+
+            else
+                listFormats.ItemsSource = _documentController.DocumentTemplates.Where(x => Object.Equals(x.Category, listCategories.SelectedItem));
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
@@ -89,6 +106,11 @@ namespace RainmeterStudio.UI.Dialogs
             res &= (listFormats.SelectedItem != null);
 
             buttonCreate.IsEnabled = res;
+        }
+
+        private void listCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RepopulateFormats();
         }
     }
 }

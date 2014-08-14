@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\Plugins\</OutputPath>
+    <OutputPath>..\x32-Debug\StudioPlugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\Plugins\</OutputPath>
+    <OutputPath>bin\Release\StudioPlugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,6 +45,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Graphics.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Graphics.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="SkinDesigner.cs" />
     <Compile Include="SkinDesignerControl.xaml.cs">
       <DependentUpon>SkinDesignerControl.xaml</DependentUpon>
@@ -53,7 +68,7 @@
     <Compile Include="SkinDocument.cs" />
     <Compile Include="SkinMetadata.cs" />
     <Compile Include="SkinStorage.cs" />
-    <Compile Include="SkinTemplate.cs" />
+    <Compile Include="SkinDocumentTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SkinDesignerControl.xaml">
@@ -65,7 +80,25 @@
     <ProjectReference Include="..\RainmeterStudio.Core\RainmeterStudio.Core.csproj">
       <Project>{1d2a4896-af31-4e82-a84f-4e218067701f}</Project>
       <Name>RainmeterStudio.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Graphics\transparent_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Graphics.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Graphics.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

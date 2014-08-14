@@ -19,7 +19,7 @@ namespace RainmeterStudio.SkinDesignerPlugin
     /// </summary>
     public partial class SkinDesignerControl : Page
     {
-        public SkinDesignerControl()
+        public SkinDesignerControl(SkinDocument document)
         {
             InitializeComponent();
         }
