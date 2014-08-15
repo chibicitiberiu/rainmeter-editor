@@ -61,11 +61,245 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utility.
+        ///   Looks up a localized string similar to _Close.
         /// </summary>
-        public static string Category_Utility {
+        public static string Command_DocumentCloseCommand_DisplayText {
             get {
-                return ResourceManager.GetString("Category_Utility", resourceCulture);
+                return ResourceManager.GetString("Command_DocumentCloseCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close active document.
+        /// </summary>
+        public static string Command_DocumentCloseCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentCloseCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _File....
+        /// </summary>
+        public static string Command_DocumentCreateCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentCreateCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new file.
+        /// </summary>
+        public static string Command_DocumentCreateCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentCreateCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Project....
+        /// </summary>
+        public static string Command_ProjectCreateCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectCreateCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new project.
+        /// </summary>
+        public static string Command_ProjectCreateCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectCreateCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Project....
+        /// </summary>
+        public static string Command_ProjectOpenCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectOpenCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open existing project.
+        /// </summary>
+        public static string Command_ProjectOpenCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectOpenCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse all.
+        /// </summary>
+        public static string Command_ProjectPanel_CollapseAllCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_CollapseAllCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse all.
+        /// </summary>
+        public static string Command_ProjectPanel_CollapseAllCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_CollapseAllCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all.
+        /// </summary>
+        public static string Command_ProjectPanel_ExpandAllCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_ExpandAllCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all.
+        /// </summary>
+        public static string Command_ProjectPanel_ExpandAllCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_ExpandAllCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Command_ProjectPanel_RefreshCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_RefreshCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Command_ProjectPanel_RefreshCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_RefreshCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all files.
+        /// </summary>
+        public static string Command_ProjectPanel_ShowAllFilesCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_ShowAllFilesCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all files.
+        /// </summary>
+        public static string Command_ProjectPanel_ShowAllFilesCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_ShowAllFilesCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync with active view.
+        /// </summary>
+        public static string Command_ProjectPanel_SyncWithActiveViewCommand_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_SyncWithActiveViewCommand_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync with active view.
+        /// </summary>
+        public static string Command_ProjectPanel_SyncWithActiveViewCommand_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectPanel_SyncWithActiveViewCommand_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string CreateDocumentDialog_Name {
+            get {
+                return ResourceManager.GetString("CreateDocumentDialog_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path:.
+        /// </summary>
+        public static string CreateDocumentDialog_Path {
+            get {
+                return ResourceManager.GetString("CreateDocumentDialog_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New item.
+        /// </summary>
+        public static string CreateDocumentDialog_Title {
+            get {
+                return ResourceManager.GetString("CreateDocumentDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location:.
+        /// </summary>
+        public static string CreateProjectDialog_Location {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set location as default.
+        /// </summary>
+        public static string CreateProjectDialog_LocationDefault {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_LocationDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string CreateProjectDialog_Name {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path:.
+        /// </summary>
+        public static string CreateProjectDialog_Path {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create directory for project.
+        /// </summary>
+        public static string CreateProjectDialog_PathCreateFolder {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_PathCreateFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create project.
+        /// </summary>
+        public static string CreateProjectDialog_Title {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_Title", resourceCulture);
             }
         }
         
@@ -133,69 +367,6 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Close.
-        /// </summary>
-        public static string DocumentCloseCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("DocumentCloseCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Close active document.
-        /// </summary>
-        public static string DocumentCloseCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("DocumentCloseCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _File....
-        /// </summary>
-        public static string DocumentCreateCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("DocumentCreateCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a new file.
-        /// </summary>
-        public static string DocumentCreateCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("DocumentCreateCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text Editor.
-        /// </summary>
-        public static string DocumentEditor_Text_Name {
-            get {
-                return ResourceManager.GetString("DocumentEditor_Text_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Blank text file.
-        /// </summary>
-        public static string DocumentFormat_TextFile_Description {
-            get {
-                return ResourceManager.GetString("DocumentFormat_TextFile_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text file.
-        /// </summary>
-        public static string DocumentFormat_TextFile_Name {
-            get {
-                return ResourceManager.GetString("DocumentFormat_TextFile_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to _File.
         /// </summary>
         public static string MainWindow_File {
@@ -223,191 +394,11 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Project....
+        ///   Looks up a localized string similar to Rainmeter Studio.
         /// </summary>
-        public static string ProjectCreateCommand_DisplayText {
+        public static string MainWindow_Title {
             get {
-                return ResourceManager.GetString("ProjectCreateCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a new project.
-        /// </summary>
-        public static string ProjectCreateCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectCreateCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Location:.
-        /// </summary>
-        public static string ProjectCreateDialog_Location {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_Location", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set location as default.
-        /// </summary>
-        public static string ProjectCreateDialog_LocationDefault {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_LocationDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name:.
-        /// </summary>
-        public static string ProjectCreateDialog_Name {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Path:.
-        /// </summary>
-        public static string ProjectCreateDialog_Path {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_Path", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create directory for project.
-        /// </summary>
-        public static string ProjectCreateDialog_PathCreateFolder {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_PathCreateFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create project.
-        /// </summary>
-        public static string ProjectCreateDialog_Title {
-            get {
-                return ResourceManager.GetString("ProjectCreateDialog_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Project....
-        /// </summary>
-        public static string ProjectOpenCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectOpenCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open existing project.
-        /// </summary>
-        public static string ProjectOpenCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectOpenCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Collapse all.
-        /// </summary>
-        public static string ProjectPanel_CollapseAllCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Collapse all.
-        /// </summary>
-        public static string ProjectPanel_CollapseAllCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expand all.
-        /// </summary>
-        public static string ProjectPanel_ExpandAllCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expand all.
-        /// </summary>
-        public static string ProjectPanel_ExpandAllCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh.
-        /// </summary>
-        public static string ProjectPanel_RefreshCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectPanel_RefreshCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh.
-        /// </summary>
-        public static string ProjectPanel_RefreshCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectPanel_RefreshCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show all files.
-        /// </summary>
-        public static string ProjectPanel_ShowAllFilesCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show all files.
-        /// </summary>
-        public static string ProjectPanel_ShowAllFilesCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sync with active view.
-        /// </summary>
-        public static string ProjectPanel_SyncWithActiveViewCommand_DisplayText {
-            get {
-                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand_DisplayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sync with active view.
-        /// </summary>
-        public static string ProjectPanel_SyncWithActiveViewCommand_ToolTip {
-            get {
-                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Utility.
-        /// </summary>
-        public static string TemplateCategory_Utility {
-            get {
-                return ResourceManager.GetString("TemplateCategory_Utility", resourceCulture);
+                return ResourceManager.GetString("MainWindow_Title", resourceCulture);
             }
         }
     }

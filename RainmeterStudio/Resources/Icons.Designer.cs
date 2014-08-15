@@ -61,128 +61,122 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/page_white_star.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string DocumentCreateCommand {
+        internal static System.Drawing.Bitmap Command_DocumentCreateCommand_Icon {
             get {
-                return ResourceManager.GetString("DocumentCreateCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_DocumentCreateCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/32/text_generic.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string DocumentTemplate_Text {
+        internal static System.Drawing.Bitmap Command_ProjectCreateCommand_Icon {
             get {
-                return ResourceManager.GetString("DocumentTemplate_Text", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectCreateCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/project_star.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectCreateCommand {
+        internal static System.Drawing.Bitmap Command_ProjectOpenCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectCreateCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectOpenCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/project.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectItem_rsproj {
+        internal static System.Drawing.Bitmap Command_ProjectPanel_CollapseAllCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectItem_rsproj", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectPanel_CollapseAllCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/text_generic.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectItem_txt {
+        internal static System.Drawing.Bitmap Command_ProjectPanel_ExpandAllCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectItem_txt", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectPanel_ExpandAllCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/folder.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectItemDirectory {
+        internal static System.Drawing.Bitmap Command_ProjectPanel_RefreshCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectItemDirectory", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectPanel_RefreshCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/page_white_delete.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectItemNone {
+        internal static System.Drawing.Bitmap Command_ProjectPanel_ShowAllFilesCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectItemNone", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectPanel_ShowAllFilesCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/file_generic.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectItemUnknown {
+        internal static System.Drawing.Bitmap Command_ProjectPanel_SyncWithActiveViewCommand_Icon {
             get {
-                return ResourceManager.GetString("ProjectItemUnknown", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_ProjectPanel_SyncWithActiveViewCommand_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/folder_project.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectOpenCommand {
+        internal static System.Drawing.Bitmap ProjectItem_rsproj {
             get {
-                return ResourceManager.GetString("ProjectOpenCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItem_rsproj", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/minus.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectPanel_CollapseAllCommand {
+        internal static System.Drawing.Bitmap ProjectItemDirectory {
             get {
-                return ResourceManager.GetString("ProjectPanel_CollapseAllCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItemDirectory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/plus.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectPanel_ExpandAllCommand {
+        internal static System.Drawing.Bitmap ProjectItemNone {
             get {
-                return ResourceManager.GetString("ProjectPanel_ExpandAllCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItemNone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/view-refresh.png.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ProjectPanel_RefreshCommand {
+        internal static System.Drawing.Bitmap ProjectItemUnknown {
             get {
-                return ResourceManager.GetString("ProjectPanel_RefreshCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/folder_explore.png.
-        /// </summary>
-        internal static string ProjectPanel_ShowAllFilesCommand {
-            get {
-                return ResourceManager.GetString("ProjectPanel_ShowAllFilesCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /Resources/Icons/16/arrow_refresh_small.png.
-        /// </summary>
-        internal static string ProjectPanel_SyncWithActiveViewCommand {
-            get {
-                return ResourceManager.GetString("ProjectPanel_SyncWithActiveViewCommand", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItemUnknown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

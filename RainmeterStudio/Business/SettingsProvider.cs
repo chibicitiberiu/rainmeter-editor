@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 
-namespace RainmeterStudio.UI.Controller
+namespace RainmeterStudio.Business
 {
     public static class SettingsProvider
     {
@@ -44,6 +42,22 @@ namespace RainmeterStudio.UI.Controller
                 value = default(T);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Saves the settings
+        /// </summary>
+        public static void SaveSettings()
+        {
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Resets settings to default
+        /// </summary>
+        public static void ResetSettings()
+        {
+            Properties.Settings.Default.Reset();
         }
     }
 }

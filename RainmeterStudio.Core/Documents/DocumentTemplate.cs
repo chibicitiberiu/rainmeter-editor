@@ -1,4 +1,6 @@
-﻿using RainmeterStudio.Core.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.Core.Documents
 {
@@ -16,6 +18,18 @@ namespace RainmeterStudio.Core.Documents
         /// Gets the default extension of this template
         /// </summary>
         public string DefaultExtension { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the properties of this template
+        /// </summary>
+        /// <remarks>Properties are used to display a form dialog after the "New item" dialog closes.</remarks>
+        public virtual IEnumerable<Property> Properties
+        {
+            get
+            {
+                return Enumerable.Empty<Property>();
+            }
+        }
 
         /// <summary>
         /// Initializes the document template

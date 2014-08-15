@@ -18,7 +18,7 @@ namespace RainmeterStudio.SkinDesignerPlugin
         /// Initializes this skin template
         /// </summary>
         public SkinDocumentTemplate()
-            : base("Skin", "ini")
+            : base("Skin", "rsskin")
         {
         }
 

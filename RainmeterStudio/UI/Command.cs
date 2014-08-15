@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using System.Windows.Media;
-using RainmeterStudio.UI.Controller;
+using RainmeterStudio.Business;
+using RainmeterStudio.Core.Utils;
 
 namespace RainmeterStudio.UI
 {
@@ -26,9 +24,6 @@ namespace RainmeterStudio.UI
         /// </summary>
         public string Name { get; set; }
 
-        #region Display text property
-        private string _displayText = null;
-
         /// <summary>
         /// Gets or sets the display text of the command
         /// </summary>
@@ -36,21 +31,9 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                if (_displayText == null)
-                    return Resources.Strings.ResourceManager.GetString(Name + "_DisplayText");
-
-                return _displayText;
-            }
-            set
-            {
-                _displayText = value;
+                return ResourceProvider.GetString("Command_" + Name + "_DisplayText");
             }
         }
-
-        #endregion
-
-        #region ToolTip property
-        private string _toolTip = null;
 
         /// <summary>
         /// Gets or sets the tooltip
@@ -59,20 +42,9 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                if (_toolTip == null)
-                    return Resources.Strings.ResourceManager.GetString(Name + "_ToolTip");
-
-                return _toolTip;
-            }
-            set
-            {
-                _toolTip = value;
+                return ResourceProvider.GetString("Command_" + Name + "_ToolTip");
             }
         }
-        #endregion
-
-        #region Icon property
-        private ImageSource _icon = null;
 
         /// <summary>
         /// Gets or sets the command's icon
@@ -81,21 +53,9 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                if (_icon == null)
-                    return IconProvider.GetIcon(Name);
-
-                return _icon;
-            }
-            set
-            {
-                _icon = value;
+                return ResourceProvider.GetImage("Command_" + Name + "_Icon");
             }
         }
-        #endregion
-
-        #region Keyboard shortcut property
-
-        private KeyGesture _shortcut;
 
         /// <summary>
         /// Gets or sets the keyboard shortcut of this command
@@ -104,17 +64,8 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                if (_shortcut == null)
-                {
-                    string str = SettingsProvider.GetSetting<string>(Name + "_Shortcut");
-                    return GetKeyGestureFromString(str);
-                }
-
-                return _shortcut;
-            }
-            set
-            {
-                _shortcut = value;
+                string str = SettingsProvider.GetSetting<string>("Command_" + Name + "_Shortcut");
+                return InputHelper.GetKeyGesture(str);
             }
         }
 
@@ -125,73 +76,20 @@ namespace RainmeterStudio.UI
         {
             get
             {
-                // Safety check
-                if (Shortcut == null)
-                    return null;
-
-                // Build string
-                string text = String.Empty;
-
-                if ((Shortcut.Modifiers & ModifierKeys.Windows) != 0)
-                    text += "Win+";
-
-                if ((Shortcut.Modifiers & ModifierKeys.Control) != 0)
-                    text += "Ctrl+";
-
-                if ((Shortcut.Modifiers & ModifierKeys.Alt) != 0)
-                    text += "Alt+";
-
-                if ((Shortcut.Modifiers & ModifierKeys.Shift) != 0)
-                    text += "Shift+";
-
-                text += Enum.GetName(typeof(Key), Shortcut.Key);
-                return text;
+                return SettingsProvider.GetSetting<string>("Command_" + Name + "_Shortcut");
             }
-            set
-            {
-                Shortcut = GetKeyGestureFromString(value);
-            }
-        }
-
-        private KeyGesture GetKeyGestureFromString(string k)
-        {
-            // Safety check
-            if (k == null)
-                return null;
-
-            // Variables
-            ModifierKeys mods = ModifierKeys.None;
-            Key key = Key.None;
-
-            // Parse each field
-            foreach (var field in k.Split('+'))
-            {
-                // Trim surrounding white space
-                string trimmed = field.Trim();
-
-                // Parse
-                if (trimmed.Equals("Win", StringComparison.InvariantCultureIgnoreCase))
-                    mods |= ModifierKeys.Windows;
-                if (trimmed.Equals("Ctrl", StringComparison.InvariantCultureIgnoreCase))
-                    mods |= ModifierKeys.Control;
-                if (trimmed.Equals("Alt", StringComparison.InvariantCultureIgnoreCase))
-                    mods |= ModifierKeys.Alt;
-                if (trimmed.Equals("Shift", StringComparison.InvariantCultureIgnoreCase))
-                    mods |= ModifierKeys.Shift;
-                else Enum.TryParse<Key>(field, out key);
-            }
-
-            return new KeyGesture(key, mods);
         }
 
         #endregion
 
-        #endregion
-
-
-
+        /// <summary>
+        /// Event triggered when the command execution status changes
+        /// </summary>
         public event EventHandler CanExecuteChanged;
 
+        /// <summary>
+        /// Triggers the can execute changed event
+        /// </summary>
         public void NotifyCanExecuteChanged()
         {
             if (CanExecuteChanged != null)
@@ -252,7 +150,7 @@ namespace RainmeterStudio.UI
         }
     }
 
-    public static class UIElementExtensions
+    public static partial class UIElementExtensions
     {
         /// <summary>
         /// Adds a keyboard shortcut to an UI element

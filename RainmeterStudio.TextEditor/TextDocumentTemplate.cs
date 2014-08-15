@@ -15,7 +15,7 @@ namespace RainmeterStudio.TextEditorPlugin
     public class TextDocumentTemplate : DocumentTemplate
     {
         public TextDocumentTemplate()
-            : base("TextDocument", "txt")
+            : base("Text", "txt")
         {
         }
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Media;
+﻿using System.Windows.Media;
+using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
-using RainmeterStudio.UI.Controller;
 
 namespace RainmeterStudio.UI.ViewModel
 {
@@ -20,33 +16,16 @@ namespace RainmeterStudio.UI.ViewModel
         /// </summary>
         public string Name { get { return Template.Name; } }
 
-        #region Icon property
-
-        private ImageSource _icon = null;
-
         /// <summary>
         /// Gets or sets the icon of this document template
         /// </summary>
-        public virtual ImageSource Icon
+        public ImageSource Icon
         {
             get
             {
-                if (_icon == null)
-                    return IconProvider.GetIcon("Template_" + Name);
-
-                return _icon;
-            }
-            set
-            {
-                _icon = value;
+                return ResourceProvider.GetImage("Template_" + Name + "_Icon");
             }
         }
-
-        #endregion
-
-        #region Display text property
-
-        private string _displayText = null;
 
         /// <summary>
         /// Gets or sets the display text
@@ -55,22 +34,9 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                if (_displayText == null)
-                    return Resources.Strings.ResourceManager.GetString("Template_" + Name + "_DisplayText");
-
-                return _displayText;
-            }
-            set
-            {
-                _displayText = value;
+                return ResourceProvider.GetString("Template_" + Name + "_DisplayText");
             }
         }
-
-        #endregion
-
-        #region Description property
-
-        private string _description = null;
 
         /// <summary>
         /// Gets or sets the description of this document template
@@ -79,42 +45,9 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                if (_description == null)
-                    return Resources.Strings.ResourceManager.GetString("Template_" + Name + "_Description");
-
-                return _description;
-            }
-            set
-            {
-                _description = value;
+                return ResourceProvider.GetString("Template_" + Name + "_Description");
             }
         }
-
-        #endregion
-
-        #region Category property
-
-        private string _category = null;
-
-        /// <summary>
-        /// Gets or sets the category of this template
-        /// </summary>
-        public string Category
-        {
-            get
-            {
-                if (_category == null)
-                    return Resources.Strings.ResourceManager.GetString("Template_" + Name + "_Category");
-
-                return _category;
-            }
-            set
-            {
-                _category = value;
-            }
-        }
-
-        #endregion
 
         /// <summary>
         /// Initializes the document template view model

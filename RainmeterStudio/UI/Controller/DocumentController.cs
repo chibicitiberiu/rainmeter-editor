@@ -66,7 +66,7 @@ namespace RainmeterStudio.UI.Controller
             var dialog = new CreateDocumentDialog(this)
             {
                 Owner = OwnerWindow,
-                SelectedTemplate = defaultFormat,
+                SelectedTemplate = new DocumentTemplateViewModel(defaultFormat),
                 SelectedPath = defaultPath
             };
             bool? res = dialog.ShowDialog();
@@ -78,7 +78,7 @@ namespace RainmeterStudio.UI.Controller
             var path = dialog.SelectedPath;
 
             // Call manager
-            DocumentManager.Create(format);
+            DocumentManager.Create(format.Template);
         }
 
         public void Create(DocumentTemplate format)

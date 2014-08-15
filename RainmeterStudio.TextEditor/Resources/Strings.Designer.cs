@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RainmeterStudio.SkinDesignerPlugin.Resources {
+namespace RainmeterStudio.TextEditorPlugin.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Graphics {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Graphics() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RainmeterStudio.SkinDesignerPlugin.Resources.Graphics", typeof(Graphics).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RainmeterStudio.TextEditorPlugin.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,12 +61,20 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to Blank text file.
         /// </summary>
-        public static System.Drawing.Bitmap TransparentBackground {
+        public static string Template_Text_Description {
             get {
-                object obj = ResourceManager.GetObject("TransparentBackground", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("Template_Text_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text file.
+        /// </summary>
+        public static string Template_Text_DisplayText {
+            get {
+                return ResourceManager.GetString("Template_Text_DisplayText", resourceCulture);
             }
         }
     }

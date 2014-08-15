@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using RainmeterStudio.Core.Utils;
 
-namespace RainmeterStudio.Resources
+namespace RainmeterStudio.Business
 {
     /// <summary>
     /// Manages and provides resources
@@ -19,6 +19,11 @@ namespace RainmeterStudio.Resources
         {
             public ResourceManager Manager;
             public Assembly Assembly;
+
+            public override string ToString()
+            {
+                return String.Format("{{{0}; {1}}}", Manager, Assembly);
+            }
         }
 
         private static List<ResourceManagerInfo> _resourceManagers = new List<ResourceManagerInfo>();
@@ -94,13 +99,12 @@ namespace RainmeterStudio.Resources
                 foreach (var info in _resourceManagers)
                 {
                     // Try to get resource
-                    var path = info.Manager.GetString(key);
+                    var bitmap = info.Manager.GetObject(key) as System.Drawing.Bitmap;
 
                     // Found
-                    if (path != null)
+                    if (bitmap != null)
                     {
-                        Uri fullPath = new Uri("/" + info.Assembly.GetName().Name + ";component" + path, UriKind.Relative);
-                        image = new BitmapImage(fullPath);
+                        image = bitmap.GetImageSource();
 
                         if (keepInCache)
                             _cacheImages[key] = image;

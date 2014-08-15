@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using RainmeterStudio.Business;
-using RainmeterStudio.Core.Documents;
 using RainmeterStudio.UI.Controller;
+using RainmeterStudio.UI.ViewModel;
 
 namespace RainmeterStudio.UI.Dialogs
 {
@@ -27,15 +17,15 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
-        public DocumentTemplate SelectedTemplate
+        public DocumentTemplateViewModel SelectedTemplate
         {
             get
             {
-                return listFormats.SelectedItem as DocumentTemplate;
+                return listTemplates.SelectedItem as DocumentTemplateViewModel;
             }
             set
             {
-                listFormats.SelectedItem = value;
+                listTemplates.SelectedItem = value;
             }
         }
 
@@ -62,29 +52,13 @@ namespace RainmeterStudio.UI.Dialogs
             InitializeComponent();
             _documentController = docCtrl;
 
-            PopulateCategories();
-            RepopulateFormats();
+            PopulateFormats();
             Validate();
         }
 
-        private void PopulateCategories()
+        private void PopulateFormats()
         {
-            listCategories.ItemsSource = _documentController.DocumentTemplates
-                .Select(template => template.Category)
-                .Where(cat => cat != null)
-                .Distinct()
-                .Concat(new[] { "All" });
-
-            listCategories.SelectedIndex = listCategories.Items.Count - 1;
-        }
-
-        private void RepopulateFormats()
-        {
-            if (Object.Equals(listCategories.SelectedItem, "All"))
-                listFormats.ItemsSource = _documentController.DocumentTemplates;
-
-            else
-                listFormats.ItemsSource = _documentController.DocumentTemplates.Where(x => Object.Equals(x.Category, listCategories.SelectedItem));
+            listTemplates.ItemsSource = _documentController.DocumentTemplates;
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
@@ -102,15 +76,17 @@ namespace RainmeterStudio.UI.Dialogs
         private void Validate()
         {
             bool res = true;
+
             res &= !String.IsNullOrWhiteSpace(textPath.Text);
-            res &= (listFormats.SelectedItem != null);
+            res &= !textPath.Text.Intersect(System.IO.Path.GetInvalidFileNameChars()).Any();
+            res &= (listTemplates.SelectedItem != null);
 
             buttonCreate.IsEnabled = res;
         }
 
-        private void listCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void listFormats_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RepopulateFormats();
+            Validate();
         }
     }
 }

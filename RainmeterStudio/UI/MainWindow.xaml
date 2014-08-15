@@ -5,7 +5,15 @@
         xmlns:ad="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:adlayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
         xmlns:r="clr-namespace:RainmeterStudio.Resources"
-        Title="Rainmeter Studio" Height="600" Width="800"
+        xmlns:p="clr-namespace:RainmeterStudio.Properties"
+        
+        Title="{x:Static r:Strings.MainWindow_Title}" 
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Height, Mode=TwoWay}"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Width, Mode=TwoWay}"
+        WindowState="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_WindowState, Mode=TwoWay}"
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Left, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Top, Mode=TwoWay}"
+        
         ResizeMode="CanResizeWithGrip" >
 
     <Grid>

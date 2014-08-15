@@ -117,46 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentCreateCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/page_white_star.png</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Command_DocumentCreateCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\page_white_star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DocumentTemplate_Text" xml:space="preserve">
-    <value>/Resources/Icons/32/text_generic.png</value>
+  <data name="Command_ProjectCreateCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\project_star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectCreateCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/project_star.png</value>
+  <data name="Command_ProjectOpenCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\folder_project.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectItemDirectory" xml:space="preserve">
-    <value>/Resources/Icons/16/folder.png</value>
+  <data name="Command_ProjectPanel_CollapseAllCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectItemNone" xml:space="preserve">
-    <value>/Resources/Icons/16/page_white_delete.png</value>
+  <data name="Command_ProjectPanel_ExpandAllCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectItemUnknown" xml:space="preserve">
-    <value>/Resources/Icons/16/file_generic.png</value>
+  <data name="Command_ProjectPanel_RefreshCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\view-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectItem_rsproj" xml:space="preserve">
-    <value>/Resources/Icons/16/project.png</value>
+  <data name="Command_ProjectPanel_ShowAllFilesCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\folder_explore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectItem_txt" xml:space="preserve">
-    <value>/Resources/Icons/16/text_generic.png</value>
+  <data name="Command_ProjectPanel_SyncWithActiveViewCommand_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\arrow_refresh_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectOpenCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/folder_project.png</value>
+  <data name="ProjectItemDirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectPanel_CollapseAllCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/minus.png</value>
+  <data name="ProjectItemNone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\file_generic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectPanel_ExpandAllCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/plus.png</value>
+  <data name="ProjectItemUnknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\page_white_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProjectPanel_RefreshCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/view-refresh.png</value>
-  </data>
-  <data name="ProjectPanel_ShowAllFilesCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/folder_explore.png</value>
-  </data>
-  <data name="ProjectPanel_SyncWithActiveViewCommand" xml:space="preserve">
-    <value>/Resources/Icons/16/arrow_refresh_small.png</value>
+  <data name="ProjectItem_rsproj" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\16\project.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

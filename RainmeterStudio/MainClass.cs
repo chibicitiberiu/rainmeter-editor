@@ -39,6 +39,9 @@ namespace RainmeterStudio
             // Create & run app
             var uiManager = new UIManager(projectManager, documentManager);
             uiManager.Run();
+
+            // Run finished, persist settings
+            SettingsProvider.SaveSettings();
         }
     }
 }

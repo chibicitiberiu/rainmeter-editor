@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RainmeterStudio.SkinDesignerPlugin.Resources {
+namespace RainmeterStudio.TextEditorPlugin.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Graphics {
+    public class Icons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Graphics() {
+        internal Icons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RainmeterStudio.SkinDesignerPlugin.Resources.Graphics", typeof(Graphics).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RainmeterStudio.TextEditorPlugin.Resources.Icons", typeof(Icons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,19 @@ namespace RainmeterStudio.SkinDesignerPlugin.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap TransparentBackground {
+        public static System.Drawing.Bitmap ProjectItem_txt {
             get {
-                object obj = ResourceManager.GetObject("TransparentBackground", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItem_txt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Template_Text_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Template_Text_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
