@@ -11,6 +11,8 @@ namespace RainmeterStudio.Business
 {
     public class ProjectManager
     {
+        private List<IProjectTemplate> _projectTemplates = new List<IProjectTemplate>();
+
         #region Properties
 
         /// <summary>
@@ -112,5 +114,16 @@ namespace RainmeterStudio.Business
             if (ActiveProjectChanged != null)
                 ActiveProjectChanged(this, new EventArgs());
         }
+
+        /// <summary>
+        /// Registers a project template
+        /// </summary>
+        /// <param name="template">Project template</param>
+        public void RegisterProjectTemplate(IProjectTemplate template)
+        {
+            _projectTemplates.Add(template);
+        }
+
+        public IEnumerable<IProjectTemplate> ProjectTemplates { get { return _projectTemplates; } }
     }
 }

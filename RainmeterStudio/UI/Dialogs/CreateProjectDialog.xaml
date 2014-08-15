@@ -13,9 +13,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListView Name="listTemplates" Grid.Row="0" SelectedIndex="0"
-                  IsEnabled="False">
-            
+        <ListView Name="listTemplates" Grid.Row="0" Margin="1px"
+                  SelectionChanged="listTemplates_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
@@ -23,21 +22,12 @@
                                Width="32" Height="32" Margin="2"
                                Stretch="Uniform" VerticalAlignment="Top" />
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding DisplayText}" FontWeight="Bold" />
                             <TextBlock Text="{Binding Description}" />
                         </StackPanel>
                     </DockPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock FontWeight="Bold" FontSize="13pt" Text="{Binding Name}" />
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </ListView.GroupStyle>
         </ListView>
 
         <Grid Grid.Row="1">

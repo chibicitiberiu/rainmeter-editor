@@ -231,4 +231,10 @@
   <data name="MainWindow_Title" xml:space="preserve">
     <value>Rainmeter Studio</value>
   </data>
+  <data name="ProjectTemplate_EmptyProject_Description" xml:space="preserve">
+    <value>Creates a new empty project.</value>
+  </data>
+  <data name="ProjectTemplate_EmptyProject_DisplayText" xml:space="preserve">
+    <value>Empty project</value>
+  </data>
 </root>

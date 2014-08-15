@@ -44,13 +44,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\IProjectTemplate.cs" />
     <Compile Include="RainmeterStudioPluginAttribute.cs" />
     <Compile Include="PluginExportAttribute.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\ICustomDocumentTitleProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\ISelectionPropertiesProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\IToolboxProvider.cs" />
     <Compile Include="Documents\DocumentEditorFeatures\IUndoSupport.cs" />
-    <Compile Include="Documents\DocumentTemplate.cs" />
+    <Compile Include="Model\IDocumentTemplate.cs" />
     <Compile Include="Documents\IDocumentEditor.cs" />
     <Compile Include="Documents\IDocumentEditorFactory.cs" />
     <Compile Include="Storage\IDocumentStorage.cs" />

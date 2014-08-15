@@ -27,12 +27,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+N")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string ProjectCreateCommand_Shortcut {
+        public string Command_ProjectCreateCommand_Shortcut {
             get {
-                return ((string)(this["ProjectCreateCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectCreateCommand_Shortcut"]));
             }
             set {
-                this["ProjectCreateCommand_Shortcut"] = value;
+                this["Command_ProjectCreateCommand_Shortcut"] = value;
             }
         }
         
@@ -40,12 +40,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("F5")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string ProjectPanel_RefreshCommand_Shortcut {
+        public string Command_ProjectPanel_RefreshCommand_Shortcut {
             get {
-                return ((string)(this["ProjectPanel_RefreshCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectPanel_RefreshCommand_Shortcut"]));
             }
             set {
-                this["ProjectPanel_RefreshCommand_Shortcut"] = value;
+                this["Command_ProjectPanel_RefreshCommand_Shortcut"] = value;
             }
         }
         
@@ -53,12 +53,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+N")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string DocumentCreateCommand_Shortcut {
+        public string Command_DocumentCreateCommand_Shortcut {
             get {
-                return ((string)(this["DocumentCreateCommand_Shortcut"]));
+                return ((string)(this["Command_DocumentCreateCommand_Shortcut"]));
             }
             set {
-                this["DocumentCreateCommand_Shortcut"] = value;
+                this["Command_DocumentCreateCommand_Shortcut"] = value;
             }
         }
         
@@ -66,12 +66,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+O")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string ProjectOpenCommand_Shortcut {
+        public string Command_ProjectOpenCommand_Shortcut {
             get {
-                return ((string)(this["ProjectOpenCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectOpenCommand_Shortcut"]));
             }
             set {
-                this["ProjectOpenCommand_Shortcut"] = value;
+                this["Command_ProjectOpenCommand_Shortcut"] = value;
             }
         }
         
@@ -79,12 +79,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+W")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string DocumentCloseCommand_Shortcut {
+        public string Command_DocumentCloseCommand_Shortcut {
             get {
-                return ((string)(this["DocumentCloseCommand_Shortcut"]));
+                return ((string)(this["Command_DocumentCloseCommand_Shortcut"]));
             }
             set {
-                this["DocumentCloseCommand_Shortcut"] = value;
+                this["Command_DocumentCloseCommand_Shortcut"] = value;
             }
         }
         

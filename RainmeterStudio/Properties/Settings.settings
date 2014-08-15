@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RainmeterStudio.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ProjectCreateCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Command_ProjectCreateCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+Shift+N</Value>
     </Setting>
-    <Setting Name="ProjectPanel_RefreshCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Command_ProjectPanel_RefreshCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">F5</Value>
     </Setting>
-    <Setting Name="DocumentCreateCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Command_DocumentCreateCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+N</Value>
     </Setting>
-    <Setting Name="ProjectOpenCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Command_ProjectOpenCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+Shift+O</Value>
     </Setting>
-    <Setting Name="DocumentCloseCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Command_DocumentCloseCommand_Shortcut" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+W</Value>
     </Setting>
     <Setting Name="MainWindow_Width" Type="System.Double" Scope="User">

@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Storage;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI;
@@ -32,8 +33,9 @@ namespace RainmeterStudio
             // Initialize plugin manager
             PluginManager pluginManager = new PluginManager();
             pluginManager.AddRegisterExportTypeHandler(typeof(IDocumentStorage), obj => documentManager.RegisterStorage((IDocumentStorage)obj));
-            pluginManager.AddRegisterExportTypeHandler(typeof(DocumentTemplate), obj => documentManager.RegisterTemplate((DocumentTemplate)obj));
+            pluginManager.AddRegisterExportTypeHandler(typeof(IDocumentTemplate), obj => documentManager.RegisterTemplate((IDocumentTemplate)obj));
             pluginManager.AddRegisterExportTypeHandler(typeof(IDocumentEditorFactory), obj => documentManager.RegisterEditorFactory((IDocumentEditorFactory)obj));
+            pluginManager.AddRegisterExportTypeHandler(typeof(IProjectTemplate), obj => projectManager.RegisterProjectTemplate((IProjectTemplate)obj));
             pluginManager.Initialize();
 
             // Create & run app

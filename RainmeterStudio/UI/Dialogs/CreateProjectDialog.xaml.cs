@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model;
+using RainmeterStudio.UI.Controller;
 
 namespace RainmeterStudio.UI.Dialogs
 {
@@ -54,11 +56,11 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
-        public DocumentTemplate SelectedTemplate
+        public IDocumentTemplate SelectedTemplate
         {
             get
             {
-                return listTemplates.SelectedItem as DocumentTemplate;
+                return listTemplates.SelectedItem as IDocumentTemplate;
             }
             set
             {
@@ -121,7 +123,7 @@ namespace RainmeterStudio.UI.Dialogs
 
         #endregion
 
-        public CreateProjectDialog()
+        public CreateProjectDialog(ProjectController projectController)
         {
             InitializeComponent();
 
@@ -131,6 +133,9 @@ namespace RainmeterStudio.UI.Dialogs
 
             // Set data context
             DataContext = this;
+
+            // Populate templates
+            listTemplates.ItemsSource = projectController.ProjectTemplates.OrderBy(x => x.DisplayText);
 
             // Focus on name textbox
             textName.Focus();
@@ -207,6 +212,10 @@ namespace RainmeterStudio.UI.Dialogs
         private void checkCreateDirectory_CheckChanged(object sender, RoutedEventArgs e)
         {
             UpdatePath();
+        }
+
+        private void listTemplates_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
         }
     }
 }

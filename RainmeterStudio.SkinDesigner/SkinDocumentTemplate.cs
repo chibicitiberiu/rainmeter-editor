@@ -12,21 +12,37 @@ namespace RainmeterStudio.SkinDesignerPlugin
     /// Template of a skin which will be opened in the designer
     /// </summary>
     [PluginExport]
-    public class SkinDocumentTemplate : DocumentTemplate
+    public class SkinDocumentTemplate : IDocumentTemplate
     {
         /// <summary>
-        /// Initializes this skin template
+        /// Gets the document template name
         /// </summary>
-        public SkinDocumentTemplate()
-            : base("Skin", "rsskin")
+        public string Name
         {
+            get { return "Skin"; }
+        }
+
+        /// <summary>
+        /// Gets the default extension of this template
+        /// </summary>
+        public string DefaultExtension
+        {
+            get { return "rsskin"; }
+        }
+
+        /// <summary>
+        /// Gets or sets the properties of this template
+        /// </summary>
+        public IEnumerable<Property> Properties
+        {
+            get { return Enumerable.Empty<Property>(); }
         }
 
         /// <summary>
         /// Creates a new document using this template
         /// </summary>
         /// <returns>Newly created document</returns>
-        public override IDocument CreateDocument()
+        public IDocument CreateDocument()
         {
             return new SkinDocument();
         }

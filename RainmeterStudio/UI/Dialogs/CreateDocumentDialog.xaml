@@ -23,7 +23,7 @@
                                Width="32" Height="32" Margin="2"
                                Stretch="Uniform" VerticalAlignment="Top" />
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding DisplayText}" FontWeight="Bold" />
                             <TextBlock Text="{Binding Description}" />
                         </StackPanel>
                     </DockPanel>

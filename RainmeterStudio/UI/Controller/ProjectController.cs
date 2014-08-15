@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Linq;
 using Microsoft.Win32;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.UI.Dialogs;
+using RainmeterStudio.UI.ViewModel;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -41,6 +44,17 @@ namespace RainmeterStudio.UI.Controller
             get
             {
                 return Manager.ActiveProject.Path;
+            }
+        }
+
+        /// <summary>
+        /// Gets the project templates
+        /// </summary>
+        public IEnumerable<ProjectTemplateViewModel> ProjectTemplates
+        {
+            get
+            {
+                return Manager.ProjectTemplates.Select(pt => new ProjectTemplateViewModel(pt));
             }
         }
 
@@ -91,7 +105,7 @@ namespace RainmeterStudio.UI.Controller
         public void CreateProject(string name = null, string path = null)
         {
             // Create dialog
-            var dialog = new CreateProjectDialog();
+            var dialog = new CreateProjectDialog(this);
             dialog.Owner = OwnerWindow;
             dialog.SelectedLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Rainmeter Studio Projects");
 

@@ -1,15 +1,18 @@
 ﻿using System.Windows.Media;
 using RainmeterStudio.Business;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.UI.ViewModel
 {
+    /// <summary>
+    /// View model for document templates
+    /// </summary>
     public class DocumentTemplateViewModel
     {
         /// <summary>
         /// Gets the document template
         /// </summary>
-        public DocumentTemplate Template { get; private set; }
+        public IDocumentTemplate Template { get; private set; }
 
         /// <summary>
         /// Gets the document template name
@@ -23,7 +26,7 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return ResourceProvider.GetImage("Template_" + Name + "_Icon");
+                return ResourceProvider.GetImage("DocumentTemplate_" + Name + "_Icon");
             }
         }
 
@@ -34,7 +37,7 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return ResourceProvider.GetString("Template_" + Name + "_DisplayText");
+                return ResourceProvider.GetString("DocumentTemplate_" + Name + "_DisplayText");
             }
         }
 
@@ -45,7 +48,7 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return ResourceProvider.GetString("Template_" + Name + "_Description");
+                return ResourceProvider.GetString("DocumentTemplate_" + Name + "_Description");
             }
         }
 
@@ -53,7 +56,7 @@ namespace RainmeterStudio.UI.ViewModel
         /// Initializes the document template view model
         /// </summary>
         /// <param name="template">The document template</param>
-        public DocumentTemplateViewModel(DocumentTemplate template)
+        public DocumentTemplateViewModel(IDocumentTemplate template)
         {
             this.Template = template;
         }

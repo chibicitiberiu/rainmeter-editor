@@ -7,6 +7,7 @@ using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.UI.Dialogs;
 using RainmeterStudio.UI.ViewModel;
+using RainmeterStudio.Core.Model;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -60,7 +61,7 @@ namespace RainmeterStudio.UI.Controller
             DocumentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow());
         }
 
-        public void CreateWindow(DocumentTemplate defaultFormat = null, string defaultPath = "")
+        public void CreateWindow(IDocumentTemplate defaultFormat = null, string defaultPath = "")
         {
             // Show dialog
             var dialog = new CreateDocumentDialog(this)
@@ -81,7 +82,7 @@ namespace RainmeterStudio.UI.Controller
             DocumentManager.Create(format.Template);
         }
 
-        public void Create(DocumentTemplate format)
+        public void Create(IDocumentTemplate format)
         {
             // Call manager
             DocumentManager.Create(format);

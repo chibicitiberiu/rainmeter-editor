@@ -12,14 +12,37 @@ namespace RainmeterStudio.TextEditorPlugin
     /// A blank text document template
     /// </summary>
     [PluginExport]
-    public class TextDocumentTemplate : DocumentTemplate
+    public class TextDocumentTemplate : IDocumentTemplate
     {
-        public TextDocumentTemplate()
-            : base("Text", "txt")
+        /// <summary>
+        /// Gets the document template name
+        /// </summary>
+        public string Name
         {
+            get { return "Text"; }
         }
 
-        public override IDocument CreateDocument()
+        /// <summary>
+        /// Gets the default extension of this template
+        /// </summary>
+        public string DefaultExtension
+        {
+            get { return "txt"; }
+        }
+
+        /// <summary>
+        /// Gets or sets the properties of this template
+        /// </summary>
+        public IEnumerable<Property> Properties
+        {
+            get { return Enumerable.Empty<Property>(); }
+        }
+
+        /// <summary>
+        /// Creates a document using this template
+        /// </summary>
+        /// <returns>Created document.</returns>
+        public IDocument CreateDocument()
         {
             return new TextDocument();
         }

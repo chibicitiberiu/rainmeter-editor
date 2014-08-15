@@ -401,5 +401,23 @@ namespace RainmeterStudio.Resources {
                 return ResourceManager.GetString("MainWindow_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates a new empty project..
+        /// </summary>
+        public static string ProjectTemplate_EmptyProject_Description {
+            get {
+                return ResourceManager.GetString("ProjectTemplate_EmptyProject_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty project.
+        /// </summary>
+        public static string ProjectTemplate_EmptyProject_DisplayText {
+            get {
+                return ResourceManager.GetString("ProjectTemplate_EmptyProject_DisplayText", resourceCulture);
+            }
+        }
     }
 }

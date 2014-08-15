@@ -63,18 +63,18 @@ namespace RainmeterStudio.TextEditorPlugin.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Blank text file.
         /// </summary>
-        public static string Template_Text_Description {
+        public static string DocumentTemplate_Text_Description {
             get {
-                return ResourceManager.GetString("Template_Text_Description", resourceCulture);
+                return ResourceManager.GetString("DocumentTemplate_Text_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Text file.
         /// </summary>
-        public static string Template_Text_DisplayText {
+        public static string DocumentTemplate_Text_DisplayText {
             get {
-                return ResourceManager.GetString("Template_Text_DisplayText", resourceCulture);
+                return ResourceManager.GetString("DocumentTemplate_Text_DisplayText", resourceCulture);
             }
         }
     }

@@ -70,6 +70,7 @@
     <Compile Include="Business\DocumentManager.cs" />
     <Compile Include="Business\PluginManager.cs" />
     <Compile Include="Business\ProjectManager.cs" />
+    <Compile Include="Documents\EmptyProjectTemplate.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
     <Compile Include="Rainmeter.cs" />
@@ -101,6 +102,7 @@
     </Compile>
     <Compile Include="UI\UIManager.cs" />
     <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
+    <Compile Include="UI\ViewModel\ProjectTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
     <Page Include="UI\Dialogs\CreateDocumentDialog.xaml">
       <SubType>Designer</SubType>
@@ -223,6 +225,9 @@
       <Project>{1d2a4896-af31-4e82-a84f-4e218067701f}</Project>
       <Name>RainmeterStudio.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\32\project_empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

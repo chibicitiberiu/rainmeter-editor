@@ -50,7 +50,7 @@ namespace RainmeterStudio.Business
         /// <summary>
         /// Gets a list of document templates
         /// </summary>
-        public IEnumerable<DocumentTemplate> DocumentTemplates { get { return _templates; } }
+        public IEnumerable<IDocumentTemplate> DocumentTemplates { get { return _templates; } }
 
         #endregion
 
@@ -59,7 +59,7 @@ namespace RainmeterStudio.Business
         private List<IDocumentEditorFactory> _factories = new List<IDocumentEditorFactory>();
         private List<IDocumentEditor> _editors = new List<IDocumentEditor>();
         private List<IDocumentStorage> _storages = new List<IDocumentStorage>();
-        private List<DocumentTemplate> _templates = new List<DocumentTemplate>();
+        private List<IDocumentTemplate> _templates = new List<IDocumentTemplate>();
 
         #endregion
 
@@ -94,7 +94,7 @@ namespace RainmeterStudio.Business
         /// Registers a document template
         /// </summary>
         /// <param name="template">The document template</param>
-        public void RegisterTemplate(DocumentTemplate template)
+        public void RegisterTemplate(IDocumentTemplate template)
         {
             _templates.Add(template);
         }
@@ -108,7 +108,7 @@ namespace RainmeterStudio.Business
         /// </summary>
         /// <param name="format"></param>
         /// <param name="path"></param>
-        public IDocumentEditor Create(DocumentTemplate format)
+        public IDocumentEditor Create(IDocumentTemplate format)
         {
             // Create document
             var document = format.CreateDocument();

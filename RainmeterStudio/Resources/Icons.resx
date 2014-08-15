@@ -154,4 +154,7 @@
   <data name="ProjectItem_rsproj" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>icons\16\project.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ProjectTemplate_EmptyProject_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icons\32\project_empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -63,9 +63,9 @@ namespace RainmeterStudio.TextEditorPlugin.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap ProjectItem_txt {
+        public static System.Drawing.Bitmap DocumentTemplate_Text_Icon {
             get {
-                object obj = ResourceManager.GetObject("ProjectItem_txt", resourceCulture);
+                object obj = ResourceManager.GetObject("DocumentTemplate_Text_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace RainmeterStudio.TextEditorPlugin.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Template_Text_Icon {
+        public static System.Drawing.Bitmap ProjectItem_txt {
             get {
-                object obj = ResourceManager.GetObject("Template_Text_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("ProjectItem_txt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
