@@ -28,13 +28,6 @@ namespace RainmeterStudio.UI.ViewModel
             {
                 return Reference.Data.Name;
             }
-            set
-            {
-                Reference.Data.Name = value;
-                
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
-            }
         }
 
         /// <summary>
@@ -45,13 +38,6 @@ namespace RainmeterStudio.UI.ViewModel
             get
             {
                 return Reference.Data.Path;
-            }
-            set
-            {
-                Reference.Data.Path = value;
-
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Path"));
             }
         }
 

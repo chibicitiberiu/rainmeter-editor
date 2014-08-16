@@ -176,8 +176,7 @@ namespace RainmeterStudio.Business
             storage.Write(path, document);
 
             // Update reference
-            document.Reference.Name = Path.GetFileName(path);
-            document.Reference.Path = path;
+            document.Reference = new Reference(Path.GetFileName(path), path);
 
             // Clear dirty flag
             document.IsDirty = false;

@@ -16,8 +16,7 @@ namespace RainmeterStudio.TextEditorPlugin
         IDocument IDocumentStorage.Read(string path)
         {
             TextDocument document = new TextDocument();
-            document.Reference.Path = path;
-            document.Reference.Name = Path.GetFileName(path);
+            document.Reference = new Reference(Path.GetFileName(path), path);
             document.Lines.AddRange(File.ReadAllLines(path));
 
             return document;

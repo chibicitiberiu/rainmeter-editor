@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Storage;
 
 namespace RainmeterStudio.Storage
 {
@@ -16,14 +17,14 @@ namespace RainmeterStudio.Storage
             var file = File.OpenText(path);
 
             // Deserialize file
-            var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
-            Project project = serializer.Deserialize(file) as Project;
+            var serializer = new XmlSerializer(typeof(SerializableProject), new XmlRootAttribute("project"));
+            SerializableProject project = serializer.Deserialize(file) as SerializableProject;
             if (project != null)
                 project.Path = path;
 
             // Clean up
             file.Close();
-            return project;
+            return project.Project;
         }
 
         public void Save(string path, Project project)
@@ -32,8 +33,9 @@ namespace RainmeterStudio.Storage
             var file = File.OpenWrite(path);
 
             // Serialize file
-            var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
-            serializer.Serialize(file, project);
+            var sProject = new SerializableProject(project);
+            var serializer = new XmlSerializer(typeof(SerializableProject), new XmlRootAttribute("project"));
+            serializer.Serialize(file, sProject);
 
             // Clean up
             file.Close();

@@ -12,14 +12,18 @@ namespace RainmeterStudio.Core.Model
     /// </summary>
     public class Project
     {
-        #region Name property
+        #region Private fields
 
         private string _name;
+        private string _path;
+        
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets or sets the name of the project
         /// </summary>
-        [XmlElement("name")]
         public string Name
         {
             get
@@ -35,16 +39,9 @@ namespace RainmeterStudio.Core.Model
             }
         }
 
-        private string _path;
-
-        #endregion
-
-        #region Path property
-
         /// <summary>
         /// Gets or sets the file path of this project
         /// </summary>
-        [XmlIgnore]
         public string Path
         {
             get
@@ -60,136 +57,40 @@ namespace RainmeterStudio.Core.Model
             }
         }
 
-        #endregion
-
-        #region Author property
-
         /// <summary>
         /// Gets or sets the author of the project
         /// </summary>
-        [XmlElement("author")]
         public string Author { get; set; }
-
-        #endregion
-
-        #region Version property
 
         /// <summary>
         /// Gets or sets the version of the project
         /// </summary>
-        [XmlIgnore]
         public Version Version { get; set; }
-
-        /// <summary>
-        /// Gets or sets the string representation of the project version
-        /// </summary>
-        [XmlElement("version")]
-        public string VersionString
-        {
-            get
-            {
-                return Version.ToString();
-            }
-            set
-            {
-                Version = new Version(value);
-            }
-        }
-
-        #endregion
-
-        #region Auto-load file property
 
         /// <summary>
         /// Gets or sets the reference to the file to automatically load at package installation
         /// </summary>
-        [XmlElement("autoLoadFile")]
         public Reference AutoLoadFile { get; set; }
-
-        #endregion
-
-        #region Variable files property
 
         /// <summary>
         /// Gets or sets the list of variable files
         /// </summary>
-        [XmlArray("variableFiles")]
         public List<Reference> VariableFiles { get; set; }
-
-        #endregion
-
-        #region Minimum rainmeter & windows properties
 
         /// <summary>
         /// Gets or sets the minimum rainmeter version
         /// </summary>
-        [XmlIgnore]
         public Version MinimumRainmeter { get; set; }
-
-        /// <summary>
-        /// Gets or sets the string representation of the minimum rainmeter version
-        /// </summary>
-        [XmlElement("minimumRainmeter")]
-        public string MinimumRainmeterString
-        {
-            get
-            {
-                return MinimumRainmeter.ToString();
-            }
-            set
-            {
-                MinimumRainmeter = new Version(value);
-            }
-        }
 
         /// <summary>
         /// Gets or sets the minimum Windows version
         /// </summary>
-        [XmlIgnore]
         public Version MinimumWindows { get; set; }
-
-        /// <summary>
-        /// Gets or sets the string representation of the minimum Windows version
-        /// </summary>
-        [XmlElement("minimumWindows")]
-        public string MinimumWindowsString
-        {
-            get
-            {
-                return MinimumWindows.ToString();
-            }
-            set
-            {
-                MinimumWindows = new Version(value);
-            }
-        }
-
-        #endregion
-
-        #region Root property
 
         /// <summary>
         /// Gets or sets the root node
         /// </summary>
-        [XmlIgnore]
         public Tree<Reference> Root { get; set; }
-
-        /// <summary>
-        /// Gets or sets the serializable root node
-        /// </summary>
-        /// <remarks>Warning: not efficient</remarks>
-        [XmlElement("root")]
-        public SerializableTree<Reference> SerializableRoot
-        {
-            get
-            {
-                return Root.AsSerializableTree();
-            }
-            set
-            {
-                Root = value.AsTree();
-            }
-        }
 
         #endregion
 
