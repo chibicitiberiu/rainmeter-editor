@@ -250,6 +250,15 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select project path.
+        /// </summary>
+        public static string CreateProjectDialog_Browse_Title {
+            get {
+                return ResourceManager.GetString("CreateProjectDialog_Browse_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location:.
         /// </summary>
         public static string CreateProjectDialog_Location {
@@ -277,7 +286,7 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path:.
+        ///   Looks up a localized string similar to Full path:.
         /// </summary>
         public static string CreateProjectDialog_Path {
             get {

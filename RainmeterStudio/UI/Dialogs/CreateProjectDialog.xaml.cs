@@ -11,11 +11,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Utils;
 using RainmeterStudio.Properties;
+using RainmeterStudio.Resources;
 using RainmeterStudio.UI.Controller;
 
 namespace RainmeterStudio.UI.Dialogs
@@ -73,18 +75,18 @@ namespace RainmeterStudio.UI.Dialogs
         }
 
         /// <summary>
-        /// Gets or sets the path
+        /// Gets the selected path
         /// </summary>
         public string SelectedPath
         {
             get
             {
-                return textPath.Text;
-            }
-            set
-            {
-                textPath.Text = value;
-                _pathUserSet = true;
+                string path = SelectedLocation;
+
+                if (checkCreateDirectory.IsChecked.HasValue && checkCreateDirectory.IsChecked.Value)
+                    path = System.IO.Path.Combine(path, SelectedName);
+
+                return System.IO.Path.Combine(path, SelectedName + ".rsproj");
             }
         }
 
@@ -92,8 +94,6 @@ namespace RainmeterStudio.UI.Dialogs
 
         #region Private fields
 
-        private bool _pathUserSet = false;
-        private bool _ignoreNextChange = false;
         private ProjectController _projectController;
 
         #endregion
@@ -146,71 +146,18 @@ namespace RainmeterStudio.UI.Dialogs
         {
             bool res = true;
             res &= (listTemplates.SelectedItem != null); 
-            res &= !String.IsNullOrWhiteSpace(textPath.Text);
-            res &= PathHelper.IsPathValid(textPath.Text);
-            
+           
             buttonCreate.IsEnabled = res;
-        }
-
-        private void UpdatePath()
-        {
-            if (!_pathUserSet)
-            {
-                // Start with location
-                string path = textLocation.Text;
-
-                try
-                {
-                    // Combine with project directory
-                    if (checkCreateDirectory.IsChecked.HasValue && checkCreateDirectory.IsChecked.Value)
-                        path = System.IO.Path.Combine(path, textName.Text);
-
-                    // Combine with project file name
-                    path = System.IO.Path.Combine(path, textName.Text + ".rsproj");
-
-                    // Set new value
-                    _ignoreNextChange = true;
-                    textPath.Text = path;
-                }
-                catch (ArgumentException)
-                {
-                }
-            }
         }
 
         private void textName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdatePath();
+            Validate();
         }
 
         private void textLocation_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdatePath();
-        }
-
-        private void textPath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (_ignoreNextChange)
-            {
-                _ignoreNextChange = false;
-            }
-            else
-            {
-                _pathUserSet = true;
-
-                try
-                {
-                    textLocation.Text = System.IO.Path.GetDirectoryName(textPath.Text);
-                }
-                catch { }
-            }
-
             Validate();
-        }
-
-        private void checkCreateDirectory_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            UpdatePath();
         }
 
         private void listTemplates_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -252,6 +199,24 @@ namespace RainmeterStudio.UI.Dialogs
                 {
                     Settings.Default.CreateProjectDialog_SavedLocation = SelectedLocation;
                 }
+            }
+        }
+
+        private void buttonBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            // Show dialog
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = Strings.CreateProjectDialog_Browse_Title;
+            dialog.AddExtension = true;
+            dialog.Filter = Strings.Dialog_FileType_Project + "|*.rsproj|" + Strings.Dialog_FileType_AllFiles + "|*.*";
+            dialog.InitialDirectory = SelectedLocation;
+            dialog.FileName = SelectedName;
+            bool? res = dialog.ShowDialog();
+
+            if (res.HasValue && res.Value)
+            {
+                SelectedName = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName);
+                SelectedLocation = System.IO.Path.GetDirectoryName(dialog.FileName);
             }
         }
     }

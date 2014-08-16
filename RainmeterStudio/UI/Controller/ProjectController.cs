@@ -102,17 +102,11 @@ namespace RainmeterStudio.UI.Controller
         /// <summary>
         /// Displays the 'create project' dialog and creates a new project
         /// </summary>
-        public void CreateProject(string name = null, string path = null)
+        public void CreateProject()
         {
             // Create dialog
             var dialog = new CreateProjectDialog(this);
             dialog.Owner = OwnerWindow;
-            
-            if (name != null) 
-                dialog.Name = name;
-            
-            if (path != null) 
-                dialog.SelectedPath = path;
             
             // Display
             bool? res = dialog.ShowDialog();

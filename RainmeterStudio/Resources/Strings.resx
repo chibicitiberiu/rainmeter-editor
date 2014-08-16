@@ -184,7 +184,7 @@
     <value>Name:</value>
   </data>
   <data name="CreateProjectDialog_Path" xml:space="preserve">
-    <value>Path:</value>
+    <value>Full path:</value>
   </data>
   <data name="CreateProjectDialog_PathCreateFolder" xml:space="preserve">
     <value>Create directory for project</value>
@@ -236,5 +236,8 @@
   </data>
   <data name="ProjectTemplate_EmptyProject_DisplayText" xml:space="preserve">
     <value>Empty project</value>
+  </data>
+  <data name="CreateProjectDialog_Browse_Title" xml:space="preserve">
+    <value>Select project path</value>
   </data>
 </root>
