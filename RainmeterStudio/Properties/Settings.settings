@@ -32,5 +32,14 @@
     <Setting Name="MainWindow_Top" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="CreateProjectDialog_RecentLocations" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CreateProjectDialog_SavedLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CreateProjectDialog_CreateDirectoryCheckbox" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

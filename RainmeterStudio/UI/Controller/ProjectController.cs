@@ -107,8 +107,7 @@ namespace RainmeterStudio.UI.Controller
             // Create dialog
             var dialog = new CreateProjectDialog(this);
             dialog.Owner = OwnerWindow;
-            dialog.SelectedLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Rainmeter Studio Projects");
-
+            
             if (name != null) 
                 dialog.Name = name;
             

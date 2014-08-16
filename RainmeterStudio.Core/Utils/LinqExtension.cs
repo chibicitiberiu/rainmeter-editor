@@ -21,5 +21,19 @@ namespace RainmeterStudio.Core.Utils
             foreach (var obj in container)
                 action(obj);
         }
+
+        /// <summary>
+        /// Appends an item at the end of the container
+        /// </summary>
+        /// <typeparam name="T">Enumerable type</typeparam>
+        /// <param name="container">Container</param>
+        /// <param name="item">Item to append</param>
+        public static IEnumerable<T> Append<T> (this IEnumerable<T> container, T item)
+        {
+            foreach (var i in container)
+                yield return i;
+
+            yield return item;
+        }
     }
 }

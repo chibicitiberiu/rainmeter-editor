@@ -147,5 +147,41 @@ namespace RainmeterStudio.Properties {
                 this["MainWindow_Top"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CreateProjectDialog_RecentLocations {
+            get {
+                return ((string)(this["CreateProjectDialog_RecentLocations"]));
+            }
+            set {
+                this["CreateProjectDialog_RecentLocations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CreateProjectDialog_SavedLocation {
+            get {
+                return ((string)(this["CreateProjectDialog_SavedLocation"]));
+            }
+            set {
+                this["CreateProjectDialog_SavedLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateProjectDialog_CreateDirectoryCheckbox {
+            get {
+                return ((bool)(this["CreateProjectDialog_CreateDirectoryCheckbox"]));
+            }
+            set {
+                this["CreateProjectDialog_CreateDirectoryCheckbox"] = value;
+            }
+        }
     }
 }
