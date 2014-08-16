@@ -21,5 +21,23 @@ namespace RainmeterStudio.Core.Utils
 
             return true;
         }
+
+        /// <summary>
+        /// Validates a file name
+        /// </summary>
+        /// <param name="name">Name of file</param>
+        /// <returns></returns>
+        public static bool IsFileNameValid(string name)
+        {
+            // No name is not a valid name
+            if (String.IsNullOrEmpty(name))
+                return false;
+
+            // Check for invalid characters
+            if (Path.GetInvalidFileNameChars().Intersect(name).Any())
+                return false;
+
+            return true;
+        }
     }
 }

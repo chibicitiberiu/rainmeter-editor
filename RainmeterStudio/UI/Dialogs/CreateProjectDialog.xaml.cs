@@ -113,9 +113,7 @@ namespace RainmeterStudio.UI.Dialogs
 
             // Populate controls
             listTemplates.ItemsSource = projectController.ProjectTemplates.OrderBy(x => x.DisplayText);
-
             textLocation.ItemsSource = GetRecentLocations().OrderBy(x => x);
-
             textLocation.Text = GetLocation();
 
             Validate();
@@ -145,8 +143,10 @@ namespace RainmeterStudio.UI.Dialogs
         private void Validate()
         {
             bool res = true;
-            res &= (listTemplates.SelectedItem != null); 
-           
+            res &= (listTemplates.SelectedItem != null);
+            res &= PathHelper.IsFileNameValid(textName.Text);
+            res &= PathHelper.IsPathValid(textLocation.Text);
+
             buttonCreate.IsEnabled = res;
         }
 
