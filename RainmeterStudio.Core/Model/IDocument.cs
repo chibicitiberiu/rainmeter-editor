@@ -8,7 +8,7 @@ namespace RainmeterStudio.Core.Model
 {
     public interface IDocument : INotifyPropertyChanged
     {
-        Reference Reference { get; }
+        Reference Reference { get; set; }
         bool IsDirty { get; set; }
     }
 }

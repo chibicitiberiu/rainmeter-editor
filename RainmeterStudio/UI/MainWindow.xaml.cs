@@ -15,6 +15,7 @@ using RainmeterStudio.Business;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
+using RainmeterStudio.UI.Panels;
 using Xceed.Wpf.AvalonDock.Layout;
 
 namespace RainmeterStudio.UI
@@ -26,6 +27,8 @@ namespace RainmeterStudio.UI
     {
         public DocumentController DocumentController { get; set; }
         public ProjectController ProjectController { get; set; }
+
+        public ProjectPanel ProjectPanel { get { return projectPanel; } }
 
         public MainWindow(ProjectController projCtrl, DocumentController docCtrl)
         {
@@ -52,7 +55,7 @@ namespace RainmeterStudio.UI
             // Spawn a new window
             LayoutDocument document = new LayoutDocument();
             document.Content = e.Editor.EditorUI;
-            document.Title = e.Editor.AttachedDocument.Reference.Name;
+            document.Title = (e.Editor.AttachedDocument.Reference == null) ? "New document" : e.Editor.AttachedDocument.Reference.Name;
             document.Closing += document_Closing;
 
             documentPane.Children.Add(document);

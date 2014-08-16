@@ -17,7 +17,7 @@ namespace RainmeterStudio.UI.ViewModel
         /// <summary>
         /// Gets the linked reference
         /// </summary>
-        public Reference Reference { get; private set; }
+        public Tree<Reference> Reference { get; private set; }
 
         /// <summary>
         /// Gets or sets the name
@@ -26,11 +26,11 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return Reference.Name;
+                return Reference.Data.Name;
             }
             set
             {
-                Reference.Name = value;
+                Reference.Data.Name = value;
                 
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Name"));
@@ -44,11 +44,11 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return Reference.Path;
+                return Reference.Data.Path;
             }
             set
             {
-                Reference.Path = value;
+                Reference.Data.Path = value;
 
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Path"));
@@ -115,7 +115,7 @@ namespace RainmeterStudio.UI.ViewModel
         /// Creates a new instance of reference view model
         /// </summary>
         /// <param name="reference">Reference</param>
-        public ReferenceViewModel(Reference reference)
+        public ReferenceViewModel(Tree<Reference> reference)
         {
             Reference = reference;
         }

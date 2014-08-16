@@ -26,7 +26,11 @@ namespace RainmeterStudio.TextEditorPlugin
             InitializeComponent();
 
             _document = document;
-            text.Text = document.Lines.Aggregate((a, b) => a + "\n" + b);
+
+            StringBuilder txt = new StringBuilder();
+            document.Lines.ForEach((line) => txt.AppendLine(line));
+            
+            text.Text = txt.ToString();
         }
     }
 }

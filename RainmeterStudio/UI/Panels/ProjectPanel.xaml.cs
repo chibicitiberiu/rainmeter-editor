@@ -21,7 +21,7 @@ using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
 using RainmeterStudio.UI.ViewModel;
 
-namespace RainmeterStudio.UI
+namespace RainmeterStudio.UI.Panels
 {
     /// <summary>
     /// Interaction logic for SkinsPanel.xaml
@@ -37,7 +37,7 @@ namespace RainmeterStudio.UI
             }
             set
             {
-                // Unsubscribe from old project
+                // Unsubscribe from old controller
                 if (_controller != null)
                 {
                     Controller.ActiveProjectChanged -= Controller_ActiveProjectChanged;
@@ -64,6 +64,26 @@ namespace RainmeterStudio.UI
 
         #endregion
 
+        /// <summary>
+        /// Gets the selected tree view item
+        /// </summary>
+        public Tree<Reference> ActiveItem
+        {
+            get
+            {
+                var selected = treeProjectItems.SelectedItem as Tree<ReferenceViewModel>;
+
+                if (selected == null)
+                {
+                    return Controller.ActiveProject.Root;
+                }
+                else
+                {
+                    return selected.Data.Reference;
+                }
+            }
+        }
+
         private bool _canExpand = false;
         private bool CanExpand
         {
@@ -75,11 +95,8 @@ namespace RainmeterStudio.UI
             {
                 _canExpand = value;
 
-                if (ExpandAllCommand != null)
-                    ExpandAllCommand.NotifyCanExecuteChanged();
-
-                if (CollapseAllCommand != null)
-                    CollapseAllCommand.NotifyCanExecuteChanged();
+                ExpandAllCommand.NotifyCanExecuteChanged();
+                CollapseAllCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -149,7 +166,7 @@ namespace RainmeterStudio.UI
             refTree.Remove(project);
 
             // Transform to reference view model and return
-            return refTree.TransformData<Reference, ReferenceViewModel>((data) => new ReferenceViewModel(data));
+            return refTree.Transform<Reference, ReferenceViewModel>((node) => new Tree<ReferenceViewModel>(new ReferenceViewModel(node)));
         }
 
         private Tree<ReferenceViewModel> GetProjectItems()
@@ -158,7 +175,7 @@ namespace RainmeterStudio.UI
             Tree<Reference> refTree = Controller.ActiveProject.Root;
 
             // Transform to reference view model and return
-            return refTree.TransformData<Reference, ReferenceViewModel>((data) => new ReferenceViewModel(data));
+            return refTree.Transform<Reference, ReferenceViewModel>((node) => new Tree<ReferenceViewModel>(new ReferenceViewModel(node)));
         }
 
         private void ExpandAll()

@@ -19,6 +19,7 @@ using RainmeterStudio.Core.Utils;
 using RainmeterStudio.Properties;
 using RainmeterStudio.Resources;
 using RainmeterStudio.UI.Controller;
+using RainmeterStudio.UI.ViewModel;
 
 namespace RainmeterStudio.UI.Dialogs
 {
@@ -36,7 +37,12 @@ namespace RainmeterStudio.UI.Dialogs
         {
             get
             {
-                return listTemplates.SelectedItem as IProjectTemplate;
+                var item = listTemplates.SelectedItem as ProjectTemplateViewModel;
+
+                if (item != null)
+                    return item.Template;
+
+                return null;
             }
             set
             {

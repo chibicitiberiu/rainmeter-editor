@@ -8,6 +8,7 @@ using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.UI.Dialogs;
 using RainmeterStudio.UI.ViewModel;
 using RainmeterStudio.Core.Model;
+using System.IO;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -53,7 +54,7 @@ namespace RainmeterStudio.UI.Controller
             remove { DocumentManager.DocumentClosed -= value; }
         }
 
-        public Window OwnerWindow { get; set; }
+        public MainWindow OwnerWindow { get; set; }
 
         public DocumentController(DocumentManager documentManager, ProjectManager projectManager)
         {
@@ -75,10 +76,25 @@ namespace RainmeterStudio.UI.Controller
                 return;
 
             var format = dialog.SelectedTemplate;
-            var path = dialog.SelectedName;
-
+            
             // Call manager
-            DocumentManager.Create(format.Template);
+            var editor = DocumentManager.Create(format.Template);
+            
+            // Set the reference
+            var name = dialog.SelectedName;
+
+            string folder = OwnerWindow.ProjectPanel.ActiveItem.Data.Path;
+            if (!Directory.Exists(folder))
+                folder = Path.GetDirectoryName(folder);
+
+            var reference = new Reference(name, Path.Combine(folder, name));
+            editor.AttachedDocument.Reference = reference;
+
+            // Save document
+            DocumentManager.Save(editor.AttachedDocument);
+
+            // Add to parent
+            OwnerWindow.ProjectPanel.ActiveItem.Add(reference);
         }
 
         public void Create(IDocumentTemplate format)
