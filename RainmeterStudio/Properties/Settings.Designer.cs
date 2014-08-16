@@ -163,12 +163,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CreateProjectDialog_SavedLocation {
+        public string Project_SavedLocation {
             get {
-                return ((string)(this["CreateProjectDialog_SavedLocation"]));
+                return ((string)(this["Project_SavedLocation"]));
             }
             set {
-                this["CreateProjectDialog_SavedLocation"] = value;
+                this["Project_SavedLocation"] = value;
             }
         }
         

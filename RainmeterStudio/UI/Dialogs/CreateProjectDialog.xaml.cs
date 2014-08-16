@@ -32,11 +32,11 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the currently selected file format
         /// </summary>
-        public IDocumentTemplate SelectedTemplate
+        public IProjectTemplate SelectedTemplate
         {
             get
             {
-                return listTemplates.SelectedItem as IDocumentTemplate;
+                return listTemplates.SelectedItem as IProjectTemplate;
             }
             set
             {
@@ -125,7 +125,7 @@ namespace RainmeterStudio.UI.Dialogs
         private string GetLocation()
         {
             // Get setting
-            string location = Settings.Default.CreateProjectDialog_SavedLocation;
+            string location = Settings.Default.Project_SavedLocation;
 
             // No location provided, use default
             if (String.IsNullOrEmpty(location))
@@ -197,7 +197,7 @@ namespace RainmeterStudio.UI.Dialogs
                 // Save location
                 if (checkLocationDefault.IsChecked.HasValue && checkLocationDefault.IsChecked.Value)
                 {
-                    Settings.Default.CreateProjectDialog_SavedLocation = SelectedLocation;
+                    Settings.Default.Project_SavedLocation = SelectedLocation;
                 }
             }
         }

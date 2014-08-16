@@ -31,6 +31,8 @@ namespace RainmeterStudio.UI.Controller
 
         public Command DocumentCreateCommand { get; private set; }
 
+        public Command DocumentOpenCommand { get; private set; }
+
         #endregion
 
         /// <summary>
@@ -58,25 +60,22 @@ namespace RainmeterStudio.UI.Controller
             DocumentManager = documentManager;
             ProjectManager = projectManager;
 
-            DocumentCreateCommand = new Command("DocumentCreateCommand", () => CreateWindow());
+            DocumentCreateCommand = new Command("DocumentCreateCommand", () => Create(), () => ProjectManager.ActiveProject != null);
+            ProjectManager.ActiveProjectChanged += new EventHandler((obj, e) => DocumentCreateCommand.NotifyCanExecuteChanged());
         }
 
-        public void CreateWindow(IDocumentTemplate defaultFormat = null, string defaultPath = "")
+        public void Create()
         {
             // Show dialog
-            var dialog = new CreateDocumentDialog(this)
-            {
-                Owner = OwnerWindow,
-                SelectedTemplate = new DocumentTemplateViewModel(defaultFormat),
-                SelectedPath = defaultPath
-            };
+            var dialog = new CreateDocumentDialog(this);
+            dialog.Owner = OwnerWindow;
             bool? res = dialog.ShowDialog();
 
             if (!res.HasValue || !res.Value)
                 return;
 
             var format = dialog.SelectedTemplate;
-            var path = dialog.SelectedPath;
+            var path = dialog.SelectedName;
 
             // Call manager
             DocumentManager.Create(format.Template);

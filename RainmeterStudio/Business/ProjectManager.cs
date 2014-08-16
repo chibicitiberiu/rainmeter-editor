@@ -51,14 +51,14 @@ namespace RainmeterStudio.Business
         /// </summary>
         /// <param name="name">Name of project</param>
         /// <param name="path">Path of project file</param>
-        public void CreateProject(string name, string path)
+        public void CreateProject(string name, string path, IProjectTemplate template)
         {
             // If there is an opened project, close it
             if (ActiveProject != null)
                 Close();
 
             // Create project object
-            ActiveProject = new Project();
+            ActiveProject = template.CreateProject();
             ActiveProject.Name = name;
             ActiveProject.Path = path;
 

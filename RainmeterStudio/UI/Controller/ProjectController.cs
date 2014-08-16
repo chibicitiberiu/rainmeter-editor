@@ -8,6 +8,7 @@ using RainmeterStudio.Business;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.UI.Dialogs;
 using RainmeterStudio.UI.ViewModel;
+using RainmeterStudio.Properties;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -115,9 +116,10 @@ namespace RainmeterStudio.UI.Controller
 
             string selectedName = dialog.SelectedName;
             string selectedPath = dialog.SelectedPath;
+            IProjectTemplate selectedTemplate = dialog.SelectedTemplate;
 
             // Call manager
-            Manager.CreateProject(selectedName, selectedPath);
+            Manager.CreateProject(selectedName, selectedPath, selectedTemplate);
         }
 
         /// <summary>
@@ -132,6 +134,7 @@ namespace RainmeterStudio.UI.Controller
                 + Resources.Strings.Dialog_FileType_AllFiles + "|*.*";
             dialog.Title = Resources.Strings.Dialog_OpenProject_Title;
             dialog.Multiselect = false;
+            dialog.InitialDirectory = Settings.Default.Project_SavedLocation;
 
             // Show dialog
             bool? res = dialog.ShowDialog(OwnerWindow);

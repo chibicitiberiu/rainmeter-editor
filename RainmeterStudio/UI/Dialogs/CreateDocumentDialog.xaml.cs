@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using RainmeterStudio.Core.Utils;
 using RainmeterStudio.UI.Controller;
 using RainmeterStudio.UI.ViewModel;
 
@@ -32,15 +33,15 @@ namespace RainmeterStudio.UI.Dialogs
         /// <summary>
         /// Gets or sets the path
         /// </summary>
-        public string SelectedPath
+        public string SelectedName
         {
             get
             {
-                return textPath.Text;
+                return textName.Text;
             }
             set
             {
-                textPath.Text = value;
+                textName.Text = value;
             }
         }
 
@@ -52,13 +53,9 @@ namespace RainmeterStudio.UI.Dialogs
             InitializeComponent();
             _documentController = docCtrl;
 
-            PopulateFormats();
-            Validate();
-        }
+            listTemplates.ItemsSource = _documentController.DocumentTemplates.OrderBy(x => x.DisplayText);
 
-        private void PopulateFormats()
-        {
-            listTemplates.ItemsSource = _documentController.DocumentTemplates;
+            Validate();
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
@@ -77,14 +74,18 @@ namespace RainmeterStudio.UI.Dialogs
         {
             bool res = true;
 
-            res &= !String.IsNullOrWhiteSpace(textPath.Text);
-            res &= !textPath.Text.Intersect(System.IO.Path.GetInvalidFileNameChars()).Any();
             res &= (listTemplates.SelectedItem != null);
+            res &= PathHelper.IsFileNameValid(SelectedName);
 
             buttonCreate.IsEnabled = res;
         }
 
         private void listFormats_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Validate();
+        }
+
+        private void textName_TextChanged(object sender, TextChangedEventArgs e)
         {
             Validate();
         }
