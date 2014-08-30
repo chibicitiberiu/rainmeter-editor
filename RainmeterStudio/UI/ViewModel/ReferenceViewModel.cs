@@ -37,7 +37,7 @@ namespace RainmeterStudio.UI.ViewModel
         {
             get
             {
-                return Reference.Data.Path;
+                return Reference.Data.StoragePath;
             }
         }
 

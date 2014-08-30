@@ -39,5 +39,37 @@ namespace RainmeterStudio.Core.Utils
 
             return true;
         }
+
+        /// <summary>
+        /// Converts an absolute path to a path relative to current working directory
+        /// </summary>
+        /// <param name="path">Absolute path</param>
+        /// <returns>Relative path</returns>
+        public static string GetRelativePath(string path)
+        {
+            return GetRelativePath(path, Environment.CurrentDirectory);
+        }
+
+        /// <summary>
+        /// Converts an absolute path to a relative path
+        /// </summary>
+        /// <param name="path">Absolute path to file</param>
+        /// <param name="relativeTo">Relative reference</param>
+        /// <returns>Relative path</returns>
+        public static string GetRelativePath(string path, string relativeTo)
+        {
+            Uri pathUri = new Uri(path);
+
+            // Folder must end in backslash
+            if (!relativeTo.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                relativeTo += Path.DirectorySeparatorChar;
+            }
+
+            Uri folderUri = new Uri(relativeTo);
+            Uri relativePath = pathUri.MakeRelativeUri(folderUri);
+
+            return Uri.UnescapeDataString(relativeTo.ToString().Replace('/', Path.DirectorySeparatorChar));
+        }
     }
 }

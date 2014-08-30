@@ -32,5 +32,10 @@ namespace RainmeterStudio.TextEditorPlugin
             
             text.Text = txt.ToString();
         }
+
+        private void text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _document.IsDirty = true;
+        }
     }
 }

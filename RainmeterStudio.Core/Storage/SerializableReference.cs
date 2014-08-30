@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Utils;
 
 namespace RainmeterStudio.Core.Storage
 {
@@ -15,38 +17,38 @@ namespace RainmeterStudio.Core.Storage
         /// <summary>
         /// Gets or sets the name of the reference
         /// </summary>
-        [XmlElement("name")]
-        public string Name
+        [XmlElement("storagePath")]
+        public string StoragePath
         {
             get
             {
-                if (Reference != null)
-                    return Reference.Name;
+                // Return only relative paths
+                if (Path.IsPathRooted(Reference.StoragePath))
+                {
+                    return PathHelper.GetRelativePath(Reference.StoragePath);
+                }
 
-                return null;
+                return Reference.StoragePath;
             }
             set
             {
-                Reference = new Reference(value, Path);
+                Reference = new Reference(value, ProjectPath);
             }
         }
 
         /// <summary>
         /// Gets or sets the path of the reference
         /// </summary>
-        [XmlElement("path")]
-        public string Path
+        [XmlElement("projectPath")]
+        public string ProjectPath
         {
             get
             {
-                if (Reference != null)
-                    return Reference.Path;
-
-                return null;
+                return Reference.ProjectPath;
             }
             set
             {
-                Reference = new Reference(Name, value);
+                Reference = new Reference(StoragePath, value);
             }
         }
 
@@ -67,6 +69,10 @@ namespace RainmeterStudio.Core.Storage
         {
         }
 
+        /// <summary>
+        /// Initializes this serializable reference
+        /// </summary>
+        /// <param name="reference">Reference to use</param>
         public SerializableReference(Reference reference)
         {
             Reference = reference;

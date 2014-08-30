@@ -152,11 +152,11 @@ namespace RainmeterStudio.Business
             // Find a storage
             var storage = FindStorage(document);
 
-            if (document.Reference == null)
+            if (document.Reference.StoragePath == null)
                 throw new ArgumentException("Reference cannot be empty");
 
             // Save
-            storage.Write(document.Reference.Path, document);
+            storage.Write(document.Reference.StoragePath, document);
 
             // Clear dirty flag
             document.IsDirty = false;

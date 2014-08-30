@@ -32,11 +32,11 @@ namespace RainmeterStudio.UI.Controller
             // Resource name
             string key = "ProjectItem";
 
-            if (Directory.Exists(item.Path))
+            if (Directory.Exists(item.StoragePath))
                 key += "Directory";
 
-            else if (File.Exists(item.Path))
-                key += "_" + Path.GetExtension(item.Path).Substring(1);
+            else if (File.Exists(item.StoragePath))
+                key += "_" + Path.GetExtension(item.StoragePath).Substring(1);
 
             else key += "None";
 
@@ -55,10 +55,9 @@ namespace RainmeterStudio.UI.Controller
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var reference = value as Reference;
-            if (reference != null)
+            if (value is Reference)
             {
-                return IconProvider.GetProjectItemIcon(reference);
+                return IconProvider.GetProjectItemIcon((Reference)value);
             }
 
             return null;

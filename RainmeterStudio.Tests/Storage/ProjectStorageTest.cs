@@ -39,8 +39,6 @@ namespace RainmeterStudio.Tests.Storage
 
             // Verify results
             Assert.IsNotNull(res);
-            Assert.AreEqual(project, res);
-            Assert.AreEqual(project.GetHashCode(), res.GetHashCode());
             Assert.AreEqual(project.Author, res.Author);
             Assert.AreEqual(project.AutoLoadFile, res.AutoLoadFile);
             Assert.AreEqual(project.MinimumRainmeter, res.MinimumRainmeter);
@@ -65,8 +63,6 @@ namespace RainmeterStudio.Tests.Storage
 
             // Test results
             Assert.IsNotNull(res);
-            Assert.AreEqual(project, res);
-            Assert.AreEqual(project.GetHashCode(), res.GetHashCode());
             Assert.AreEqual(project.Author, res.Author);
             Assert.AreEqual(project.AutoLoadFile, res.AutoLoadFile);
             Assert.AreEqual(project.MinimumRainmeter, res.MinimumRainmeter);

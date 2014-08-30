@@ -109,40 +109,5 @@ namespace RainmeterStudio.Core.Model
         }
 
         #endregion
-
-        #region Equals
-
-        public override bool Equals(object obj)
-        {
-            Project other = obj as Project;
-
-            if (other == null)
-                return false;
-
-            bool res = String.Equals(Author, other.Author);
-            res &= Reference.Equals(AutoLoadFile, other.AutoLoadFile);
-            res &= Version.Equals(MinimumRainmeter, other.MinimumRainmeter);
-            res &= Version.Equals(MinimumWindows, other.MinimumWindows);
-            res &= String.Equals(Name, other.Name);
-            res &= Tree<Reference>.Equals(Root, other.Root);
-            res &= Version.Equals(Version, other.Version);
-
-            return res;
-        }
-
-        public override int GetHashCode()
-        {
-            int hash = (Author == null) ? 0 : Author.GetHashCode();
-            hash = hash * 7 + ((AutoLoadFile == null) ? 0 : AutoLoadFile.GetHashCode());
-            hash = hash * 7 + ((MinimumRainmeter == null) ? 0 : MinimumRainmeter.GetHashCode());
-            hash = hash * 7 + ((MinimumWindows == null) ? 0 : MinimumWindows.GetHashCode());
-            hash = hash * 7 + ((Name == null) ? 0 : Name.GetHashCode());
-            hash = hash * 7 + ((Root == null) ? 0 : Root.GetHashCode());
-            hash = hash * 7 + ((Version == null) ? 0 : Version.GetHashCode());
-
-            return hash;
-        }
-
-        #endregion
     }
 }

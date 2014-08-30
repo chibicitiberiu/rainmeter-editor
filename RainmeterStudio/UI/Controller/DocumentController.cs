@@ -34,6 +34,8 @@ namespace RainmeterStudio.UI.Controller
 
         public Command DocumentOpenCommand { get; private set; }
 
+
+
         #endregion
 
         /// <summary>
@@ -65,6 +67,11 @@ namespace RainmeterStudio.UI.Controller
             ProjectManager.ActiveProjectChanged += new EventHandler((obj, e) => DocumentCreateCommand.NotifyCanExecuteChanged());
         }
 
+        #region Document operations
+
+        /// <summary>
+        /// Shows the new item dialog, and creates a new document
+        /// </summary>
         public void Create()
         {
             // Show dialog
@@ -83,7 +90,7 @@ namespace RainmeterStudio.UI.Controller
             // Set the reference
             var name = dialog.SelectedName;
 
-            string folder = OwnerWindow.ProjectPanel.ActiveItem.Data.Path;
+            string folder = OwnerWindow.ProjectPanel.ActiveItem.Data.StoragePath;
             if (!Directory.Exists(folder))
                 folder = Path.GetDirectoryName(folder);
 
@@ -97,11 +104,58 @@ namespace RainmeterStudio.UI.Controller
             OwnerWindow.ProjectPanel.ActiveItem.Add(reference);
         }
 
-        public void Create(IDocumentTemplate format)
+        /// <summary>
+        /// Saves the document opened in specified editor
+        /// </summary>
+        /// <param name="editor">Editor</param>
+        public void Save(IDocumentEditor editor)
         {
-            // Call manager
-            DocumentManager.Create(format);
+            if (!editor.AttachedDocument.Reference.IsOnStorage())
+            {
+                SaveAs(editor);
+                return;
+            }
+
+            // TODO
         }
+
+        public void SaveAs(IDocumentEditor editor)
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// Closes an active document.
+        /// </summary>
+        /// <param name="editor">The document editor attached</param>
+        /// <returns>True if closed successfully</returns>
+        /// <remarks>Shows the 'are you sure' prompt if there are unsaved edits.</remarks>
+        public bool Close(IDocumentEditor editor)
+        {
+            // Show the 'are you sure' prompt if necesary
+            if (editor.AttachedDocument.IsDirty)
+            {
+                bool? res = CloseUnsavedDialog.ShowDialog(OwnerWindow, editor.AttachedDocument);
+                if (res.HasValue)
+                {
+                    // Save
+                    if (res.Value)
+                    {
+                        Save(editor);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            // Close
+            DocumentManager.Close(editor);
+            return true;
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets a list of document templates view models

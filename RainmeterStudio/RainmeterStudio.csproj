@@ -90,6 +90,9 @@
     <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
     <Compile Include="Business\SettingsProvider.cs" />
+    <Compile Include="UI\Dialogs\CloseUnsavedDialog.xaml.cs">
+      <DependentUpon>CloseUnsavedDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\CreateDocumentDialog.xaml.cs">
       <DependentUpon>CreateDocumentDialog.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
     <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ProjectTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ReferenceViewModel.cs" />
+    <Page Include="UI\Dialogs\CloseUnsavedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dialogs\CreateDocumentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

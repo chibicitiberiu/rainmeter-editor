@@ -61,6 +61,33 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following files have unsaved changes:.
+        /// </summary>
+        public static string CloseUnsavedDialog_Message {
+            get {
+                return ResourceManager.GetString("CloseUnsavedDialog_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to save these changes?.
+        /// </summary>
+        public static string CloseUnsavedDialog_Question {
+            get {
+                return ResourceManager.GetString("CloseUnsavedDialog_Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsaved changes.
+        /// </summary>
+        public static string CloseUnsavedDialog_Title {
+            get {
+                return ResourceManager.GetString("CloseUnsavedDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Close.
         /// </summary>
         public static string Command_DocumentCloseCommand_DisplayText {
@@ -340,6 +367,15 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do_n&apos;t save.
+        /// </summary>
+        public static string Dialog_DoNotSave {
+            get {
+                return ResourceManager.GetString("Dialog_DoNotSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All files.
         /// </summary>
         public static string Dialog_FileType_AllFiles {
@@ -372,6 +408,15 @@ namespace RainmeterStudio.Resources {
         public static string Dialog_OpenProject_Title {
             get {
                 return ResourceManager.GetString("Dialog_OpenProject_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Save.
+        /// </summary>
+        public static string Dialog_Save {
+            get {
+                return ResourceManager.GetString("Dialog_Save", resourceCulture);
             }
         }
         

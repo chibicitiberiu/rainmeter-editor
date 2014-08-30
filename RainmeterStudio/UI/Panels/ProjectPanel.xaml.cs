@@ -162,7 +162,7 @@ namespace RainmeterStudio.UI.Panels
             refTree.Data = Controller.ActiveProject.Root.Data;
 
             // Remove the project file from the list
-            Tree<Reference> project = refTree.First(x => DirectoryHelper.PathsEqual(x.Data.Path, Controller.ActiveProjectPath));
+            Tree<Reference> project = refTree.First(x => DirectoryHelper.PathsEqual(x.Data.StoragePath, Controller.ActiveProjectPath));
             refTree.Remove(project);
 
             // Transform to reference view model and return

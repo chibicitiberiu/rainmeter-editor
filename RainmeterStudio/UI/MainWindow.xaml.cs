@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
+using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
@@ -29,6 +30,8 @@ namespace RainmeterStudio.UI
         public ProjectController ProjectController { get; set; }
 
         public ProjectPanel ProjectPanel { get { return projectPanel; } }
+
+        private Dictionary<LayoutDocument, IDocumentEditor> _openedDocuments = new Dictionary<LayoutDocument, IDocumentEditor>();
 
         public MainWindow(ProjectController projCtrl, DocumentController docCtrl)
         {
@@ -52,18 +55,52 @@ namespace RainmeterStudio.UI
 
         void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)
         {
-            // Spawn a new window
+            // Create a new panel
             LayoutDocument document = new LayoutDocument();
+            _openedDocuments.Add(document, e.Editor);
+
             document.Content = e.Editor.EditorUI;
-            document.Title = (e.Editor.AttachedDocument.Reference == null) ? "New document" : e.Editor.AttachedDocument.Reference.Name;
             document.Closing += document_Closing;
+            document.Closed += document_Closed;
 
             documentPane.Children.Add(document);
             documentPane.SelectedContentIndex = documentPane.IndexOf(document);
+
+
+            e.Document.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((obj, args) =>
+            {
+                string documentName;
+
+                if (!e.Document.Reference.IsInProject())
+                {
+                    documentName = e.Document.Reference.StoragePath;
+
+                    if (documentName == null)
+                        documentName = "New document";
+                }
+                else
+                {
+                    documentName = e.Document.Reference.Name;
+                }
+
+                if (e.Document.IsDirty)
+                    documentName += "*";
+
+                document.Title = documentName;
+            });
+        }
+
+        void document_Closed(object sender, EventArgs e)
+        {
+            var layoutDocument = (LayoutDocument)sender;
+            
+
         }
 
         void document_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            
+
             switch (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
             {
                 case MessageBoxResult.Yes:
