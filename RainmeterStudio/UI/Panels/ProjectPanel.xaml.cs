@@ -67,7 +67,7 @@ namespace RainmeterStudio.UI.Panels
         /// <summary>
         /// Gets the selected tree view item
         /// </summary>
-        public Tree<Reference> ActiveItem
+        public Reference ActiveItem
         {
             get
             {
@@ -136,57 +136,36 @@ namespace RainmeterStudio.UI.Panels
                 this.IsEnabled = true;
 
                 // Get tree
-                Tree<ReferenceViewModel> tree;
+                Reference refTree;
+
                 if (toggleShowAllFiles.IsChecked.HasValue && toggleShowAllFiles.IsChecked.Value)
                 {
-                    tree = GetAllFiles();
+                    // Get directory name
+                    string projectFolder = System.IO.Path.GetDirectoryName(Controller.ActiveProjectPath);
+
+                    // Get folder tree
+                    refTree = DirectoryHelper.GetFolderTree(projectFolder);
                 }
                 else
                 {
-                    tree = GetProjectItems();
+                    refTree = Controller.ActiveProject.Root;
                 }
 
                 // Add tree to tree view
                 treeProjectItems.Items.Clear();
-                treeProjectItems.Items.Add(tree);
+                treeProjectItems.Items.Add(new ReferenceViewModel(refTree));
             }
-        }
-
-        private Tree<ReferenceViewModel> GetAllFiles()
-        {
-            // Get directory name
-            string projectFolder = System.IO.Path.GetDirectoryName(Controller.ActiveProjectPath);
-
-            // Get folder tree
-            Tree<Reference> refTree = DirectoryHelper.GetFolderTree(projectFolder);
-            refTree.Data = Controller.ActiveProject.Root.Data;
-
-            // Remove the project file from the list
-            Tree<Reference> project = refTree.First(x => DirectoryHelper.PathsEqual(x.Data.StoragePath, Controller.ActiveProjectPath));
-            refTree.Remove(project);
-
-            // Transform to reference view model and return
-            return refTree.Transform<Reference, ReferenceViewModel>((node) => new Tree<ReferenceViewModel>(new ReferenceViewModel(node)));
-        }
-
-        private Tree<ReferenceViewModel> GetProjectItems()
-        {
-            // Get project items
-            Tree<Reference> refTree = Controller.ActiveProject.Root;
-
-            // Transform to reference view model and return
-            return refTree.Transform<Reference, ReferenceViewModel>((node) => new Tree<ReferenceViewModel>(new ReferenceViewModel(node)));
         }
 
         private void ExpandAll()
         {
             // Get tree
-            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            var tree = treeProjectItems.Items[0] as ReferenceViewModel;
             if (tree == null)
                 return;
 
             // Expand all
-            tree.Apply((node) => node.Data.IsExpanded = true);
+            tree.TreeExpand(true);
 
             // Set can expand property
             CanExpand = false;
@@ -195,12 +174,12 @@ namespace RainmeterStudio.UI.Panels
         private void CollapseAll()
         {
             // Get tree
-            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            var tree = treeProjectItems.Items[0] as ReferenceViewModel;
             if (tree == null)
                 return;
 
             // Expand all
-            tree.Apply((node) => node.Data.IsExpanded = false);
+            tree.TreeExpand(false);
 
             // Set can expand property
             CanExpand = true;
@@ -209,12 +188,12 @@ namespace RainmeterStudio.UI.Panels
         void TreeViewItem_ExpandedOrCollapsed(object sender, RoutedEventArgs e)
         {
             // Get tree
-            var tree = treeProjectItems.Items[0] as Tree<ReferenceViewModel>;
+            var tree = treeProjectItems.Items[0] as ReferenceViewModel;
             if (tree == null)
                 return;
             
             // We can expand if the root is not expanded
-            CanExpand = (!tree.Data.IsExpanded);
+            CanExpand = (!tree.IsExpanded);
         }
     }
 }

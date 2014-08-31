@@ -32,12 +32,23 @@ namespace RainmeterStudio.UI.Controller
             // Resource name
             string key = "ProjectItem";
 
-            if (Directory.Exists(item.StoragePath))
+            // Is a file?
+            if (File.Exists(item.StoragePath))
+            {
+                if (String.IsNullOrEmpty(Path.GetExtension(item.StoragePath)))
+                    key += "Unknown";
+
+                else
+                    key += "_" + Path.GetExtension(item.StoragePath).Substring(1);
+            }
+
+            // Not a file, try to figure out if a directory
+            else if (item.Count > 0 || Directory.Exists(item.StoragePath))
+            {
                 key += "Directory";
+            }
 
-            else if (File.Exists(item.StoragePath))
-                key += "_" + Path.GetExtension(item.StoragePath).Substring(1);
-
+            // None
             else key += "None";
 
             // Get icon

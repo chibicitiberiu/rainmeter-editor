@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RainmeterStudio.Storage;
 using System.IO;
 using RainmeterStudio.Core.Model;
+using Version = RainmeterStudio.Core.Utils.Version;
 
 namespace RainmeterStudio.Tests.Storage
 {
@@ -34,7 +35,7 @@ namespace RainmeterStudio.Tests.Storage
             Project project = CreateProject();
 
             // Save and load
-            ProjectStorage.Save(filename, project);
+            ProjectStorage.Save(project, filename);
             Project res = ProjectStorage.Load(filename);
 
             // Verify results
@@ -58,7 +59,7 @@ namespace RainmeterStudio.Tests.Storage
             Project project = new Project();
 
             // Save and load project
-            ProjectStorage.Save(filename, project);
+            ProjectStorage.Save(project, filename);
             Project res = ProjectStorage.Load(filename);
 
             // Test results
@@ -76,11 +77,11 @@ namespace RainmeterStudio.Tests.Storage
         private Project CreateProject()
         {
             // Create some file references
-            Reference folder1 = new Reference("folder1");
-            Reference folder2 = new Reference("folder2");
-            Reference file1 = new Reference("file1.txt");
-            Reference file2 = new Reference("file2.ini");
-            Reference file3 = new Reference("file3.bmp");
+            Reference folder1 = new Reference("folder1", "folder1");
+            Reference folder2 = new Reference("folder2", "folder2");
+            Reference file1 = new Reference("file1.txt", "folder1/file1.txt");
+            Reference file2 = new Reference("file2.ini", "folder2/file2.ini");
+            Reference file3 = new Reference("file3.bmp", "file3.bmp");
 
             // Create a project
             Project project = new Project();
@@ -96,8 +97,8 @@ namespace RainmeterStudio.Tests.Storage
             // Set project references
             project.Root.Add(folder1);
             project.Root.Add(folder2);
-            project.Root[0].Add(file1);
-            project.Root[1].Add(file2);
+            folder1.Add(file1);
+            folder2.Add(file2);
             project.Root.Add(file3);
 
             return project;

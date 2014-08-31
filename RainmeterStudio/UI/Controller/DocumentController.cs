@@ -90,7 +90,7 @@ namespace RainmeterStudio.UI.Controller
             // Set the reference
             var name = dialog.SelectedName;
 
-            string folder = OwnerWindow.ProjectPanel.ActiveItem.Data.StoragePath;
+            string folder = OwnerWindow.ProjectPanel.ActiveItem.StoragePath;
             if (!Directory.Exists(folder))
                 folder = Path.GetDirectoryName(folder);
 

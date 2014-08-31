@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
@@ -70,22 +71,24 @@ namespace RainmeterStudio.UI
             e.Document.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((obj, args) =>
             {
                 string documentName;
-
-                if (!e.Document.Reference.IsInProject())
+                
+                // Get title
+                if (!ProjectController.ActiveProject.Contains(e.Document.Reference))
                 {
-                    documentName = e.Document.Reference.StoragePath;
-
-                    if (documentName == null)
-                        documentName = "New document";
+                    documentName = e.Document.Reference.StoragePath ?? "New document";
                 }
                 else
                 {
                     documentName = e.Document.Reference.Name;
                 }
 
+                // Is document dirty? Append star
                 if (e.Document.IsDirty)
+                {
                     documentName += "*";
+                }
 
+                // Set document title
                 document.Title = documentName;
             });
         }

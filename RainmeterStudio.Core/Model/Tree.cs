@@ -153,5 +153,10 @@ namespace RainmeterStudio.Core.Model
         {
             return Children.GetEnumerator();
         }
+
+        public void TreeExpand(bool p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -100,7 +100,7 @@ namespace RainmeterStudio.Business
                 throw new InvalidOperationException("Cannot save a project that is not opened.");
 
             // Save
-            Storage.Save(ActiveProject.Path, ActiveProject);
+            Storage.Save(ActiveProject);
         }
 
         /// <summary>

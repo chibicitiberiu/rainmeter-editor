@@ -46,8 +46,8 @@
         <TreeView Grid.Row="2" Name="treeProjectItems">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="IsExpanded" Value="{Binding Data.IsExpanded, Mode=TwoWay}" />
-                    <Setter Property="IsSelected" Value="{Binding Data.IsSelected, Mode=TwoWay}" />
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                     <EventSetter Event="Expanded" Handler="TreeViewItem_ExpandedOrCollapsed" />
                     <EventSetter Event="Collapsed" Handler="TreeViewItem_ExpandedOrCollapsed" />
                 </Style>
@@ -55,8 +55,8 @@
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <DockPanel LastChildFill="True">
-                        <Image DockPanel.Dock="Left" Width="16" Height="16" Source="{Binding Data.Reference.Data, Converter={StaticResource IconConverter}}" />
-                        <TextBlock Text="{Binding Data.Name}" />
+                        <Image DockPanel.Dock="Left" Width="16" Height="16" Source="{Binding Reference, Converter={StaticResource IconConverter}}" />
+                        <TextBlock Text="{Binding Name}" />
                     </DockPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>

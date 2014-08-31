@@ -14,24 +14,23 @@ namespace RainmeterStudio.Core.Utils
         /// </summary>
         /// <param name="folder">Folder</param>
         /// <returns>A tree</returns>
-        public static Tree<Reference> GetFolderTree(string folder)
+        public static Reference GetFolderTree(string folder)
         {
             // Build tree object
-            Reference reference = new Reference(Path.GetFileName(folder), folder);
-            Tree<Reference> tree = new Tree<Reference>(reference);
-
+            Reference refTree = new Reference(Path.GetFileName(folder), folder);
+            
             // Navigate folder structure
             if (Directory.Exists(folder))
             {
                 foreach (var item in Directory.EnumerateDirectories(folder)
                     .Concat(Directory.EnumerateFiles(folder)))
                 {
-                    tree.Add(GetFolderTree(item));
+                    refTree.Add(GetFolderTree(item));
                 }
             }
 
             // Return tree
-            return tree;
+            return refTree;
         }
 
         /// <summary>
