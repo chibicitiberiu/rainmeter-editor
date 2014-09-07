@@ -27,7 +27,7 @@ namespace RainmeterStudio.Business
 
         #endregion
 
-        #region Callbacks
+        #region Events
 
         /// <summary>
         /// Called when a project is opened or the active project closes.
@@ -123,7 +123,10 @@ namespace RainmeterStudio.Business
         {
             _projectTemplates.Add(template);
         }
-
+        
+        /// <summary>
+        /// Gets a list of existing project templates
+        /// </summary>
         public IEnumerable<IProjectTemplate> ProjectTemplates { get { return _projectTemplates; } }
     }
 }

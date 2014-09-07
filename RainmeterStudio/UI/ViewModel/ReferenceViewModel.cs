@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Utils;
 
 namespace RainmeterStudio.UI.ViewModel
 {
@@ -13,7 +15,7 @@ namespace RainmeterStudio.UI.ViewModel
     /// </summary>
     public class ReferenceViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
-        private List<ReferenceViewModel> _children = null;
+        private ObservableCollection<ReferenceViewModel> _children = new ObservableCollection<ReferenceViewModel>();
 
         #region Properties
 
@@ -47,7 +49,7 @@ namespace RainmeterStudio.UI.ViewModel
         /// <summary>
         /// Gets an enumerable of this object's children
         /// </summary>
-        public IEnumerable<ReferenceViewModel> Children
+        public ObservableCollection<ReferenceViewModel> Children
         {
             get
             {
@@ -118,10 +120,10 @@ namespace RainmeterStudio.UI.ViewModel
         {
             Reference = reference;
             Reference.CollectionChanged += Reference_CollectionChanged;
-            UpdateChildren();
+            RefreshChildren();
         }
 
-        void Reference_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Reference_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             List<ReferenceViewModel> newItems = new List<ReferenceViewModel>();
             List<ReferenceViewModel> oldItems = new List<ReferenceViewModel>();
@@ -143,12 +145,12 @@ namespace RainmeterStudio.UI.ViewModel
                     break;
 
                 default:
-                    UpdateChildren();
+                    RefreshChildren();
                     break;
             }
 
-            _children.RemoveAll(oldItems.Contains);
-            _children.AddRange(newItems);
+            oldItems.ForEach(x => _children.Remove(x));
+            newItems.ForEach(_children.Add);
 
             // Pass event
             if (CollectionChanged != null)
@@ -168,9 +170,10 @@ namespace RainmeterStudio.UI.ViewModel
             IsExpanded = value;
         }
 
-        private void UpdateChildren()
+        private void RefreshChildren()
         {
-            _children = Reference.Children.Select(x => new ReferenceViewModel(x)).ToList();
+            _children.Clear();
+            Reference.Children.Select(x => new ReferenceViewModel(x)).ForEach(_children.Add);
         }
 
         #endregion
