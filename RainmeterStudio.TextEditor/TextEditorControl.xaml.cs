@@ -24,18 +24,17 @@ namespace RainmeterStudio.TextEditorPlugin
         public TextEditorControl(TextDocument document)
         {
             InitializeComponent();
+            DataContext = this;
 
             _document = document;
-
-            StringBuilder txt = new StringBuilder();
-            document.Lines.ForEach((line) => txt.AppendLine(line));
-            
-            text.Text = txt.ToString();
+            textBox.Text = _document.Text;
+            textBox.TextChanged += text_TextChanged;
         }
 
         private void text_TextChanged(object sender, TextChangedEventArgs e)
         {
             _document.IsDirty = true;
+            _document.Text = textBox.Text;
         }
     }
 }

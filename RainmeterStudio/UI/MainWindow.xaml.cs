@@ -66,6 +66,7 @@ namespace RainmeterStudio.UI
             document.Content = e.Editor.EditorUI;
             document.Closing += document_Closing;
             document.Closed += document_Closed;
+            document.Title = GetDocumentTitle(e.Document);
             document.IsActiveChanged += new EventHandler((sender2, e2) =>
             {
                 if (document.IsActive)
@@ -77,27 +78,32 @@ namespace RainmeterStudio.UI
 
             e.Document.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((obj, args) =>
             {
-                string documentName;
-                
-                // Get title
-                if (ProjectController.ActiveProject == null || !ProjectController.ActiveProject.Contains(e.Document.Reference))
-                {
-                    documentName = e.Document.Reference.StoragePath ?? "New document";
-                }
-                else
-                {
-                    documentName = e.Document.Reference.Name;
-                }
-
-                // Is document dirty? Append star
-                if (e.Document.IsDirty)
-                {
-                    documentName += "*";
-                }
-
-                // Set document title
-                document.Title = documentName;
+                // Update document title
+                document.Title = GetDocumentTitle(e.Document);
             });
+        }
+
+        private string GetDocumentTitle(IDocument document)
+        {
+            string documentName;
+
+            // Get title
+            if (ProjectController.ActiveProject == null || !ProjectController.ActiveProject.Contains(document.Reference))
+            {
+                documentName = document.Reference.StoragePath ?? "New document";
+            }
+            else
+            {
+                documentName = document.Reference.Name;
+            }
+
+            // Is document dirty? Append star
+            if (document.IsDirty)
+            {
+                documentName += "*";
+            }
+
+            return documentName;
         }
 
         void document_Closed(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace RainmeterStudio.TextEditorPlugin
         {
             TextDocument document = new TextDocument();
             document.Reference = new Reference(Path.GetFileName(path), path);
-            document.Lines.AddRange(File.ReadAllLines(path));
+            document.Text = File.ReadAllText(path);
 
             return document;
         }
@@ -30,7 +30,7 @@ namespace RainmeterStudio.TextEditorPlugin
             if (textDocument == null)
                 throw new ArgumentException("Provided document is not supported by this storage.");
 
-            File.WriteAllLines(path, textDocument.Lines);
+            File.WriteAllText(path, textDocument.Text);
         }
 
         /// <inheritdoc />

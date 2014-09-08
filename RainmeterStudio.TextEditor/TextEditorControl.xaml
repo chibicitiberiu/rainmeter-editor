@@ -6,7 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBox Name="text" AcceptsReturn="True"
-                 TextChanged="text_TextChanged"/>
+        <TextBox Name="textBox" AcceptsReturn="True" />
     </Grid>
 </UserControl>
