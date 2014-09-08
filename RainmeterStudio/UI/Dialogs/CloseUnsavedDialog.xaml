@@ -17,15 +17,14 @@
         <TextBlock Grid.Row="0" Text="{x:Static r:Strings.CloseUnsavedDialog_Message }"
                    Margin="4"/>
 
-        <ScrollViewer Grid.Row="1" 
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto">
-            
-            <TextBlock Name="textFiles" 
-                       Margin="4" Padding="4" 
-                       Background="White"/>
-            
-        </ScrollViewer>
+        <ListBox Name="listUnsavedDocuments" Grid.Row="1" Padding="3"
+                 IsEnabled="False" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Reference.Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <TextBlock Grid.Row="2" Text="{x:Static r:Strings.CloseUnsavedDialog_Question }"
                    Margin="4"/>

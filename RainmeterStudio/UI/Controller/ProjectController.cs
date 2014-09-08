@@ -82,9 +82,20 @@ namespace RainmeterStudio.UI.Controller
 
         #region Commands
 
+        /// <summary>
+        /// Create project command
+        /// </summary>
         public Command ProjectCreateCommand { get; private set; }
 
+        /// <summary>
+        /// Open project command
+        /// </summary>
         public Command ProjectOpenCommand { get; private set; }
+
+        /// <summary>
+        /// Close project command
+        /// </summary>
+        public Command ProjectCloseCommand { get; private set; }
 
         #endregion
 
@@ -96,8 +107,11 @@ namespace RainmeterStudio.UI.Controller
         {
             Manager = manager;
 
-            ProjectCreateCommand = new Command("ProjectCreateCommand", () => CreateProject());
-            ProjectOpenCommand = new Command("ProjectOpenCommand", () => OpenProject());
+            // Initialize commands
+            ProjectCreateCommand = new Command("ProjectCreate", CreateProject);
+            ProjectOpenCommand = new Command("ProjectOpen", OpenProject);
+            ProjectCloseCommand = new Command("ProjectClose", CloseProject, () => ActiveProject != null);
+            ActiveProjectChanged += new EventHandler((sender, e) => ProjectCloseCommand.NotifyCanExecuteChanged());
         }
 
         /// <summary>
@@ -126,7 +140,7 @@ namespace RainmeterStudio.UI.Controller
         /// Displays an 'open file' dialog and opens an existing project
         /// </summary>
         /// <param name="path"></param>
-        public void OpenProject(string path = null)
+        public void OpenProject()
         {
             // Open dialog
             OpenFileDialog dialog = new OpenFileDialog();
@@ -151,6 +165,7 @@ namespace RainmeterStudio.UI.Controller
         /// </summary>
         public void CloseProject()
         {
+            Manager.Close();
         }
     }
 }

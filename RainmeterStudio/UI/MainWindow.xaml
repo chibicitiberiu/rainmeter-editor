@@ -14,7 +14,8 @@
         Left="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Left, Mode=TwoWay}"
         Top="{Binding Source={x:Static p:Settings.Default}, Path=MainWindow_Top, Mode=TwoWay}"
         
-        ResizeMode="CanResizeWithGrip" >
+        ResizeMode="CanResizeWithGrip"
+        Closing="Window_Closing">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -47,16 +48,58 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="{x:Static r:Strings.MainWindow_File_Open}">
+                    <MenuItem DataContext="{Binding DocumentController.DocumentOpenCommand}"
+                              Style="{StaticResource CommandMenuItemStyle}">
+                        <MenuItem.Icon>
+                            <Image Source="{Binding Icon}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem DataContext="{Binding ProjectController.ProjectOpenCommand}"
                               Style="{StaticResource CommandMenuItemStyle}">
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Close" />
+                <MenuItem DataContext="{Binding DocumentController.DocumentSaveCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem DataContext="{Binding DocumentController.DocumentSaveAsCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem DataContext="{Binding DocumentController.DocumentSaveACopyCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem DataContext="{Binding DocumentController.DocumentSaveAllCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem DataContext="{Binding DocumentController.DocumentCloseCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem DataContext="{Binding ProjectController.ProjectCloseCommand}"
+                          Style="{StaticResource CommandMenuItemStyle}" >
+                    <MenuItem.Icon>
+                        <Image Source="{Binding Icon}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
                 <MenuItem Header="E_xit" />
             </MenuItem>
             <MenuItem Header="_Edit" />

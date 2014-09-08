@@ -147,16 +147,16 @@
   <data name="Dialog_OpenProject_Title" xml:space="preserve">
     <value>Open project...</value>
   </data>
-  <data name="Command_DocumentCloseCommand_DisplayText" xml:space="preserve">
+  <data name="Command_DocumentClose_DisplayText" xml:space="preserve">
     <value>_Close</value>
   </data>
-  <data name="Command_DocumentCloseCommand_ToolTip" xml:space="preserve">
+  <data name="Command_DocumentClose_ToolTip" xml:space="preserve">
     <value>Close active document</value>
   </data>
-  <data name="Command_DocumentCreateCommand_DisplayText" xml:space="preserve">
+  <data name="Command_DocumentCreate_DisplayText" xml:space="preserve">
     <value>_File...</value>
   </data>
-  <data name="Command_DocumentCreateCommand_ToolTip" xml:space="preserve">
+  <data name="Command_DocumentCreate_ToolTip" xml:space="preserve">
     <value>Create a new file</value>
   </data>
   <data name="MainWindow_File" xml:space="preserve">
@@ -168,10 +168,10 @@
   <data name="MainWindow_File_Open" xml:space="preserve">
     <value>_Open</value>
   </data>
-  <data name="Command_ProjectCreateCommand_DisplayText" xml:space="preserve">
+  <data name="Command_ProjectCreate_DisplayText" xml:space="preserve">
     <value>_Project...</value>
   </data>
-  <data name="Command_ProjectCreateCommand_ToolTip" xml:space="preserve">
+  <data name="Command_ProjectCreate_ToolTip" xml:space="preserve">
     <value>Create a new project</value>
   </data>
   <data name="CreateProjectDialog_Location" xml:space="preserve">
@@ -192,10 +192,10 @@
   <data name="CreateProjectDialog_Title" xml:space="preserve">
     <value>Create project</value>
   </data>
-  <data name="Command_ProjectOpenCommand_DisplayText" xml:space="preserve">
+  <data name="Command_ProjectOpen_DisplayText" xml:space="preserve">
     <value>_Project...</value>
   </data>
-  <data name="Command_ProjectOpenCommand_ToolTip" xml:space="preserve">
+  <data name="Command_ProjectOpen_ToolTip" xml:space="preserve">
     <value>Open existing project</value>
   </data>
   <data name="Command_ProjectPanel_CollapseAllCommand_DisplayText" xml:space="preserve">
@@ -250,9 +250,51 @@
     <value>Unsaved changes</value>
   </data>
   <data name="Dialog_DoNotSave" xml:space="preserve">
-    <value>Do_n't save</value>
+    <value>Don't save</value>
   </data>
   <data name="Dialog_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Command_ProjectClose_DisplayText" xml:space="preserve">
+    <value>Close Project</value>
+  </data>
+  <data name="Command_ProjectClose_ToolTip" xml:space="preserve">
+    <value>Close currently opened project</value>
+  </data>
+  <data name="Dialog_OpenDocument_Title" xml:space="preserve">
+    <value>Open document</value>
+  </data>
+  <data name="Dialog_SaveDocument_Title" xml:space="preserve">
+    <value>Save document</value>
+  </data>
+  <data name="Command_DocumentOpen_DisplayText" xml:space="preserve">
+    <value>_File...</value>
+  </data>
+  <data name="Command_DocumentOpen_ToolTip" xml:space="preserve">
+    <value>Open a file</value>
+  </data>
+  <data name="Command_DocumentSaveACopy_DisplayText" xml:space="preserve">
+    <value>Save a _Copy...</value>
+  </data>
+  <data name="Command_DocumentSaveACopy_ToolTip" xml:space="preserve">
+    <value>Saves a copy of the current document</value>
+  </data>
+  <data name="Command_DocumentSaveAll_DisplayText" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="Command_DocumentSaveAll_ToolTip" xml:space="preserve">
+    <value>Save all the opened documents</value>
+  </data>
+  <data name="Command_DocumentSaveAs_DisplayText" xml:space="preserve">
+    <value>Save _As...</value>
+  </data>
+  <data name="Command_DocumentSaveAs_ToolTip" xml:space="preserve">
+    <value>Save the current document to another file</value>
+  </data>
+  <data name="Command_DocumentSave_DisplayText" xml:space="preserve">
     <value>_Save</value>
+  </data>
+  <data name="Command_DocumentSave_ToolTip" xml:space="preserve">
+    <value>Save the current document</value>
   </data>
 </root>

@@ -36,6 +36,8 @@ namespace RainmeterStudio.Business
 
         #endregion
 
+        #region Constructor
+
         /// <summary>
         /// Initializes the project manager
         /// </summary>
@@ -45,7 +47,11 @@ namespace RainmeterStudio.Business
             Storage = storage;
             ActiveProject = null;
         }
-        
+
+        #endregion
+
+        #region Project operations
+
         /// <summary>
         /// Creates a new project
         /// </summary>
@@ -115,6 +121,10 @@ namespace RainmeterStudio.Business
                 ActiveProjectChanged(this, new EventArgs());
         }
 
+        #endregion
+
+        #region Document templates
+
         /// <summary>
         /// Registers a project template
         /// </summary>
@@ -128,5 +138,7 @@ namespace RainmeterStudio.Business
         /// Gets a list of existing project templates
         /// </summary>
         public IEnumerable<IProjectTemplate> ProjectTemplates { get { return _projectTemplates; } }
+
+        #endregion
     }
 }

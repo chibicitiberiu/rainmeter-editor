@@ -27,12 +27,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+N")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string Command_ProjectCreateCommand_Shortcut {
+        public string Command_ProjectCreate_Shortcut {
             get {
-                return ((string)(this["Command_ProjectCreateCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectCreate_Shortcut"]));
             }
             set {
-                this["Command_ProjectCreateCommand_Shortcut"] = value;
+                this["Command_ProjectCreate_Shortcut"] = value;
             }
         }
         
@@ -40,12 +40,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("F5")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string Command_ProjectPanel_RefreshCommand_Shortcut {
+        public string Command_ProjectPanel_Refresh_Shortcut {
             get {
-                return ((string)(this["Command_ProjectPanel_RefreshCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectPanel_Refresh_Shortcut"]));
             }
             set {
-                this["Command_ProjectPanel_RefreshCommand_Shortcut"] = value;
+                this["Command_ProjectPanel_Refresh_Shortcut"] = value;
             }
         }
         
@@ -53,12 +53,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+N")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string Command_DocumentCreateCommand_Shortcut {
+        public string Command_DocumentCreate_Shortcut {
             get {
-                return ((string)(this["Command_DocumentCreateCommand_Shortcut"]));
+                return ((string)(this["Command_DocumentCreate_Shortcut"]));
             }
             set {
-                this["Command_DocumentCreateCommand_Shortcut"] = value;
+                this["Command_DocumentCreate_Shortcut"] = value;
             }
         }
         
@@ -66,12 +66,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+O")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string Command_ProjectOpenCommand_Shortcut {
+        public string Command_ProjectOpen_Shortcut {
             get {
-                return ((string)(this["Command_ProjectOpenCommand_Shortcut"]));
+                return ((string)(this["Command_ProjectOpen_Shortcut"]));
             }
             set {
-                this["Command_ProjectOpenCommand_Shortcut"] = value;
+                this["Command_ProjectOpen_Shortcut"] = value;
             }
         }
         
@@ -79,12 +79,12 @@ namespace RainmeterStudio.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+W")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string Command_DocumentCloseCommand_Shortcut {
+        public string Command_DocumentClose_Shortcut {
             get {
-                return ((string)(this["Command_DocumentCloseCommand_Shortcut"]));
+                return ((string)(this["Command_DocumentClose_Shortcut"]));
             }
             set {
-                this["Command_DocumentCloseCommand_Shortcut"] = value;
+                this["Command_DocumentClose_Shortcut"] = value;
             }
         }
         
@@ -181,6 +181,32 @@ namespace RainmeterStudio.Properties {
             }
             set {
                 this["CreateProjectDialog_CreateDirectoryCheckbox"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+O")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string Command_DocumentOpen_Shortcut {
+            get {
+                return ((string)(this["Command_DocumentOpen_Shortcut"]));
+            }
+            set {
+                this["Command_DocumentOpen_Shortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+S")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string Command_DocumentSave_Shortcut {
+            get {
+                return ((string)(this["Command_DocumentSave_Shortcut"]));
+            }
+            set {
+                this["Command_DocumentSave_Shortcut"] = value;
             }
         }
     }

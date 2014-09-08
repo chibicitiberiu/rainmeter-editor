@@ -90,72 +90,180 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to _Close.
         /// </summary>
-        public static string Command_DocumentCloseCommand_DisplayText {
+        public static string Command_DocumentClose_DisplayText {
             get {
-                return ResourceManager.GetString("Command_DocumentCloseCommand_DisplayText", resourceCulture);
+                return ResourceManager.GetString("Command_DocumentClose_DisplayText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Close active document.
         /// </summary>
-        public static string Command_DocumentCloseCommand_ToolTip {
+        public static string Command_DocumentClose_ToolTip {
             get {
-                return ResourceManager.GetString("Command_DocumentCloseCommand_ToolTip", resourceCulture);
+                return ResourceManager.GetString("Command_DocumentClose_ToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to _File....
         /// </summary>
-        public static string Command_DocumentCreateCommand_DisplayText {
+        public static string Command_DocumentCreate_DisplayText {
             get {
-                return ResourceManager.GetString("Command_DocumentCreateCommand_DisplayText", resourceCulture);
+                return ResourceManager.GetString("Command_DocumentCreate_DisplayText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Create a new file.
         /// </summary>
-        public static string Command_DocumentCreateCommand_ToolTip {
+        public static string Command_DocumentCreate_ToolTip {
             get {
-                return ResourceManager.GetString("Command_DocumentCreateCommand_ToolTip", resourceCulture);
+                return ResourceManager.GetString("Command_DocumentCreate_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _File....
+        /// </summary>
+        public static string Command_DocumentOpen_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentOpen_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open a file.
+        /// </summary>
+        public static string Command_DocumentOpen_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentOpen_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Save.
+        /// </summary>
+        public static string Command_DocumentSave_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentSave_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save the current document.
+        /// </summary>
+        public static string Command_DocumentSave_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentSave_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save a _Copy....
+        /// </summary>
+        public static string Command_DocumentSaveACopy_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveACopy_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saves a copy of the current document.
+        /// </summary>
+        public static string Command_DocumentSaveACopy_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveACopy_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        public static string Command_DocumentSaveAll_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveAll_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save all the opened documents.
+        /// </summary>
+        public static string Command_DocumentSaveAll_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveAll_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save _As....
+        /// </summary>
+        public static string Command_DocumentSaveAs_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveAs_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save the current document to another file.
+        /// </summary>
+        public static string Command_DocumentSaveAs_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_DocumentSaveAs_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Project.
+        /// </summary>
+        public static string Command_ProjectClose_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectClose_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close currently opened project.
+        /// </summary>
+        public static string Command_ProjectClose_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectClose_ToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to _Project....
         /// </summary>
-        public static string Command_ProjectCreateCommand_DisplayText {
+        public static string Command_ProjectCreate_DisplayText {
             get {
-                return ResourceManager.GetString("Command_ProjectCreateCommand_DisplayText", resourceCulture);
+                return ResourceManager.GetString("Command_ProjectCreate_DisplayText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Create a new project.
         /// </summary>
-        public static string Command_ProjectCreateCommand_ToolTip {
+        public static string Command_ProjectCreate_ToolTip {
             get {
-                return ResourceManager.GetString("Command_ProjectCreateCommand_ToolTip", resourceCulture);
+                return ResourceManager.GetString("Command_ProjectCreate_ToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to _Project....
         /// </summary>
-        public static string Command_ProjectOpenCommand_DisplayText {
+        public static string Command_ProjectOpen_DisplayText {
             get {
-                return ResourceManager.GetString("Command_ProjectOpenCommand_DisplayText", resourceCulture);
+                return ResourceManager.GetString("Command_ProjectOpen_DisplayText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Open existing project.
         /// </summary>
-        public static string Command_ProjectOpenCommand_ToolTip {
+        public static string Command_ProjectOpen_ToolTip {
             get {
-                return ResourceManager.GetString("Command_ProjectOpenCommand_ToolTip", resourceCulture);
+                return ResourceManager.GetString("Command_ProjectOpen_ToolTip", resourceCulture);
             }
         }
         
@@ -367,7 +475,7 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do_n&apos;t save.
+        ///   Looks up a localized string similar to Don&apos;t save.
         /// </summary>
         public static string Dialog_DoNotSave {
             get {
@@ -403,6 +511,15 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open document.
+        /// </summary>
+        public static string Dialog_OpenDocument_Title {
+            get {
+                return ResourceManager.GetString("Dialog_OpenDocument_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open project....
         /// </summary>
         public static string Dialog_OpenProject_Title {
@@ -412,11 +529,20 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Save.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Dialog_Save {
             get {
                 return ResourceManager.GetString("Dialog_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save document.
+        /// </summary>
+        public static string Dialog_SaveDocument_Title {
+            get {
+                return ResourceManager.GetString("Dialog_SaveDocument_Title", resourceCulture);
             }
         }
         

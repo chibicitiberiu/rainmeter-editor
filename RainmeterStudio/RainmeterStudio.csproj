@@ -238,6 +238,16 @@
   <ItemGroup>
     <None Include="Resources\Icons\32\project_empty.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\window-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\folder_page_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\16\disk.png" />
+    <Resource Include="Resources\Icons\16\disk_multiple.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

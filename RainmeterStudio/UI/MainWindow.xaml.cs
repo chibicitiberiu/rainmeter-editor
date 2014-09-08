@@ -44,8 +44,11 @@ namespace RainmeterStudio.UI
             ProjectController = projCtrl;
 
             // Add key bindings
-            this.AddKeyBinding(ProjectController.ProjectCreateCommand);
             this.AddKeyBinding(DocumentController.DocumentCreateCommand);
+            this.AddKeyBinding(DocumentController.DocumentOpenCommand);
+            this.AddKeyBinding(DocumentController.DocumentSaveCommand);
+            this.AddKeyBinding(DocumentController.DocumentCloseCommand);
+            this.AddKeyBinding(ProjectController.ProjectCreateCommand);
             
             // Subscribe to events
             DocumentController.DocumentOpened += documentController_DocumentOpened;
@@ -63,17 +66,21 @@ namespace RainmeterStudio.UI
             document.Content = e.Editor.EditorUI;
             document.Closing += document_Closing;
             document.Closed += document_Closed;
+            document.IsActiveChanged += new EventHandler((sender2, e2) =>
+            {
+                if (document.IsActive)
+                    DocumentController.ActiveDocumentEditor = e.Editor;
+            });
 
             documentPane.Children.Add(document);
             documentPane.SelectedContentIndex = documentPane.IndexOf(document);
-
 
             e.Document.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((obj, args) =>
             {
                 string documentName;
                 
                 // Get title
-                if (!ProjectController.ActiveProject.Contains(e.Document.Reference))
+                if (ProjectController.ActiveProject == null || !ProjectController.ActiveProject.Contains(e.Document.Reference))
                 {
                     documentName = e.Document.Reference.StoragePath ?? "New document";
                 }
@@ -96,25 +103,27 @@ namespace RainmeterStudio.UI
         void document_Closed(object sender, EventArgs e)
         {
             var layoutDocument = (LayoutDocument)sender;
-            
-
         }
 
         void document_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
+            // Get editor
+            var document = (LayoutDocument)sender;
+            var editor = _openedDocuments[document];
 
-            switch (MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+            // Try to close active document
+            if (!DocumentController.Close(editor))
             {
-                case MessageBoxResult.Yes:
-                    break;
+                e.Cancel = true;
+            }
+        }
 
-                case MessageBoxResult.No:
-                    break;
-
-                default:
-                    e.Cancel = true;
-                    return;
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Try to close
+            if (!DocumentController.CloseAll())
+            {
+                e.Cancel = true;
             }
         }
     }

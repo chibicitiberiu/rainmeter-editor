@@ -63,9 +63,9 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Command_DocumentCreateCommand_Icon {
+        internal static System.Drawing.Bitmap Command_DocumentClose_Icon {
             get {
-                object obj = ResourceManager.GetObject("Command_DocumentCreateCommand_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_DocumentClose_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Command_ProjectCreateCommand_Icon {
+        internal static System.Drawing.Bitmap Command_DocumentCreate_Icon {
             get {
-                object obj = ResourceManager.GetObject("Command_ProjectCreateCommand_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_DocumentCreate_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,49 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Command_ProjectOpenCommand_Icon {
+        internal static System.Drawing.Bitmap Command_DocumentOpen_Icon {
             get {
-                object obj = ResourceManager.GetObject("Command_ProjectOpenCommand_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Command_DocumentOpen_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Command_DocumentSave_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Command_DocumentSave_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Command_DocumentSaveAll_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Command_DocumentSaveAll_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Command_ProjectCreate_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Command_ProjectCreate_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Command_ProjectOpen_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Command_ProjectOpen_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

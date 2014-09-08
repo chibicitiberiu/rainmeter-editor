@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,9 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Core.Utils;
 
 namespace RainmeterStudio.UI.Dialogs
 {
+    public enum CloseUnsavedDialogResult
+    {
+        Unset,
+        Save,
+        DoNotSave,
+        Cancel
+    }
+    
     /// <summary>
     /// Interaction logic for CloseUnsavedDialog.xaml
     /// </summary>
@@ -24,10 +34,11 @@ namespace RainmeterStudio.UI.Dialogs
         /// </summary>
         /// <param name="unsavedDocuments">List of unsaved documents</param>
         /// <returns>Dialog result</returns>
-        public static bool? ShowDialog(IEnumerable<IDocument> unsavedDocuments)
+        public static CloseUnsavedDialogResult ShowDialog(IEnumerable<IDocument> unsavedDocuments)
         {
             var dialog = new CloseUnsavedDialog(unsavedDocuments);
-            return dialog.ShowDialog();
+            dialog.ShowDialog();
+            return dialog.SaveDialogResult;
         }
 
         /// <summary>
@@ -36,11 +47,11 @@ namespace RainmeterStudio.UI.Dialogs
         /// <param name="owner">Owner window</param>
         /// <param name="unsavedDocuments">List of unsaved documents</param>
         /// <returns>Dialog result</returns>
-        public static bool? ShowDialog(Window owner, IEnumerable<IDocument> unsavedDocuments)
+        public static CloseUnsavedDialogResult ShowDialog(Window owner, IEnumerable<IDocument> unsavedDocuments)
         {
             var dialog = new CloseUnsavedDialog(unsavedDocuments);
-            dialog.Owner = owner;
-            return dialog.ShowDialog();
+            dialog.ShowDialog();
+            return dialog.SaveDialogResult;
         }
 
         /// <summary>
@@ -49,12 +60,17 @@ namespace RainmeterStudio.UI.Dialogs
         /// <param name="owner">Owner window</param>
         /// <param name="unsavedDocuments">List of unsaved documents</param>
         /// <returns>Dialog result</returns>
-        public static bool? ShowDialog(Window owner, params IDocument[] unsavedDocuments)
+        public static CloseUnsavedDialogResult ShowDialog(Window owner, params IDocument[] unsavedDocuments)
         {
             var dialog = new CloseUnsavedDialog(unsavedDocuments);
-            dialog.Owner = owner;
-            return dialog.ShowDialog();
+            dialog.ShowDialog();
+            return dialog.SaveDialogResult;
         }
+
+        /// <summary>
+        /// Gets the 'close unsaved' dialog result
+        /// </summary>
+        public CloseUnsavedDialogResult SaveDialogResult { get; private set; }
 
         /// <summary>
         /// Initializes the dialog
@@ -64,39 +80,25 @@ namespace RainmeterStudio.UI.Dialogs
         {
             InitializeComponent();
 
-            textFiles.Inlines.AddRange(unsavedDocuments.SelectMany(GetInlines));
-        }
-
-        private IEnumerable<Inline> GetInlines(IDocument doc)
-        {
-            var folder = System.IO.Path.GetDirectoryName(doc.Reference.StoragePath);
-            
-            yield return new Run(folder)
-            {
-                Foreground = Brushes.DarkGray
-            };
-
-            yield return new Run(doc.Reference.Name)
-            {
-                FontWeight = FontWeights.Bold
-            };
+            SaveDialogResult = CloseUnsavedDialogResult.Unset;
+            unsavedDocuments.ForEach(d => listUnsavedDocuments.Items.Add(d));
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            SaveDialogResult = CloseUnsavedDialogResult.Save;
             Close();
         }
 
         private void buttonDoNotSave_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            SaveDialogResult = CloseUnsavedDialogResult.DoNotSave;
             Close();
         }
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = null;
+            SaveDialogResult = CloseUnsavedDialogResult.Cancel;
             Close();
         }
     }
