@@ -33,7 +33,7 @@ namespace RainmeterStudio.UI.Controller
             string key = "ProjectItem";
 
             // Is a file?
-            if (File.Exists(item.StoragePath))
+            if (item.TargetKind == Reference.ReferenceTargetKind.File || item.TargetKind == Reference.ReferenceTargetKind.Project)
             {
                 if (String.IsNullOrEmpty(Path.GetExtension(item.StoragePath)))
                     key += "Unknown";
@@ -43,7 +43,7 @@ namespace RainmeterStudio.UI.Controller
             }
 
             // Not a file, try to figure out if a directory
-            else if (item.Count > 0 || Directory.Exists(item.StoragePath))
+            else if (item.TargetKind == Reference.ReferenceTargetKind.Directory)
             {
                 key += "Directory";
             }

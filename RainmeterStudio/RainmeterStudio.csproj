@@ -98,10 +98,12 @@
     </Compile>
     <Compile Include="Editor\ProjectEditor\ProjectStorage.cs" />
     <Compile Include="UI\Command.cs" />
+    <Compile Include="UI\CommandGroup.cs" />
     <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\IContextMenuProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
     <Compile Include="Business\SettingsProvider.cs" />
+    <Compile Include="UI\Controller\ReferenceContextMenuProvider.cs" />
     <Compile Include="UI\Dialogs\CloseUnsavedDialog.xaml.cs">
       <DependentUpon>CloseUnsavedDialog.xaml</DependentUpon>
     </Compile>

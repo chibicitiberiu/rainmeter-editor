@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -14,9 +16,52 @@ namespace RainmeterStudio.Core.Model
     /// Reference to a file or folder
     /// </summary>
     [DebuggerDisplay("QualifiedName = {QualifiedName}, StoragePath = {StoragePath}")]
-    public class Reference : INotifyCollectionChanged
+    public class Reference : INotifyCollectionChanged, INotifyPropertyChanged
     {
+        /// <summary>
+        /// The kind of item the reference points to
+        /// </summary>
+        public enum ReferenceTargetKind
+        {
+            /// <summary>
+            /// Invalid state
+            /// </summary>
+            None,
+
+            /// <summary>
+            /// Reference points to a file
+            /// </summary>
+            File,
+
+            /// <summary>
+            /// Reference points to a directory
+            /// </summary>
+            Directory,
+
+            /// <summary>
+            /// Reference points to a project
+            /// </summary>
+            Project
+        }
+
         private Dictionary<string, Reference> _children;
+        private Reference _parent;
+        private string _name, _storagePath;
+        private ReferenceTargetKind _kind;
+        
+        #region Events
+
+        /// <summary>
+        /// Triggered when children are added or removed.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        /// <summary>
+        /// Triggered when a property changes its value
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         #region Properties
 
@@ -24,7 +69,30 @@ namespace RainmeterStudio.Core.Model
         /// Gets or sets the parent of this reference
         /// </summary>
         [XmlIgnore]
-        public Reference Parent { get; set; }
+        public Reference Parent
+        {
+            get
+            {
+                return _parent;
+            }
+            set
+            {
+                // Unsubscribe from old parent
+                if (_parent != null)
+                    _parent.PropertyChanged -= Parent_PropertyChanged;
+
+                // Set new parent
+                _parent = value;
+
+                // Subscribe to new parent
+                if (_parent != null)
+                    _parent.PropertyChanged += Parent_PropertyChanged;
+
+                // Notify
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Parent"));
+            }
+        }
 
         /// <summary>
         /// Gets the children references
@@ -34,7 +102,7 @@ namespace RainmeterStudio.Core.Model
         {
             get
             {
-                return new ReadOnlyDictionary<string,Reference>(_children);
+                return new ReadOnlyDictionary<string, Reference>(_children);
             }
         }
 
@@ -61,7 +129,17 @@ namespace RainmeterStudio.Core.Model
         [XmlAttribute("name")]
         public string Name
         {
-            get; set;
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            }
         }
 
         /// <summary>
@@ -110,8 +188,33 @@ namespace RainmeterStudio.Core.Model
         [XmlAttribute("storagePath")]
         public string StoragePath
         {
-            get;
-            set;
+            get
+            {
+                return _storagePath;
+            }
+            set
+            {
+                _storagePath = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("StoragePath"));
+            }
+        }
+
+        [XmlAttribute("targetKind")]
+        public ReferenceTargetKind TargetKind
+        {
+            get
+            {
+                return _kind;
+            }
+            set
+            {
+                _kind = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Kind"));
+            }
         }
 
         #endregion
@@ -119,19 +222,31 @@ namespace RainmeterStudio.Core.Model
         #region Constructors
 
         /// <summary>
-        /// Initializes the reference
+        /// Initializes the reference as a file reference
         /// </summary>
         public Reference()
-            : this(null, null)
+            : this(null, null, ReferenceTargetKind.File)
         {
         }
 
         /// <summary>
         /// Initializes the reference
         /// </summary>
-        /// <param name="projectPath">Project path to item referenced</param>
-        public Reference(string name)
-            : this(name, null)
+        /// <param name="name">Name of this reference</param>
+        /// <param name="kind">Reference kind</param>
+        public Reference(string name, ReferenceTargetKind kind)
+            : this(name, null, kind)
+        {
+        }
+
+        /// <summary>
+        /// Initializes the reference.
+        /// Kind is inferred by testing the file on disk.
+        /// </summary>
+        /// <param name="name">Name of reference</param>
+        /// <param name="storagePath">Path to item on disk</param>
+        public Reference(string name, string storagePath)
+            : this(name, storagePath, InferKind(storagePath))
         {
         }
 
@@ -140,23 +255,36 @@ namespace RainmeterStudio.Core.Model
         /// </summary>
         /// <param name="name">Name of reference</param>
         /// <param name="storagePath">Path to item on disk</param>
-        public Reference(string name, string storagePath)
+        /// <param name="kind">Reference kind</param>
+        public Reference(string name, string storagePath, ReferenceTargetKind kind)
         {
             StoragePath = storagePath;
             Name = name;
+            TargetKind = kind;
             _children = new Dictionary<string, Reference>();
         }
 
         #endregion
 
+        #region Exists
+
         /// <summary>
-        /// Checks if the reference has a file on disk
+        /// Checks if the file exists
         /// </summary>
         /// <returns></returns>
-        public bool IsOnStorage()
+        public bool ExistsOnStorage()
         {
-            return (StoragePath != null);
+            if (StoragePath != null)
+            {
+                return File.Exists(StoragePath) || Directory.Exists(StoragePath);
+            }
+
+            return false;
         }
+
+        #endregion
+
+        #region Children/parenting operations
 
         /// <summary>
         /// Adds a child reference
@@ -241,6 +369,16 @@ namespace RainmeterStudio.Core.Model
             }
         }
 
+        private void Parent_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null && (e.PropertyName == "Parent" || e.PropertyName == "Name" || e.PropertyName == "QualifiedName"))
+                PropertyChanged(this, new PropertyChangedEventArgs("QualifiedName"));
+        }
+
+        #endregion
+
+        #region Object overrides
+
         /// <summary>
         /// Compares a reference to another objects
         /// </summary>
@@ -275,10 +413,27 @@ namespace RainmeterStudio.Core.Model
             return QualifiedName;
         }
 
-        /// <summary>
-        /// Triggered when children are added or removed.
-        /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        #endregion
+
+        #region Helper methods
+
+        private static ReferenceTargetKind InferKind(string storagePath)
+        {
+            ReferenceTargetKind kind = ReferenceTargetKind.None;
+
+            if (Path.GetExtension(storagePath) == ".rsproj")
+                kind = ReferenceTargetKind.Project;
+
+            else if (File.Exists(storagePath))
+                kind = ReferenceTargetKind.File;
+
+            else if (Directory.Exists(storagePath))
+                kind = ReferenceTargetKind.Directory;
+
+            return kind;
+        }
+
+        #endregion
     }
 
     /// <summary>

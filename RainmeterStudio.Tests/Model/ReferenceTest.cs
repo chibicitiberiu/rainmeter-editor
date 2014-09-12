@@ -20,8 +20,8 @@ namespace RainmeterStudio.Tests.Model
         [TestMethod]
         public void ReferenceConstructorTest()
         {
-            Reference root = new Reference("root", "D:\\Data\\Project");
-            Reference file = new Reference("f ile__asdf.txt");
+            Reference root = new Reference("root", "D:\\Data\\Project", Reference.ReferenceTargetKind.Directory);
+            Reference file = new Reference("f ile__asdf.txt", Reference.ReferenceTargetKind.File);
                         
             // Test root
             Assert.AreEqual("root", root.Name);
@@ -45,11 +45,11 @@ namespace RainmeterStudio.Tests.Model
         public void ReferenceParentingTest()
         {
             Reference root = new Reference(String.Empty, "D:\\Data\\Project");
-            Reference folder1 = new Reference("folder1");
-            Reference folder2 = new Reference("folder 2");
-            Reference file1 = new Reference("file1");
-            Reference file2 = new Reference("file2.txt");
-            Reference file3 = new Reference("file 3.png");
+            Reference folder1 = new Reference("folder1", Reference.ReferenceTargetKind.Directory);
+            Reference folder2 = new Reference("folder 2", Reference.ReferenceTargetKind.Directory);
+            Reference file1 = new Reference("file1", Reference.ReferenceTargetKind.File);
+            Reference file2 = new Reference("file2.txt", Reference.ReferenceTargetKind.File);
+            Reference file3 = new Reference("file 3.png", Reference.ReferenceTargetKind.File);
 
             root.Add(folder1);
             root.Add(file3);
@@ -87,11 +87,11 @@ namespace RainmeterStudio.Tests.Model
         public void ReferenceQualifiedNameTest()
         {
             Reference root = new Reference(String.Empty, "D:\\Data\\Project");
-            Reference folder1 = new Reference("folder1");
-            Reference folder2 = new Reference("folder 2");
-            Reference file1 = new Reference("file1");
-            Reference file2 = new Reference("file2.txt");
-            Reference file3 = new Reference("file 3.png");
+            Reference folder1 = new Reference("folder1", Reference.ReferenceTargetKind.Directory);
+            Reference folder2 = new Reference("folder 2", Reference.ReferenceTargetKind.Directory);
+            Reference file1 = new Reference("file1", Reference.ReferenceTargetKind.File);
+            Reference file2 = new Reference("file2.txt", Reference.ReferenceTargetKind.File);
+            Reference file3 = new Reference("file 3.png", Reference.ReferenceTargetKind.File);
 
             root.Add(folder1);
             root.Add(file3);
@@ -134,11 +134,11 @@ namespace RainmeterStudio.Tests.Model
         public void ReferenceGetReferenceTest()
         {
             Reference root = new Reference(String.Empty, "D:\\Data\\Project");
-            Reference folder1 = new Reference("folder1");
-            Reference folder2 = new Reference("folder 2");
-            Reference file1 = new Reference("file1");
-            Reference file2 = new Reference("file2.txt");
-            Reference file3 = new Reference("file 3.png");
+            Reference folder1 = new Reference("folder1", Reference.ReferenceTargetKind.Directory);
+            Reference folder2 = new Reference("folder 2", Reference.ReferenceTargetKind.Directory);
+            Reference file1 = new Reference("file1", Reference.ReferenceTargetKind.File);
+            Reference file2 = new Reference("file2.txt", Reference.ReferenceTargetKind.File);
+            Reference file3 = new Reference("file 3.png", Reference.ReferenceTargetKind.File);
 
             root.Add(folder1);
             root.Add(file3);

@@ -36,17 +36,6 @@ namespace RainmeterStudio.UI.ViewModel
         }
 
         /// <summary>
-        /// Gets or sets the path
-        /// </summary>
-        public string Path
-        {
-            get
-            {
-                return Reference.StoragePath;
-            }
-        }
-
-        /// <summary>
         /// Gets an enumerable of this object's children
         /// </summary>
         public ObservableCollection<ReferenceViewModel> Children
@@ -120,7 +109,14 @@ namespace RainmeterStudio.UI.ViewModel
         {
             Reference = reference;
             Reference.CollectionChanged += Reference_CollectionChanged;
+            Reference.PropertyChanged += Reference_PropertyChanged;
             RefreshChildren();
+        }
+
+        private void Reference_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Name" && PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("Name"));
         }
 
         private void Reference_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

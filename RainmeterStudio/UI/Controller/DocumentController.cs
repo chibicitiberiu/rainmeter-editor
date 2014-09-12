@@ -210,7 +210,7 @@ namespace RainmeterStudio.UI.Controller
         /// </summary>
         public bool Save(IDocumentEditor editor)
         {
-            if (editor.AttachedDocument.Reference.IsOnStorage())
+            if (editor.AttachedDocument.Reference != null)
             {
                 DocumentManager.Save(editor.AttachedDocument);
                 return true;
