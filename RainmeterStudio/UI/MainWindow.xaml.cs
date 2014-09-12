@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -48,6 +49,7 @@ namespace RainmeterStudio.UI
             this.AddKeyBinding(DocumentController.DocumentSaveCommand);
             this.AddKeyBinding(DocumentController.DocumentCloseCommand);
             this.AddKeyBinding(ProjectController.ProjectCreateCommand);
+            this.AddKeyBinding(ProjectController.ProjectOpenCommand);
             
             // Subscribe to events
             DocumentController.DocumentOpened += documentController_DocumentOpened;
@@ -75,11 +77,51 @@ namespace RainmeterStudio.UI
             documentPane.Children.Add(document);
             documentPane.SelectedContentIndex = documentPane.IndexOf(document);
 
-            e.Document.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler((obj, args) =>
+            e.Document.PropertyChanged += Document_PropertyChanged;
+            if (e.Document.Reference != null)
+                e.Document.Reference.PropertyChanged += Reference_PropertyChanged;
+        }
+
+        private void Document_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            IDocument document = (IDocument)sender;
+
+            // Find document object and update document title
+            foreach (var pair in _openedDocuments)
             {
-                // Update document title
-                document.Title = GetDocumentTitle(e.Document);
-            });
+                if (pair.Value.AttachedDocument == document)
+                {
+                    pair.Key.Title = GetDocumentTitle(document);
+                }
+            }
+
+            // If the reference changed, subscribe to reference changes as well
+            if (e.PropertyName == "Reference" && document.Reference != null)
+            {
+                document.Reference.PropertyChanged += Reference_PropertyChanged;
+            }
+        }
+
+        void Reference_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Reference reference = (Reference)sender;
+            bool found = false;
+
+            // Find documents with this reference and update document title
+            foreach (var pair in _openedDocuments)
+            {
+                if (pair.Value.AttachedDocument.Reference == reference)
+                {
+                    pair.Key.Title = GetDocumentTitle(pair.Value.AttachedDocument);
+                    found = true;
+                }
+            }
+
+            // No document found? Unsubscribe
+            if (found == false)
+            {
+                reference.PropertyChanged -= Reference_PropertyChanged;
+            }
         }
 
         private string GetDocumentTitle(IDocument document)
@@ -87,7 +129,11 @@ namespace RainmeterStudio.UI
             string documentName;
 
             // Get title
-            if (ProjectController.ActiveProject == null || !ProjectController.ActiveProject.Contains(document.Reference))
+            if (document.Reference == null)
+            {
+                documentName = "New document";
+            }
+            else if (ProjectController.ActiveProject == null || !ProjectController.ActiveProject.Contains(document.Reference))
             {
                 documentName = document.Reference.StoragePath ?? "New document";
             }

@@ -201,6 +201,9 @@ namespace RainmeterStudio.Core.Model
             }
         }
 
+        /// <summary>
+        /// Gets the target kind
+        /// </summary>
         [XmlAttribute("targetKind")]
         public ReferenceTargetKind TargetKind
         {
@@ -297,8 +300,8 @@ namespace RainmeterStudio.Core.Model
                 throw new ArgumentException("Reference must be removed from its current parent first.");
 
             // Add and parent
-            reference.Parent = this;
             _children.Add(reference.Name, reference);
+            reference.Parent = this;
 
             // Trigger event
             if (CollectionChanged != null)

@@ -112,6 +112,10 @@ namespace RainmeterStudio.UI.Panels
 
         private void Refresh()
         {
+            // Clear current items
+            treeProjectItems.Items.Clear();
+
+            // No project
             if (Controller == null || Controller.ActiveProject == null)
             {
                 this.IsEnabled = false;
@@ -137,7 +141,6 @@ namespace RainmeterStudio.UI.Panels
                 }
 
                 // Add tree to tree view
-                treeProjectItems.Items.Clear();
                 treeProjectItems.Items.Add(new ReferenceViewModel(refTree));
             }
         }

@@ -168,7 +168,7 @@ namespace RainmeterStudio.UI.Controller
             if (!Directory.Exists(folder))
                 folder = Path.GetDirectoryName(folder);
 
-            var reference = new Reference(name, Path.Combine(folder, name));
+            var reference = new Reference(name, Path.Combine(folder, name), Reference.ReferenceTargetKind.File);
             editor.AttachedDocument.Reference = reference;
 
             // Save document
@@ -176,6 +176,7 @@ namespace RainmeterStudio.UI.Controller
 
             // Add to parent
             OwnerWindow.ProjectPanel.ActiveItem.Add(reference);
+            ProjectManager.SaveActiveProject();
         }
 
         /// <summary>
