@@ -35,11 +35,13 @@ namespace RainmeterStudio.UI.Controller
             // Is a file?
             if (item.TargetKind == Reference.ReferenceTargetKind.File || item.TargetKind == Reference.ReferenceTargetKind.Project)
             {
-                if (String.IsNullOrEmpty(Path.GetExtension(item.StoragePath)))
+                var extension = Path.GetExtension(item.StoragePath);
+
+                if (String.IsNullOrEmpty(extension))
                     key += "Unknown";
 
                 else
-                    key += "_" + Path.GetExtension(item.StoragePath).Substring(1);
+                    key += "_" + extension.Substring(1);
             }
 
             // Not a file, try to figure out if a directory
