@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Storage;
-using RainmeterStudio.Storage;
+using RainmeterStudio.Editor.ProjectEditor;
 
 namespace RainmeterStudio.Business
 {
@@ -88,7 +88,7 @@ namespace RainmeterStudio.Business
                 Close();
 
             // Open using storage
-            ActiveProject = Storage.Load(path);
+            ActiveProject = Storage.Read(path);
             ActiveProject.Path = path;
 
             // Raise event
@@ -106,7 +106,7 @@ namespace RainmeterStudio.Business
                 throw new InvalidOperationException("Cannot save a project that is not opened.");
 
             // Save
-            Storage.Save(ActiveProject);
+            Storage.Write(ActiveProject);
         }
 
         /// <summary>

@@ -156,7 +156,7 @@ namespace RainmeterStudio.Business
                 throw new ArgumentException("Reference cannot be empty");
 
             // Save
-            storage.Write(document.Reference.StoragePath, document);
+            storage.WriteDocument(document, document.Reference.StoragePath);
 
             // Clear dirty flag
             document.IsDirty = false;
@@ -173,7 +173,7 @@ namespace RainmeterStudio.Business
             var storage = FindStorage(document);
 
             // Save
-            storage.Write(path, document);
+            storage.WriteDocument(document, path);
 
             // Update reference
             document.Reference = new Reference(Path.GetFileName(path), path);
@@ -193,7 +193,7 @@ namespace RainmeterStudio.Business
             var storage = FindStorage(document);
 
             // Save
-            storage.Write(path, document);
+            storage.WriteDocument(document, path);
         }
 
         /// <summary>
@@ -249,9 +249,9 @@ namespace RainmeterStudio.Business
             IDocument document = null;
 
             foreach (var storage in Storages)
-                if (storage.CanRead(path))
+                if (storage.CanReadDocument(path))
                 {
-                    document = storage.Read(path);
+                    document = storage.ReadDocument(path);
                     break;
                 }
 
@@ -272,7 +272,7 @@ namespace RainmeterStudio.Business
             IDocumentStorage storage = null;
 
             foreach (var s in Storages)
-                if (s.CanWrite(document.GetType()))
+                if (s.CanWriteDocument(document.GetType()))
                 {
                     storage = s;
                     break;

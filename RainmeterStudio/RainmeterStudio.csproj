@@ -65,6 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Editor\ProjectEditor\ProjectEditorUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +77,11 @@
     <Compile Include="Business\PluginManager.cs" />
     <Compile Include="Business\ProjectManager.cs" />
     <Compile Include="Documents\EmptyProjectTemplate.cs" />
+    <Compile Include="Editor\ProjectEditor\ProjectDocument.cs" />
+    <Compile Include="Editor\ProjectEditor\ProjectEditorFactory.cs" />
+    <Compile Include="Editor\ProjectEditor\ProjectEditorUI.xaml.cs">
+      <DependentUpon>ProjectEditorUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainClass.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
     <Compile Include="Rainmeter.cs" />
@@ -87,7 +96,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Storage\ProjectStorage.cs" />
+    <Compile Include="Editor\ProjectEditor\ProjectStorage.cs" />
     <Compile Include="UI\Command.cs" />
     <Compile Include="UI\Controller\IconProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
@@ -247,6 +256,9 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\16\disk.png" />
     <Resource Include="Resources\Icons\16\disk_multiple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Storage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RainmeterStudio.Storage;
-using System.IO;
 using RainmeterStudio.Core.Model;
+using RainmeterStudio.Editor.ProjectEditor;
 using Version = RainmeterStudio.Core.Utils.Version;
 
 namespace RainmeterStudio.Tests.Storage
@@ -35,8 +32,8 @@ namespace RainmeterStudio.Tests.Storage
             Project project = CreateProject();
 
             // Save and load
-            ProjectStorage.Save(project, filename);
-            Project res = ProjectStorage.Load(filename);
+            ProjectStorage.Write(project, filename);
+            Project res = ProjectStorage.Read(filename);
 
             // Verify results
             Assert.IsNotNull(res);
@@ -59,8 +56,8 @@ namespace RainmeterStudio.Tests.Storage
             Project project = new Project();
 
             // Save and load project
-            ProjectStorage.Save(project, filename);
-            Project res = ProjectStorage.Load(filename);
+            ProjectStorage.Write(project, filename);
+            Project res = ProjectStorage.Read(filename);
 
             // Test results
             Assert.IsNotNull(res);

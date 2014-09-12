@@ -9,22 +9,22 @@ namespace RainmeterStudio.SkinDesignerPlugin
 {
     public class SkinStorage : IDocumentStorage
     {
-        public IDocument Read(string path)
+        public IDocument ReadDocument(string path)
         {
             throw new NotImplementedException();
         }
 
-        public void Write(string path, IDocument document)
+        public void WriteDocument(IDocument document, string path)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanRead(string path)
+        public bool CanReadDocument(string path)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanWrite(Type documentType)
+        public bool CanWriteDocument(Type documentType)
         {
             throw new NotImplementedException();
         }

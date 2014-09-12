@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -12,8 +14,13 @@ namespace RainmeterStudio.Core.Model
     /// <summary>
     /// Defines a Rainmeter Studio project
     /// </summary>
-    public class Project
+    public class Project : INotifyPropertyChanged
     {
+        private string _author;
+        private Reference _autoLoadFile;
+        private Version _version, _minimumWindows, _minimumRainmeter;
+        private Reference _root;
+
         #region Properties
 
         /// <summary>
@@ -29,6 +36,9 @@ namespace RainmeterStudio.Core.Model
             set
             {
                 Root.Name = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
             }
         }
 
@@ -45,6 +55,9 @@ namespace RainmeterStudio.Core.Model
             set
             {
                 Root.StoragePath = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
             }
         }
 
@@ -52,19 +65,58 @@ namespace RainmeterStudio.Core.Model
         /// Gets or sets the author of the project
         /// </summary>
         [XmlElement(ElementName = "author", Order = 2)]
-        public string Author { get; set; }
+        public string Author
+        {
+            get
+            {
+                return _author;
+            }
+            set
+            {
+                _author = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Author"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the version of the project
         /// </summary>
         [XmlElement(ElementName = "version", Order = 3)]
-        public Version Version { get; set; }
+        public Version Version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                _version = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Version"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the reference to the file that automatically loads at package installation
         /// </summary>
         [XmlIgnore]
-        public Reference AutoLoadFile { get; set; }
+        public Reference AutoLoadFile
+        {
+            get
+            {
+                return _autoLoadFile;
+            }
+            set
+            {
+                _autoLoadFile = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("AutoLoadFile"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the qualified name of the auto load file
@@ -86,7 +138,7 @@ namespace RainmeterStudio.Core.Model
         /// Gets or sets the list of variable files
         /// </summary>
         [XmlIgnore]
-        public List<Reference> VariableFiles { get; set; }
+        public ObservableCollection<Reference> VariableFiles { get; private set; }
 
         /// <summary>
         /// Gets or sets the list of variable files qualified names
@@ -101,7 +153,7 @@ namespace RainmeterStudio.Core.Model
             set
             {
                 VariableFiles.Clear();
-                VariableFiles.AddRange(value.Select(x => Root.GetReference(x)));
+                value.Select(x => Root.GetReference(x)).ForEach(VariableFiles.Add);
             }
         }
 
@@ -109,19 +161,58 @@ namespace RainmeterStudio.Core.Model
         /// Gets or sets the minimum rainmeter version
         /// </summary>
         [XmlElement(ElementName = "minimumRainmeter", Order = 4)]
-        public Version MinimumRainmeter { get; set; }
+        public Version MinimumRainmeter
+        {
+            get
+            {
+                return _minimumRainmeter;
+            }
+            set
+            {
+                _minimumRainmeter = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("MinimumRainmeter"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the minimum Windows version
         /// </summary>
         [XmlElement(ElementName = "minimumWindows", Order = 5)]
-        public Version MinimumWindows { get; set; }
+        public Version MinimumWindows
+        {
+            get
+            {
+                return _minimumWindows;
+            }
+            set
+            {
+                _minimumWindows = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("MinimumWindows"));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the root node
         /// </summary>
         [XmlElement(ElementName = "root", Order = 6)]
-        public Reference Root { get; set; }
+        public Reference Root
+        {
+            get
+            {
+                return _root;
+            }
+            set
+            {
+                _root = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Root"));
+            }
+        }
 
         #endregion
 
@@ -133,7 +224,7 @@ namespace RainmeterStudio.Core.Model
         public Project()
         {
             Root = new Reference(String.Empty);
-            VariableFiles = new List<Reference>();
+            VariableFiles = new ObservableCollection<Reference>();
             Version = new Version();
             MinimumRainmeter = new Version("3.1");
             MinimumWindows = new Version("5.1");
@@ -155,5 +246,10 @@ namespace RainmeterStudio.Core.Model
         }
 
         #endregion
+
+        /// <summary>
+        /// Triggered when a property changes
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

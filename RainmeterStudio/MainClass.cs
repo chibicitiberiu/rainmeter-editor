@@ -8,7 +8,7 @@ using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Storage;
-using RainmeterStudio.Storage;
+using RainmeterStudio.Editor.ProjectEditor;
 using RainmeterStudio.UI;
 using RainmeterStudio.UI.Controller;
 

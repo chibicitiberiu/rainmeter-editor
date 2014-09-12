@@ -15,7 +15,6 @@ using RainmeterStudio.Business;
 using RainmeterStudio.Core.Documents;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Model.Events;
-using RainmeterStudio.Storage;
 using RainmeterStudio.UI.Controller;
 using RainmeterStudio.UI.Panels;
 using Xceed.Wpf.AvalonDock.Layout;

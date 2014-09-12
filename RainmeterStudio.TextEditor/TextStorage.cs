@@ -13,7 +13,7 @@ namespace RainmeterStudio.TextEditorPlugin
     public class TextStorage : IDocumentStorage
     {
         /// <inheritdoc />
-        IDocument IDocumentStorage.Read(string path)
+        public IDocument ReadDocument(string path)
         {
             TextDocument document = new TextDocument();
             document.Reference = new Reference(Path.GetFileName(path), path);
@@ -23,7 +23,7 @@ namespace RainmeterStudio.TextEditorPlugin
         }
 
         /// <inheritdoc />
-        public void Write(string path, IDocument document)
+        public void WriteDocument(IDocument document, string path)
         {
             TextDocument textDocument = document as TextDocument;
 
@@ -34,7 +34,7 @@ namespace RainmeterStudio.TextEditorPlugin
         }
 
         /// <inheritdoc />
-        public bool CanRead(string path)
+        public bool CanReadDocument(string path)
         {
             // Open the file
             FileStream file = File.OpenRead(path);
@@ -64,7 +64,7 @@ namespace RainmeterStudio.TextEditorPlugin
             return true;
         }
 
-        public bool CanWrite(Type documentType)
+        public bool CanWriteDocument(Type documentType)
         {
             return documentType.Equals(typeof(TextDocument));
         }
