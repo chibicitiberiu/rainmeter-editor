@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using RainmeterStudio.Business;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Storage;
 using RainmeterStudio.Editor.ProjectEditor;

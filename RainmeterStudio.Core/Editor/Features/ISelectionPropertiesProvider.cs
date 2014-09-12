@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RainmeterStudio.Core.Model;
 
-namespace RainmeterStudio.Core.Documents.DocumentEditorFeatures
+namespace RainmeterStudio.Core.Editor.Features
 {
     interface ISelectionPropertiesProvider
     {

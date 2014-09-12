@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 using RainmeterStudio.Core.Model;
-using RainmeterStudio.Core.Documents.DocumentEditorFeatures;
+using RainmeterStudio.Core.Editor.Features;
 
 namespace RainmeterStudio.SkinDesignerPlugin
 {

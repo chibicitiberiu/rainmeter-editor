@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using RainmeterStudio.Business;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Utils;
 using RainmeterStudio.Properties;

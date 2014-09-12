@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Resources;
 using System.Text;
 using RainmeterStudio.Core;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 using RainmeterStudio.Core.Utils;
 using RainmeterStudio.Resources;
 

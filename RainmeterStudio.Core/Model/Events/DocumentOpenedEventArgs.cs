@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 
 namespace RainmeterStudio.Core.Model.Events
 {

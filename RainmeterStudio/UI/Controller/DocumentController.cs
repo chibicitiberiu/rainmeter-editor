@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Linq;
 using RainmeterStudio.Business;
-using RainmeterStudio.Core.Documents;
+using RainmeterStudio.Core.Editor;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.UI.Dialogs;
 using RainmeterStudio.UI.ViewModel;

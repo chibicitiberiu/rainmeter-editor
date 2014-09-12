@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using RainmeterStudio.Core.Model;
 
-namespace RainmeterStudio.Core.Documents
+namespace RainmeterStudio.Core.Editor
 {
     /// <summary>
     /// A document editor
