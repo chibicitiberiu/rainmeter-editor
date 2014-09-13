@@ -121,13 +121,13 @@ namespace RainmeterStudio.UI.Controller
             DocumentSaveAllCommand = new Command("DocumentSaveAll", SaveAll, () => ProjectManager.ActiveProject != null);
             DocumentCloseCommand = new Command("DocumentClose", () => Close(), HasActiveDocumentEditor);
 
-            ProjectManager.ActiveProjectChanged += new EventHandler((obj, e) => 
+            ProjectManager.ActiveProjectChanged += new EventHandler((sender, e) => 
             {
                 DocumentCreateCommand.NotifyCanExecuteChanged();
                 DocumentSaveAllCommand.NotifyCanExecuteChanged();
             });
 
-            ActiveDocumentEditorChanged += new EventHandler((obj, e) =>
+            ActiveDocumentEditorChanged += new EventHandler((sender, e) =>
             {
                 DocumentSaveCommand.NotifyCanExecuteChanged();
                 DocumentSaveAsCommand.NotifyCanExecuteChanged();
@@ -135,7 +135,7 @@ namespace RainmeterStudio.UI.Controller
                 DocumentCloseCommand.NotifyCanExecuteChanged();
             });
         }
-
+        
         private bool HasActiveDocumentEditor()
         {
             return ActiveDocumentEditor != null;
@@ -305,6 +305,11 @@ namespace RainmeterStudio.UI.Controller
 
             // Close
             DocumentManager.Close(editor);
+
+            // Update ActiveDocument
+            if (editor == ActiveDocumentEditor)
+                ActiveDocumentEditor = null;
+
             return true;
         }
 
@@ -315,14 +320,7 @@ namespace RainmeterStudio.UI.Controller
         /// <remarks>Shows the 'are you sure' prompt if there are unsaved edits.</remarks>
         public bool Close()
         {
-            // Show the 'are you sure' prompt if necesary
-            if (Close(ActiveDocumentEditor))
-            {
-                ActiveDocumentEditor = null;
-                return true;
-            }
-            
-            return false;
+            return Close(ActiveDocumentEditor);
         }
 
         /// <summary>

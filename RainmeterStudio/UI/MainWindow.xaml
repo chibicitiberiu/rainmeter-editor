@@ -120,6 +120,18 @@
                         Style="{StaticResource CommandButtonStyle}">
                     <Image Width="16" Height="16" Source="{Binding Icon}" />
                 </Button>
+                <Button DataContext="{Binding DocumentController.DocumentOpenCommand}"
+                        Style="{StaticResource CommandButtonStyle}">
+                    <Image Width="16" Height="16" Source="{Binding Icon}" />
+                </Button>
+                <Button DataContext="{Binding DocumentController.DocumentSaveCommand}"
+                        Style="{StaticResource CommandButtonStyle}">
+                    <Image Width="16" Height="16" Source="{Binding Icon}" />
+                </Button>
+                <Button DataContext="{Binding DocumentController.DocumentSaveAllCommand}"
+                        Style="{StaticResource CommandButtonStyle}">
+                    <Image Width="16" Height="16" Source="{Binding Icon}" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
 
