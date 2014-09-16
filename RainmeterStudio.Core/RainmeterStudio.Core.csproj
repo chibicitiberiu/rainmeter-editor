@@ -71,7 +71,6 @@
     <Compile Include="Utils\LinqExtension.cs" />
     <Compile Include="Utils\BitmapHelper.cs" />
     <Compile Include="Utils\PathHelper.cs" />
-    <Compile Include="Utils\TreeExtensions.cs" />
     <Compile Include="Utils\Version.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -34,13 +34,15 @@
             <MenuItem Header="{x:Static r:Strings.MainWindow_File}">
                 <MenuItem Header="{x:Static r:Strings.MainWindow_File_New}">
                     <MenuItem DataContext="{Binding DocumentController.DocumentCreateCommand}"
-                              Style="{StaticResource CommandMenuItemStyle}" >
+                              Style="{StaticResource CommandMenuItemStyle}" 
+                              Header="{x:Static r:Strings.Command_DocumentCreate_AltDisplayText}">
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem DataContext="{Binding ProjectController.ProjectCreateCommand}"
-                              Style="{StaticResource CommandMenuItemStyle}">
+                              Style="{StaticResource CommandMenuItemStyle}"
+                              Header="{x:Static r:Strings.Command_ProjectCreate_AltDisplayText}">
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
@@ -49,13 +51,15 @@
                 <Separator />
                 <MenuItem Header="{x:Static r:Strings.MainWindow_File_Open}">
                     <MenuItem DataContext="{Binding DocumentController.DocumentOpenCommand}"
-                              Style="{StaticResource CommandMenuItemStyle}">
+                              Style="{StaticResource CommandMenuItemStyle}"
+                              Header="{x:Static r:Strings.Command_DocumentOpen_AltDisplayText}">
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem DataContext="{Binding ProjectController.ProjectOpenCommand}"
-                              Style="{StaticResource CommandMenuItemStyle}">
+                              Style="{StaticResource CommandMenuItemStyle}"
+                              Header="{x:Static r:Strings.Command_ProjectOpen_AltDisplayText}">
                         <MenuItem.Icon>
                             <Image Source="{Binding Icon}" />
                         </MenuItem.Icon>

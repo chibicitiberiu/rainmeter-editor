@@ -1,0 +1,29 @@
+﻿<Window x:Class="RainmeterStudio.UI.Dialogs.InputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="clr-namespace:RainmeterStudio.Resources"
+        Height="100" Width="360"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow" ShowInTaskbar="False"
+        Background="WhiteSmoke" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="textPrompt" Grid.Row="0" 
+                   Text="[placeholder]" Margin="4" Grid.ColumnSpan="2"/>
+
+        <TextBox Name="textInput" Grid.Row="1" Margin="3"
+                 TextChanged="textInput_TextChanged" Grid.ColumnSpan="2"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Grid.Column="1">
+            <Button Name="buttonOK" Content="{x:Static r:Strings.Dialog_OK}" IsDefault="True" Margin="1px" Click="buttonOK_Click" />
+            <Button Name="buttonCancel" Content="{x:Static r:Strings.Dialog_Cancel}" IsCancel="True" Margin="1px" Click="buttonCancel_Click" />
+        </StackPanel>
+
+    </Grid>
+</Window>

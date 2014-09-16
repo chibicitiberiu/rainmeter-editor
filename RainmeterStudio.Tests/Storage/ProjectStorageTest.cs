@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Editor.ProjectEditor;
+using RainmeterStudio.Storage;
 using Version = RainmeterStudio.Core.Utils.Version;
 
 namespace RainmeterStudio.Tests.Storage
@@ -13,8 +14,6 @@ namespace RainmeterStudio.Tests.Storage
     [TestClass]
     public class ProjectStorageTest
     {
-        private ProjectStorage ProjectStorage = new ProjectStorage();
-
         public TestContext TestContext { get; set; }
 
         [TestInitialize]

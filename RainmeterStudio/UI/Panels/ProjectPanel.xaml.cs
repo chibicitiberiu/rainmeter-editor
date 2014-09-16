@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Utils;
 using RainmeterStudio.UI.Controller;
@@ -13,27 +16,30 @@ namespace RainmeterStudio.UI.Panels
     /// </summary>
     public partial class ProjectPanel : UserControl
     {
-        private ProjectController _controller;
-        public ProjectController Controller
+        private ProjectController _projectController;
+
+        public ProjectController ProjectController
         {
             get
             {
-                return _controller;
+                return _projectController;
             }
             set
             {
                 // Unsubscribe from old controller
-                if (_controller != null)
+                if (_projectController != null)
                 {
-                    Controller.ActiveProjectChanged -= Controller_ActiveProjectChanged;
+                    ProjectController.ActiveProjectChanged -= Controller_ActiveProjectChanged;
                 }
 
                 // Set new project
-                _controller = value;
-                _controller.ActiveProjectChanged += Controller_ActiveProjectChanged;
+                _projectController = value;
+                _projectController.ActiveProjectChanged += Controller_ActiveProjectChanged;
                 Refresh();
             }
         }
+
+        public DocumentController DocumentController { get; set; }
 
         #region Commands
 
@@ -60,7 +66,7 @@ namespace RainmeterStudio.UI.Panels
 
                 if (selected == null)
                 {
-                    return Controller.ActiveProject.Root;
+                    return ProjectController.ActiveProject.Root;
                 }
                 else
                 {
@@ -84,7 +90,6 @@ namespace RainmeterStudio.UI.Panels
                 CollapseAllCommand.NotifyCanExecuteChanged();
             }
         }
-
 
         public ProjectPanel()
         {
@@ -116,7 +121,7 @@ namespace RainmeterStudio.UI.Panels
             treeProjectItems.Items.Clear();
 
             // No project
-            if (Controller == null || Controller.ActiveProject == null)
+            if (ProjectController == null || ProjectController.ActiveProject == null)
             {
                 this.IsEnabled = false;
             }
@@ -130,14 +135,14 @@ namespace RainmeterStudio.UI.Panels
                 if (toggleShowAllFiles.IsChecked.HasValue && toggleShowAllFiles.IsChecked.Value)
                 {
                     // Get directory name
-                    string projectFolder = System.IO.Path.GetDirectoryName(Controller.ActiveProjectPath);
+                    string projectFolder = System.IO.Path.GetDirectoryName(ProjectController.ActiveProjectPath);
 
                     // Get folder tree
                     refTree = DirectoryHelper.GetFolderTree(projectFolder);
                 }
                 else
                 {
-                    refTree = Controller.ActiveProject.Root;
+                    refTree = ProjectController.ActiveProject.Root;
                 }
 
                 // Add tree to tree view
@@ -182,6 +187,107 @@ namespace RainmeterStudio.UI.Panels
             
             // We can expand if the root is not expanded
             CanExpand = (!tree.IsExpanded);
+        }
+
+        private void TreeViewItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var treeViewItem = sender as TreeViewItem;
+            var referenceViewModel = treeViewItem.Header as ReferenceViewModel;
+
+            if (referenceViewModel != null)
+            {
+                treeViewItem.ContextMenu = new ContextMenu();
+                treeViewItem.ContextMenu.ItemsSource = GetContextMenuItems(referenceViewModel.Reference);
+            }
+        }
+
+        private void TreeViewItem_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var treeViewItem = sender as TreeViewItem;
+            var refViewModel = treeViewItem.Header as ReferenceViewModel;
+
+            if (refViewModel != null)
+            {
+                Command command = GetDefaultCommand(refViewModel.Reference);
+                command.Execute(refViewModel.Reference);
+            }
+        }
+
+        /// <summary>
+        /// Gets the default command (double click) for a specific reference
+        /// </summary>
+        /// <param name="reference">The reference</param>
+        /// <returns>The command</returns>
+        public Command GetDefaultCommand(Reference reference)
+        {
+            switch (reference.TargetKind)
+            {
+                case ReferenceTargetKind.File:
+                    return DocumentController.DocumentOpenCommand;
+
+                case ReferenceTargetKind.Project:
+                    return DocumentController.DocumentOpenCommand;
+
+                case ReferenceTargetKind.Directory:
+                    return null; // TODO: expand command
+
+                default:
+                    return null;
+            }
+        }
+
+        private MenuItem GetMenuItem(Command cmd, Reference reference)
+        {
+            var icon = new Image();
+            icon.Source = cmd.Icon;
+            icon.Width = 16;
+            icon.Height = 16;
+
+            var menuItem = new MenuItem();
+            menuItem.DataContext = cmd;
+            menuItem.Style = Application.Current.TryFindResource("CommandContextMenuItemStyle") as Style;
+            menuItem.Icon = icon;
+            menuItem.CommandParameter = reference;
+
+            if (GetDefaultCommand(reference) == cmd)
+                menuItem.FontWeight = FontWeights.Bold;
+
+            return menuItem;
+        }
+
+        public IEnumerable<UIElement> GetContextMenuItems(Reference @ref)
+        {
+            if (@ref.TargetKind == ReferenceTargetKind.File || @ref.TargetKind == ReferenceTargetKind.Project)
+            {
+                yield return GetMenuItem(DocumentController.DocumentOpenCommand, @ref);
+            }
+            if (@ref.TargetKind == ReferenceTargetKind.Directory || @ref.TargetKind == ReferenceTargetKind.Project)
+            {
+                // TODO: expand command
+            }
+
+            yield return new Separator();
+
+            if (@ref.TargetKind != ReferenceTargetKind.Project)
+            {
+                yield return GetMenuItem(ProjectController.ProjectItemCutCommand, @ref);
+                yield return GetMenuItem(ProjectController.ProjectItemCopyCommand, @ref);
+
+                if (@ref.TargetKind == ReferenceTargetKind.Directory)
+                    yield return GetMenuItem(ProjectController.ProjectItemPasteCommand, @ref);
+            }
+
+            yield return GetMenuItem(ProjectController.ProjectItemRenameCommand, @ref);
+
+            if (@ref.TargetKind != ReferenceTargetKind.Project)
+                yield return GetMenuItem(ProjectController.ProjectItemDeleteCommand, @ref);
+
+            yield return new Separator();
+
+            if (@ref.TargetKind == ReferenceTargetKind.Directory)
+                yield return GetMenuItem(ProjectController.ProjectItemOpenInExplorerCommand, @ref);
+            else
+                yield return GetMenuItem(ProjectController.ProjectItemOpenContainingFolderCommand, @ref);
         }
     }
 }

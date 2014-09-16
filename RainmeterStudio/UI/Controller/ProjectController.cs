@@ -9,6 +9,7 @@ using RainmeterStudio.Core.Model;
 using RainmeterStudio.UI.Dialogs;
 using RainmeterStudio.UI.ViewModel;
 using RainmeterStudio.Properties;
+using RainmeterStudio.Core.Utils;
 
 namespace RainmeterStudio.UI.Controller
 {
@@ -97,6 +98,42 @@ namespace RainmeterStudio.UI.Controller
         /// </summary>
         public Command ProjectCloseCommand { get; private set; }
 
+        /// <summary>
+        /// Cut command
+        /// </summary>
+        public Command ProjectItemCutCommand { get; private set; }
+
+        /// <summary>
+        /// Copy command
+        /// </summary>
+        public Command ProjectItemCopyCommand { get; private set; }
+
+        /// <summary>
+        /// Paste command
+        /// </summary>
+        public Command ProjectItemPasteCommand { get; private set; }
+
+        /// <summary>
+        /// Rename command
+        /// </summary>
+        public Command ProjectItemRenameCommand { get; private set; }
+
+        /// <summary>
+        /// Delete command
+        /// </summary>
+        public Command ProjectItemDeleteCommand { get; private set; }
+
+        /// <summary>
+        /// Open folder command
+        /// </summary>
+        public Command ProjectItemOpenInExplorerCommand { get; private set; }
+
+        /// <summary>
+        /// Open folder command
+        /// </summary>
+        public Command ProjectItemOpenContainingFolderCommand { get; private set; }
+
+
         #endregion
 
         /// <summary>
@@ -111,8 +148,18 @@ namespace RainmeterStudio.UI.Controller
             ProjectCreateCommand = new Command("ProjectCreate", CreateProject);
             ProjectOpenCommand = new Command("ProjectOpen", OpenProject);
             ProjectCloseCommand = new Command("ProjectClose", CloseProject, () => ActiveProject != null);
+            ProjectItemCutCommand = new Command("ProjectItemCut", r => ProjectItemCutClipboard((Reference)r));
+            ProjectItemCopyCommand = new Command("ProjectItemCopy", r => ProjectItemCopyClipboard((Reference)r));
+            ProjectItemPasteCommand = new Command("ProjectItemPaste", r => ProjectItemPasteClipboard((Reference)r), r => Manager.HaveProjectItemInClipboard());
+            ProjectItemRenameCommand = new Command("ProjectItemRename", r => ProjectItemRename((Reference)r));
+            ProjectItemDeleteCommand = new Command("ProjectItemDelete", r => ProjectItemDelete((Reference)r));
+            ProjectItemOpenInExplorerCommand = new Command("ProjectItemOpenInExplorer", r => ProjectItemOpenInExplorer((Reference)r));
+            ProjectItemOpenContainingFolderCommand = new Command("ProjectItemOpenContainingFolder", r => ProjectItemOpenInExplorer((Reference)r));
+
             ActiveProjectChanged += new EventHandler((sender, e) => ProjectCloseCommand.NotifyCanExecuteChanged());
         }
+
+        #region Project operations
 
         /// <summary>
         /// Displays the 'create project' dialog and creates a new project
@@ -167,5 +214,144 @@ namespace RainmeterStudio.UI.Controller
         {
             Manager.Close();
         }
+
+        #endregion
+
+        #region Project item operations
+
+        protected struct ClipboardData
+        {
+            public bool Cut;
+            public Reference Ref;
+        }
+
+        /// <summary>
+        /// Places a project item in the clipboard, and marks it for deletion
+        /// </summary>
+        /// <param name="ref">Project item to cut</param>
+        public void ProjectItemCutClipboard(Reference @ref)
+        {
+            try
+            {
+                Manager.ProjectItemCutClipboard(@ref);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Places a project item in the clipboard
+        /// </summary>
+        /// <param name="ref">Project item to copy</param>
+        public void ProjectItemCopyClipboard(Reference @ref)
+        {
+            try
+            {
+                Manager.ProjectItemCopyClipboard(@ref);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Pastes a project item from clipboard
+        /// </summary>
+        /// <param name="ref">Destination</param>
+        public void ProjectItemPasteClipboard(Reference @ref)
+        {
+            try
+            {
+                Manager.ProjectItemPasteClipboard(@ref);
+                Manager.SaveActiveProject();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Renames a project item
+        /// </summary>
+        /// <param name="ref">Reference to project item</param>
+        public void ProjectItemRename(Reference @ref)
+        {
+            string initialValue = Path.GetFileName(@ref.StoragePath.TrimEnd('\\'));
+
+            // Show an input dialog
+            var newName = InputDialog.Show(Resources.Strings.RenameReferenceDialog_Prompt,
+                Resources.Strings.RenameReferenceDialog_Caption,
+                initialValue,
+                PathHelper.IsFileNameValid,
+                Resources.Strings.RenameReferenceDialog_OKCaption,
+                Resources.Strings.Dialog_Cancel);
+
+            if (newName != null)
+            {
+                try
+                {
+                    Manager.ProjectItemRename(@ref, newName);
+                    Manager.SaveActiveProject();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes a project item
+        /// </summary>
+        /// <param name="ref">Reference to project item</param>
+        public void ProjectItemDelete(Reference @ref)
+        {
+            var res = MessageBox.Show(Resources.Strings.DeleteReferenceDialog_Prompt,
+                Resources.Strings.DeleteReferenceDialog_Caption,
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            try
+            {
+                switch(res)
+                {
+                    case MessageBoxResult.Yes:
+                        Manager.ProjectItemDelete(@ref, true);
+                        Manager.SaveActiveProject();
+                        break;
+
+                    case MessageBoxResult.No:
+                        Manager.ProjectItemDelete(@ref, false);
+                        Manager.SaveActiveProject();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        /// <summary>
+        /// Opens the containing folder if reference is a file, or folder if reference is a folder in windows explorer
+        /// </summary>
+        /// <param name="ref">Reference</param>
+        public void ProjectItemOpenInExplorer(Reference @ref)
+        {
+            if (@ref.TargetKind == ReferenceTargetKind.Directory)
+            {
+                System.Diagnostics.Process.Start(@ref.StoragePath);
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Path.GetDirectoryName(@ref.StoragePath));
+            }
+        }
+
+        #endregion
     }
 }

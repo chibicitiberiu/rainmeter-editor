@@ -223,7 +223,7 @@ namespace RainmeterStudio.Core.Model
         /// </summary>
         public Project()
         {
-            Root = new Reference(String.Empty, Reference.ReferenceTargetKind.Project);
+            Root = new Reference(String.Empty, ReferenceTargetKind.Project);
             VariableFiles = new ObservableCollection<Reference>();
             Version = new Version();
             MinimumRainmeter = new Version("3.1");

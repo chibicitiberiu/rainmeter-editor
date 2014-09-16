@@ -13,37 +13,37 @@ using RainmeterStudio.Core.Utils;
 namespace RainmeterStudio.Core.Model
 {
     /// <summary>
+    /// The kind of item the reference points to
+    /// </summary>
+    public enum ReferenceTargetKind
+    {
+        /// <summary>
+        /// Invalid state
+        /// </summary>
+        None,
+
+        /// <summary>
+        /// Reference points to a file
+        /// </summary>
+        File,
+
+        /// <summary>
+        /// Reference points to a directory
+        /// </summary>
+        Directory,
+
+        /// <summary>
+        /// Reference points to a project
+        /// </summary>
+        Project
+    }
+
+    /// <summary>
     /// Reference to a file or folder
     /// </summary>
     [DebuggerDisplay("QualifiedName = {QualifiedName}, StoragePath = {StoragePath}")]
-    public class Reference : INotifyCollectionChanged, INotifyPropertyChanged
+    public class Reference : INotifyCollectionChanged, INotifyPropertyChanged, ICloneable
     {
-        /// <summary>
-        /// The kind of item the reference points to
-        /// </summary>
-        public enum ReferenceTargetKind
-        {
-            /// <summary>
-            /// Invalid state
-            /// </summary>
-            None,
-
-            /// <summary>
-            /// Reference points to a file
-            /// </summary>
-            File,
-
-            /// <summary>
-            /// Reference points to a directory
-            /// </summary>
-            Directory,
-
-            /// <summary>
-            /// Reference points to a project
-            /// </summary>
-            Project
-        }
-
         private Dictionary<string, Reference> _children;
         private Reference _parent;
         private string _name, _storagePath;
@@ -90,7 +90,10 @@ namespace RainmeterStudio.Core.Model
 
                 // Notify
                 if (PropertyChanged != null)
+                {
                     PropertyChanged(this, new PropertyChangedEventArgs("Parent"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("QualifiedName"));
+                }
             }
         }
 
@@ -138,7 +141,10 @@ namespace RainmeterStudio.Core.Model
                 _name = value;
 
                 if (PropertyChanged != null)
+                {
                     PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("QualifiedName"));
+                }
             }
         }
 
@@ -216,7 +222,7 @@ namespace RainmeterStudio.Core.Model
                 _kind = value;
 
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Kind"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("TargetKind"));
             }
         }
 
@@ -374,7 +380,7 @@ namespace RainmeterStudio.Core.Model
 
         private void Parent_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null && (e.PropertyName == "Parent" || e.PropertyName == "Name" || e.PropertyName == "QualifiedName"))
+            if (PropertyChanged != null && e.PropertyName == "QualifiedName")
                 PropertyChanged(this, new PropertyChangedEventArgs("QualifiedName"));
         }
 
@@ -437,6 +443,23 @@ namespace RainmeterStudio.Core.Model
         }
 
         #endregion
+        
+        /// <summary>
+        /// Creates a clone of this reference
+        /// </summary>
+        /// <returns>The clone</returns>
+        /// <remarks>The clone doesn't keep the parent.</remarks>
+        public object Clone()
+        {
+            var cloneReference = new Reference(Name, StoragePath, TargetKind);
+
+            foreach (var r in Children)
+            {
+                cloneReference.Add((Reference)r.Clone());
+            }
+
+            return cloneReference;
+        }
     }
 
     /// <summary>

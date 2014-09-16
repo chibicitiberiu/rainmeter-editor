@@ -23,11 +23,8 @@ namespace RainmeterStudio
             SplashScreen splash = new SplashScreen("Resources/splash.png");
             splash.Show(true);
 
-            // Initialize project manager
-            ProjectStorage projectStorage = new ProjectStorage();
-            ProjectManager projectManager = new ProjectManager(projectStorage);
-
-            // Initialize document manager
+            // Initialize project, document manager
+            ProjectManager projectManager = new ProjectManager();
             DocumentManager documentManager = new DocumentManager();
 
             // Initialize plugin manager

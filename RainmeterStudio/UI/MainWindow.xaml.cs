@@ -55,7 +55,8 @@ namespace RainmeterStudio.UI
             DocumentController.DocumentOpened += documentController_DocumentOpened;
 
             // Initialize panels
-            projectPanel.Controller = ProjectController;
+            projectPanel.ProjectController = ProjectController;
+            projectPanel.DocumentController = DocumentController;
         }
 
         void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)

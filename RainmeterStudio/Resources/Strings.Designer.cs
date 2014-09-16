@@ -108,6 +108,15 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to _File....
         /// </summary>
+        public static string Command_DocumentCreate_AltDisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentCreate_AltDisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _New item.
+        /// </summary>
         public static string Command_DocumentCreate_DisplayText {
             get {
                 return ResourceManager.GetString("Command_DocumentCreate_DisplayText", resourceCulture);
@@ -125,6 +134,15 @@ namespace RainmeterStudio.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to _File....
+        /// </summary>
+        public static string Command_DocumentOpen_AltDisplayText {
+            get {
+                return ResourceManager.GetString("Command_DocumentOpen_AltDisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Open.
         /// </summary>
         public static string Command_DocumentOpen_DisplayText {
             get {
@@ -234,6 +252,15 @@ namespace RainmeterStudio.Resources {
         /// <summary>
         ///   Looks up a localized string similar to _Project....
         /// </summary>
+        public static string Command_ProjectCreate_AltDisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectCreate_AltDisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New _Project.
+        /// </summary>
         public static string Command_ProjectCreate_DisplayText {
             get {
                 return ResourceManager.GetString("Command_ProjectCreate_DisplayText", resourceCulture);
@@ -250,7 +277,142 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Copy.
+        /// </summary>
+        public static string Command_ProjectItemCopy_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemCopy_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy the selected item to clipboard.
+        /// </summary>
+        public static string Command_ProjectItemCopy_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemCopy_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cu_t.
+        /// </summary>
+        public static string Command_ProjectItemCut_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemCut_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut the selected item to clipboard.
+        /// </summary>
+        public static string Command_ProjectItemCut_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemCut_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Delete.
+        /// </summary>
+        public static string Command_ProjectItemDelete_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemDelete_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected item.
+        /// </summary>
+        public static string Command_ProjectItemDelete_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemDelete_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Containing _Folder.
+        /// </summary>
+        public static string Command_ProjectItemOpenContainingFolder_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemOpenContainingFolder_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open containing folder of selected item in Explorer.
+        /// </summary>
+        public static string Command_ProjectItemOpenContainingFolder_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemOpenContainingFolder_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open in _Explorer.
+        /// </summary>
+        public static string Command_ProjectItemOpenInExplorer_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemOpenInExplorer_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open selected folder in Explorer.
+        /// </summary>
+        public static string Command_ProjectItemOpenInExplorer_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemOpenInExplorer_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Paste.
+        /// </summary>
+        public static string Command_ProjectItemPaste_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemPaste_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste the clipboard contents in selected folder.
+        /// </summary>
+        public static string Command_ProjectItemPaste_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemPaste_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Rename.
+        /// </summary>
+        public static string Command_ProjectItemRename_DisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemRename_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename selected item.
+        /// </summary>
+        public static string Command_ProjectItemRename_ToolTip {
+            get {
+                return ResourceManager.GetString("Command_ProjectItemRename_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Project....
+        /// </summary>
+        public static string Command_ProjectOpen_AltDisplayText {
+            get {
+                return ResourceManager.GetString("Command_ProjectOpen_AltDisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O_pen Project.
         /// </summary>
         public static string Command_ProjectOpen_DisplayText {
             get {
@@ -448,6 +610,24 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you also want to delete the selected project items from disk?.
+        /// </summary>
+        public static string DeleteReferenceDialog_Caption {
+            get {
+                return ResourceManager.GetString("DeleteReferenceDialog_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete from disk?.
+        /// </summary>
+        public static string DeleteReferenceDialog_Prompt {
+            get {
+                return ResourceManager.GetString("DeleteReferenceDialog_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         public static string Dialog_Browse {
@@ -597,6 +777,33 @@ namespace RainmeterStudio.Resources {
         public static string ProjectTemplate_EmptyProject_DisplayText {
             get {
                 return ResourceManager.GetString("ProjectTemplate_EmptyProject_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename project item.
+        /// </summary>
+        public static string RenameReferenceDialog_Caption {
+            get {
+                return ResourceManager.GetString("RenameReferenceDialog_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        public static string RenameReferenceDialog_OKCaption {
+            get {
+                return ResourceManager.GetString("RenameReferenceDialog_OKCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the new name:.
+        /// </summary>
+        public static string RenameReferenceDialog_Prompt {
+            get {
+                return ResourceManager.GetString("RenameReferenceDialog_Prompt", resourceCulture);
             }
         }
     }

@@ -114,7 +114,17 @@ namespace RainmeterStudio.UI.Controller
             ProjectManager = projectManager;
 
             DocumentCreateCommand = new Command("DocumentCreate", Create, () => ProjectManager.ActiveProject != null);
-            DocumentOpenCommand = new Command("DocumentOpen", Open);
+            DocumentOpenCommand = new Command("DocumentOpen", arg =>
+            {
+                if (arg is Reference)
+                {
+                    Open((Reference)arg);
+                }
+                else
+                {
+                    Open(); 
+                }
+            });
             DocumentSaveCommand = new Command("DocumentSave", () => Save(), HasActiveDocumentEditor);
             DocumentSaveAsCommand = new Command("DocumentSaveAs", () => SaveAs(), HasActiveDocumentEditor);
             DocumentSaveACopyCommand = new Command("DocumentSaveACopy", () => SaveACopy(), HasActiveDocumentEditor);
@@ -168,7 +178,7 @@ namespace RainmeterStudio.UI.Controller
             if (!Directory.Exists(folder))
                 folder = Path.GetDirectoryName(folder);
 
-            var reference = new Reference(name, Path.Combine(folder, name), Reference.ReferenceTargetKind.File);
+            var reference = new Reference(name, Path.Combine(folder, name), ReferenceTargetKind.File);
             editor.AttachedDocument.Reference = reference;
 
             // Save document
@@ -196,6 +206,15 @@ namespace RainmeterStudio.UI.Controller
                 // Open file
                 DocumentManager.Open(dialog.FileName);
             }
+        }
+
+        /// <summary>
+        /// Opens the document pointed to by a reference
+        /// </summary>
+        /// <param name="reference"></param>
+        public void Open(Reference reference)
+        {
+            DocumentManager.Open(reference.StoragePath);
         }
 
         /// <summary>

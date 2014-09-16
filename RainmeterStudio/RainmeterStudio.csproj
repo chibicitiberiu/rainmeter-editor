@@ -96,14 +96,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Editor\ProjectEditor\ProjectStorage.cs" />
+    <Compile Include="Editor\ProjectEditor\ProjectDocumentStorage.cs" />
+    <Compile Include="Storage\ProjectStorage.cs" />
     <Compile Include="UI\Command.cs" />
-    <Compile Include="UI\CommandGroup.cs" />
     <Compile Include="UI\Controller\IconProvider.cs" />
-    <Compile Include="UI\Controller\IContextMenuProvider.cs" />
     <Compile Include="UI\Controller\ProjectController.cs" />
     <Compile Include="Business\SettingsProvider.cs" />
-    <Compile Include="UI\Controller\ReferenceContextMenuProvider.cs" />
     <Compile Include="UI\Dialogs\CloseUnsavedDialog.xaml.cs">
       <DependentUpon>CloseUnsavedDialog.xaml</DependentUpon>
     </Compile>
@@ -113,6 +111,9 @@
     <Compile Include="UI\Controller\DocumentController.cs" />
     <Compile Include="UI\Dialogs\CreateProjectDialog.xaml.cs">
       <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Panels\ProjectPanel.xaml.cs">
       <DependentUpon>ProjectPanel.xaml</DependentUpon>
@@ -130,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\CreateProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,9 +265,7 @@
     <Resource Include="Resources\Icons\16\disk.png" />
     <Resource Include="Resources\Icons\16\disk_multiple.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Storage\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

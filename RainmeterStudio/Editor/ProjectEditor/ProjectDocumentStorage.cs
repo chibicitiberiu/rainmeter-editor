@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using RainmeterStudio.Core;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Storage;
+using RainmeterStudio.Storage;
 
 namespace RainmeterStudio.Editor.ProjectEditor
 {
@@ -14,60 +15,8 @@ namespace RainmeterStudio.Editor.ProjectEditor
     /// Project storage, loads and saves project files
     /// </summary>
     [PluginExport]
-    public class ProjectStorage : IDocumentStorage
+    public class ProjectDocumentStorage : IDocumentStorage
     {
-        /// <summary>
-        /// Loads a project from file
-        /// </summary>
-        /// <param name="path">Path to file to load</param>
-        /// <returns>Loaded project</returns>
-        public Project Read(string path)
-        {
-            // Open file
-            var file = File.OpenText(path);
-
-            // Deserialize file
-            var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
-            Project project = serializer.Deserialize(file) as Project;
-
-            if (project != null)
-            {
-                project.Path = path;
-            }
-
-            // Clean up
-            file.Close();
-            return project;
-        }
-
-        /// <summary>
-        /// Saves a project to file
-        /// </summary>
-        /// <param name="project">Project to save</param>
-        /// <param name="path">File to save to</param>
-        public void Write(Project project, string path)
-        {
-            // Open file
-            var file = File.OpenWrite(path);
-
-            // Serialize file
-            var serializer = new XmlSerializer(typeof(Project), new XmlRootAttribute("project"));
-            serializer.Serialize(file, project);
-
-            // Clean up
-            file.Close();
-            project.Path = path;
-        }
-
-        /// <summary>
-        /// Saves a project
-        /// </summary>
-        /// <param name="project">Saves a project to the path specified in the 'Path' property</param>
-        public void Write(Project project)
-        {
-            Write(project, project.Path);
-        }
-
         /// <summary>
         /// Reads the project as a ProjectDocument.
         /// Use Load to get only the Project.
@@ -76,9 +25,9 @@ namespace RainmeterStudio.Editor.ProjectEditor
         /// <returns>A project document</returns>
         public IDocument ReadDocument(string path)
         {
-            Project project = Read(path);
+            Project project = ProjectStorage.Read(path);
             var document = new ProjectDocument(project);
-            document.Reference = new Reference(Path.GetFileName(path), path);
+            document.Reference = new Reference(Path.GetFileName(path), path, ReferenceTargetKind.Project);
 
             return document;
         }
@@ -91,7 +40,7 @@ namespace RainmeterStudio.Editor.ProjectEditor
         public void WriteDocument(IDocument document, string path)
         {
             var projectDocument = (ProjectDocument)document;
-            Write(projectDocument.Project, path);
+            ProjectStorage.Write(projectDocument.Project, path);
         }
 
         /// <summary>

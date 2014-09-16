@@ -57,6 +57,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Business\DocumentManagerTest.cs" />
+    <Compile Include="Business\ProjectManagerClipboardTest.cs" />
+    <Compile Include="Business\ProjectManagerTest.cs" />
+    <Compile Include="Business\ProjectManagerTestBase.cs" />
     <Compile Include="Model\ReferenceTest.cs" />
     <Compile Include="Storage\ProjectStorageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

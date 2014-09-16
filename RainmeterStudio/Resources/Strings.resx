@@ -154,7 +154,7 @@
     <value>Close active document</value>
   </data>
   <data name="Command_DocumentCreate_DisplayText" xml:space="preserve">
-    <value>_File...</value>
+    <value>_New item</value>
   </data>
   <data name="Command_DocumentCreate_ToolTip" xml:space="preserve">
     <value>Create a new file</value>
@@ -168,7 +168,7 @@
   <data name="MainWindow_File_Open" xml:space="preserve">
     <value>_Open</value>
   </data>
-  <data name="Command_ProjectCreate_DisplayText" xml:space="preserve">
+  <data name="Command_ProjectCreate_AltDisplayText" xml:space="preserve">
     <value>_Project...</value>
   </data>
   <data name="Command_ProjectCreate_ToolTip" xml:space="preserve">
@@ -192,7 +192,7 @@
   <data name="CreateProjectDialog_Title" xml:space="preserve">
     <value>Create project</value>
   </data>
-  <data name="Command_ProjectOpen_DisplayText" xml:space="preserve">
+  <data name="Command_ProjectOpen_AltDisplayText" xml:space="preserve">
     <value>_Project...</value>
   </data>
   <data name="Command_ProjectOpen_ToolTip" xml:space="preserve">
@@ -268,7 +268,7 @@
     <value>Save document</value>
   </data>
   <data name="Command_DocumentOpen_DisplayText" xml:space="preserve">
-    <value>_File...</value>
+    <value>_Open</value>
   </data>
   <data name="Command_DocumentOpen_ToolTip" xml:space="preserve">
     <value>Open a file</value>
@@ -296,5 +296,74 @@
   </data>
   <data name="Command_DocumentSave_ToolTip" xml:space="preserve">
     <value>Save the current document</value>
+  </data>
+  <data name="DeleteReferenceDialog_Caption" xml:space="preserve">
+    <value>Do you also want to delete the selected project items from disk?</value>
+  </data>
+  <data name="DeleteReferenceDialog_Prompt" xml:space="preserve">
+    <value>Delete from disk?</value>
+  </data>
+  <data name="RenameReferenceDialog_Caption" xml:space="preserve">
+    <value>Rename project item</value>
+  </data>
+  <data name="RenameReferenceDialog_OKCaption" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="RenameReferenceDialog_Prompt" xml:space="preserve">
+    <value>Enter the new name:</value>
+  </data>
+  <data name="Command_DocumentCreate_AltDisplayText" xml:space="preserve">
+    <value>_File...</value>
+  </data>
+  <data name="Command_DocumentOpen_AltDisplayText" xml:space="preserve">
+    <value>_File...</value>
+  </data>
+  <data name="Command_ProjectItemCopy_DisplayText" xml:space="preserve">
+    <value>_Copy</value>
+  </data>
+  <data name="Command_ProjectItemCopy_ToolTip" xml:space="preserve">
+    <value>Copy the selected item to clipboard</value>
+  </data>
+  <data name="Command_ProjectItemCut_DisplayText" xml:space="preserve">
+    <value>Cu_t</value>
+  </data>
+  <data name="Command_ProjectItemCut_ToolTip" xml:space="preserve">
+    <value>Cut the selected item to clipboard</value>
+  </data>
+  <data name="Command_ProjectItemDelete_DisplayText" xml:space="preserve">
+    <value>_Delete</value>
+  </data>
+  <data name="Command_ProjectItemDelete_ToolTip" xml:space="preserve">
+    <value>Delete selected item</value>
+  </data>
+  <data name="Command_ProjectItemOpenContainingFolder_DisplayText" xml:space="preserve">
+    <value>Open Containing _Folder</value>
+  </data>
+  <data name="Command_ProjectItemOpenContainingFolder_ToolTip" xml:space="preserve">
+    <value>Open containing folder of selected item in Explorer</value>
+  </data>
+  <data name="Command_ProjectItemOpenInExplorer_DisplayText" xml:space="preserve">
+    <value>Open in _Explorer</value>
+  </data>
+  <data name="Command_ProjectItemOpenInExplorer_ToolTip" xml:space="preserve">
+    <value>Open selected folder in Explorer</value>
+  </data>
+  <data name="Command_ProjectItemPaste_DisplayText" xml:space="preserve">
+    <value>_Paste</value>
+  </data>
+  <data name="Command_ProjectItemPaste_ToolTip" xml:space="preserve">
+    <value>Paste the clipboard contents in selected folder</value>
+  </data>
+  <data name="Command_ProjectItemRename_DisplayText" xml:space="preserve">
+    <value>_Rename</value>
+  </data>
+  <data name="Command_ProjectItemRename_ToolTip" xml:space="preserve">
+    <value>Rename selected item</value>
+  </data>
+  <data name="Command_ProjectCreate_DisplayText" xml:space="preserve">
+    <value>New _Project</value>
+  </data>
+  <data name="Command_ProjectOpen_DisplayText" xml:space="preserve">
+    <value>O_pen Project</value>
   </data>
 </root>
