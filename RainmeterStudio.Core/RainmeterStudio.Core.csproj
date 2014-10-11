@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\Features\ToolboxItem.cs" />
     <Compile Include="Model\IProjectTemplate.cs" />
     <Compile Include="RainmeterStudioPluginAttribute.cs" />
     <Compile Include="PluginExportAttribute.cs" />
@@ -70,9 +71,11 @@
     <Compile Include="Utils\InputHelper.cs" />
     <Compile Include="Utils\LinqExtension.cs" />
     <Compile Include="Utils\BitmapHelper.cs" />
+    <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\PathHelper.cs" />
     <Compile Include="Utils\Version.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
