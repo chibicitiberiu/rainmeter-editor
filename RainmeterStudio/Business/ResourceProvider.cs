@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
+using System.Windows.Data;
 using System.Windows.Media;
 using RainmeterStudio.Core.Utils;
 
@@ -125,6 +126,54 @@ namespace RainmeterStudio.Business
         {
             _cacheImages.Clear();
             _cacheStrings.Clear();
+        }
+    }
+
+    /// <summary>
+    /// Resource converter - converts resource identifier string into actual resource
+    /// </summary>
+    public class StringResourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string identifier = value as string;
+            object resource = null;
+
+            if (identifier != null)
+            {
+                resource = ResourceProvider.GetString(identifier);
+            }
+
+            return resource;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotSupportedException("Operation not supported.");
+        }
+    }
+
+    /// <summary>
+    /// Resource converter - converts resource identifier string into actual resource
+    /// </summary>
+    public class ImageResourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string identifier = value as string;
+            object resource = null;
+
+            if (identifier != null)
+            {
+                resource = ResourceProvider.GetImage(identifier);
+            }
+
+            return resource;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotSupportedException("Operation not supported.");
         }
     }
 }
