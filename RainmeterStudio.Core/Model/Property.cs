@@ -61,7 +61,13 @@ namespace RainmeterStudio.Core.Model
             set
             {
                 // Test if type changed
-                bool typeChanged = (_value.GetType() != value.GetType());
+                bool typeChanged;
+                
+                if (_value == null || value == null)
+                    typeChanged = (_value != null) || (value != null);
+                        
+                else
+                    typeChanged = (_value.GetType() != value.GetType());
 
                 // Set value
                 _value = value;
