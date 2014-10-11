@@ -210,6 +210,13 @@ HDC CanvasD2D::GetDC()
 	return dcMemory;
 }
 
+HBITMAP CanvasD2D::GetBitmap()
+{
+	EndTargetDraw();
+
+	return m_Bitmap.GetHandle();
+}
+
 void CanvasD2D::ReleaseDC(HDC dc)
 {
 	DeleteDC(dc);

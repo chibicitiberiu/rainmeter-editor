@@ -99,6 +99,12 @@ HDC CanvasGDIP::GetDC()
 	return dcMemory;
 }
 
+HBITMAP CanvasGDIP::GetBitmap()
+{
+	return m_DIBSection;
+}
+
+
 void CanvasGDIP::ReleaseDC(HDC dc)
 {
 	DeleteDC(dc);

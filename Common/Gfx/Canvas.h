@@ -69,6 +69,7 @@ public:
 	// matched by a corresponding call to ReleaseDC(). While in the Gdiplus context, non-const
 	// member functions of this class must not be called.
 	virtual HDC GetDC() = 0;
+	virtual HBITMAP GetBitmap() = 0;
 	virtual void ReleaseDC(HDC dc) = 0;
 
 	// The Create* functions allocate objects specific to this Canvas object.

@@ -51,6 +51,7 @@ public:
 	virtual void EndGdiplusContext() override;
 
 	virtual HDC GetDC() override;
+	virtual HBITMAP GetBitmap() override;
 	virtual void ReleaseDC(HDC dc) override;
 	
 	virtual FontCollection* CreateFontCollection() override { return new FontCollectionD2D(); }
