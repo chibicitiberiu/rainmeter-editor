@@ -65,7 +65,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\ViewModel\ToolboxItemViewModel.cs" />
     <Page Include="Editor\ProjectEditor\ProjectEditorUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editor\SkinDesigner\Controls\MeterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editor\SkinDesigner\SkinDesignerUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,6 +91,18 @@
     <Compile Include="Editor\ProjectEditor\ProjectEditorUI.xaml.cs">
       <DependentUpon>ProjectEditorUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Editor\SkinDesigner\Controls\HoverAdorner.cs" />
+    <Compile Include="Editor\SkinDesigner\Controls\MeterControl.xaml.cs">
+      <DependentUpon>MeterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SkinDesigner\Controls\SelectAdorner.cs" />
+    <Compile Include="Editor\SkinDesigner\SkinDesignerFactory.cs" />
+    <Compile Include="Editor\SkinDesigner\SkinDesignerUI.xaml.cs">
+      <DependentUpon>SkinDesignerUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SkinDesigner\SkinDocument.cs" />
+    <Compile Include="Editor\SkinDesigner\SkinDocumentEmptyTemplate.cs" />
+    <Compile Include="Editor\SkinDesigner\SkinStorage.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Interop\NativeLibrary.cs" />
     <Compile Include="Rainmeter.cs" />
@@ -118,6 +139,9 @@
     <Compile Include="UI\Panels\ProjectPanel.xaml.cs">
       <DependentUpon>ProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Panels\ToolboxPanel.xaml.cs">
+      <DependentUpon>ToolboxPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIManager.cs" />
     <Compile Include="UI\ViewModel\DocumentTemplateViewModel.cs" />
     <Compile Include="UI\ViewModel\ProjectTemplateViewModel.cs" />
@@ -151,6 +175,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Panels\ProjectPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Panels\ToolboxPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,6 +279,10 @@
       <Project>{1d2a4896-af31-4e82-a84f-4e218067701f}</Project>
       <Name>RainmeterStudio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RainmeterStudio.Rainmeter\RainmeterStudio.Rainmeter.csproj">
+      <Project>{c641d7f8-dddc-4ec6-8f5e-233520290642}</Project>
+      <Name>RainmeterStudio.Rainmeter</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icons\32\project_empty.png" />
@@ -265,7 +297,13 @@
     <Resource Include="Resources\Icons\16\disk.png" />
     <Resource Include="Resources\Icons\16\disk_multiple.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Editor\LayoutDesigner\" />
+    <Folder Include="Editor\TextEditor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Graphics\transparent_background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

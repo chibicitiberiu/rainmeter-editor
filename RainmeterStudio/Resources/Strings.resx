@@ -366,4 +366,10 @@
   <data name="Command_ProjectOpen_DisplayText" xml:space="preserve">
     <value>O_pen Project</value>
   </data>
+  <data name="DocumentTemplate_Skin_Description" xml:space="preserve">
+    <value>New empty skin</value>
+  </data>
+  <data name="DocumentTemplate_Skin_DisplayText" xml:space="preserve">
+    <value>Skin</value>
+  </data>
 </root>

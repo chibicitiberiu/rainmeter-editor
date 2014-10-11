@@ -727,6 +727,24 @@ namespace RainmeterStudio.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New empty skin.
+        /// </summary>
+        public static string DocumentTemplate_Skin_Description {
+            get {
+                return ResourceManager.GetString("DocumentTemplate_Skin_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skin.
+        /// </summary>
+        public static string DocumentTemplate_Skin_DisplayText {
+            get {
+                return ResourceManager.GetString("DocumentTemplate_Skin_DisplayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _File.
         /// </summary>
         public static string MainWindow_File {
