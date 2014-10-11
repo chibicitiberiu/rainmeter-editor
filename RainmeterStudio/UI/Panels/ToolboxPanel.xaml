@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="RainmeterStudio.UI.Panels.ToolboxPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        <Style x:Key="ToolboxListViewStyle" TargetType="ListView">
+            <Style.Triggers>
+                <Trigger Property="HasItems" Value="False">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListView">
+                                <Grid>
+                                    <TextBlock TextAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="Wrap" 
+                                               Text="There are no toolbox items available for the active document." />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0" LastChildFill="True">
+            <Button DockPanel.Dock="Right">Search</Button>
+            <TextBox Name="searchTextBox"/>
+        </DockPanel>
+        
+        <ListView Name="listItems"
+                  Style="{StaticResource ToolboxListViewStyle}"
+                  Grid.Row="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseMove" Handler="Item_PreviewMouseMove" />
+                    <EventSetter Event="PreviewMouseDoubleClick" Handler="Item_PreviewMouseDoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True" ToolTip="{Binding ToolTip}">
+                        <Image Width="16" Height="16" Source="{Binding Icon}" DockPanel.Dock="Left" />
+                        <TextBlock Text="{Binding DisplayText}" />
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</UserControl>

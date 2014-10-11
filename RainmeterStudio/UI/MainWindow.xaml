@@ -143,7 +143,7 @@
         <GridSplitter Grid.Row="2" Grid.Column="1"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
-        <!-- Document panel -->
+        <!-- Document area -->
         <ad:DockingManager 
             x:Name="dockingManager"
             Grid.Row="2">
@@ -152,7 +152,9 @@
                 <adlayout:LayoutRoot.LeftSide>
                     <adlayout:LayoutAnchorSide>
                         <adlayout:LayoutAnchorGroup>
-                            <adlayout:LayoutAnchorable Title="Toolbox" />
+                            <adlayout:LayoutAnchorable Title="Toolbox">
+                                <uiPanels:ToolboxPanel x:Name="toolboxPanel" />
+                            </adlayout:LayoutAnchorable>
                         </adlayout:LayoutAnchorGroup>
                     </adlayout:LayoutAnchorSide>
                 </adlayout:LayoutRoot.LeftSide>

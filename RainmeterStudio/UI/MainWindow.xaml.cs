@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RainmeterStudio.Business;
 using RainmeterStudio.Core.Editor;
+using RainmeterStudio.Core.Editor.Features;
 using RainmeterStudio.Core.Model;
 using RainmeterStudio.Core.Model.Events;
 using RainmeterStudio.UI.Controller;
@@ -27,13 +28,30 @@ namespace RainmeterStudio.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Gets or sets the document controller
+        /// </summary>
         public DocumentController DocumentController { get; set; }
+
+        /// <summary>
+        /// Gets or sets the project controller
+        /// </summary>
         public ProjectController ProjectController { get; set; }
 
+        /// <summary>
+        /// Gets the project panel
+        /// </summary>
         public ProjectPanel ProjectPanel { get { return projectPanel; } }
 
         private Dictionary<LayoutDocument, IDocumentEditor> _openedDocuments = new Dictionary<LayoutDocument, IDocumentEditor>();
 
+        #region Constructor
+
+        /// <summary>
+        /// Initializes the main window
+        /// </summary>
+        /// <param name="projCtrl">The project controller</param>
+        /// <param name="docCtrl">The document controller</param>
         public MainWindow(ProjectController projCtrl, DocumentController docCtrl)
         {
             InitializeComponent();
@@ -52,35 +70,62 @@ namespace RainmeterStudio.UI
             this.AddKeyBinding(ProjectController.ProjectOpenCommand);
             
             // Subscribe to events
-            DocumentController.DocumentOpened += documentController_DocumentOpened;
+            DocumentController.DocumentOpened += DocumentController_DocumentOpened;
 
             // Initialize panels
             projectPanel.ProjectController = ProjectController;
             projectPanel.DocumentController = DocumentController;
         }
 
-        void documentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)
+        #endregion
+
+        #region Document opened event handler
+
+        void DocumentController_DocumentOpened(object sender, DocumentOpenedEventArgs e)
         {
-            // Create a new panel
-            LayoutDocument document = new LayoutDocument();
-            _openedDocuments.Add(document, e.Editor);
+            OpenDocument(e.Editor);
+        }
 
-            document.Content = e.Editor.EditorUI;
-            document.Closing += document_Closing;
-            document.Closed += document_Closed;
-            document.Title = GetDocumentTitle(e.Document);
-            document.IsActiveChanged += new EventHandler((sender2, e2) =>
+        #endregion
+
+        #region Document events
+
+        void Document_IsActiveChanged(object sender, EventArgs e)
+        {
+            LayoutDocument document = (LayoutDocument)sender;
+            IDocumentEditor editor = _openedDocuments[document];
+
+            if (document.IsActive)
             {
-                if (document.IsActive)
-                    DocumentController.ActiveDocumentEditor = e.Editor;
-            });
+                // Set active editor in controller
+                DocumentController.ActiveDocumentEditor = editor;
 
-            documentPane.Children.Add(document);
-            documentPane.SelectedContentIndex = documentPane.IndexOf(document);
+                // Set up toolbox
+                SetUpToolbox(editor);
+            }
+            else
+            {
+                // Disable drop, so that we don't drop invalid items in an editor
+                editor.EditorUI.AllowDrop = false;
+            }
+        }
 
-            e.Document.PropertyChanged += Document_PropertyChanged;
-            if (e.Document.Reference != null)
-                e.Document.Reference.PropertyChanged += Reference_PropertyChanged;
+        void Document_Closed(object sender, EventArgs e)
+        {
+            CloseDocument((LayoutDocument)sender);
+        }
+
+        void Document_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Get editor
+            var document = (LayoutDocument)sender;
+            var editor = _openedDocuments[document];
+
+            // Try to close active document
+            if (!DocumentController.Close(editor))
+            {
+                e.Cancel = true;
+            }
         }
 
         private void Document_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -125,6 +170,23 @@ namespace RainmeterStudio.UI
             }
         }
 
+        #endregion
+
+        #region Window events
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Try to close
+            if (!DocumentController.CloseAll())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        #endregion
+
+        #region Helper methods
+
         private string GetDocumentTitle(IDocument document)
         {
             string documentName;
@@ -152,31 +214,52 @@ namespace RainmeterStudio.UI
             return documentName;
         }
 
-        void document_Closed(object sender, EventArgs e)
+        private LayoutDocument OpenDocument(IDocumentEditor editor)
         {
-            var layoutDocument = (LayoutDocument)sender;
+            // Create document
+            LayoutDocument document = new LayoutDocument();
+            document.Content = editor.EditorUI;
+            document.Title = GetDocumentTitle(editor.AttachedDocument);
+
+            // Set up events
+            document.Closing += Document_Closing;
+            document.Closed += Document_Closed;
+            document.IsActiveChanged += Document_IsActiveChanged;
+
+            // Add to dictionary
+            _openedDocuments.Add(document, editor);
+
+            // Add to layout
+            documentPane.Children.Add(document);
+            documentPane.SelectedContentIndex = documentPane.IndexOf(document);
+
+            // Subscribe to document events
+            editor.AttachedDocument.PropertyChanged += Document_PropertyChanged;
+            if (editor.AttachedDocument.Reference != null)
+                editor.AttachedDocument.Reference.PropertyChanged += Reference_PropertyChanged;
+
+            return document;
         }
 
-        void document_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void CloseDocument(LayoutDocument document)
         {
-            // Get editor
-            var document = (LayoutDocument)sender;
-            var editor = _openedDocuments[document];
+            _openedDocuments.Remove(document);
+        }
 
-            // Try to close active document
-            if (!DocumentController.Close(editor))
+        private void SetUpToolbox(IDocumentEditor editor)
+        {
+            var toolboxProvider = editor as IToolboxProvider;
+
+            // Set toolbar panel
+            toolboxPanel.ItemsSource = toolboxProvider;
+
+            // Enable 'allow drop'
+            if (toolboxProvider != null)
             {
-                e.Cancel = true;
+                editor.EditorUI.AllowDrop = true;
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // Try to close
-            if (!DocumentController.CloseAll())
-            {
-                e.Cancel = true;
-            }
-        }
+        #endregion
     }
 }
